@@ -128,3 +128,4 @@ libraries[guiders][destination] = "libraries"
 ; Patches
 
 projects[chosen][patch][] = http://drupal.org/files/issues/chosen-7.x-1.x-install_profile.patch
+projects[chosen][patch][] = http://drupal.org/files/drush_make_core-1291986-2.patch
