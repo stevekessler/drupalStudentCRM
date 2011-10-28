@@ -26,9 +26,9 @@ function crm_student_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views--exp-search_contacts-page' => array(
-          'module' => 'views',
-          'delta' => '-exp-search_contacts-page',
+        'crm_student-crm_student_search' => array(
+          'module' => 'crm_student',
+          'delta' => 'crm_student_search',
           'region' => 'header_right',
           'weight' => '-10',
         ),
@@ -69,7 +69,7 @@ function crm_student_context_default_contexts() {
           'module' => 'menu',
           'delta' => 'menu-crm-navigation',
           'region' => 'sidebar_left',
-          'weight' => '-10',
+          'weight' => '-17',
         ),
         'system-main' => array(
           'module' => 'system',

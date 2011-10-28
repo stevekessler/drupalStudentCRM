@@ -8,12 +8,50 @@ function crm_student_init() {
 }
 
 /**
-*	Implementation of hook_form_FORM_ID_alter
-*	Here we're changing how the search box works
-*/
-function crm_student_form_views_exposed_form_alter(&$form, $form_state) {
-	$form['submit']['#attributes']['class'][] = 'element-invisible';
-	$form['contact_name_value']['#attributes']['class'][] = 'search-box';
-	$form['contact_name_value']['#attributes']['placeholder'] = t('Search');
-	$form['#info']['filter-contact_name_value']['label'] = '<span class="element-invisible">' . $form['#info']['filter-contact_name_value']['label'] .'</span>';
+ * Implements hook_block_info().
+ */
+function crm_student_block_info() {
+	$blocks['crm_student_search'] = array('info' => 'Student CRM search box');
+	return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function crm_student_block_view($delta) {
+	if($delta == 'crm_student_search') {
+		return array('content' => drupal_get_form('_crm_student_search_form'));	
+	}
+}
+
+/**
+ * A generic search form
+ */
+function _crm_student_search_form() {
+	$form = array();
+
+	$form['#attributes']['class'][] = 'site-search-form';
+	$form['search'] = array(
+		'#type' => 'textfield',
+		'#title' => '<span class="element-invisible">Search for students</span>',
+		'#attributes' => array('class' => array('search-box'),
+													 'placeholder' => 'Search'),
+		'#default_value' => (isset($_GET['name'])) ? check_plain($_GET['name']) : '',
+	);
+	$form['#info']['contact_name_value']['label']['#attributes']['classs'][] = 'element-invisible';
+	
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => 'Search',
+		'#attributes' => array('class' => array('element-invisible')),
+	);
+	
+	return $form;
+}
+
+/**
+ * A generic search form
+ */
+function _crm_student_search_form_submit($form, &$form_state) {
+  drupal_goto('search', array('query' => array('name' => $form_state['values']['search'])));
 }

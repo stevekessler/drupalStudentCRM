@@ -54,6 +54,8 @@
 @content-line-color : #ddd;
 @sidebar-color		: #d5e6ed;
 
+@table-odd 				: #ecf8fc; 
+@table-even 			: #e4f0f8;
 
 /** LAYOUT **/
 @min-width			: 800px;
@@ -95,18 +97,18 @@ h5 { font-size:1.2em; }
 h6 { font-size:1.1em; }
 
 /** TABLES **/
-table { border: 1px solid #ededed; }
+table {  border: darken(@content-background, 30%) 1px solid;  }
 
-table thead th { background: lighten(@header-gradient, 25%); color: darken(@content-background, 80%); margin-bottom: 10px; padding: 3px 10px; font-weight: bold; .text-shadow(0px, 1px, 0px, #fff); white-space: nowrap; }
+table thead th { background: darken(@content-background, 5%); color: darken(@content-background, 80%); margin-bottom: 10px; padding: 3px 10px; font-weight: bold; .text-shadow(0px, 1px, 0px, #fff); white-space: nowrap;}
 	table th, table td {padding: 6px 8px; }
-		table th a { text-shadow: none; }
+		table th a { text-shadow: none; text-decoration: none;  }
 	table td { border-top: 1px dotted darken(@content-background, 50%); }
-		table tr.odd { background: darken(@content-background, 5%); }
+		table tr.odd { background: @content-background; }
 		table tr.even { background: @content-background; }
 	table span.indent { padding: 0 2px 0 10px; }
 	table td.indent { padding-left: 25px; }
-
-
+	table td.active { background: @table-even; }
+	table tr.odd td.active { background: @table-odd; }
 /** LAYOUT **/
 body { width: 100%; background: @body-background; }
 .container { position: relative; max-width: @max-width; min-width: @min-width; margin: 0 auto; }
@@ -175,7 +177,7 @@ a.add { margin: 10px 0; }
 	
 /** VIEWS **/
 .view .view-empty { font-size: 1.7em; color: lighten(@text-color, 60%); text-align: center;  }
-
+	body .views-exposed-form .views-exposed-widget { float: none; }
 /** TAGS **/
 .tags { margin: 5px 5px; }
 	.tags ul li { float: left; margin: 0 10px 0 0; }

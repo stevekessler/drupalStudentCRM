@@ -135,10 +135,10 @@ h6 {
 }
 /** TABLES **/
 table {
-  border: 1px solid #ededed;
+  border: #b3b3b3 1px solid;
 }
 table thead th {
-  background: #b8bec5;
+  background: #f2f2f2;
   color: #333333;
   margin-bottom: 10px;
   padding: 3px 10px;
@@ -153,12 +153,13 @@ table th, table td {
 }
 table th a {
   text-shadow: none;
+  text-decoration: none;
 }
 table td {
   border-top: 1px dotted #808080;
 }
 table tr.odd {
-  background: #f2f2f2;
+  background: #ffffff;
 }
 table tr.even {
   background: #ffffff;
@@ -168,6 +169,12 @@ table span.indent {
 }
 table td.indent {
   padding-left: 25px;
+}
+table td.active {
+  background: #e4f0f8;
+}
+table tr.odd td.active {
+  background: #ecf8fc;
 }
 /** LAYOUT **/
 body {
@@ -403,6 +410,9 @@ a.add {
   font-size: 1.7em;
   color: #999999;
   text-align: center;
+}
+body .views-exposed-form .views-exposed-widget {
+  float: none;
 }
 /** TAGS **/
 .tags {

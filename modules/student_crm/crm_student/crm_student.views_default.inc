@@ -199,29 +199,6 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_tags']['multi_type'] = 'ul';
   $handler->display->display_options['fields']['field_student_tags']['separator'] = ' ';
   $handler->display->display_options['fields']['field_student_tags']['field_api_classes'] = 0;
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
-  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing_1']['label'] = '';
-  $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['nothing_1']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['nothing_1']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['nothing_1']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['nothing_1']['element_wrapper_class'] = 'clear';
-  $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['hide_alter_empty'] = 0;
   /* Contextual filter: CRM Contact: Contact ID */
   $handler->display->display_options['arguments']['contact_id']['id'] = 'contact_id';
   $handler->display->display_options['arguments']['contact_id']['table'] = 'crm_contact';
@@ -377,7 +354,7 @@ function crm_student_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Search';
+  $handler->display->display_options['title'] = 'Search Students';
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -449,12 +426,6 @@ function crm_student_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No students found.';
   $handler->display->display_options['empty']['area']['format'] = 'plain_text';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: Broken/missing handler */
-  $handler->display->display_options['relationships']['relation_advisor_user']['id'] = 'relation_advisor_user';
-  $handler->display->display_options['relationships']['relation_advisor_user']['table'] = 'crm_contact';
-  $handler->display->display_options['relationships']['relation_advisor_user']['field'] = 'relation_advisor_user';
-  $handler->display->display_options['relationships']['relation_advisor_user']['label'] = 'Advisor';
-  $handler->display->display_options['relationships']['relation_advisor_user']['required'] = 0;
   /* Field: CRM Contact: Contact ID */
   $handler->display->display_options['fields']['contact_id']['id'] = 'contact_id';
   $handler->display->display_options['fields']['contact_id']['table'] = 'crm_contact';
@@ -623,31 +594,6 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_degrees']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_student_degrees']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_student_degrees']['field_api_classes'] = 0;
-  /* Field: User: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'users';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['relationship'] = 'relation_advisor_user';
-  $handler->display->display_options['fields']['name']['label'] = 'Advisor(s)';
-  $handler->display->display_options['fields']['name']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['name']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['name']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['name']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['name']['hide_empty'] = 1;
-  $handler->display->display_options['fields']['name']['empty_zero'] = 1;
-  $handler->display->display_options['fields']['name']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['name']['link_to_user'] = 1;
-  $handler->display->display_options['fields']['name']['overwrite_anonymous'] = 0;
   /* Filter criterion: Contact: Name (contact_name) */
   $handler->display->display_options['filters']['contact_name_value']['id'] = 'contact_name_value';
   $handler->display->display_options['filters']['contact_name_value']['table'] = 'field_data_contact_name';
@@ -657,7 +603,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['filters']['contact_name_value']['expose']['operator_id'] = 'contact_name_value_op';
   $handler->display->display_options['filters']['contact_name_value']['expose']['label'] = 'Name';
   $handler->display->display_options['filters']['contact_name_value']['expose']['operator'] = 'contact_name_value_op';
-  $handler->display->display_options['filters']['contact_name_value']['expose']['identifier'] = 'contact_name_value';
+  $handler->display->display_options['filters']['contact_name_value']['expose']['identifier'] = 'name';
   $handler->display->display_options['filters']['contact_name_value']['expose']['required'] = 0;
   $handler->display->display_options['filters']['contact_name_value']['expose']['multiple'] = FALSE;
   /* Filter criterion: CRM Contact: Contact Type */
@@ -665,14 +611,45 @@ function crm_student_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'crm_contact';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = 'Student';
+  /* Filter criterion: Contact: Degrees (field_student_degrees) */
+  $handler->display->display_options['filters']['field_student_degrees_tid']['id'] = 'field_student_degrees_tid';
+  $handler->display->display_options['filters']['field_student_degrees_tid']['table'] = 'field_data_field_student_degrees';
+  $handler->display->display_options['filters']['field_student_degrees_tid']['field'] = 'field_student_degrees_tid';
+  $handler->display->display_options['filters']['field_student_degrees_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_student_degrees_tid']['expose']['operator_id'] = 'field_student_degrees_tid_op';
+  $handler->display->display_options['filters']['field_student_degrees_tid']['expose']['label'] = 'Degree';
+  $handler->display->display_options['filters']['field_student_degrees_tid']['expose']['operator'] = 'field_student_degrees_tid_op';
+  $handler->display->display_options['filters']['field_student_degrees_tid']['expose']['identifier'] = 'field_student_degrees_tid';
+  $handler->display->display_options['filters']['field_student_degrees_tid']['expose']['remember'] = 1;
+  $handler->display->display_options['filters']['field_student_degrees_tid']['expose']['multiple'] = 1;
+  $handler->display->display_options['filters']['field_student_degrees_tid']['expose']['reduce'] = 0;
+  $handler->display->display_options['filters']['field_student_degrees_tid']['reduce_duplicates'] = 0;
+  $handler->display->display_options['filters']['field_student_degrees_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_student_degrees_tid']['vocabulary'] = 'degrees';
+  $handler->display->display_options['filters']['field_student_degrees_tid']['error_message'] = 1;
+  /* Filter criterion: Contact: Status (field_student_status) */
+  $handler->display->display_options['filters']['field_student_status_tid']['id'] = 'field_student_status_tid';
+  $handler->display->display_options['filters']['field_student_status_tid']['table'] = 'field_data_field_student_status';
+  $handler->display->display_options['filters']['field_student_status_tid']['field'] = 'field_student_status_tid';
+  $handler->display->display_options['filters']['field_student_status_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_student_status_tid']['expose']['operator_id'] = 'field_student_status_tid_op';
+  $handler->display->display_options['filters']['field_student_status_tid']['expose']['label'] = 'Status';
+  $handler->display->display_options['filters']['field_student_status_tid']['expose']['operator'] = 'field_student_status_tid_op';
+  $handler->display->display_options['filters']['field_student_status_tid']['expose']['identifier'] = 'field_student_status_tid';
+  $handler->display->display_options['filters']['field_student_status_tid']['expose']['remember'] = 1;
+  $handler->display->display_options['filters']['field_student_status_tid']['expose']['multiple'] = 1;
+  $handler->display->display_options['filters']['field_student_status_tid']['expose']['reduce'] = 0;
+  $handler->display->display_options['filters']['field_student_status_tid']['reduce_duplicates'] = 0;
+  $handler->display->display_options['filters']['field_student_status_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_student_status_tid']['vocabulary'] = 'student_status';
+  $handler->display->display_options['filters']['field_student_status_tid']['error_message'] = 1;
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['exposed_block'] = TRUE;
+  /* Display: Search page */
+  $handler = $view->new_display('page', 'Search page', 'page');
   $handler->display->display_options['path'] = 'search';
   $translatables['search_contacts'] = array(
     t('Master'),
-    t('Search'),
+    t('Search Students'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -683,16 +660,15 @@ function crm_student_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('No students found.'),
-    t('Advisor'),
     t('crm/contact/[contact_id]'),
     t('First Name'),
     t('Last name'),
     t('Student ID'),
     t('Status'),
     t('Degrees'),
-    t('Advisor(s)'),
     t('Name'),
-    t('Page'),
+    t('Degree'),
+    t('Search page'),
   );
   $export['search_contacts'] = $view;
 
