@@ -118,6 +118,11 @@ function student_crm_demo_feeds_importer_default() {
             'target' => 'guid',
             'unique' => 1,
           ),
+          5 => array(
+            'source' => 'degree',
+            'target' => 'field_student_degrees',
+            'unique' => FALSE,
+          ),
         ),
         'update_existing' => '2',
         'input_format' => 'plain_text',
