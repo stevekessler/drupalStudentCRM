@@ -34,6 +34,9 @@ dependencies[] = trigger
 dependencies[] = update
 dependencies[] = user
 
+;libraries
+dependencies[] = libraries
+
 ;contrib
 dependencies[] = addressfield
 dependencies[] = admin_menu
@@ -52,7 +55,6 @@ dependencies[] = field_group
 dependencies[] = guiders_js
 ;dependencies[] = interface
 dependencies[] = job_scheduler
-dependencies[] = libraries
 dependencies[] = link
 dependencies[] = options_element
 dependencies[] = relation
