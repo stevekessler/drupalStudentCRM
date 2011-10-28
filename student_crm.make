@@ -112,10 +112,6 @@ projects[webform_submission_entity][download][branch] = "master"
 ; Libraries
 
 ; Download the Chosen JS library
-libraries[formalize][download][type] = "get"
-libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/zipball/master"
-libraries[chosen][directory_name] = "chosen"
-libraries[chosen][destination] = "libraries"
 
 ; Download the Formalize library
 libraries[formalize][download][type] = "get"
