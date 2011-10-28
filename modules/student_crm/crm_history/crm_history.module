@@ -15,11 +15,10 @@ function crm_history_block_view($delta) {
 	if(!user_access('track user history')) {
 		return;
 	}
-	
 	$history = (isset($_SESSION['crm_history'])) ? $_SESSION['crm_history'] : array();
 	$items = array();
 	if(!count($history)) {
-		$items[] = 'No history avaialble.';
+		$items[] = t('No history available.');
 	}
 	else {
 		foreach($_SESSION['crm_history'] as $history) {
@@ -100,23 +99,24 @@ function crm_history_permission() {
  */
 function crm_history_exit() {
 	$contact = _crm_history_get_contact();
-	if($contact) {
-		if(!is_array($_SESSION['crm_history'])) {
-			$_SESSION['crm_history'] = array();
+	if(!$contact) {
+	  return;
+	}
+	if(!is_array($_SESSION['crm_history'])) {
+		$_SESSION['crm_history'] = array();
+	}
+	foreach($_SESSION['crm_history'] as $item) {
+		if($item['path'] == $_GET['q']) {
+			return;
 		}
-		foreach($_SESSION['crm_history'] as $item) {
-			if($item['path'] == $_GET['q']) {
-				return;
-			}
-		}
-		$item = array('image' => field_get_items('crm_contact', $contact, 'contact_image'),
-					  'title' => field_get_items('crm_contact', $contact, 'contact_name'),
-					  'path' => $_GET['q']);
-		array_unshift($_SESSION['crm_history'], $item);
-		if(count($_SESSION['crm_history']) > variable_get('crm_history_max_items', 5)) {
-			$history = array_chunk($_SESSION['crm_history'], variable_get('crm_history_max_items', 5));
-			$_SESSION['crm_history'] = $history[0];
-		}
-
+	}
+	$item = array('image' => field_get_items('crm_contact', $contact, 'contact_image'),
+				  'title' => field_get_items('crm_contact', $contact, 'contact_name'),
+				  'path' => $_GET['q']);
+	array_unshift($_SESSION['crm_history'], $item);
+	if(count($_SESSION['crm_history']) > variable_get('crm_history_max_items', 5)) {
+		$history = array_chunk($_SESSION['crm_history'], variable_get('crm_history_max_items', 5));
+		dpm($history);
+		$_SESSION['crm_history'] = $history[0];
 	}
 }
