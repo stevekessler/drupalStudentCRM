@@ -23,8 +23,8 @@ projects[cck_phone][version] = "1.x-dev"
 projects[context][subdir] = "contrib"
 projects[context][version] = "3.0-beta2"
 
-projects[chosen][subdir] = "contrib"
-projects[chosen][version] = "1.0"
+;projects[chosen][subdir] = "contrib"
+;projects[chosen][version] = "1.0"
 
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.x-dev"
@@ -112,10 +112,10 @@ projects[webform_submission_entity][download][branch] = "master"
 ; Libraries
 
 ; Download the Chosen JS library
-libraries[chosen][download][type] = "get"
-libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/zipball/master"
-libraries[chosen][directory_name] = "chosen"
-libraries[chosen][destination] = "libraries"
+;libraries[chosen][download][type] = "get"
+;libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/zipball/master"
+;libraries[chosen][directory_name] = "chosen"
+;libraries[chosen][destination] = "libraries"
 
 ; Download the Formalize library
 libraries[formalize][download][type] = "get"
@@ -131,5 +131,5 @@ libraries[guiders][destination] = "libraries"
 
 ; Patches
 
-projects[chosen][patch][] = http://drupal.org/files/issues/chosen-7.x-1.x-install_profile.patch
-projects[chosen][patch][] = http://drupal.org/files/remove_make_file-1291986-3.patch
+;projects[chosen][patch][] = http://drupal.org/files/issues/chosen-7.x-1.x-install_profile.patch
+;projects[chosen][patch][] = http://drupal.org/files/remove_make_file-1291986-3.patch
