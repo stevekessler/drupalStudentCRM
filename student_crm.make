@@ -123,9 +123,12 @@ libraries[formalize][download][url] = "https://github.com/nathansmith/formalize/
 libraries[formalize][directory_name] = "formalize"
 libraries[formalize][destination] = "libraries"
 
-
 ; Download the guidersJS library
 libraries[guiders][download][type] = "get"
 libraries[guiders][download][url] = "https://github.com/jeff-optimizely/Guiders-JS/tarball/master"
 libraries[guiders][directory_name] = "guiders"
 libraries[guiders][destination] = "libraries"
+
+; Patches
+
+projects[chosen][patch][] = http://drupal.org/files/issues/chosen-7.x-1.x-install_profile.patch
