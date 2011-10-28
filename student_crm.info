@@ -38,6 +38,7 @@ dependencies[] = user
 dependencies[] = addressfield
 dependencies[] = admin_menu
 dependencies[] = cck_phone
+dependencies[] = chosen
 dependencies[] = context_ui
 dependencies[] = context
 dependencies[] = ctools

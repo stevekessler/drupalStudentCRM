@@ -23,6 +23,9 @@ projects[cck_phone][version] = "1.x-dev"
 projects[context][subdir] = "contrib"
 projects[context][version] = "3.0-beta2"
 
+projects[chosen][subdir] = "contrib"
+projects[chosen][subdir] = "1.0"
+
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.x-dev"
 
@@ -108,11 +111,17 @@ projects[webform_submission_entity][download][branch] = "master"
 
 ; Libraries
 
+; Download the Chosen JS library
+libraries[formalize][download][type] = "get"
+libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/zipball/master"
+libraries[chosen][directory_name] = "chosen"
+libraries[chosen][destination] = "libraries"
+
 ; Download the Formalize library
-libraries[guiders][download][type] = "get"
-libraries[guiders][download][url] = "https://github.com/nathansmith/formalize/tarball/master"
-libraries[guiders][directory_name] = "formalize"
-libraries[guiders][destination] = "libraries"
+libraries[formalize][download][type] = "get"
+libraries[formalize][download][url] = "https://github.com/nathansmith/formalize/tarball/master"
+libraries[formalize][directory_name] = "formalize"
+libraries[formalize][destination] = "libraries"
 
 
 ; Download the guidersJS library
