@@ -98,6 +98,14 @@ projects[formalize][download][type] = "git"
 projects[formalize][download][url] = "http://git.drupal.org/project/formalize.git"
 projects[formalize][download][branch] = "7.x-1.x"
 
+; Webform submission entity module
+projects[webform_submission_entity][type] = module
+projects[webform_submission_entity][subdir] = "contrib"
+projects[webform_submission_entity][version] = "1.x-dev"
+projects[webform_submission_entity][download][type] = "git"
+projects[webform_submission_entity][download][url] = "http://git.drupal.org/sandbox/kevee/1324794.git"
+projects[webform_submission_entity][download][branch] = "master"
+
 ; Libraries
 
 ; Download the Formalize library

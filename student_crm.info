@@ -59,6 +59,7 @@ dependencies[] = views
 dependencies[] = views_ui
 dependencies[] = views_bulk_operations
 dependencies[] = webform
+dependencies[] = webform_submission_entity
 
 ;crm
 dependencies[] = crm
