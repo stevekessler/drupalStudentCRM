@@ -1,4 +1,7 @@
 <?php
+
+include_once('crm_student.features.inc');
+
 /**
  * @file
  */
