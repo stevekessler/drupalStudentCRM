@@ -102,17 +102,19 @@ function crm_history_exit() {
 	if(!$contact) {
 	  return;
 	}
+	$key = 'contact:'. $contact->contact_id;
 	if(!is_array($_SESSION['crm_history'])) {
 		$_SESSION['crm_history'] = array();
 	}
 	foreach($_SESSION['crm_history'] as $item) {
-		if($item['path'] == $_GET['q']) {
+		if($item['key'] == $key) {
 			return;
 		}
 	}
 	$item = array('image' => field_get_items('crm_contact', $contact, 'contact_image'),
 				  'title' => field_get_items('crm_contact', $contact, 'contact_name'),
-				  'path' => $_GET['q']);
+				  'path' => $_GET['q'],
+				  'key' => $key);
 	array_unshift($_SESSION['crm_history'], $item);
 	if(count($_SESSION['crm_history']) > variable_get('crm_history_max_items', 5)) {
 		$history = array_chunk($_SESSION['crm_history'], variable_get('crm_history_max_items', 5));
