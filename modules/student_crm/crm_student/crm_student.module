@@ -15,7 +15,7 @@ function crm_student_init() {
  */
 function crm_student_block_info() {
 	$blocks['crm_student_search'] = array('info' => 'Student CRM search box');
-	unset($blocks['title']);
+	return $blocks;
 }
 
 /**
@@ -25,6 +25,12 @@ function crm_student_block_view($delta) {
 	if($delta == 'crm_student_search') {
 		return array('content' => drupal_get_form('_crm_student_search_form'));	
 	}
+}
+
+function crm_student_block_view_alter(&$data, $block) {
+  if($block->module == 'menu' && $block->delta == 'menu-crm-navigation') {
+    unset($data['subject']);
+  }
 }
 
 /**
