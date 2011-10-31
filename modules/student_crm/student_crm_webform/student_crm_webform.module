@@ -85,3 +85,129 @@ function student_crm_webform_webform_submission_entity_insert($entity) {
                );
   relation_save($relation);
 }
+
+/**
+ * Implements hook_field_info().
+ */
+function student_crm_webform_field_info() {
+  return array(
+    'student_crm_webform_attach' => array(
+      'label' => t('Attached form'),
+      'description' => t('Attach a form that needs to be filled out by a user or anonymous person.'),
+      'settings' => array(),
+      'instance_settings' => array( ),
+      'default_widget' => 'student_crm_webform_field_widget',
+      'default_formatter' => 'attached_form',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function student_crm_webform_field_widget_info() {
+  return array(
+    'student_crm_webform_field_widget' => array(
+      'label' => t('Attached form'),
+      'field types' => array('student_crm_webform_attach'),
+      'behaviors' => array(
+        'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+        'default value' => FIELD_BEHAVIOR_NONE,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_hook_field_widget_form().
+ */
+function hook_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  return array();
+}
+
+/**
+ * Implements hook_field_instance_settings_form().
+ */
+function student_crm_webform_field_instance_settings_form($field, $instance) {
+
+  $defaults   = field_info_instance_settings($field['type']);
+  $settings   = array_merge($defaults, $instance['settings']);
+
+  $form = array();
+  
+  $webforms = db_select('node', 'n')
+              ->fields('n', array('nid', 'title'))
+              ->condition('n.type', 
+                          variable_get('webform_node_types', array('webform')), 'in')
+              ->condition('n.status', 1)
+              ->execute()
+              ->fetchAllKeyed();
+              
+  
+  $form['webform'] = array(
+    '#type' => 'select',
+    '#title' => t('Required form'),
+    '#default_value' => $settings['webform'],
+    '#options' => $webforms,
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_field_validate().
+ */
+function student_crm_webform_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+
+}
+
+/**
+ * Implements hook_field_presave().
+ */
+function student_crm_webform_field_presave($entity_type, $entity, $field, $instance, $langcode, &$items) {
+
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function student_crm_webform_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  return array();
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function student_crm_webform_field_is_empty($item, $field) {
+  return empty($item['value']);
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function student_crm_webform_field_formatter_info() {
+  return array(
+    'attached_form' => array(
+      'label' => t('Attached form (default)'),
+      'field types' => array('student_crm_webform_attach'),
+      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function student_crm_webform_theme() {
+  return array(
+    'student_crm_webform_formatter_attached_form' => array(
+      'variables' => array('element' => NULL),
+    ),
+  );
+}
+/**
+ * Theme function for 'default' or global attached form field formatter.
+ */
+function theme_student_crm_webform_formatter_attached_form($element) {
+  return null;
+}
