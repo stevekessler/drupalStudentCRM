@@ -11,15 +11,30 @@ function student_crm_webform_menu() {
   
   $items['crm/webform/%/%/%node/%'] = array(
     'page callback' => 'student_crm_webform_complete_form',
-    'page arguments' => array(2, 3, 4, 5),
-    'access arguments' => array('complete crm webforms'),
+    'page arguments' => array(2, 3, 4),
+    'access arguments' => array(2, 3, 4, 5),
+    'access callback' => 'student_crm_webform_complete_form_access',
   );
   
   return $items;
 }
 
-function student_crm_webform_complete_form($entity_type, $entity_id, $webform, $key) {
+function student_crm_webform_complete_form_access($entity_type, $entity_id, $webform, $key) {
+  if(!user_access('complete crm webforms')) {
+    return FALSE;
+  }
+  if($key != _student_crm_webform_generate_key($entity_type, $entity_id, $webform->nid)) {
+    return FALSE;
+  }
+  return TRUE;
+}
 
+function student_crm_webform_complete_form($entity_type, $entity_id, $webform) {
+  
+}
+
+function _student_crm_webform_generate_key($entity_type, $entity_id, $webform_nid) {
+  return md5($entity_type .':'. $entity_id .':'. $webform_nid .':'. drupal_get_hash_salt());
 }
 
 /**
