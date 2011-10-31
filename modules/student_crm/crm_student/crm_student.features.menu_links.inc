@@ -10,11 +10,11 @@
 function crm_student_menu_default_menu_links() {
   $menu_links = array();
 
-  // Exported menu link: menu-crm-navigation:search
-  $menu_links['menu-crm-navigation:search'] = array(
+  // Exported menu link: menu-crm-navigation:crm/search
+  $menu_links['menu-crm-navigation:crm/search'] = array(
     'menu_name' => 'menu-crm-navigation',
-    'link_path' => 'search',
-    'router_path' => 'search',
+    'link_path' => 'crm/search',
+    'router_path' => 'crm/search',
     'link_title' => 'Students',
     'options' => array(
       'attributes' => array(

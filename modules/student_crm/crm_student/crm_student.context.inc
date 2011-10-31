@@ -119,6 +119,12 @@ function crm_student_context_default_contexts() {
           'region' => 'sidebar_right',
           'weight' => '-10',
         ),
+        'views-crm_contact_cases-block' => array(
+          'module' => 'views',
+          'delta' => 'crm_contact_cases-block',
+          'region' => 'sidebar_right',
+          'weight' => '-10',
+        ),
         'views-crm_contact_fields-block_1' => array(
           'module' => 'views',
           'delta' => 'crm_contact_fields-block_1',
@@ -131,12 +137,6 @@ function crm_student_context_default_contexts() {
           'region' => 'sidebar_right',
           'weight' => '-8',
         ),
-        'views-crm_contact_cases-block' => array(
-          'module' => 'views',
-          'delta' => 'crm_contact_cases-block',
-          'region' => 'sidebar_right',
-          'weight' => '-10',
-        ),
         'views-crm_contact_fields-block' => array(
           'module' => 'views',
           'delta' => 'crm_contact_fields-block',
@@ -145,7 +145,7 @@ function crm_student_context_default_contexts() {
         ),
       ),
     ),
-    'menu' => 'search',
+    'menu' => 'crm/search',
   );
   $context->condition_mode = 1;
 
