@@ -1,0 +1,32 @@
+<?php
+/**
+ * @file
+ * Code for the Student CRM Webform feature.
+ */
+
+include_once('student_crm_webform.features.inc');
+
+function student_crm_webform_menu() {
+  $items = array();
+  
+  $items['crm/webform/%/%/%node/%'] = array(
+    'page callback' => 'student_crm_webform_complete_form',
+    'page arguments' => array(2, 3, 4, 5),
+    'access arguments' => array('complete crm webforms'),
+  );
+  
+  return $items;
+}
+
+function student_crm_webform_complete_form($entity_type, $entity_id, $webform, $key) {
+
+}
+
+/**
+ * Implements hook_permission().
+ */
+function student_crm_webform_permission() {
+  return array('complete crm webforms' => array(
+              'title' => t('Fill out webforms attached to CRM entities'),
+              'description' => t('Allowed to complete webforms that are later attached to CRM contacts or cases.')));
+}
