@@ -19,6 +19,9 @@ function student_crm_webform_menu() {
   return $items;
 }
 
+/**
+ * Access callback - ensures the user's key is accurate & they have access to complete forms.
+ */
 function student_crm_webform_complete_form_access($entity_type, $entity_id, $webform, $key) {
   if(!user_access('complete crm webforms')) {
     return FALSE;
@@ -29,12 +32,23 @@ function student_crm_webform_complete_form_access($entity_type, $entity_id, $web
   return TRUE;
 }
 
+/**
+ * Page callback - sets a session key for reusing later when the user submits a form.
+ */
 function student_crm_webform_complete_form($entity_type, $entity_id, $webform) {
-  
+  $_SESSION['student_crm_webform_form'][$webform->nid] = array('entity_type' => $entity_type,
+                                                               'entity_id' => $entity_id);
+  return drupal_render(node_view($webform, 'page'));
 }
 
+/**
+ * Helper function to generate a form access key.
+ */
 function _student_crm_webform_generate_key($entity_type, $entity_id, $webform_nid) {
-  return drupal_hmac_base64($entity_type .':'. $entity_id .':'. $webform_nid .':'. drupal_get_hash_salt());
+  return drupal_hmac_base64($entity_type .':'. 
+                            $entity_id .':'. 
+                            $webform_nid .':',
+                            drupal_get_hash_salt());
 }
 
 /**
@@ -44,4 +58,25 @@ function student_crm_webform_permission() {
   return array('complete crm webforms' => array(
               'title' => t('Fill out webforms attached to CRM entities'),
               'description' => t('Allowed to complete webforms that are later attached to CRM contacts or cases.')));
+}
+
+/**
+ * Implements hook_webform_submission_entity_insert().
+ */
+function student_crm_webform_webform_submission_entity_insert($entity) {
+  $submission = $_SESSION['student_crm_webform_form'][$entity->nid];
+  
+  $relation = relation_create('case_webform_relationshiop', array(
+                    array('entity_type' => 'webform_submission_entity',
+                         'entity_bundle' => 'webform_submission_entity',
+                         'entity_id' => $entity->wsid,
+                         'r_index' => 0,
+                         'entity_key' => 'webform_submission_entity'),
+                    array('entity_type' => $submission['entity_type'],
+                           'entity_bundle' => 'student', 
+                           'entity_id' => $submission['entity_id'],
+                           'r_index' => 1,
+                           'entity_key' => $submission['entity_type']))
+               );
+  $rid = relation_save($relation);
 }
