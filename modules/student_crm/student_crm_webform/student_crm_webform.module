@@ -34,7 +34,7 @@ function student_crm_webform_complete_form($entity_type, $entity_id, $webform) {
 }
 
 function _student_crm_webform_generate_key($entity_type, $entity_id, $webform_nid) {
-  return md5($entity_type .':'. $entity_id .':'. $webform_nid .':'. drupal_get_hash_salt());
+  return drupal_hmac_base64($entity_type .':'. $entity_id .':'. $webform_nid .':'. drupal_get_hash_salt());
 }
 
 /**
