@@ -41,7 +41,12 @@ function _crm_student_search_form() {
 													 'placeholder' => 'Search'),
 		'#default_value' => (isset($_GET['name'])) ? check_plain($_GET['name']) : '',
 	);
+	
 	$form['#info']['contact_name_value']['label']['#attributes']['classs'][] = 'element-invisible';
+	
+	$form['advanced'] = array(
+		'#markup' => l('Advanced search', 'crm/search'),
+	);
 	
 	$form['submit'] = array(
 		'#type' => 'submit',
@@ -56,5 +61,5 @@ function _crm_student_search_form() {
  * A generic search form
  */
 function _crm_student_search_form_submit($form, &$form_state) {
-  drupal_goto('search', array('query' => array('name' => $form_state['values']['search'])));
+  drupal_goto('crm/search', array('query' => array('name' => $form_state['values']['search'])));
 }

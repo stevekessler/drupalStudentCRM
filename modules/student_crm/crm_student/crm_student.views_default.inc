@@ -646,7 +646,7 @@ function crm_student_views_default_views() {
 
   /* Display: Search page */
   $handler = $view->new_display('page', 'Search page', 'page');
-  $handler->display->display_options['path'] = 'search';
+  $handler->display->display_options['path'] = 'crm/search';
   $translatables['search_contacts'] = array(
     t('Master'),
     t('Search Students'),
