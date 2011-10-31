@@ -57,12 +57,14 @@ dependencies[] = guiders_js
 dependencies[] = job_scheduler
 dependencies[] = link
 dependencies[] = options_element
-dependencies[] = relation
 dependencies[] = views
 dependencies[] = views_ui
 dependencies[] = views_bulk_operations
 dependencies[] = webform
 dependencies[] = webform_submission_entity
+
+;relation
+dependencies[] = relation
 
 ;crm
 dependencies[] = crm
