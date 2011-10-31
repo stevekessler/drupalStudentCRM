@@ -65,18 +65,20 @@ function student_crm_webform_permission() {
  */
 function student_crm_webform_webform_submission_entity_insert($entity) {
   $submission = $_SESSION['student_crm_webform_form'][$entity->nid];
+  if($submission['entity_type'] == 'crm_contact') {
+    $target = crm_contact_load($submission['entity_id']);
+    $target_type = $target->type;
+  }
   
-  $relation = relation_create('case_webform_relationshiop', array(
+  $relation = relation_create('webform_submission_to_entities', array(
                     array('entity_type' => 'webform_submission_entity',
-                         'entity_bundle' => 'webform_submission_entity',
                          'entity_id' => $entity->wsid,
                          'r_index' => 0,
-                         'entity_key' => 'webform_submission_entity'),
+                         ),
                     array('entity_type' => $submission['entity_type'],
-                           'entity_bundle' => 'student', 
+                           'entity_bundle' => $target_type, 
                            'entity_id' => $submission['entity_id'],
-                           'r_index' => 1,
-                           'entity_key' => $submission['entity_type']))
+                           'r_index' => 1,))
                );
   $rid = relation_save($relation);
 }
