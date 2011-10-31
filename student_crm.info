@@ -40,6 +40,7 @@ dependencies[] = libraries
 ;contrib
 dependencies[] = addressfield
 dependencies[] = admin_menu
+dependencies[] = better_formats
 dependencies[] = cck_phone
 ;dependencies[] = chosen
 dependencies[] = context_ui
