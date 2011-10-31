@@ -136,3 +136,4 @@ libraries[guiders][destination] = "libraries"
 
 ;projects[chosen][patch][] = http://drupal.org/files/issues/chosen-7.x-1.x-install_profile.patch
 ;projects[chosen][patch][] = http://drupal.org/files/remove_make_file-1291986-3.patch
+projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"
