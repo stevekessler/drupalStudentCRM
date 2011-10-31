@@ -31,9 +31,10 @@ function crm_history_block_view($delta) {
 			$items[] = l($text, $history['path'], array('html' => true));
 		}
 		
-		$items[] = l('Clear history', 'crm/history/clear', array('query' => array('destination' => $_GET['q'])));
+		
 	}
 	$output = theme('item_list', array('attributes' => array('class' => 'history'), 'items' => $items));
+	
 	return array('subject' => 'Recently viewed',
 				 'content' => $output);
 }
@@ -59,12 +60,6 @@ function _crm_history_get_contact() {
 function crm_history_menu() {
 	$items = array();
 	
-	$items['crm/history/clear'] = array(
-		'title' => 'Clear history',
-		'page callback' => 'crm_history_clear',
-		'access arguments' => array('track user history'),
-	);
-	
 	$items['admin/config/crm_history'] = array(
 		'title' => 'CRM History',
 		'description' => 'Manage how history is tracked for users.',
@@ -78,17 +73,8 @@ function crm_history_menu() {
 }
 
 /**
- * Menu callback to clear user history.
+ * Implements hook_permission().
  */
-function crm_history_clear() {
-	$_SESSION['crm_history'] = array();
-	drupal_set_message(t('History cleared.'));
-	$destination = (isset($_GET['destination']))
-				   ? $_GET['destination']
-				   : '<front>';
-	drupal_goto($destination);
-}
-
 function crm_history_permission() {
 	return array('track user history' => array('title' => 'Track user\'s history',
 											   'description' => 'Allow user to view recently viewed pages.'));
