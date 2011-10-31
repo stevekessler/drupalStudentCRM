@@ -238,7 +238,7 @@ function theme_crm_case_add_list($variables) {
   }
   else {
     if (user_access('administer crm_case types')) {
-      $output = '<p>' . t('CRMCase Entities cannot be added because you have not created any crm_case types yet. Go to the <a href="@create-crm_case-type">crm_case type creation page</a> to add a new crm_case type.', array('@create-crm_case-type' => url('crm/admin/case-types/add'))) . '</p>';
+      $output = '<p>' . t('CRMCase Entities cannot be added because you have not created any case types yet. Go to the <a href="@create-crm_case-type">crm_case type creation page</a> to add a new crm_case type.', array('@create-crm_case-type' => url('crm/admin/case/types/add'))) . '</p>';
     }
     else {
       $output = '<p>' . t('No crm_case types have been created yet for you to use.') . '</p>';
