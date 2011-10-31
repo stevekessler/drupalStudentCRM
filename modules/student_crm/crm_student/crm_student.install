@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function crm_student_install() {
+  module_load_include('inc', 'menu');
+  menu_rebuild();
+}

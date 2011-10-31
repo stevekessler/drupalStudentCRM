@@ -15,7 +15,7 @@ function crm_student_init() {
  */
 function crm_student_block_info() {
 	$blocks['crm_student_search'] = array('info' => 'Student CRM search box');
-	return $blocks;
+	unset($blocks['title']);
 }
 
 /**
