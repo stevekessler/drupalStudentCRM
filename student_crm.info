@@ -86,3 +86,5 @@ dependencies[] = student_crm_webform
 variables[site_frontpage] = crm
 variables[site_name] = Student CRM
 variables[admin_theme] = rubik
+variables[webform_use_cookies] = 1
+variables[webform_submission_access_control] = 0
