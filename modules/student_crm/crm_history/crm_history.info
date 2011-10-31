@@ -1,12 +1,10 @@
-name=CRM History
-description=Provides a recent history of viewed entities.
-package=Student CRM
-core=7.x
-
+core = "7.x"
 dependencies[] = "context"
-dependencies[] = "crm_history"
 dependencies[] = "image"
-
+description = "Provides a recent history of viewed entities."
 features[context][] = "crm_history"
 features[ctools][] = "context:context:3"
 features[image][] = "history_small"
+name = "CRM History"
+package = "Student CRM"
+php = "5.2.4"
