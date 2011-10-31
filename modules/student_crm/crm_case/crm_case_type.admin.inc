@@ -54,12 +54,12 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
 function crm_case_type_form_submit(&$form, &$form_state) {
   $crm_case_type = entity_ui_form_submit_build_entity($form, $form_state);
   $crm_case_type->save();
-  $form_state['redirect'] = 'crm/admin/case-types';
+  $form_state['redirect'] = 'crm/admin/case/types';
 }
 
 /**
  * Form API submit callback for the delete button.
  */
 function crm_case_type_form_submit_delete(&$form, &$form_state) {
-  $form_state['redirect'] = 'crm/admin/case-types/manage/' . $form_state['crm_case_type']->type . '/delete';
+  $form_state['redirect'] = 'crm/admin/case/types/' . $form_state['crm_case_type']->type . '/delete';
 }

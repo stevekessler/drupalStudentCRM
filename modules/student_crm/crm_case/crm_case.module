@@ -67,9 +67,10 @@ function crm_case_entity_info() {
     'module' => 'crm_case',
     // Enable the entity API's admin UI.
     'admin ui' => array(
-      'path' => 'crm/admin/case-types',
+      'path' => 'crm/admin/case/types',
       'file' => 'crm_case_type.admin.inc',
       'controller class' => 'CRMCaseTypeUIController',
+      'menu wildcard' => '%crm_case_type',
     ),
   );
 
@@ -123,9 +124,9 @@ function crm_case_entity_info_alter(&$entity_info) {
     $entity_info['crm_case']['bundles'][$type] = array(
       'label' => $info->label,
       'admin' => array(
-        'path' => 'crm/admin/case-types/manage/%crm_case_type',
-        'real path' => 'crm/admin/case-types/manage/' . $type,
-        'bundle argument' => 4,
+        'path' => 'crm/admin/case/types/manage/%crm_case_type',
+        'real path' => 'crm/admin/case/types/manage/' . $type,
+        'bundle argument' => 5,
         'access arguments' => array('administer crm_case types'),
       ),
     );

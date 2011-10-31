@@ -6,4 +6,5 @@
 function crm_student_install() {
   module_load_include('inc', 'menu');
   menu_rebuild();
+  cache_clear_all();
 }
