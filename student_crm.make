@@ -33,7 +33,7 @@ projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.x-dev"
 
 projects[email][subdir] = "contrib"
-projects[email][version] = "1.0"
+projects[email][version] = "1.x-dev"
 
 projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.0-beta10"
@@ -137,3 +137,4 @@ libraries[guiders][destination] = "libraries"
 ;projects[chosen][patch][] = http://drupal.org/files/issues/chosen-7.x-1.x-install_profile.patch
 ;projects[chosen][patch][] = http://drupal.org/files/remove_make_file-1291986-3.patch
 projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"
+projects[email][patch][] = "http://drupal.org/files/email_feeds_target-718414-36.patch"

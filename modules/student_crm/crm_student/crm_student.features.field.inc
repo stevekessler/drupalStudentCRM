@@ -141,6 +141,54 @@ function crm_student_field_default_fields() {
     ),
   );
 
+  // Exported field: 'crm_contact-student-field_contact_email'
+  $fields['crm_contact-student-field_contact_email'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_contact_email',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'email',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'email',
+    ),
+    'field_instance' => array(
+      'bundle' => 'student',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'email',
+          'settings' => array(),
+          'type' => 'email_default',
+          'weight' => 8,
+        ),
+      ),
+      'entity_type' => 'crm_contact',
+      'field_name' => 'field_contact_email',
+      'label' => 'Email address',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'email',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'email_textfield',
+        'weight' => '8',
+      ),
+    ),
+  );
+
   // Exported field: 'crm_contact-student-field_first_name'
   $fields['crm_contact-student-field_first_name'] = array(
     'field_config' => array(
@@ -641,6 +689,7 @@ function crm_student_field_default_fields() {
   t('Alert level');
   t('Degree type');
   t('Degrees');
+  t('Email address');
   t('First Name');
   t('Image');
   t('Last name');
