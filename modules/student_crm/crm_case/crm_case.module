@@ -19,7 +19,7 @@ include_once('crm_case.features.inc');
  */
 function crm_case_entity_info() {
   $return['crm_case'] = array(
-    'label' => t('CRM Case'),
+    'label' => t('Case'),
     // The entity class and controller class extend the classes provided by the
     // Entity API
     'entity class' => 'CRMCase',
@@ -51,7 +51,7 @@ function crm_case_entity_info() {
   );
   // The entity that holds information about the entity types	  
   $return['crm_case_type'] = array(
-    'label' => t('CRM Case Type'),
+    'label' => t('Case Type'),
     'entity class' => 'CRMCaseType',
     'controller class' => 'CRMCaseTypeController',
     'base table' => 'crm_case_type',
