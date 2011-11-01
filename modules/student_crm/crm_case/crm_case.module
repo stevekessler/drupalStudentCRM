@@ -60,7 +60,7 @@ function crm_case_entity_info() {
     'exportable' => TRUE,
     'entity keys' => array(
       'id' => 'id',
-      'bundle' => 'type',
+      'name' => 'type',
       'label' => 'label',
     ),
     'access callback' => 'crm_case_type_access',
