@@ -4,7 +4,7 @@ function student_crm_demo_install() {
 	$feed = feeds_source('crm_demo_degrees', 0);
 	$config = array(
 		'FeedsFileFetcher' => array(
-		'source' => 'file://'. drupal_get_path('module', 'student_crm_demo') .'/data/degrees.csv'));
+		'source' => drupal_get_path('module', 'student_crm_demo') .'/data/degrees.csv'));
 	$feed->addConfig($config);
 	
 	// Not using Batch API (complete import within current page load)
@@ -13,7 +13,7 @@ function student_crm_demo_install() {
 	$feed = feeds_source('crm_demo_students', 0);
 	$config = array(
 		'FeedsFileFetcher' => array(
-		'source' => 'file://'. drupal_get_path('module', 'student_crm_demo') .'/data/students.csv'));
+		'source' => drupal_get_path('module', 'student_crm_demo') .'/data/students.csv'));
 	$feed->addConfig($config);
 	
 	// Not using Batch API (complete import within current page load)
