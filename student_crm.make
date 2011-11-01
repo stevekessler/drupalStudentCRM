@@ -68,6 +68,9 @@ projects[options_element][version] = "1.4"
 projects[relation][subdir] = "contrib"
 projects[relation][version] = "1.0-beta1"
 
+projects[token][subdir] = "contrib"
+projects[token][version] = "1.0-beta7"
+
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.x-dev"
 
