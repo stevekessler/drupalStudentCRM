@@ -45,49 +45,28 @@ function crm_case_views_default_views() {
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['field'] = 'relation_crm_contact_case_crm_contact';
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['required'] = 0;
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['r_index'] = '-1';
-  /* Field: Case: Case ID */
-  $handler->display->display_options['fields']['cid']['id'] = 'cid';
-  $handler->display->display_options['fields']['cid']['table'] = 'crm_case';
-  $handler->display->display_options['fields']['cid']['field'] = 'cid';
-  $handler->display->display_options['fields']['cid']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['cid']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['cid']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['cid']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['cid']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['cid']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['cid']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['cid']['hide_alter_empty'] = 0;
-  $handler->display->display_options['fields']['cid']['format_plural'] = 0;
-  /* Field: Case: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'crm_case';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['name']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['name']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['name']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['name']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['name']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['name']['hide_alter_empty'] = 0;
+  /* Field: Case: Link */
+  $handler->display->display_options['fields']['link_crm_case']['id'] = 'link_crm_case';
+  $handler->display->display_options['fields']['link_crm_case']['table'] = 'crm_case';
+  $handler->display->display_options['fields']['link_crm_case']['field'] = 'link_crm_case';
+  $handler->display->display_options['fields']['link_crm_case']['label'] = 'Case name';
+  $handler->display->display_options['fields']['link_crm_case']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['link_crm_case']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['link_crm_case']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['hide_alter_empty'] = 0;
   /* Field: Case: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'crm_case';
@@ -145,7 +124,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['inline'] = array(
-    'name' => 'name',
+    'link_crm_case' => 'link_crm_case',
     'type' => 'type',
   );
   $handler->display->display_options['row_options']['separator'] = ' - ';
@@ -153,53 +132,28 @@ function crm_case_views_default_views() {
   $handler->display->display_options['row_options']['default_field_elements'] = 1;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Case: Case ID */
-  $handler->display->display_options['fields']['cid']['id'] = 'cid';
-  $handler->display->display_options['fields']['cid']['table'] = 'crm_case';
-  $handler->display->display_options['fields']['cid']['field'] = 'cid';
-  $handler->display->display_options['fields']['cid']['label'] = '';
-  $handler->display->display_options['fields']['cid']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['cid']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['cid']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['cid']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['cid']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['cid']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['cid']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['cid']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['cid']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['cid']['hide_alter_empty'] = 0;
-  $handler->display->display_options['fields']['cid']['format_plural'] = 0;
-  /* Field: Case: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'crm_case';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['make_link'] = 1;
-  $handler->display->display_options['fields']['name']['alter']['path'] = 'crm/case/[case_id]';
-  $handler->display->display_options['fields']['name']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['name']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['name']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['name']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['name']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['name']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['name']['hide_alter_empty'] = 0;
+  /* Field: Case: Link */
+  $handler->display->display_options['fields']['link_crm_case']['id'] = 'link_crm_case';
+  $handler->display->display_options['fields']['link_crm_case']['table'] = 'crm_case';
+  $handler->display->display_options['fields']['link_crm_case']['field'] = 'link_crm_case';
+  $handler->display->display_options['fields']['link_crm_case']['label'] = '';
+  $handler->display->display_options['fields']['link_crm_case']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['link_crm_case']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['link_crm_case']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['link_crm_case']['hide_alter_empty'] = 0;
   /* Field: Case: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'crm_case';
@@ -251,16 +205,12 @@ function crm_case_views_default_views() {
     t('Offset'),
     t('No cases found.'),
     t('CRM Contact Case'),
-    t('Case ID'),
-    t('.'),
-    t(','),
-    t('Name'),
+    t('Case name'),
     t('Case type'),
     t('All'),
     t('Page'),
     t('Block'),
     t('Open Cases'),
-    t('crm/case/[case_id]'),
   );
   $export['crm_contact_cases'] = $view;
 
