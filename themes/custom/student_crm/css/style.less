@@ -47,7 +47,7 @@
 @body-background  	: #fefefe;
 @content-background : #fff;
 @text-color			: #000;
-@link-color 	 	: #0084B4;
+@link-color 	 	: #4183C4;
 
 @header-gradient	: #fefefe;
 @main-background	: #f4f1ec;
@@ -59,6 +59,10 @@
 
 @tag-color        : #fff;
 @tag-background   : #2486c0;
+
+/** HIGHLIGHT COLOR **/
+@green-highlight  : #daf6df;
+
 
 /** LAYOUT **/
 @min-width			: 800px;
@@ -139,10 +143,10 @@ fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; ma
 	#page #page-title { margin: .5em 0px; font-size: 2.7em; }
 	#page .container { padding: 15px 10px; }
 	#content-wrapper { margin-left: (@min-width / 4) + @sidebar-padding; margin-right: 10px; }
-	#page.has-right-sidebar #content { margin-right: (@min-width / 4) + (@sidebar-padding * 2);  }
+	#page.has-right-sidebar #content { margin-right: (@min-width / 4) + (@sidebar-padding * 3);  }
 #content-wrapper { background: @content-background; .round-box(8px); .box-shadow(0px, 0px, 6px, 0.2); }
 	#page.has-right-sidebar #content-wrapper { padding-right: 0; }
-	#content { padding: @content-padding; border-right: 1px solid @content-line-color; }
+	#content { padding: @content-padding; }
 	#content .profile { clear: none; }
 	#content-wrapper .sidebar.right { width: (@min-width / 4); padding: @sidebar-padding; overflow-x: hidden; }
 
