@@ -129,7 +129,7 @@ function hook_field_widget_form(&$form, &$form_state, $field, $instance, $langco
  * Implements hook_field_instance_settings_form().
  */
 function student_crm_webform_field_instance_settings_form($field, $instance) {
-
+  drupal_add_js(drupal_get_path('module', 'student_crm_webform') .'/js/student_crm_webform.field_instance.js');
   $defaults   = field_info_instance_settings($field['type']);
   $settings   = array_merge($defaults, $instance['settings']);
 
@@ -147,9 +147,62 @@ function student_crm_webform_field_instance_settings_form($field, $instance) {
   $form['webform'] = array(
     '#type' => 'select',
     '#title' => t('Required form'),
-    '#default_value' => $settings['webform'],
+    '#default_value' => (isset($settings['webform'])) ? $settings['webform'] : 0,
     '#options' => $webforms,
   );
+  
+  $form['webform'] = array(
+    '#type' => 'select',
+    '#title' => t('Required form'),
+    '#default_value' => (isset($settings['webform'])) ? $settings['webform'] : 0,
+    '#options' => $webforms,
+  );
+  
+  $form['email_address'] = array(
+    '#type' => 'select',
+    '#title' => 'Who should receive the email for this form?',
+    '#default_value' => (isset($settings['email_address'])) ? $settings['email_address'] : 'manual',
+    '#options' => array('contact' => 'Contact attached to the case',
+                        'manual'  => 'Manual entry',
+                        'field'   => 'Email address from another field'
+                        ),
+  );
+  
+  $email_field_options = array();
+  $fields = field_info_instances();
+  $fields = $fields[$instance['entity_type']][$instance['bundle']];
+  foreach($fields as $field_name => $field) {
+    if($field['widget']['module'] == 'email') {
+      $email_field_options[$field_name] = $field['label'];
+    }
+  }
+  $form['email_field'] = array(
+		'#type' => 'select',
+		'#prefix' => '<div id="email-field-source-select">',
+		'#suffix' => '</div>',
+		'#title' => 'Email field',
+    '#default_value' => (isset($settings['email_field'])) ? $settings['email_field'] : 0,
+		'#options' => $email_field_options,
+	);
+
+  $form['email_subject'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Email subject',
+    '#default_value' => (isset($settings['email_subject'])) ? $settings['email_subject'] : '',
+  );
+  
+  $form['email_body'] = array(
+    '#type' => 'textarea',
+    '#title' => 'Email body',
+    '#default_value' => (isset($settings['email_body'])) ? $settings['email_body'] : '',
+  );
+  
+  if (module_exists('token')) {
+    $form['email_tokens'] = array(
+      '#theme' => 'token_tree',
+      '#token_types' => array('crm_case', 'crm_contact'),
+    );
+  }
 
   return $form;
 }
