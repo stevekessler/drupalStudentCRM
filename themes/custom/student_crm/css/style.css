@@ -462,6 +462,19 @@ ul.tabs li a.active:hover {
 ul.primary li a:hover {
   background: #dadfe5;
 }
+/** WEBFORMS **/
+.webform-submission label {
+  font-weight: bold;
+  font-size: 120%;
+  margin: 5px 0 5px -20px;
+}
+.webform-submission .webform-component {
+  margin: 10px 0 10px 20px;
+}
+.webform-submission-info {
+  width: 200px;
+  float: right;
+}
 /** PAGER **/
 ul.pager {
   margin: 15px 0;
