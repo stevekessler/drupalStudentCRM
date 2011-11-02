@@ -112,10 +112,14 @@ function crm_advisor_block_view($delta) {
   if($delta == 'crm_advisor_select_advisor') {
     global $user;
     if(_crm_advisor_user_is_advisor($contact, $user)) {
-      $link = l('Remove from your advising list', 'crm/advisor/remove/'. $contact->contact_id .'/'. $user->uid);
+      $link = l('Remove from your advising list', 
+                'crm/advisor/remove/'. $contact->contact_id .'/'. $user->uid,
+                array('attributes' => array('class' => array('tag', 'advisor-link', 'remove'))));
     }
     else {
-      $link = l('Add to your advising list', 'crm/advisor/add/'. $contact->contact_id .'/'. $user->uid);
+      $link = l('Add to your advising list', 
+                'crm/advisor/add/'. $contact->contact_id .'/'. $user->uid,
+                array('attributes' => array('class' => array('tag', 'advisor-link', 'add')))));
     }
     return array('content' => $link);
   }
