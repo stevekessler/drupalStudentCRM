@@ -38,6 +38,9 @@ projects[email][version] = "1.x-dev"
 projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.0-beta11"
 
+projects[fancybox][subdir] = "contrib"
+projects[fancybox][version] = "1.x-dev"
+
 projects[features][subdir] = "contrib"
 projects[features][version] = "1.x-dev"
 
@@ -122,6 +125,12 @@ projects[webform_submission_entity][download][branch] = "master"
 ;libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/zipball/master"
 ;libraries[chosen][directory_name] = "chosen"
 ;libraries[chosen][destination] = "libraries"
+
+; Download fancybox as a library
+libraries[fancybox][download][type] = "get"
+libraries[fancybox][download][url] = "http://fancybox.googlecode.com/files/jquery.fancybox-1.3.4.zip"
+libraries[fancybox][directory_name] = "fancybox"
+libraries[fancybox][destination] = "libraries"
 
 ; Download the Formalize library
 libraries[formalize][download][type] = "get"
