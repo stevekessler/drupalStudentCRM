@@ -43,7 +43,7 @@ function crm_case_entity_info() {
     'module' => 'crm_case',
     // The information below is used by the CRMCaseUIController (which extends the EntityDefaultUIController)
     'admin ui' => array(
-      'path' => 'crm/cases',
+      'path' => 'crm/case',
       'file' => 'crm_case.admin.inc',
       'controller class' => 'CRMCaseUIController',
       'menu wildcard' => '%crm_case',
@@ -182,6 +182,10 @@ function crm_case_permission() {
  *   Whether access is allowed or not.
  */
 function crm_case_access($op, $crm_case = NULL, $account = NULL) {
+  if(!$account) {
+    global $user;
+    $account = $user;
+  }
   if (user_access('administer crm_cases', $account)) {
     return TRUE;
   }
@@ -368,12 +372,6 @@ function crm_case_theme() {
       'render element' => 'elements',
       'template' => 'crm_case',
     ),
-   'crm_case_sample_data' => array(
-      'variables' => array('crm_case_sample_data', 'crm_case' => NULL),
-      'template' => 'crm_case-sample-data',
-    ),
-
-
   );
 }  
 
@@ -383,8 +381,8 @@ function crm_case_theme() {
  */
 function crm_case_menu_local_tasks_alter(&$data, $router_item, $root_path) {
   // Add action link 'admin/structure/crm_cases/add' on 'admin/structure/crm_cases'.
-  if ($root_path == 'crm/cases') {
-    $item = menu_get_item('crm/cases/add');
+  if ($root_path == 'crm/case') {
+    $item = menu_get_item('crm/case/add');
     if ($item['access']) {
       $data['actions']['output'][] = array(
         '#theme' => 'menu_local_action',
@@ -553,7 +551,7 @@ class CRMCaseUIController extends EntityDefaultUIController {
       'file path' => drupal_get_path('module', $this->entityInfo['module'])
 
     );
-    
+
     // Add menu items to add each different type of entity.
     foreach (crm_case_get_types() as $type) {
       $items[$this->path . '/add/' . $type->type] = array(
@@ -568,32 +566,39 @@ class CRMCaseUIController extends EntityDefaultUIController {
     }
 
     // Loading and editing crm_case entities
-    $items[$this->path . '/case/' . $wildcard] = array(
+    $items['crm/case/' . $wildcard] = array(
       'page callback' => 'crm_case_form_wrapper',
-      'page arguments' => array($id_count + 1),
+      'page arguments' => array(2),
       'access callback' => 'crm_case_access',
-      'access arguments' => array('edit', $id_count + 1),
+      'access arguments' => array('edit', 2),
       'weight' => 0,
       'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
+      'type' => MENU_LOCAL_TASK,
       'file' => 'crm_case.admin.inc',
       'file path' => drupal_get_path('module', $this->entityInfo['module'])
     );
-    $items[$this->path . '/case/' . $wildcard . '/edit'] = array(
+    
+    $items['crm/case/' . $wildcard . '/edit'] = array(
       'title' => 'Edit',
-      'type' => MENU_DEFAULT_LOCAL_TASK,
-      'weight' => -10,
+      'type' => MENU_LOCAL_TASK,
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('crm_case_edit_form', 2),
+      'access callback' => 'crm_case_access',
+      'access arguments' => array('edit', 2),
+      'file' => 'crm_case.admin.inc',
+      'file path' => drupal_get_path('module', $this->entityInfo['module']),
+      'weight' => 2,
       'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
     );
     
-    $items[$this->path . '/case/' . $wildcard . '/delete'] = array(
+    $items['crm/case/' . $wildcard . '/delete'] = array(
       'title' => 'Delete',
       'page callback' => 'crm_case_delete_form_wrapper',
-      'page arguments' => array($id_count + 1),
+      'page arguments' => array(2),
       'access callback' => 'crm_case_access',
-      'access arguments' => array('edit', $id_count + 1),
-      'type' => MENU_LOCAL_TASK,
+      'access arguments' => array('edit', 2),
+      'type' => MENU_CALLBACK,
       'context' => MENU_CONTEXT_INLINE,
-      'weight' => 10,
       'file' => 'crm_case.admin.inc',
       'file path' => drupal_get_path('module', $this->entityInfo['module'])
     );
@@ -604,11 +609,17 @@ class CRMCaseUIController extends EntityDefaultUIController {
       'title callback' => 'crm_case_page_title',
       'title arguments' => array(2),
       'page callback' => 'crm_case_page_view',
-      'page arguments' => array(1),
+      'page arguments' => array(2),
       'access callback' => 'crm_case_access',
-      'access arguments' => array('view', 1),
-      'type' => MENU_CALLBACK,
+      'access arguments' => array('view', 2),
+      'type' => MENU_NORMAL_ITEM,
     );
+    
+    $items['crm/case/' . $wildcard .'/view'] = array(
+    'title' => 'View',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
     return $items;
   }
   

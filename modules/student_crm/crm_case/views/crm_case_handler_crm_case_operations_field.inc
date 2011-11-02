@@ -18,7 +18,7 @@ class crm_case_handler_crm_case_operations_field extends views_handler_field {
 
   function render($values) {
 
-    $links = menu_contextual_links('crm_case', 'crm/cases/crm_case', array($this->get_value($values, 'cid')));
+    $links = menu_contextual_links('crm_case', 'crm/case/crm_case', array($this->get_value($values, 'cid')));
     
     if (!empty($links)) {
       return theme('links', array('links' => $links, 'attributes' => array('class' => array('links', 'inline', 'operations'))));

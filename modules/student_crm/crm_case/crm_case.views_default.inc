@@ -39,17 +39,16 @@ function crm_case_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No cases found.';
   $handler->display->display_options['empty']['area']['format'] = 'plain_text';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: CRM Case: Relation: CRM Contact Case (crm_case <-> crm_contact) */
+  /* Relationship: Case: Relation: CRM Contact Case (crm_case <-> crm_contact) */
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['id'] = 'relation_crm_contact_case_crm_contact';
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['table'] = 'crm_case';
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['field'] = 'relation_crm_contact_case_crm_contact';
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['required'] = 0;
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['r_index'] = '-1';
-  /* Field: CRM Case: Crm case ID */
+  /* Field: Case: Case ID */
   $handler->display->display_options['fields']['cid']['id'] = 'cid';
   $handler->display->display_options['fields']['cid']['table'] = 'crm_case';
   $handler->display->display_options['fields']['cid']['field'] = 'cid';
-  $handler->display->display_options['fields']['cid']['label'] = 'Case ID';
   $handler->display->display_options['fields']['cid']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['cid']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['cid']['alter']['absolute'] = 0;
@@ -68,7 +67,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['fields']['cid']['empty_zero'] = 0;
   $handler->display->display_options['fields']['cid']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['cid']['format_plural'] = 0;
-  /* Field: CRM Case: Name */
+  /* Field: Case: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'crm_case';
   $handler->display->display_options['fields']['name']['field'] = 'name';
@@ -89,7 +88,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['fields']['name']['hide_empty'] = 0;
   $handler->display->display_options['fields']['name']['empty_zero'] = 0;
   $handler->display->display_options['fields']['name']['hide_alter_empty'] = 0;
-  /* Field: CRM Case: Type */
+  /* Field: Case: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'crm_case';
   $handler->display->display_options['fields']['type']['field'] = 'type';
@@ -116,8 +115,9 @@ function crm_case_views_default_views() {
   $handler->display->display_options['arguments']['contact_id']['table'] = 'crm_contact';
   $handler->display->display_options['arguments']['contact_id']['field'] = 'contact_id';
   $handler->display->display_options['arguments']['contact_id']['relationship'] = 'relation_crm_contact_case_crm_contact';
-  $handler->display->display_options['arguments']['contact_id']['default_action'] = 'empty';
-  $handler->display->display_options['arguments']['contact_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['contact_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['contact_id']['default_argument_type'] = 'raw';
+  $handler->display->display_options['arguments']['contact_id']['default_argument_options']['index'] = '2';
   $handler->display->display_options['arguments']['contact_id']['default_argument_skip_url'] = 0;
   $handler->display->display_options['arguments']['contact_id']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['contact_id']['summary']['format'] = 'default_summary';
@@ -127,7 +127,7 @@ function crm_case_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'crm/contact/%/cases';
+  $handler->display->display_options['path'] = 'crm/contact/%crm_contact/cases';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Cases';
   $handler->display->display_options['menu']['weight'] = '0';
@@ -153,7 +153,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['row_options']['default_field_elements'] = 1;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: CRM Case: Crm case ID */
+  /* Field: Case: Case ID */
   $handler->display->display_options['fields']['cid']['id'] = 'cid';
   $handler->display->display_options['fields']['cid']['table'] = 'crm_case';
   $handler->display->display_options['fields']['cid']['field'] = 'cid';
@@ -177,7 +177,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['fields']['cid']['empty_zero'] = 0;
   $handler->display->display_options['fields']['cid']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['cid']['format_plural'] = 0;
-  /* Field: CRM Case: Name */
+  /* Field: Case: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'crm_case';
   $handler->display->display_options['fields']['name']['field'] = 'name';
@@ -200,7 +200,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['fields']['name']['hide_empty'] = 0;
   $handler->display->display_options['fields']['name']['empty_zero'] = 0;
   $handler->display->display_options['fields']['name']['hide_alter_empty'] = 0;
-  /* Field: CRM Case: Type */
+  /* Field: Case: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'crm_case';
   $handler->display->display_options['fields']['type']['field'] = 'type';

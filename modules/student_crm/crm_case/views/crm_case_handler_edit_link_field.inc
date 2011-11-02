@@ -26,6 +26,6 @@ class crm_case_handler_edit_link_field extends crm_case_handler_link_field {
     $text = !empty($this->options['text']) ? $this->options['text'] : t('edit');
     $cid = $values->{$this->aliases['cid']};
     
-    return l($text, 'crm/cases/case/' . $cid . '/edit');
+    return l($text, 'crm/case/case/' . $cid . '/edit');
   }
 }

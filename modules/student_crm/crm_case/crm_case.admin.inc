@@ -50,6 +50,8 @@ function crm_case_delete_form_wrapper($crm_case) {
  *     with only a crm_case type defined.
  */
 function crm_case_edit_form($form, &$form_state, $crm_case) {
+  drupal_set_title(t('Edit @name', array('@name' => $crm_case->name)));
+  
   // Add the default field elements.
   $form['name'] = array(
     '#type' => 'textfield',
@@ -96,8 +98,8 @@ function crm_case_edit_form($form, &$form_state, $crm_case) {
   if (!empty($crm_case->name)) {
     $form['actions']['delete'] = array(
       '#type' => 'submit',
-      '#value' => t('Delete crm_case'),
-      '#suffix' => l(t('Cancel'), 'crm/cases'),
+      '#value' => t('Delete case'),
+      '#suffix' => l(t('Cancel'), 'crm/case'),
       '#submit' => $submit + array('crm_case_form_submit_delete'),
       '#weight' => 45,
     );
@@ -155,7 +157,7 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
     $rid = relation_save($relation);
   }
   
-  $form_state['redirect'] = 'crm/cases';
+  $form_state['redirect'] = 'crm/case/'. $crm_case->cid;
 }
 
 /**
@@ -164,7 +166,7 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
  * @todo Remove hard-coded path
  */
 function crm_case_form_submit_delete(&$form, &$form_state) {
-  $form_state['redirect'] = 'crm/cases/' . $form_state['crm_case']->cid . '/delete';
+  $form_state['redirect'] = 'crm/case/' . $form_state['crm_case']->cid . '/delete';
 }
 
 
@@ -182,8 +184,8 @@ function crm_case_delete_form($form, &$form_state, $crm_case) {
   $form['#submit'][] = 'crm_case_delete_form_submit';
 
   $form = confirm_form($form,
-    t('Are you sure you want to delete crm_case %name?', array('%name' => $crm_case->name)),
-    'crm/cases/crm_case',
+    t('Are you sure you want to delete the case %name?', array('%name' => $crm_case->name)),
+    'crm/case/crm_case',
     '<p>' . t('This action cannot be undone.') . '</p>',
     t('Delete'),
     t('Cancel'),
@@ -202,9 +204,9 @@ function crm_case_delete_form_submit($form, &$form_state) {
   crm_case_delete($crm_case);
 
   drupal_set_message(t('The crm_case %name has been deleted.', array('%name' => $crm_case->name)));
-  watchdog('crm_case', 'Deleted crm_case %name.', array('%name' => $crm_case->name));
+  watchdog('crm_case', 'Deleted case %name.', array('%name' => $crm_case->name));
 
-  $form_state['redirect'] = 'crm/cases';
+  $form_state['redirect'] = 'crm/case';
 }
 
 
@@ -260,7 +262,7 @@ function crm_case_set_breadcrumb() {
     l(t('Home'), '<front>'),
     l(t('Administration'), 'admin'),
     l(t('Content'), 'admin/content'),
-    l(t('CRMCases'), 'crm/cases'),
+    l(t('CRMCases'), 'crm/case'),
   );
 
   drupal_set_breadcrumb($breadcrumb);

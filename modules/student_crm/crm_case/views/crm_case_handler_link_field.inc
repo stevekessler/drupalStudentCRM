@@ -12,6 +12,7 @@ class crm_case_handler_link_field extends views_handler_field {
 
     $this->additional_fields['cid'] = 'cid';
     $this->additional_fields['type'] = 'type';
+    $this->additional_fields['name'] = 'name';
   }
 
   function option_definition() {
@@ -38,7 +39,7 @@ class crm_case_handler_link_field extends views_handler_field {
   }
 
   function render($values) {
-    $text = !empty($this->options['text']) ? $this->options['text'] : t('view');
+    $text = !empty($this->options['text']) ? $this->options['text'] : $values->{$this->aliases['name']};
     $cid = $values->{$this->aliases['cid']};
 
     return l($text, 'crm/case/' . $cid);
