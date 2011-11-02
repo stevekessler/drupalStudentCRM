@@ -57,6 +57,9 @@
 @table-odd 				: #ecf8fc; 
 @table-even 			: #e4f0f8;
 
+@tag-color        : #fff;
+@tag-background   : #2486c0;
+
 /** LAYOUT **/
 @min-width			: 800px;
 @max-width			: 1200px;
@@ -138,10 +141,10 @@ fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; ma
 	#content-wrapper { margin-left: (@min-width / 4) + @sidebar-padding; margin-right: 10px; }
 	#page.has-right-sidebar #content { margin-right: (@min-width / 4) + (@sidebar-padding * 2);  }
 #content-wrapper { background: @content-background; .round-box(8px); .box-shadow(0px, 0px, 6px, 0.2); }
-	#page.has-right-sidebar #content-wrapper { padding-right: 0; background: @content-background url(../images/sidebar.png) repeat-y right 0; }
-	#content { padding: @content-padding; }
+	#page.has-right-sidebar #content-wrapper { padding-right: 0; }
+	#content { padding: @content-padding; border-right: 1px solid @content-line-color; }
 	#content .profile { clear: none; }
-	#content-wrapper .sidebar.right { width: (@min-width / 4) + (@sidebar-padding * 2) - 1; overflow-x: hidden; }
+	#content-wrapper .sidebar.right { width: (@min-width / 4); padding: @sidebar-padding; overflow-x: hidden; }
 
 /** BUTTONS **/
 a .add { background: url(../images/add.png) no-repeat 0 0; width: 9px; height: 9px; display: inline-block; margin-right: 5px; }
@@ -167,10 +170,10 @@ a.add { margin: 10px 0; }
 		#sidebar-left .history li a:hover { background: darken(@body-background, 5%); }
 #sidebar-left .block { margin: 20px 0 0 0; }
 
-#sidebar-left .block-title { border-bottom: 1px solid darken(@body-background, 20%); color: darken(@body-background, 65%); width: @min-width / 4; margin-left: -@sidebar-padding; font-size: 1.5em; margin-right: -7px; }
+#sidebar-left .block-title { border-bottom: 1px solid darken(@body-background, 20%); width: @min-width / 4; font-size: 1.5em; margin-right: -7px; }
 
 /** RIGHT SIDEBAR **/
-.sidebar.right h1, .sidebar.right h2, .sidebar.right h3, .sidebar.right h4, .sidebar.right h5, .sidebar.right h6 { font-size: 1em; font-weight: bold; padding: 2px 5px; background: darken(@sidebar-color, 10%); margin: 5px 0;}
+.sidebar.right h1, .sidebar.right h2, .sidebar.right h3, .sidebar.right h4, .sidebar.right h5, .sidebar.right h6 { font-size: 1em; font-weight: bold;}
 	.sidebar.right ul, .sidebar.right li { margin: 0; padding: 0; list-style-type: none; }
 	.sidebar.right li { border-bottom: 1px solid @header-gradient; }
 	
@@ -181,8 +184,8 @@ a.add { margin: 10px 0; }
 .tags { margin: 5px 5px; }
 	.tags ul li { float: left; margin: 0 10px 0 0; }
 	.tags ul, .tags li { list-style-type: none; margin: 0px; padding: 0px; }
-	.tags a { .round-box(4px); background: darken(@content-background, 10%); .box-shadow(1px, 1px, 0px, 0.6); padding: 3px 5px; text-decoration: none; color: lighten(@text-color, 20%); }
-		.tags a:hover { background: darken(@content-background, 15%); }
+	.tags a { .round-box(4px); background: @tag-background; padding: 3px 5px; text-decoration: none; color: @tag-color; }
+		.tags a:hover { background: lighten(@tag-background, 15%); }
 
 /** TABS **/
 ul.tabs { margin: 0px -10px 15px -10px; }
