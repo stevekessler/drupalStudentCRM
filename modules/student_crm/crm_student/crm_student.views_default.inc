@@ -230,9 +230,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['inline'] = array(
-    'contact_image' => 'contact_image',
-    'field_first_name' => 'field_first_name',
-    'field_last_name' => 'field_last_name',
+    'field_student_id' => 'field_student_id',
   );
   $handler->display->display_options['row_options']['hide_empty'] = 0;
   $handler->display->display_options['row_options']['default_field_elements'] = 1;
@@ -254,8 +252,10 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_id']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['field_student_id']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['field_student_id']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_student_id']['element_type'] = 'span';
+  $handler->display->display_options['fields']['field_student_id']['element_class'] = 'easy-copy';
   $handler->display->display_options['fields']['field_student_id']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['field_student_id']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_student_id']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['field_student_id']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_student_id']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_student_id']['hide_alter_empty'] = 0;
