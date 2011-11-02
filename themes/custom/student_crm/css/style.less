@@ -44,12 +44,12 @@
 }
 
 /** COLORS **/
-@body-background  	: #dadfe5;
+@body-background  	: #fefefe;
 @content-background : #fff;
 @text-color			: #000;
 @link-color 	 	: #0084B4;
 
-@header-gradient	: #727d8c;
+@header-gradient	: #fefefe;
 @main-background	: #f4f1ec;
 @content-line-color : #ddd;
 @sidebar-color		: #d5e6ed;
@@ -122,12 +122,12 @@ body { width: 100%; background: @body-background; }
 
 /** FORMS **/
 fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; margin: 10px 0; }
-  input.search-box { border: #fff 1px solid; .round-box(5px); font-size: 1.2em; width: (@min-width / 2); }
+  input.search-box { border: darken(@header-gradient, 10%) 1px solid; .round-box(7px); font-size: 1.2em; width: (@min-width / 2); padding: 4px; }
 
 /** HEADER **/
-#header { .gradient(@header-gradient, darken(@header-gradient, 10%)); padding: 15px 30px; .box-shadow (0, 2px, 5px, 0.4 ); }
-	#header h1 { float: left; color: #fff; font-size: 1.4em; margin: 0; font-weight: bold;}
-		#header h1 a { color: #fff; text-decoration: none; .text-shadow(1px, 1px, 2px, rgba(0,0,0,0.6)); }
+#header { .gradient(@header-gradient, darken(@header-gradient, 10%)); padding: 15px 30px; border-bottom: 1px solid darken(@header-gradient, 20%); }
+	#header h1 { float: left; color: darken(@header-gradient, 80%); font-size: 1.7em; margin: 0; font-weight: bold;}
+		#header h1 a { color: darken(@header-gradient, 80%); text-decoration: none; }
 	#header .right { width: (@min-width / 2); }
 	#header .right .views-exposed-widgets, #header .right .views-exposed-widget { margin: 0; padding: 0; }
 	
