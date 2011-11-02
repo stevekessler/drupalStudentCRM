@@ -401,7 +401,7 @@ a.add {
   color: #999999;
 }
 .sidebar.right .block {
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 /** VIEWS **/
 .view .view-empty {
