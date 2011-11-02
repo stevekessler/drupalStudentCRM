@@ -7,6 +7,13 @@
 include_once('student_crm_webform.features.inc');
 
 /**
+ * Implements hook_init().
+ */
+function student_crm_webform_init() {
+  drupal_add_js(drupal_get_path('module', 'student_crm_webform') .'/js/student_crm_webform.fancybox.js');
+}
+
+/**
  * Implements hook_menu().
  */
 function student_crm_webform_menu() {

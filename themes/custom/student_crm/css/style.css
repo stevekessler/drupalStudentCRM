@@ -319,6 +319,9 @@ a.add {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
+#messages .status {
+  background-color: #daf6df;
+}
 #messages .messages.notice .message-icon {
   background-position: 2px -17px;
 }
