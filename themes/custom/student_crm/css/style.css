@@ -235,7 +235,7 @@ input.search-box {
   float: left;
   color: #323232;
   font-size: 2em;
-  margin: 5px 0 0 0;
+  margin: 0;
   font-weight: bold;
 }
 #header h1 a {
@@ -400,7 +400,7 @@ a.add {
 .sidebar.right .block-title, .sidebar.right .views-label {
   color: #999999;
 }
-.sidebar.right .block {
+#content-wrapper .sidebar.right .block {
   margin-bottom: 10px;
 }
 /** VIEWS **/

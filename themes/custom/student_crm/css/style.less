@@ -134,7 +134,7 @@ fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; ma
 
 /** HEADER **/
 #header { .gradient(@header-gradient, darken(@header-gradient, 10%)); padding: 15px 30px; border-bottom: 1px solid darken(@header-gradient, 20%); }
-	#header h1 { float: left; color: darken(@header-gradient, 80%); font-size: 2em; margin: 5px 0 0 0; font-weight: bold;}
+	#header h1 { float: left; color: darken(@header-gradient, 80%); font-size: 2em; margin: 0; font-weight: bold;}
 		#header h1 a { color: darken(@header-gradient, 80%); text-decoration: none; }
 	#header .right { width: (@min-width / 2); }
 	#header .right .views-exposed-widgets, #header .right .views-exposed-widget { margin: 0; padding: 0; }
@@ -184,7 +184,7 @@ a.add { margin: 10px 0; }
 	.sidebar.right ul, .sidebar.right li { margin: 0; padding: 0; list-style-type: none; }
 	.sidebar.right li { border-bottom: 1px solid @header-gradient; }
 	 .sidebar.right .block-title, .sidebar.right .views-label { color: lighten(@text-color, 60%); }
-	 .sidebar.right .block { margin-bottom: @sidebar-padding; }
+#content-wrapper .sidebar.right .block { margin-bottom: @sidebar-padding; }
 	
 /** VIEWS **/
 .view .view-empty { font-size: 1.7em; color: lighten(@text-color, 60%); text-align: center;  }
