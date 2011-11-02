@@ -8,6 +8,7 @@ include_once('crm_student.features.inc');
 
 function crm_student_init() {
   drupal_add_css(drupal_get_path('module', 'crm_student') .'/css/crm_student.css');
+  drupal_add_js(drupal_get_path('module', 'crm_student') .'/js/crm_student.easycopy.js');
 }
 
 /**

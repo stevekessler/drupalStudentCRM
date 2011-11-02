@@ -62,7 +62,7 @@
 
 /** HIGHLIGHT COLOR **/
 @green-highlight  : #daf6df;
-
+@blue-highlight   : #e6f1f6;
 
 /** LAYOUT **/
 @min-width			: 800px;
@@ -133,7 +133,7 @@ fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; ma
 
 /** HEADER **/
 #header { .gradient(@header-gradient, darken(@header-gradient, 10%)); padding: 15px 30px; border-bottom: 1px solid darken(@header-gradient, 20%); }
-	#header h1 { float: left; color: darken(@header-gradient, 80%); font-size: 1.7em; margin: 0; font-weight: bold;}
+	#header h1 { float: left; color: darken(@header-gradient, 80%); font-size: 2em; margin: 5px 0 0 0; font-weight: bold;}
 		#header h1 a { color: darken(@header-gradient, 80%); text-decoration: none; }
 	#header .right { width: (@min-width / 2); }
 	#header .right .views-exposed-widgets, #header .right .views-exposed-widget { margin: 0; padding: 0; }
@@ -144,7 +144,7 @@ fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; ma
 	#page .container { padding: 15px 10px; }
 	#content-wrapper { margin-left: (@min-width / 4) + @sidebar-padding; margin-right: 10px; }
 	#page.has-right-sidebar #content { margin-right: (@min-width / 4) + (@sidebar-padding * 3);  }
-#content-wrapper { background: @content-background; .round-box(8px); .box-shadow(0px, 0px, 6px, 0.2); }
+#content-wrapper { background: @content-background; .round-box(8px); .box-shadow(0px, 0px, 6px, 0.2); border: 1px solid darken(@body-background, 10%);}
 	#page.has-right-sidebar #content-wrapper { padding-right: 0; }
 	#content { padding: @content-padding; }
 	#content .profile { clear: none; }
@@ -177,9 +177,11 @@ a.add { margin: 10px 0; }
 #sidebar-left .block-title { border-bottom: 1px solid darken(@body-background, 20%); width: @min-width / 4; font-size: 1.5em; margin-right: -7px; }
 
 /** RIGHT SIDEBAR **/
-.sidebar.right h1, .sidebar.right h2, .sidebar.right h3, .sidebar.right h4, .sidebar.right h5, .sidebar.right h6 { font-size: 1em; font-weight: bold;}
+.sidebar.right h1, .sidebar.right h2, .sidebar.right h3, .sidebar.right h4, .sidebar.right h5, .sidebar.right h6 { font-size: 1.1em; font-weight: bold;}
 	.sidebar.right ul, .sidebar.right li { margin: 0; padding: 0; list-style-type: none; }
 	.sidebar.right li { border-bottom: 1px solid @header-gradient; }
+	 .sidebar.right .block-title, .sidebar.right .views-label { color: lighten(@text-color, 60%); }
+	 .sidebar.right .block { margin-top: @sidebar-padding; }
 	
 /** VIEWS **/
 .view .view-empty { font-size: 1.7em; color: lighten(@text-color, 60%); text-align: center;  }
