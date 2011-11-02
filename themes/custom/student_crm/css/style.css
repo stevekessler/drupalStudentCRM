@@ -458,7 +458,7 @@ ul.tabs li a.active:hover {
   border-bottom-color: #ffffff;
 }
 ul.primary li a:hover {
-  background: #fefefe;
+  background: #dddddd;
 }
 /** WEBFORMS **/
 .webform-submission label {

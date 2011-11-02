@@ -119,7 +119,7 @@ function crm_advisor_block_view($delta) {
     else {
       $link = l('Add to your advising list', 
                 'crm/advisor/add/'. $contact->contact_id .'/'. $user->uid,
-                array('attributes' => array('class' => array('tag', 'advisor-link', 'add')))));
+                array('attributes' => array('class' => array('tag', 'advisor-link', 'add'))));
     }
     return array('content' => $link);
   }

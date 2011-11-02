@@ -201,12 +201,13 @@ ul.tabs { margin: 0px -10px 15px -10px; }
 	ul.tabs li a, ul.tabs li a.active { color: @text-color; .border-radius(3px, 3px, 0px, 0px); border-left-color: @content-line-color; border-right-color: @content-line-color; border-top-color: @content-line-color; background: @content-background;}
 	ul.tabs li a.active:hover { border-bottom-color: @content-background; }
 	
-		ul.primary li a:hover { background: @body-background; }
+		ul.primary li a:hover { background: @content-line-color; }
 
 /** WEBFORMS **/
 .webform-submission label { font-weight: bold; font-size: 120%; margin: 5px 0 5px -20px; }
   .webform-submission .webform-component { margin: 10px 0 10px 20px; }
   .webform-submission-info { width: @min-width / 4; float: right; }
+  
 /** PAGER **/
 ul.pager { margin: 15px 0; }
 	ul.pager li { padding: 0; margin: .25em 0; }
