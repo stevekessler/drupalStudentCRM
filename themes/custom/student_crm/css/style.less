@@ -82,6 +82,7 @@ input[disabled],select[disabled],textarea[disabled],button[disabled] { opacity:0
 .clear { height:0; clear:both; }
 .hidden {display:none;}
 
+label { font-weight: bold; }
 /** SKIP LINK **/
 #skip-link { background: #fffba4; font-weight: bold; }
 
@@ -185,7 +186,7 @@ a.add { margin: 10px 0; }
 	.sidebar.right li { border-bottom: 1px solid @header-gradient; }
 	 .sidebar.right .block-title, .sidebar.right .views-label { color: lighten(@text-color, 60%); }
 #content-wrapper .sidebar.right .block { margin-bottom: @sidebar-padding; }
-	
+	.sidebar.right input { max-width: (@min-width / 4) - (@sidebar-padding * 2); }
 /** VIEWS **/
 .view .view-empty { font-size: 1.7em; color: lighten(@text-color, 60%); text-align: center;  }
 	body .views-exposed-form .views-exposed-widget { float: none; }

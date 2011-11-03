@@ -30,6 +30,25 @@ function student_crm_webform_menu() {
 }
 
 /**
+ *  Implements hook_block_info().
+ */
+function student_crm_webform_block_info() {
+  $blocks['student_crm_webform_send_form'] = array('info' => 'Send form emails.');
+  return $blocks;
+}
+
+/**
+ *  Implements hook_block_view().
+ */
+function student_crm_webform_block_view($delta) {
+  if($delta = 'student_crm_webform_send_form') {
+    module_load_include('inc', 'student_crm_webform', 'student_crm_webform.mail');
+    return array('subject' => 'Send forms',
+                 'content' => drupal_get_form('student_crm_webform_send_email_form'));  
+  }
+}
+
+/**
  * Access callback - ensures the user's key is accurate & they have access to complete forms.
  */
 function student_crm_webform_complete_form_access($entity_type, $entity_id, $webform, $key) {
@@ -101,6 +120,20 @@ function student_crm_webform_theme_registry_alter(&$theme_registry) {
   $theme_registry['webform_submission_page']['template'] = '/templates/webform-submission-page';
   $theme_registry['webform_submission_page']['path'] = drupal_get_path('module', 'student_crm_webform');
   $theme_registry['webform_submission_page']['template'] = '/templates/webform-submission-page';
+}
+
+/**
+ * Implements hook_action_info().
+ */
+function s4_core_action_info() {
+  return array(
+    'student_crm_webform_action_send_form_email' => array(
+        'type' => 'system',
+        'label' => t('Send form email'),
+        'configurable' => TRUE,
+        'triggers' => array('any'),
+      ),
+  );
 }
 
 /**
