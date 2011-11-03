@@ -142,7 +142,11 @@ table {
   border: #b3b3b3 1px solid;
 }
 table thead th {
-  background: #f2f2f2;
+  background-color: #e6e6e6;
+  background-image: -moz-linear-gradient(top, #e6e6e6, #f7f7f7);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e6e6e6), color-stop(1, #f7f7f7));
+  background-image: -webkit-linear-gradient(#e6e6e6, #f7f7f7);
+  background-image: linear-gradient(top, #e6e6e6, #f7f7f7);
   color: #333333;
   margin-bottom: 10px;
   padding: 3px 10px;
@@ -156,7 +160,6 @@ table th, table td {
   padding: 6px 8px;
 }
 table th a {
-  text-shadow: none;
   text-decoration: none;
 }
 table td {
@@ -403,10 +406,13 @@ a.add {
 .sidebar.right .block-title, .sidebar.right .views-label {
   color: #999999;
 }
+.sidebar.right label {
+  font-weight: normal;
+}
 #content-wrapper .sidebar.right .block {
   margin-bottom: 10px;
 }
-.sidebar.right input {
+#content-wrapper .sidebar.right input {
   max-width: 180px;
 }
 /** VIEWS **/
