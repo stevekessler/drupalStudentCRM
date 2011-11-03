@@ -185,11 +185,14 @@ a.add { margin: 10px 0; }
 	.sidebar.right ul, .sidebar.right li { margin: 0; padding: 0; list-style-type: none; }
 	.sidebar.right li { border-bottom: 1px solid @header-gradient; }
 	 .sidebar.right .block-title, .sidebar.right .views-label { color: lighten(@text-color, 60%); }
+  .sidebar.right label { font-weight: normal; }
 #content-wrapper .sidebar.right .block { margin-bottom: @sidebar-padding; }
-	.sidebar.right input { max-width: (@min-width / 4) - (@sidebar-padding * 2); }
+	#content-wrapper .sidebar.right input { max-width: (@min-width / 4) - (@sidebar-padding * 2); }
+	
 /** VIEWS **/
 .view .view-empty { font-size: 1.7em; color: lighten(@text-color, 60%); text-align: center;  }
 	body .views-exposed-form .views-exposed-widget { float: none; }
+
 /** TAGS **/
 .tags { margin: 5px 5px; }
 	.tags ul li { float: left; margin: 0 10px 0 0; }

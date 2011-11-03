@@ -403,10 +403,13 @@ a.add {
 .sidebar.right .block-title, .sidebar.right .views-label {
   color: #999999;
 }
+.sidebar.right label {
+  font-weight: normal;
+}
 #content-wrapper .sidebar.right .block {
   margin-bottom: 10px;
 }
-.sidebar.right input {
+#content-wrapper .sidebar.right input {
   max-width: 180px;
 }
 /** VIEWS **/
