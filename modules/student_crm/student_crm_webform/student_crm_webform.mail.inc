@@ -1,14 +1,24 @@
 <?php
 
-function student_crm_webform_send_email($entity_type, $entity, $field) {
+/**
+ * Sends an email with a link to complete a form.
+ */
+function student_crm_webform_send_email($entity_type, $entity, $field, $emails = false) {
   $fields = field_info_instances();
   $field = $fields[$entity_type][$entity->type][$field];
   if(!$field || !isset($field['settings']['webform'])) {
     return false;
   }
   $settings = $field['settings'];
+  if(!$emails) {
+    $emails = _student_crm_webform_get_field_email_addresses($field, $entity, 'crm_case');
+  }
+  return $emails;
 }
 
+/**
+ * Form for ad-hoc form sending form.
+ */
 function student_crm_webform_send_email_form() {
   $case = crm_case_get_item();
   if(!$case) {
@@ -57,27 +67,39 @@ function student_crm_webform_send_email_form() {
   return $form;
 }
 
+/**
+ * Validation for ad-hoc form sending form. Checks for valid emails.
+ */
 function student_crm_webform_send_email_form_validate($form, $form_state) {
   if(strlen(trim($form_state['values']['manual-email'])) != '' && !valid_email_address($form_state['values']['manual-email'])) {
     form_set_error('manual-email', t('The provided email address is not valid.'));
   }
 }
 
+/**
+ * Form submit callback for ad-hoc form sending form.
+ */
 function student_crm_webform_send_email_form_submit($form, $form_state) {
+  $case = crm_case_load($form_state['values']['case']);
+  $email_addresses = student_crm_webform_send_email('crm_case', $case, $form_state['values']['field'], $form_state['values']['manual-email']);
+  
   $case = crm_case_load($form_state['values']['case']);
   $fields = field_info_instances();
   $field = $fields['crm_case'][$case->type][$form_state['values']['field']];
-  $email_addresses = _student_crm_webform_get_field_email_addresses($field, $case, $form_state['values']['manual-email']);
+
   drupal_set_message(t('The form %form has been sent to: !email-addresses', array('%form' => $field['label'], '!email-addresses' => theme('item_list', array('items' => $email_addresses)))));
 }
 
-function _student_crm_webform_get_field_email_addresses($field, $case, $manual_addresses = FALSE) {
+/**
+ * Retrieves a list of email addresses that are attached to a field.
+ */
+function _student_crm_webform_get_field_email_addresses($field, $entity, $entity_type) {
   $emails = array();
   if($field['settings']['email_address'] == 'manual') {
-    return explode(',', $manual_addresses);
+    return false;
   }
   if($field['settings']['email_address'] == 'field') {
-    $items = field_get_items('crm_case', $case, $field['settings']['email_field']);
+    $items = field_get_items($entity_type, $entity, $field['settings']['email_field']);
     foreach($items as $address) {
       $emails[$address['email']] = $address['email'];
     }
