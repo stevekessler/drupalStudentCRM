@@ -78,6 +78,26 @@ function crm_case_entity_info() {
 }
 
 /**
+ * Helper function to return the contact of a given case.
+ */
+function crm_case_get_contact($case) {
+  $query = db_select('field_data_endpoints', 'e')
+              ->condition('e.entity_type', 'relation')
+              ->condition('e.bundle', 'crm_contact_case')
+              ->condition('e.endpoints_entity_type', 'crm_case')
+              ->condition('e.endpoints_entity_id', $case->cid);
+  $query->leftJoin('field_data_endpoints', 'e2', 'e2.entity_id = e.entity_id AND e2.entity_type = e.entity_type');
+  $query->fields('e2', array('endpoints_entity_id'))
+              ->condition('e2.endpoints_entity_type', 'crm_contact');
+  $id = $query->execute()
+              ->fetchField();
+  if($id) {
+    return crm_contact_load($id);
+  }
+  return FALSE;
+}
+
+/**
  * Implements hook_block_info().
  */
 function crm_case_block_info() {
