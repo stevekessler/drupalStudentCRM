@@ -68,6 +68,61 @@ function student_crm_demo_feeds_importer_default() {
   $feeds_importer = new stdClass;
   $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'crm_demo_status';
+  $feeds_importer->config = array(
+    'name' => 'Demo Student Status',
+    'description' => 'Import student statuses',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsFileFetcher',
+      'config' => array(
+        'allowed_extensions' => 'txt csv tsv xml opml',
+        'direct' => 1,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsCSVParser',
+      'config' => array(
+        'delimiter' => ',',
+        'no_headers' => 0,
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsTermProcessor',
+      'config' => array(
+        'vocabulary' => 'student_status',
+        'mappings' => array(
+          0 => array(
+            'source' => 'title',
+            'target' => 'name',
+            'unique' => 0,
+          ),
+          1 => array(
+            'source' => 'title',
+            'target' => 'guid',
+            'unique' => 0,
+          ),
+          2 => array(
+            'source' => 'alert',
+            'target' => 'field_status_alert',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '2',
+        'input_format' => 'plain_text',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => '-1',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
+  );
+  $export['crm_demo_status'] = $feeds_importer;
+
+  $feeds_importer = new stdClass;
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
   $feeds_importer->id = 'crm_demo_students';
   $feeds_importer->config = array(
     'name' => 'Demo Students',

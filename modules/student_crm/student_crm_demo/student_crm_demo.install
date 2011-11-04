@@ -10,6 +10,15 @@ function student_crm_demo_install() {
 	// Not using Batch API (complete import within current page load)
 	while (FEEDS_BATCH_COMPLETE != $feed->import());
 	
+	$feed = feeds_source('crm_demo_status', 0);
+	$config = array(
+		'FeedsFileFetcher' => array(
+		'source' => drupal_get_path('module', 'student_crm_demo') .'/data/statuses.csv'));
+	$feed->addConfig($config);
+	
+	// Not using Batch API (complete import within current page load)
+	while (FEEDS_BATCH_COMPLETE != $feed->import());
+	
 	$feed = feeds_source('crm_demo_students', 0);
 	$config = array(
 		'FeedsFileFetcher' => array(
