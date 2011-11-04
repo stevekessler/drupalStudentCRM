@@ -8,18 +8,25 @@ stylesheets[all][] = css/style.css
 
 scripts[] = js/placeholder.js
 
-regions[header_left]		= Header Left
-regions[header_middle]		= Header Middle
-regions[header_right]		= Header Right
+regions[header_left]		    = Header Left
+regions[header_middle]		  = Header Middle
+regions[header_right]		    = Header Right
 
-regions[help]				= Help
+regions[help]				        = Help
 
-regions[sidebar_left]		= Sidebar Left
-regions[sidebar_right]		= Sidebar Right
+regions[sidebar_left]		    = Sidebar Left
+regions[sidebar_right]		  = Sidebar Right
 
-regions[content_top_wide]	= Content Top Wide
+regions[content_top_wide]	  = Content Top Wide
 regions[content_top_left] 	= Content Top Left
 regions[content_top_right]  = Content Top Right
-regions[content] 			= Content
-regions[content_bottom] 	= Content Bottom
+regions[content] 			      = Content
+regions[content_bottom] 	  = Content Bottom
 
+features[] = logo
+features[] = name
+features[] = slogan
+features[] = node_user_picture
+features[] = comment_user_picture
+features[] = comment_user_verification
+features[] = favicon
