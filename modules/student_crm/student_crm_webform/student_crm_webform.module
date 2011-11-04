@@ -242,9 +242,10 @@ function student_crm_webform_field_instance_settings_form($field, $instance) {
   );
   
   $form['email_body'] = array(
-    '#type' => 'textarea',
+    '#type' => 'text_format',
     '#title' => 'Email body',
-    '#default_value' => (isset($settings['email_body'])) ? $settings['email_body'] : '',
+    '#default_value' => (isset($settings['email_body']['value'])) ? $settings['email_body']['value'] : '',
+    '#format' => (isset($settings['email_body']['format'])) ? $settings['email_body']['format'] : null,
   );
   
   if (module_exists('token')) {
@@ -308,9 +309,40 @@ function student_crm_webform_theme() {
     ),
   );
 }
+
 /**
  * Theme function for 'default' or global attached form field formatter.
  */
 function theme_student_crm_webform_formatter_attached_form($element) {
   return null;
+}
+
+/**
+ * Implements hook_mail().
+ */
+function student_crm_webform_mail($key, &$message, $params) {
+  if($key == 'form_prompt') {
+    $message['subject'] = $params['subject'];
+    $message['body'][] = $params['body'];
+    $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+  }
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function student_crm_webform_token_info() {
+  $link = array(
+    'name' => t('Link to fill out form'),
+    'description' => t('Provides a link to complete a form emailed to a user.'),
+  );
+  return array('tokens' => array('crm_case'    => $link,
+                                 'crm_contact' => $link));
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function student_crm_webform_tokens($type, $tokens, $data = array(), $options = array()) {
+  
 }

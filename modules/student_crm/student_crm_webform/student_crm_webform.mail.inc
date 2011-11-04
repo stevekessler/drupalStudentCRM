@@ -13,6 +13,19 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
   if(!$emails) {
     $emails = _student_crm_webform_get_field_email_addresses($field, $entity, 'crm_case');
   }
+  $body = check_markup($field['settings']['email_body']['value'], $field['settings']['email_body']['format']);
+  if($entity_type == 'case') {
+    $tokens = array('crm_contact' => crm_case_get_contact($entity),
+                    'crm_case' => $entity);
+  }
+  else {
+    $tokens = array($entity_type => $entity);
+  }
+  $message['body'] = token_replace($body, $tokens);
+  $message['subject'] = check_plain($field['settings']['email_subject']);
+  foreach($emails as $email) {
+    drupal_mail('student_crm_webform', 'form_prompt', $email, language_default(), $message);
+  }
   return $emails;
 }
 
