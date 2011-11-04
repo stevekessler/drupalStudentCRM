@@ -52,8 +52,6 @@ dependencies[] = feeds
 dependencies[] = feeds_ui
 dependencies[] = feeds_import
 dependencies[] = entity
-
-dependencies[] = features
 dependencies[] = field_group
 dependencies[] = guiders_js
 ;dependencies[] = interface
@@ -69,6 +67,9 @@ dependencies[] = webform_submission_entity
 ;token 
 dependencies[] = token
 dependencies[] = entity_token
+
+;features
+dependencies[] = features
 
 ;relation
 dependencies[] = relation
