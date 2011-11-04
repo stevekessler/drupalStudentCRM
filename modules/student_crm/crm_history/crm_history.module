@@ -91,7 +91,7 @@ function crm_history_exit() {
 	  return;
 	}
 	$key = 'contact:'. $contact->contact_id;
-	if(!is_array($_SESSION['crm_history'])) {
+	if(!isset($_SESSION['crm_history'])) {
 		$_SESSION['crm_history'] = array();
 	}
 	foreach($_SESSION['crm_history'] as $item) {
@@ -106,7 +106,6 @@ function crm_history_exit() {
 	array_unshift($_SESSION['crm_history'], $item);
 	if(count($_SESSION['crm_history']) > variable_get('crm_history_max_items', 5)) {
 		$history = array_chunk($_SESSION['crm_history'], variable_get('crm_history_max_items', 5));
-		dpm($history);
 		$_SESSION['crm_history'] = $history[0];
 	}
 }
