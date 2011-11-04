@@ -332,9 +332,10 @@ function student_crm_webform_mail($key, &$message, $params) {
  * Implements hook_token_info().
  */
 function student_crm_webform_token_info() {
-  $link = array(
-    'name' => t('Link to fill out form'),
-    'description' => t('Provides a link to complete a form emailed to a user.'),
+  $link = array('student_crm_webform_link' => array(
+              'name' => t('Link to fill out form'),
+              'description' => t('Provides a link to complete a form emailed to a user.'),
+            ),
   );
   return array('tokens' => array('crm_case'    => $link,
                                  'crm_contact' => $link));
@@ -344,5 +345,17 @@ function student_crm_webform_token_info() {
  * Implements hook_tokens().
  */
 function student_crm_webform_tokens($type, $tokens, $data = array(), $options = array()) {
-  
+  //$entity_type, $entity_id, $webform, $key
+  //crm/webform/%/%/%node/%
+  if(!in_array($type, array('crm_case', 'crm_contact'))) {
+    return;
+  }
+  if($data['entity_type'] == 'crm_case') {
+    $id = $data['crm_case']->cid;
+  }
+  if($data['entity_type'] == 'crm_contact') {
+    $id = $data['crm_contact']->contact_id;
+  }
+  return array('[crm_case:student_crm_webform_link]' => url('crm/webform/'. $data['entity_type'] .'/'. $id .'/'. $data['webform'] .'/'. _student_crm_webform_generate_key($data['entity_type'], $id, $data['webform']), array('absolute' => true))
+              );
 }

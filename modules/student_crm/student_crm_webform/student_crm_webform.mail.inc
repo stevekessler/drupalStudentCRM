@@ -21,6 +21,8 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
   else {
     $tokens = array($entity_type => $entity);
   }
+  $tokens['webform'] = $field['settings']['webform'];
+  $tokens['entity_type'] = $entity_type;
   $message['body'] = token_replace($body, $tokens);
   $message['subject'] = check_plain($field['settings']['email_subject']);
   foreach($emails as $email) {
