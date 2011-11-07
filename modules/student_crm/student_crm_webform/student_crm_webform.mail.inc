@@ -25,7 +25,7 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
   $tokens['entity_type'] = $entity_type;
   $message['body'] = token_replace($body, $tokens);
   $message['subject'] = check_plain($field['settings']['email_subject']);
-  foreach($emails as $email) {
+  foreach ($emails as $email) {
     drupal_mail('student_crm_webform', 'form_prompt', $email, language_default(), $message);
   }
   return $emails;
@@ -36,22 +36,20 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
  */
 function student_crm_webform_send_email_form() {
   $case = crm_case_get_item();
-  if (!$case) {
-    return NULL;
-  }
   
   $fields = field_info_instances();
   $fields = $fields['crm_case'][$case->type];
   $form_fields = array();
   $field_settings = array();
-  foreach($fields as $field_name => $field) {
+  foreach ($fields as $field_name => $field) {
     if ($field['settings']['webform']) {
       $form_fields[$field_name] = $field['label'];
       $field_settings[$field_name] = $field['settings']['email_address'];
     }
   }
   if (!count($form_fields)) {
-    return array('message' => array('#value' => 
+    
+    return array('message' => array('#markup' => 
                   '<div class="empty">' . t('No forms for this item') . '</div>'));
   }
   drupal_add_js(drupal_get_path('module', 'student_crm_webform') . '/js/student_crm_webform.send_form.js');
@@ -115,17 +113,17 @@ function _student_crm_webform_get_field_email_addresses($field, $entity, $entity
   }
   if ($field['settings']['email_address'] == 'field') {
     $items = field_get_items($entity_type, $entity, $field['settings']['email_field']);
-    foreach($items as $address) {
+    foreach ($items as $address) {
       $emails[$address['email']] = $address['email'];
     }
   }
   if ($field['settings']['email_address'] == 'contact') {
     $contact = crm_case_get_contact($case);
     $fields = field_info_instances();
-    foreach($fields['crm_contact'][$contact->type] as $field_name => $field) {
+    foreach ($fields['crm_contact'][$contact->type] as $field_name => $field) {
       if ($field['widget']['module'] == 'email') {
         $items = field_get_items('crm_contact', $contact, $field_name);
-        foreach($items as $address) {
+        foreach ($items as $address) {
           $emails[$address['email']] = $address['email'];
         }
       }

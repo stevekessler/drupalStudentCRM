@@ -112,7 +112,7 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
 
   private function getContactTypeNames() {
     $types = array();
-    foreach(crm_contact_types() as $type) {
+    foreach (crm_contact_types() as $type) {
       $types[$type->type] = $type->name;
     }
     return $types;

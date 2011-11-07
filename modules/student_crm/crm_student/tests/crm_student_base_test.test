@@ -10,7 +10,7 @@ class StudentCRMWebTestCase extends DrupalWebTestCase {
   var $roles = array();
   
   function setUp() {
-    foreach(user_roles() as $rid => $role) {
+    foreach (user_roles() as $rid => $role) {
       $permissions = db_select('role_permission', 'r')
                    ->fields('r', array('permission'))
                    ->condition('r.rid', $rid);

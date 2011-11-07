@@ -23,7 +23,7 @@ function crm_history_block_view($delta) {
     $items[] = t('No history available.');
   }
   else {
-    foreach($_SESSION['crm_history'] as $history) {
+    foreach ($_SESSION['crm_history'] as $history) {
       $text = '';
       if ($history['image'][0]['uri']) {
         $text .= theme('image_style', array('style_name' => 'history_small',
@@ -94,7 +94,7 @@ function crm_history_exit() {
   if (!isset($_SESSION['crm_history'])) {
     $_SESSION['crm_history'] = array();
   }
-  foreach($_SESSION['crm_history'] as $item) {
+  foreach ($_SESSION['crm_history'] as $item) {
     if ($item['key'] == $key) {
       return;
     }

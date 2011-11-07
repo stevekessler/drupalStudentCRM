@@ -112,7 +112,7 @@ class CRMFeedsActivityProcessor extends FeedsProcessor {
 
   private function getActivityTypeNames() {
     $types = array();
-    foreach(crm_activity_get_types() as $type) {
+    foreach (crm_activity_get_types() as $type) {
       $types[$type->type] = $type->name;
     }
     return $types;

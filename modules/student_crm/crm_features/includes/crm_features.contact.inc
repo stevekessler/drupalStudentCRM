@@ -5,7 +5,7 @@
  */
 function crm_contact_features_export_options() {
   $names = array();
-  foreach(crm_contact_types() as $type) {
+  foreach (crm_contact_types() as $type) {
     $names[$type->type] = $type->name;
   }
   return $names;
