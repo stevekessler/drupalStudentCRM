@@ -6,6 +6,7 @@ function student_crm_demo_install() {
     'FeedsFileFetcher' => array(
     'source' => drupal_get_path('module', 'student_crm_demo') .'/data/degrees.csv'));
   $feed->addConfig($config);
+  $feed->setConfig(array('FeedsHTTPFetcher' => false);
   
   // Not using Batch API (complete import within current page load)
   while (FEEDS_BATCH_COMPLETE != $feed->import());
@@ -15,6 +16,7 @@ function student_crm_demo_install() {
     'FeedsFileFetcher' => array(
     'source' => drupal_get_path('module', 'student_crm_demo') .'/data/statuses.csv'));
   $feed->addConfig($config);
+  $feed->setConfig(array('FeedsHTTPFetcher' => false);
   
   // Not using Batch API (complete import within current page load)
   while (FEEDS_BATCH_COMPLETE != $feed->import());
@@ -24,6 +26,7 @@ function student_crm_demo_install() {
     'FeedsFileFetcher' => array(
     'source' => drupal_get_path('module', 'student_crm_demo') .'/data/students.csv'));
   $feed->addConfig($config);
+  $feed->setConfig(array('FeedsHTTPFetcher' => false);
   
   // Not using Batch API (complete import within current page load)
   while (FEEDS_BATCH_COMPLETE != $feed->import());
