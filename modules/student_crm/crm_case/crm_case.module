@@ -25,9 +25,11 @@ function crm_case_entity_info() {
     'entity class' => 'CRMCase',
     'controller class' => 'CRMCaseController',
     'base table' => 'crm_case',
+    'revision table' => 'crm_case_revision',
     'fieldable' => TRUE,
     'entity keys' => array(
         'id' => 'cid',
+        'revision' => 'vid',
         'bundle' => 'type',
     ),
     // Bundles are defined by the crm_case types below
@@ -110,7 +112,7 @@ function crm_case_block_info() {
  */
 function crm_case_block_view($delta) {
    module_load_include('inc', 'crm_case', 'crm_case.blocks');
-   $function_name = 'crm_case_blocks_'. $delta;
+   $function_name = 'crm_case_blocks_' . $delta;
    if (function_exists($function_name)) {
      return $function_name();
    }
@@ -370,6 +372,16 @@ function crm_case_uri(CRMCase $crm_case){
   );
 }
 
+/**
+ * Retrieves the list of revisions.
+ */
+function crm_case_revision_list($case) {
+  return db_select('crm_case_revision', 'rev')->
+           fields('rev', array('vid', 'log', 'created', 'changed', 'uid'))->
+           condition('cid', $case->cid)->
+           execute()->
+           fetchAllAssoc('vid', $fetch);
+}
 
 /**
  * Menu title callback for showing individual entities
@@ -412,7 +424,7 @@ function crm_case_theme() {
  * Implements hook_menu_local_tasks_alter().
  */
 function crm_case_menu_local_tasks_alter(&$data, $router_item, $root_path) {
-  // Add action link 'admin/structure/crm_cases/add' on 'admin/structure/crm_cases'.
+  // Add action link 'admin/structure/crm_cases/add' on 'admin/structure/crm_cases' .
   if ($root_path == 'crm/case') {
     $item = menu_get_item('crm/case/add');
     if ($item['access']) {
@@ -647,7 +659,7 @@ class CRMCaseUIController extends EntityDefaultUIController {
       'type' => MENU_NORMAL_ITEM,
     );
     
-    $items['crm/case/' . $wildcard .'/view'] = array(
+    $items['crm/case/' . $wildcard . '/view'] = array(
     'title' => 'View',
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'weight' => 0,
