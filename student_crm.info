@@ -74,6 +74,14 @@ dependencies[] = features
 ;relation
 dependencies[] = relation
 
+;user messaging
+dependencies[] = rules
+dependencies[] = rules_admin
+dependencies[] = privatemsg
+dependencies[] = pm_email_notify
+dependencies[] = privatemsg_rules
+dependencies[] = privatemsg_filter
+
 ;crm
 dependencies[] = crm
 dependencies[] = crm_activity
