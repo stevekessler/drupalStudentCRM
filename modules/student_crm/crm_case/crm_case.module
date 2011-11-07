@@ -20,8 +20,6 @@ include_once('crm_case.features.inc');
 function crm_case_entity_info() {
   $return['crm_case'] = array(
     'label' => t('Case'),
-    // The entity class and controller class extend the classes provided by the
-    // Entity API
     'entity class' => 'CRMCase',
     'controller class' => 'CRMCaseController',
     'base table' => 'crm_case',
@@ -32,9 +30,7 @@ function crm_case_entity_info() {
         'revision' => 'vid',
         'bundle' => 'type',
     ),
-    // Bundles are defined by the crm_case types below
     'bundles' => array(),
-    // Bundle keys tell the FieldAPI how to extract information from the bundle objects
     'bundle keys' => array(
       'bundle' => 'type',
     ),
@@ -43,7 +39,6 @@ function crm_case_entity_info() {
     'creation callback' => 'crm_case_create',
     'access callback' => 'crm_case_access',
     'module' => 'crm_case',
-    // The information below is used by the CRMCaseUIController (which extends the EntityDefaultUIController)
     'admin ui' => array(
       'path' => 'crm/case',
       'file' => 'crm_case.admin.inc',
@@ -51,7 +46,7 @@ function crm_case_entity_info() {
       'menu wildcard' => '%crm_case',
     ),
   );
-  // The entity that holds information about the entity types    
+
   $return['crm_case_type'] = array(
     'label' => t('Case Type'),
     'entity class' => 'CRMCaseType',
@@ -67,7 +62,6 @@ function crm_case_entity_info() {
     ),
     'access callback' => 'crm_case_type_access',
     'module' => 'crm_case',
-    // Enable the entity API's admin UI.
     'admin ui' => array(
       'path' => 'crm/admin/case/types',
       'file' => 'crm_case_type.admin.inc',
