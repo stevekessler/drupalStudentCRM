@@ -183,6 +183,11 @@ function student_crm_demo_feeds_importer_default() {
             'target' => 'field_contact_email',
             'unique' => FALSE,
           ),
+          7 => array(
+            'source' => 'status',
+            'target' => 'field_student_status',
+            'unique' => FALSE,
+          ),
         ),
         'update_existing' => '2',
         'input_format' => 'plain_text',
