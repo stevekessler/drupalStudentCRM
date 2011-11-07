@@ -1,7 +1,7 @@
 <?php
 
 /**
-*	The base class for all Student CRM web cases
+*  The base class for all Student CRM web cases
 */
 class StudentCRMWebTestCase extends DrupalWebTestCase {
   
@@ -12,13 +12,13 @@ class StudentCRMWebTestCase extends DrupalWebTestCase {
   function setUp() {
     foreach(user_roles() as $rid => $role) {
       $permissions = db_select('role_permission', 'r')
-          		     ->fields('r', array('permission'))
-          		     ->condition('r.rid', $rid);
+                   ->fields('r', array('permission'))
+                   ->condition('r.rid', $rid);
           
       $this->roles[$role] = $permissions->execute()->fetchCol();
     }
     $info = drupal_parse_info_file('profiles/student_crm/student_crm.info');
     parent::setUp($info['dependencies']);
   }
-	
+  
 }

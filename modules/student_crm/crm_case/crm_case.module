@@ -49,7 +49,7 @@ function crm_case_entity_info() {
       'menu wildcard' => '%crm_case',
     ),
   );
-  // The entity that holds information about the entity types	  
+  // The entity that holds information about the entity types    
   $return['crm_case_type'] = array(
     'label' => t('Case Type'),
     'entity class' => 'CRMCaseType',
@@ -91,7 +91,7 @@ function crm_case_get_contact($case) {
               ->condition('e2.endpoints_entity_type', 'crm_contact');
   $id = $query->execute()
               ->fetchField();
-  if($id) {
+  if ($id) {
     return crm_contact_load($id);
   }
   return FALSE;
@@ -111,8 +111,8 @@ function crm_case_block_info() {
 function crm_case_block_view($delta) {
    module_load_include('inc', 'crm_case', 'crm_case.blocks');
    $function_name = 'crm_case_blocks_'. $delta;
-   if(function_exists($function_name)) {
-   	return $function_name();
+   if (function_exists($function_name)) {
+     return $function_name();
    }
 }
 
@@ -122,12 +122,12 @@ function crm_case_block_view($delta) {
  */
 function crm_case_crm_case_delete($case) {
   $relations = db_select('field_data_endpoints', 'e')
-  		       ->fields('e', array('entity_id'))
-  		       ->condition('e.endpoints_entity_id', $case->cid)
-  		       ->condition('e.endpoints_entity_type', 'crm_case')
-  		       ->condition('e.entity_type', 'relation')
-  		       ->execute()
-  		       ->fetchAllKeyed();
+             ->fields('e', array('entity_id'))
+             ->condition('e.endpoints_entity_id', $case->cid)
+             ->condition('e.endpoints_entity_type', 'crm_case')
+             ->condition('e.entity_type', 'relation')
+             ->execute()
+             ->fetchAllKeyed();
   relation_multiple_delete($relations);
 }
 
@@ -202,7 +202,7 @@ function crm_case_permission() {
  *   Whether access is allowed or not.
  */
 function crm_case_access($op, $crm_case = NULL, $account = NULL) {
-  if(!$account) {
+  if (!$account) {
     global $user;
     $account = $user;
   }
@@ -257,14 +257,14 @@ function crm_case_type_load($type) {
 
 function crm_case_get_item() {
   $item = menu_get_item();
-  if(isset($item['load_functions'][2]) && $item['load_functions'][2] == 'crm_case_load') {
-    if($item['page_callback'] == 'crm_case_page_view') {
-    	return $item['page_arguments'][0];
+  if (isset($item['load_functions'][2]) && $item['load_functions'][2] == 'crm_case_load') {
+    if ($item['page_callback'] == 'crm_case_page_view') {
+      return $item['page_arguments'][0];
     }
-    elseif($item['page_callback'] == 'drupal_get_form') {
-    	return $item['page_arguments'][1];
+    elseif ($item['page_callback'] == 'drupal_get_form') {
+      return $item['page_arguments'][1];
     }
-	}
+  }
   return false;
 }
 
@@ -684,8 +684,8 @@ class CRMCaseTypeUIController extends EntityDefaultUIController {
    */
   public function hook_menu() {
     $items = parent::hook_menu();
-		$items[$this->path]['description'] = 'Manage crm_case entity types, including adding
-		and removing fields and the display of fields.';
+    $items[$this->path]['description'] = 'Manage crm_case entity types, including adding
+    and removing fields and the display of fields.';
     return $items;
   }
 }

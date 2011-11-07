@@ -6,15 +6,15 @@
 function student_crm_webform_send_email($entity_type, $entity, $field, $emails = false) {
   $fields = field_info_instances();
   $field = $fields[$entity_type][$entity->type][$field];
-  if(!$field || !isset($field['settings']['webform'])) {
+  if (!$field || !isset($field['settings']['webform'])) {
     return false;
   }
   $settings = $field['settings'];
-  if(!$emails) {
+  if (!$emails) {
     $emails = _student_crm_webform_get_field_email_addresses($field, $entity, 'crm_case');
   }
   $body = check_markup($field['settings']['email_body']['value'], $field['settings']['email_body']['format']);
-  if($entity_type == 'case') {
+  if ($entity_type == 'case') {
     $tokens = array('crm_contact' => crm_case_get_contact($entity),
                     'crm_case' => $entity);
   }
@@ -36,7 +36,7 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
  */
 function student_crm_webform_send_email_form() {
   $case = crm_case_get_item();
-  if(!$case) {
+  if (!$case) {
     return null;
   }
   
@@ -45,12 +45,12 @@ function student_crm_webform_send_email_form() {
   $form_fields = array();
   $field_settings = array();
   foreach($fields as $field_name => $field) {
-    if($field['settings']['webform']) {
+    if ($field['settings']['webform']) {
       $form_fields[$field_name] = $field['label'];
       $field_settings[$field_name] = $field['settings']['email_address'];
     }
   }
-  if(!count($form_fields)) {
+  if (!count($form_fields)) {
     return array('message' => array('#value' => 
                   '<div class="empty">'. t('No forms for this item') .'</div>'));
   }
@@ -86,7 +86,7 @@ function student_crm_webform_send_email_form() {
  * Validation for ad-hoc form sending form. Checks for valid emails.
  */
 function student_crm_webform_send_email_form_validate($form, $form_state) {
-  if(strlen(trim($form_state['values']['manual-email'])) != '' && !valid_email_address($form_state['values']['manual-email'])) {
+  if (strlen(trim($form_state['values']['manual-email'])) != '' && !valid_email_address($form_state['values']['manual-email'])) {
     form_set_error('manual-email', t('The provided email address is not valid.'));
   }
 }
@@ -110,20 +110,20 @@ function student_crm_webform_send_email_form_submit($form, $form_state) {
  */
 function _student_crm_webform_get_field_email_addresses($field, $entity, $entity_type) {
   $emails = array();
-  if($field['settings']['email_address'] == 'manual') {
+  if ($field['settings']['email_address'] == 'manual') {
     return false;
   }
-  if($field['settings']['email_address'] == 'field') {
+  if ($field['settings']['email_address'] == 'field') {
     $items = field_get_items($entity_type, $entity, $field['settings']['email_field']);
     foreach($items as $address) {
       $emails[$address['email']] = $address['email'];
     }
   }
-  if($field['settings']['email_address'] == 'contact') {
+  if ($field['settings']['email_address'] == 'contact') {
     $contact = crm_case_get_contact($case);
     $fields = field_info_instances();
     foreach($fields['crm_contact'][$contact->type] as $field_name => $field) {
-      if($field['widget']['module'] == 'email') {
+      if ($field['widget']['module'] == 'email') {
         $items = field_get_items('crm_contact', $contact, $field_name);
         foreach($items as $address) {
           $emails[$address['email']] = $address['email'];

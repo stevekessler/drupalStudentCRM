@@ -4,7 +4,7 @@
     
     attach : function() {
       $('#edit-instance-settings-email-address').change(function() {
-        if($(this).val() == 'field') {
+        if ($(this).val() == 'field') {
           $('#email-field-source-select').show();
         }
         else {

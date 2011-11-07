@@ -4,7 +4,7 @@
     
     attach : function() {
       $('.webform-entity-modal li a').each(function() {
-        if(typeof $(this).fancybox !== 'undefined') {
+        if (typeof $(this).fancybox !== 'undefined') {
           var $link = $(this);
           $(this).fancybox({
             type   : 'ajax',

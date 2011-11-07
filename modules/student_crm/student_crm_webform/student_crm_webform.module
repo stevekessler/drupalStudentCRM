@@ -41,7 +41,7 @@ function student_crm_webform_block_info() {
  *  Implements hook_block_view().
  */
 function student_crm_webform_block_view($delta) {
-  if($delta = 'student_crm_webform_send_form') {
+  if ($delta = 'student_crm_webform_send_form') {
     module_load_include('inc', 'student_crm_webform', 'student_crm_webform.mail');
     return array('subject' => 'Send forms',
                  'content' => drupal_get_form('student_crm_webform_send_email_form'));  
@@ -52,10 +52,10 @@ function student_crm_webform_block_view($delta) {
  * Access callback - ensures the user's key is accurate & they have access to complete forms.
  */
 function student_crm_webform_complete_form_access($entity_type, $entity_id, $webform, $key) {
-  if(!user_access('complete crm webforms')) {
+  if (!user_access('complete crm webforms')) {
     return FALSE;
   }
-  if($key != _student_crm_webform_generate_key($entity_type, $entity_id, $webform->nid)) {
+  if ($key != _student_crm_webform_generate_key($entity_type, $entity_id, $webform->nid)) {
     return FALSE;
   }
   return TRUE;
@@ -94,7 +94,7 @@ function student_crm_webform_permission() {
  */
 function student_crm_webform_webform_submission_entity_insert($entity) {
   $submission = $_SESSION['student_crm_webform_form'][$entity->nid];
-  if($submission['entity_type'] == 'crm_contact') {
+  if ($submission['entity_type'] == 'crm_contact') {
     $target = crm_contact_load($submission['entity_id']);
     $target_type = $target->type;
   }
@@ -222,18 +222,18 @@ function student_crm_webform_field_instance_settings_form($field, $instance) {
   $fields = field_info_instances();
   $fields = $fields[$instance['entity_type']][$instance['bundle']];
   foreach($fields as $field_name => $field) {
-    if($field['widget']['module'] == 'email') {
+    if ($field['widget']['module'] == 'email') {
       $email_field_options[$field_name] = $field['label'];
     }
   }
   $form['email_field'] = array(
-		'#type' => 'select',
-		'#prefix' => '<div id="email-field-source-select">',
-		'#suffix' => '</div>',
-		'#title' => 'Email field',
+    '#type' => 'select',
+    '#prefix' => '<div id="email-field-source-select">',
+    '#suffix' => '</div>',
+    '#title' => 'Email field',
     '#default_value' => (isset($settings['email_field'])) ? $settings['email_field'] : 0,
-		'#options' => $email_field_options,
-	);
+    '#options' => $email_field_options,
+  );
 
   $form['email_subject'] = array(
     '#type' => 'textfield',
@@ -321,7 +321,7 @@ function theme_student_crm_webform_formatter_attached_form($element) {
  * Implements hook_mail().
  */
 function student_crm_webform_mail($key, &$message, $params) {
-  if($key == 'form_prompt') {
+  if ($key == 'form_prompt') {
     $message['subject'] = $params['subject'];
     $message['body'][] = $params['body'];
     $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
@@ -347,13 +347,13 @@ function student_crm_webform_token_info() {
 function student_crm_webform_tokens($type, $tokens, $data = array(), $options = array()) {
   //$entity_type, $entity_id, $webform, $key
   //crm/webform/%/%/%node/%
-  if(!in_array($type, array('crm_case', 'crm_contact'))) {
+  if (!in_array($type, array('crm_case', 'crm_contact'))) {
     return;
   }
-  if($data['entity_type'] == 'crm_case') {
+  if ($data['entity_type'] == 'crm_case') {
     $id = $data['crm_case']->cid;
   }
-  if($data['entity_type'] == 'crm_contact') {
+  if ($data['entity_type'] == 'crm_contact') {
     $id = $data['crm_contact']->contact_id;
   }
   return array('[crm_case:student_crm_webform_link]' => url('crm/webform/'. $data['entity_type'] .'/'. $id .'/'. $data['webform'] .'/'. _student_crm_webform_generate_key($data['entity_type'], $id, $data['webform']), array('absolute' => true))

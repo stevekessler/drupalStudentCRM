@@ -49,7 +49,7 @@ function crm_advisor_delete_relation_page($contact, $advisor) {
 function crm_advisor_create_relation_page($contact, $advisor) {
   $advisor = user_load($advisor);
   $contact = crm_contact_load($contact);
-  if(!user_access('advise students', $advisor)) {
+  if (!user_access('advise students', $advisor)) {
     drupal_set_message(t('This user cannot advise students'), 'error');
     drupal_goto('crm/contact/'. $contact->contact_id);
   }
@@ -86,10 +86,10 @@ function crm_advisor_create_relation($contact, $advisor) {
  * Implements hook_permission().
  */
 function crm_advisor_permission() {
-	return array('advise students' => array(
-					'title' => 'Advise students',
-					'description' => 'User can view and create activities on students.',
-				),
+  return array('advise students' => array(
+          'title' => 'Advise students',
+          'description' => 'User can view and create activities on students.',
+        ),
   );
 }
 
@@ -106,12 +106,12 @@ function crm_advisor_block_info() {
  */
 function crm_advisor_block_view($delta) {
   $contact = _crm_advisor_get_contact();
-  if(!$contact || !user_access('advise students')) {
+  if (!$contact || !user_access('advise students')) {
     return null;
   }
-  if($delta == 'crm_advisor_select_advisor') {
+  if ($delta == 'crm_advisor_select_advisor') {
     global $user;
-    if(_crm_advisor_user_is_advisor($contact, $user)) {
+    if (_crm_advisor_user_is_advisor($contact, $user)) {
       $link = l('Remove from your advising list', 
                 'crm/advisor/remove/'. $contact->contact_id .'/'. $user->uid,
                 array('attributes' => array('class' => array('tag', 'advisor-link', 'remove'))));
@@ -129,7 +129,7 @@ function crm_advisor_block_view($delta) {
  * Returns whether the provided user is an advisor with a contact
  */
 function _crm_advisor_user_is_advisor($contact, $advisor = null) {
-  if(!$advisor) {
+  if (!$advisor) {
     global $user;
     $advisor = $user;
   }
@@ -157,13 +157,13 @@ function _crm_advisor_get_advisor_contacts($advisor_id) {
  * Helper function to retrieve contact information from current page.
  */
 function _crm_advisor_get_contact() {
-	$item = menu_get_item();
-    if(isset($item['load_functions'][2]) && $item['load_functions'][2] == 'crm_contact_load') {
-	    if($item['page_callback'] == 'crm_contact_view') {
-	    	return $item['page_arguments'][0];
-	    }
-	    elseif($item['page_callback'] == 'drupal_get_form') {
-	    	return $item['page_arguments'][1];
-	    }
-	}
+  $item = menu_get_item();
+    if (isset($item['load_functions'][2]) && $item['load_functions'][2] == 'crm_contact_load') {
+      if ($item['page_callback'] == 'crm_contact_view') {
+        return $item['page_arguments'][0];
+      }
+      elseif ($item['page_callback'] == 'drupal_get_form') {
+        return $item['page_arguments'][1];
+      }
+  }
 }

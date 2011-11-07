@@ -6,7 +6,7 @@
 function crm_activity_features_export_options() {
   $names = array();
   foreach(crm_activity_get_types() as $type) {
-  	$names[$type->type] = $type->label;
+    $names[$type->type] = $type->label;
   }
   return $names;
 }
@@ -21,8 +21,8 @@ function crm_activity_features_export($data, &$export, $module_name = '') {
   foreach ($data as $type) {
     $info = false;
     foreach(crm_activity_get_types() as $type_info) {
-      if($type == $type_info->type) {
-      	$info = $type_info;
+      if ($type == $type_info->type) {
+        $info = $type_info;
       }
     }
     if ($info) {

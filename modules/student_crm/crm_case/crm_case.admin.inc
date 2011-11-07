@@ -68,7 +68,7 @@ function crm_case_edit_form($form, &$form_state, $crm_case) {
   $form_state['crm_case'] = $crm_case;
   field_attach_form('crm_case', $crm_case, $form, $form_state);
   
-  if(arg(4) && $contact = crm_contact_load(arg(4))) {
+  if (arg(4) && $contact = crm_contact_load(arg(4))) {
     $form['crm_contact'] = array(
       '#type' => 'hidden',
       '#value' => $contact->contact_id,
@@ -142,7 +142,7 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
   
   $crm_case->save();
   
-  if($crm_case->crm_contact) {
+  if ($crm_case->crm_contact) {
     $contact = crm_contact_load($crm_case->crm_contact);
     $relation = relation_create('crm_contact_case', array(
                     array('entity_type' => 'crm_case',

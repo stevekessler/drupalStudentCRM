@@ -15,21 +15,21 @@ function crm_student_init() {
  * Implements hook_block_info().
  */
 function crm_student_block_info() {
-	$blocks['crm_student_search'] = array('info' => 'Student CRM search box');
-	return $blocks;
+  $blocks['crm_student_search'] = array('info' => 'Student CRM search box');
+  return $blocks;
 }
 
 /**
  * Implements hook_block_view().
  */
 function crm_student_block_view($delta) {
-	if($delta == 'crm_student_search') {
-		return array('content' => drupal_get_form('_crm_student_search_form'));	
-	}
+  if ($delta == 'crm_student_search') {
+    return array('content' => drupal_get_form('_crm_student_search_form'));  
+  }
 }
 
 function crm_student_block_view_alter(&$data, $block) {
-  if($block->module == 'menu' && $block->delta == 'menu-crm-navigation') {
+  if ($block->module == 'menu' && $block->delta == 'menu-crm-navigation') {
     unset($data['subject']);
   }
 }
@@ -38,30 +38,30 @@ function crm_student_block_view_alter(&$data, $block) {
  * A generic search form
  */
 function _crm_student_search_form() {
-	$form = array();
+  $form = array();
 
-	$form['#attributes']['class'][] = 'site-search-form';
-	$form['search'] = array(
-		'#type' => 'textfield',
-		'#title' => '<span class="element-invisible">Search for students</span>',
-		'#attributes' => array('class' => array('search-box'),
-													 'placeholder' => 'Search'),
-		'#default_value' => (isset($_GET['name'])) ? check_plain($_GET['name']) : '',
-	);
-	
-	$form['#info']['contact_name_value']['label']['#attributes']['classs'][] = 'element-invisible';
-	/**
-	* $form['advanced'] = array(
-	* 	'#markup' => l('Advanced search', 'crm/search'),
-	* );
-	*/
-	$form['submit'] = array(
-		'#type' => 'submit',
-		'#value' => 'Search',
-		'#attributes' => array('class' => array('element-invisible')),
-	);
-	
-	return $form;
+  $form['#attributes']['class'][] = 'site-search-form';
+  $form['search'] = array(
+    '#type' => 'textfield',
+    '#title' => '<span class="element-invisible">Search for students</span>',
+    '#attributes' => array('class' => array('search-box'),
+                           'placeholder' => 'Search'),
+    '#default_value' => (isset($_GET['name'])) ? check_plain($_GET['name']) : '',
+  );
+  
+  $form['#info']['contact_name_value']['label']['#attributes']['classs'][] = 'element-invisible';
+  /**
+  * $form['advanced'] = array(
+  *   '#markup' => l('Advanced search', 'crm/search'),
+  * );
+  */
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Search',
+    '#attributes' => array('class' => array('element-invisible')),
+  );
+  
+  return $form;
 }
 
 /**
