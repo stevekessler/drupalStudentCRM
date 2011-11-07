@@ -22,7 +22,7 @@ function crm_advisor_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Advisee list';
+  $handler->display->display_options['title'] = 'Your students';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'access user profiles';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -30,7 +30,10 @@ function crm_advisor_views_default_views() {
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '30';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = 0;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'contact_id' => 'contact_id',
@@ -302,7 +305,7 @@ function crm_advisor_views_default_views() {
   $handler->display->display_options['path'] = 'students/advisees';
   $translatables['advisee_list'] = array(
     t('Master'),
-    t('Advisee list'),
+    t('Your students'),
     t('more'),
     t('Apply'),
     t('Reset'),
