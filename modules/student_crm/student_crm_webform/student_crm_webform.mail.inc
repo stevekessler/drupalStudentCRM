@@ -52,9 +52,9 @@ function student_crm_webform_send_email_form() {
   }
   if (!count($form_fields)) {
     return array('message' => array('#value' => 
-                  '<div class="empty">'. t('No forms for this item') .'</div>'));
+                  '<div class="empty">' . t('No forms for this item') . '</div>'));
   }
-  drupal_add_js(drupal_get_path('module', 'student_crm_webform') .'/js/student_crm_webform.send_form.js');
+  drupal_add_js(drupal_get_path('module', 'student_crm_webform') . '/js/student_crm_webform.send_form.js');
   drupal_add_js(array('studentCRMWebformSettings' => $field_settings), 'setting');
   $form = array();
   

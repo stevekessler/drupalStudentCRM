@@ -27,7 +27,7 @@ function crm_history_block_view($delta) {
       $text = '';
       if ($history['image'][0]['uri']) {
         $text .= theme('image_style', array('style_name' => 'history_small',
-                          'path' => $history['image'][0]['uri'])) .' '; 
+                          'path' => $history['image'][0]['uri'])) . ' '; 
       }
       $text .= $history['title'][0]['safe_value'];
       $items[] = l($text, $history['path'], array('html' => TRUE));
@@ -90,7 +90,7 @@ function crm_history_exit() {
   if (!$contact) {
     return;
   }
-  $key = 'contact:'. $contact->contact_id;
+  $key = 'contact:' . $contact->contact_id;
   if (!isset($_SESSION['crm_history'])) {
     $_SESSION['crm_history'] = array();
   }

@@ -157,7 +157,7 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
     $rid = relation_save($relation);
   }
   
-  $form_state['redirect'] = 'crm/case/'. $crm_case->cid;
+  $form_state['redirect'] = 'crm/case/' . $crm_case->cid;
 }
 
 /**

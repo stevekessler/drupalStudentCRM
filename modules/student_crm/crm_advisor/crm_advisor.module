@@ -38,7 +38,7 @@ function crm_advisor_delete_relation_page($contact, $advisor) {
   relation_delete($rid);
   $destination = (isset($_GET['destination']))
                    ? $_GET['destination']
-                   : 'crm/contact/'. $contact->contact_id;
+                   : 'crm/contact/' . $contact->contact_id;
   drupal_set_message('User has been removed from advising list');
   drupal_goto($destination);
 }
@@ -51,15 +51,15 @@ function crm_advisor_create_relation_page($contact, $advisor) {
   $contact = crm_contact_load($contact);
   if (!user_access('advise students', $advisor)) {
     drupal_set_message(t('This user cannot advise students'), 'error');
-    drupal_goto('crm/contact/'. $contact->contact_id);
+    drupal_goto('crm/contact/' . $contact->contact_id);
   }
   else {
     $rid = crm_advisor_create_relation($contact, $advisor);
     drupal_set_message(t('Advising relationship created'));
     $destination = (isset($_GET['destination']))
                    ? $_GET['destination']
-                   : 'crm/contact/'. $contact->contact_id;
-    drupal_goto('relation/'. $rid .'/edit', array('query' => array('destination' => $destination)));
+                   : 'crm/contact/' . $contact->contact_id;
+    drupal_goto('relation/' . $rid . '/edit', array('query' => array('destination' => $destination)));
   }
   return NULL;
 }
@@ -113,12 +113,12 @@ function crm_advisor_block_view($delta) {
     global $user;
     if (_crm_advisor_user_is_advisor($contact, $user)) {
       $link = l('Remove from your advising list', 
-                'crm/advisor/remove/'. $contact->contact_id .'/'. $user->uid,
+                'crm/advisor/remove/' . $contact->contact_id . '/' . $user->uid,
                 array('attributes' => array('class' => array('tag', 'advisor-link', 'remove'))));
     }
     else {
       $link = l('Add to your advising list', 
-                'crm/advisor/add/'. $contact->contact_id .'/'. $user->uid,
+                'crm/advisor/add/' . $contact->contact_id . '/' . $user->uid,
                 array('attributes' => array('class' => array('tag', 'advisor-link', 'add'))));
     }
     return array('content' => $link);

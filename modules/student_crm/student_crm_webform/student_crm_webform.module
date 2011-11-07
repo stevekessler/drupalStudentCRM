@@ -10,7 +10,7 @@ include_once('student_crm_webform.features.inc');
  * Implements hook_init().
  */
 function student_crm_webform_init() {
-  drupal_add_js(drupal_get_path('module', 'student_crm_webform') .'/js/student_crm_webform.fancybox.js');
+  drupal_add_js(drupal_get_path('module', 'student_crm_webform') . '/js/student_crm_webform.fancybox.js');
 }
 
 /**
@@ -74,9 +74,9 @@ function student_crm_webform_complete_form($entity_type, $entity_id, $webform) {
  * Helper function to generate a form access key.
  */
 function _student_crm_webform_generate_key($entity_type, $entity_id, $webform_nid) {
-  return drupal_hmac_base64($entity_type .':'. 
-                            $entity_id .':'. 
-                            $webform_nid .':',
+  return drupal_hmac_base64($entity_type . ':' . 
+                            $entity_id . ':' . 
+                            $webform_nid . ':',
                             drupal_get_hash_salt());
 }
 
@@ -179,7 +179,7 @@ function hook_field_widget_form(&$form, &$form_state, $field, $instance, $langco
  * Implements hook_field_instance_settings_form().
  */
 function student_crm_webform_field_instance_settings_form($field, $instance) {
-  drupal_add_js(drupal_get_path('module', 'student_crm_webform') .'/js/student_crm_webform.field_instance.js');
+  drupal_add_js(drupal_get_path('module', 'student_crm_webform') . '/js/student_crm_webform.field_instance.js');
   $defaults   = field_info_instance_settings($field['type']);
   $settings   = array_merge($defaults, $instance['settings']);
 
@@ -356,6 +356,6 @@ function student_crm_webform_tokens($type, $tokens, $data = array(), $options = 
   if ($data['entity_type'] == 'crm_contact') {
     $id = $data['crm_contact']->contact_id;
   }
-  return array('[crm_case:student_crm_webform_link]' => url('crm/webform/'. $data['entity_type'] .'/'. $id .'/'. $data['webform'] .'/'. _student_crm_webform_generate_key($data['entity_type'], $id, $data['webform']), array('absolute' => TRUE))
+  return array('[crm_case:student_crm_webform_link]' => url('crm/webform/' . $data['entity_type'] . '/' . $id . '/' . $data['webform'] . '/' . _student_crm_webform_generate_key($data['entity_type'], $id, $data['webform']), array('absolute' => TRUE))
               );
 }

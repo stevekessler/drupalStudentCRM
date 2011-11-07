@@ -36,7 +36,7 @@ function student_crm_blocks_block_info_alter(&$blocks, $theme, $code_blocks) {
     foreach($deltas as $delta => $ajax) {
       if ($ajax && $blocks[$module][$delta]['module'] != 'student_crm_blocks') {
         $blocks[$module][$delta]['module'] = 'student_crm_blocks';
-        $blocks[$module][$delta]['delta']  = $module .'|'. $delta;
+        $blocks[$module][$delta]['delta']  = $module . '|' . $delta;
       }
     }
   }*/
@@ -45,8 +45,8 @@ function student_crm_blocks_block_info_alter(&$blocks, $theme, $code_blocks) {
 function student_crm_blocks_block_view($delta) {
   $delta = explode('|', $delta);
   if (!isset($_GET['ajaxBlocks'])) {
-    drupal_add_js(drupal_get_path('module', 'student_crm_blocks') .'/js/student_crm_blocks.js');
-    drupal_add_css(drupal_get_path('module', 'student_crm_blocks') .'/css/student_crm_blocks.css');
+    drupal_add_js(drupal_get_path('module', 'student_crm_blocks') . '/js/student_crm_blocks.js');
+    drupal_add_css(drupal_get_path('module', 'student_crm_blocks') . '/css/student_crm_blocks.css');
     return array('content' => theme('ajax_loading_block', array('module' => $delta[0],
                                 'delta' => $delta[1])));
   }

@@ -7,7 +7,7 @@ function crm_context_context_plugins() {
   $plugins = array();
   $plugins['crm_context_condition_contact_type'] = array(
     'handler' => array(
-      'path' => drupal_get_path('module', 'crm_context') .'/plugins',
+      'path' => drupal_get_path('module', 'crm_context') . '/plugins',
       'file' => 'crm_context_context_condition_contact_type.inc',
       'class' => 'crm_context_context_condition_contact_type',
       'parent' => 'context_condition',
