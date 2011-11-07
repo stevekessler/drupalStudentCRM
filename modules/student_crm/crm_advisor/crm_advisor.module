@@ -61,7 +61,7 @@ function crm_advisor_create_relation_page($contact, $advisor) {
                    : 'crm/contact/'. $contact->contact_id;
     drupal_goto('relation/'. $rid .'/edit', array('query' => array('destination' => $destination)));
   }
-  return null;
+  return NULL;
 }
 
 /**
@@ -107,7 +107,7 @@ function crm_advisor_block_info() {
 function crm_advisor_block_view($delta) {
   $contact = _crm_advisor_get_contact();
   if (!$contact || !user_access('advise students')) {
-    return null;
+    return NULL;
   }
   if ($delta == 'crm_advisor_select_advisor') {
     global $user;
@@ -128,7 +128,7 @@ function crm_advisor_block_view($delta) {
 /**
  * Returns whether the provided user is an advisor with a contact
  */
-function _crm_advisor_user_is_advisor($contact, $advisor = null) {
+function _crm_advisor_user_is_advisor($contact, $advisor = NULL) {
   if (!$advisor) {
     global $user;
     $advisor = $user;

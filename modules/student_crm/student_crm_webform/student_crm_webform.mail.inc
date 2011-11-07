@@ -3,11 +3,11 @@
 /**
  * Sends an email with a link to complete a form.
  */
-function student_crm_webform_send_email($entity_type, $entity, $field, $emails = false) {
+function student_crm_webform_send_email($entity_type, $entity, $field, $emails = FALSE) {
   $fields = field_info_instances();
   $field = $fields[$entity_type][$entity->type][$field];
   if (!$field || !isset($field['settings']['webform'])) {
-    return false;
+    return FALSE;
   }
   $settings = $field['settings'];
   if (!$emails) {
@@ -37,7 +37,7 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
 function student_crm_webform_send_email_form() {
   $case = crm_case_get_item();
   if (!$case) {
-    return null;
+    return NULL;
   }
   
   $fields = field_info_instances();
@@ -111,7 +111,7 @@ function student_crm_webform_send_email_form_submit($form, $form_state) {
 function _student_crm_webform_get_field_email_addresses($field, $entity, $entity_type) {
   $emails = array();
   if ($field['settings']['email_address'] == 'manual') {
-    return false;
+    return FALSE;
   }
   if ($field['settings']['email_address'] == 'field') {
     $items = field_get_items($entity_type, $entity, $field['settings']['email_field']);

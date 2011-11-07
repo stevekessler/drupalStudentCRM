@@ -19,7 +19,7 @@ function crm_activity_features_export($data, &$export, $module_name = '') {
   $map = features_get_default_map('crm_activity');
 
   foreach ($data as $type) {
-    $info = false;
+    $info = FALSE;
     foreach(crm_activity_get_types() as $type_info) {
       if ($type == $type_info->type) {
         $info = $type_info;

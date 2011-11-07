@@ -265,7 +265,7 @@ function crm_case_get_item() {
       return $item['page_arguments'][1];
     }
   }
-  return false;
+  return FALSE;
 }
 
 /**

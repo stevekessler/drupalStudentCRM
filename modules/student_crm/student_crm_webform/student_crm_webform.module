@@ -245,7 +245,7 @@ function student_crm_webform_field_instance_settings_form($field, $instance) {
     '#type' => 'text_format',
     '#title' => 'Email body',
     '#default_value' => (isset($settings['email_body']['value'])) ? $settings['email_body']['value'] : '',
-    '#format' => (isset($settings['email_body']['format'])) ? $settings['email_body']['format'] : null,
+    '#format' => (isset($settings['email_body']['format'])) ? $settings['email_body']['format'] : NULL,
   );
   
   if (module_exists('token')) {
@@ -314,7 +314,7 @@ function student_crm_webform_theme() {
  * Theme function for 'default' or global attached form field formatter.
  */
 function theme_student_crm_webform_formatter_attached_form($element) {
-  return null;
+  return NULL;
 }
 
 /**
@@ -356,6 +356,6 @@ function student_crm_webform_tokens($type, $tokens, $data = array(), $options = 
   if ($data['entity_type'] == 'crm_contact') {
     $id = $data['crm_contact']->contact_id;
   }
-  return array('[crm_case:student_crm_webform_link]' => url('crm/webform/'. $data['entity_type'] .'/'. $id .'/'. $data['webform'] .'/'. _student_crm_webform_generate_key($data['entity_type'], $id, $data['webform']), array('absolute' => true))
+  return array('[crm_case:student_crm_webform_link]' => url('crm/webform/'. $data['entity_type'] .'/'. $id .'/'. $data['webform'] .'/'. _student_crm_webform_generate_key($data['entity_type'], $id, $data['webform']), array('absolute' => TRUE))
               );
 }
