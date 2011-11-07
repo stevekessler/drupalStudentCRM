@@ -1,4 +1,4 @@
-"student_id","first_name","last_name","full_name","degree","email","status","Junior"
+"student_id","first_name","last_name","full_name","degree","email","status","level"
 2348,"Chris","Cherice","Chris Cherice","Env Sci Technology and Policy","student@campus.edu","Matriculated","Senior"
 7625,"Riqui","Hayden","Riqui Hayden","Multiple Subject Credential","student@campus.edu","Matriculated","Sophomore"
 8205,"Ingrid","Michael","Ingrid Michael","CSU Concurrent Student","student@campus.edu","Probation","Junior"

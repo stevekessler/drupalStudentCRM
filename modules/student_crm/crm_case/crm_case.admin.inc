@@ -134,7 +134,7 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
   // Save the crm_case and go back to the list of crm_cases
   
   // Add in created and changed times.
-  if ($crm_case->is_new = isset($crm_case->is_new) ? $crm_case->is_new : 0){
+  if ($crm_case->is_new = isset($crm_case->is_new) ? $crm_case->is_new : 0) {
     $crm_case->created = time();
   }
 
@@ -148,11 +148,13 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
                     array('entity_type' => 'crm_case',
                            'entity_bundle' => $crm_case->type,
                            'entity_id' => $crm_case->cid,
-                           'r_index' => 0),
+                           'r_index' => 0,
+                           ),
                       array('entity_type' => 'crm_contact',
                              'entity_bundle' => $contact->type, 
                              'entity_id' => $contact->contact_id,
-                             'r_index' => 1,)
+                             'r_index' => 1, 
+                          )
                  ));
     $rid = relation_save($relation);
   }

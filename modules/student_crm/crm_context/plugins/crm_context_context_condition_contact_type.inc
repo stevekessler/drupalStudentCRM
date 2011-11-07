@@ -1,5 +1,11 @@
 <?php
 
+
+/**
+ * @file
+ * Class for determining if the user is in the right contact context.
+ */
+
 /**
  * Trigger context on node view only.
  */

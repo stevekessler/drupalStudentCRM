@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Functions to handle block callbacks.
+ */
+
 function crm_case_blocks_crm_create_case() {
   foreach (crm_case_get_types() as $type) {
     $type_name = check_plain($type->type);

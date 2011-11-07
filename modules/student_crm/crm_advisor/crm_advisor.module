@@ -39,7 +39,7 @@ function crm_advisor_delete_relation_page($contact, $advisor) {
   $destination = (isset($_GET['destination']))
                    ? $_GET['destination']
                    : 'crm/contact/' . $contact->contact_id;
-  drupal_set_message('User has been removed from advising list');
+  drupal_set_message(t('User has been removed from advising list'));
   drupal_goto($destination);
 }
 

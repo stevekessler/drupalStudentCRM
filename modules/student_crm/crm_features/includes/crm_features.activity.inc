@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * CRM Activity features hooks.
+ */
+ 
+/**
  * Implements hook_features_export_options().
  */
 function crm_activity_features_export_options() {

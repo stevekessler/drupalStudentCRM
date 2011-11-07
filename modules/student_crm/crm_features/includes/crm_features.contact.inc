@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * CRM Case features hooks.
+ */
+
+/**
  * Implements hook_features_export_options().
  */
 function crm_contact_features_export_options() {

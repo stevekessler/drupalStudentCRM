@@ -238,6 +238,11 @@ function student_crm_demo_feeds_importer_default() {
             'target' => 'field_student_status',
             'unique' => FALSE,
           ),
+          8 => array(
+            'source' => 'level',
+            'target' => 'field_student_level',
+            'unique' => FALSE,
+          ),
         ),
         'update_existing' => '2',
         'input_format' => 'plain_text',
