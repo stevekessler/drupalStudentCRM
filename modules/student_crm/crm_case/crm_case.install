@@ -22,13 +22,6 @@ function crm_case_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
-      'vid' => array(
-        'description' => 'The current {crm_case_revision}.vid of this contact.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 0,
-      ),
       'type' => array(
         'description' => 'The {crm_case_type}.type of this crm_case.',
         'type' => 'varchar',
@@ -71,59 +64,6 @@ function crm_case_schema() {
       ),
     ),
     'primary key' => array('cid'),
-  );
-  
-  $schema['crm_case_revision'] = array(
-    'description' => 'Saves information about each saved revision of a {crm_case}',
-    'fields' => array(
-      'vid' => array(
-        'description' => 'The primary identifier of this {crm_case_revision}.',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'cid' => array(
-        'description' => 'The {crm_case}.contact_id for this revision.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'log' => array(
-        'description' => 'The log entry explaining the changes in this version.',
-        'type' => 'text',
-        'not null' => TRUE,
-        'size' => 'big',
-      ),
-      'created' => array(
-        'description' => 'The unix timestamp for when this revision was created.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'changed' => array(
-        'description' => 'The unix timestamp for when this revision was last changed.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'uid' => array(
-        'description' => 'The {users}.uid that created this version.',
-        'type' => 'int',
-        'not null' => TRUE,
-        'default' => 0,
-      ),
-    ),
-    'foreign keys' => array(
-      'versioned_contact' => array(
-        'table' => 'crm_case',
-        'columns' => array('contact_id' => 'contact_id'),
-      ),
-      'version_creator' => array(
-        'table' => 'user',
-        'columns' => array('uid' => 'uid'),
-      ),
-    ),
-    'primary key' => array('vid'),
   );
 
   $schema['crm_case_type'] = array(
