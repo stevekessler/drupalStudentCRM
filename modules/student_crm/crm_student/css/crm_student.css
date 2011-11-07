@@ -5,7 +5,7 @@
 .page-crm-contact #page-title { display: none; }
 
 .student-status { font-size: 130%; font-weight: bold; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; padding: 6px; margin-bottom: 10px; }
-  .student-status.student-status-normal, .student-status student-status-good { background: #64bf00; color: #fff;}
+  .student-status.student-status-normal, .student-status.student-status-good { background: #64bf00; color: #fff;}
   .student-status.student-status-bad { background: #b43939; color: #fff; }
 
 form.site-search-form .form-item { margin: 0px; }

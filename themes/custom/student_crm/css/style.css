@@ -364,8 +364,11 @@ a.add {
   -moz-border-radius: 2px 0 0 2px;
   -webkit-border-radius: 2px 0 0 2px;
 }
-#sidebar-left .block-menu li a.active, #sidebar-left .block-menu li a:hover {
+#sidebar-left .block-menu li a.active {
   background: #e5e5e5;
+}
+#sidebar-left .block-menu li a:hover {
+  background: #cbcbcb;
 }
 #sidebar-left .history img {
   margin-bottom: -10px;
