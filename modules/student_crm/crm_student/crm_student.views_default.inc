@@ -569,6 +569,29 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_status']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_student_status']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_student_status']['field_api_classes'] = 0;
+  /* Field: Contact: Class level */
+  $handler->display->display_options['fields']['field_student_level']['id'] = 'field_student_level';
+  $handler->display->display_options['fields']['field_student_level']['table'] = 'field_data_field_student_level';
+  $handler->display->display_options['fields']['field_student_level']['field'] = 'field_student_level';
+  $handler->display->display_options['fields']['field_student_level']['label'] = 'Level';
+  $handler->display->display_options['fields']['field_student_level']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_student_level']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_student_level']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_student_level']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_student_level']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['field_api_classes'] = 0;
   /* Field: Contact: Degrees */
   $handler->display->display_options['fields']['field_student_degrees']['id'] = 'field_student_degrees';
   $handler->display->display_options['fields']['field_student_degrees']['table'] = 'field_data_field_student_degrees';
@@ -665,6 +688,7 @@ function crm_student_views_default_views() {
     t('Last name'),
     t('Student ID'),
     t('Status'),
+    t('Level'),
     t('Degrees'),
     t('Name'),
     t('Degree'),

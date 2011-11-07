@@ -32,6 +32,29 @@ function crm_student_taxonomy_default_vocabularies() {
         ),
       ),
     ),
+    'student_level' => array(
+      'name' => 'Student level',
+      'machine_name' => 'student_level',
+      'description' => 'The class level of a student - like "senior" or "junior."',
+      'hierarchy' => '0',
+      'module' => 'taxonomy',
+      'weight' => '0',
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
     'student_status' => array(
       'name' => 'Student status',
       'machine_name' => 'student_status',

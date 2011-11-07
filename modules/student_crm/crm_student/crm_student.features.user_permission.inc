@@ -157,12 +157,6 @@ function crm_student_user_default_permissions() {
     'module' => 'relation',
   );
 
-  // Exported permission: edit any css_student crm_case
-  $permissions['edit any css_student crm_case'] = array(
-    'name' => 'edit any css_student crm_case',
-    'roles' => array(),
-  );
-
   // Exported permission: edit any webform content
   $permissions['edit any webform content'] = array(
     'name' => 'edit any webform content',
@@ -266,12 +260,6 @@ function crm_student_user_default_permissions() {
       0 => 'advisor',
     ),
     'module' => 'crm_history',
-  );
-
-  // Exported permission: view any css_student crm_case
-  $permissions['view any css_student crm_case'] = array(
-    'name' => 'view any css_student crm_case',
-    'roles' => array(),
   );
 
   return $permissions;
