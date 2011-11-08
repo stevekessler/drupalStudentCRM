@@ -18,4 +18,9 @@ function student_crm_demo_install() {
     $feed->addConfig($config);
     while (FEEDS_BATCH_COMPLETE != $feed->import());  
   }
+  if(!variable_get('crm_student_welcome_page', FALSE)) {
+    variable_set('crm_student_welcome_page', array('value' => t('<h3>Welcome to the Student CRM Demo site!</h3>
+<p>You can login using the form to the left</p>'),
+                         'format' => 'filtered_html'));
+  }
 }
