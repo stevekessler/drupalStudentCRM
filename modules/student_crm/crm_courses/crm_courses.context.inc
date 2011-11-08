@@ -27,6 +27,16 @@ function crm_courses_context_default_contexts() {
     ),
   );
   $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-crm_course_students-block' => array(
+          'module' => 'views',
+          'delta' => 'crm_course_students-block',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
+      ),
+    ),
     'menu' => 'crm/courses',
   );
   $context->condition_mode = 1;
