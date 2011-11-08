@@ -10,15 +10,6 @@
 function crm_student_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: access comments
-  $permissions['access comments'] = array(
-    'name' => 'access comments',
-    'roles' => array(
-      0 => 'advisor',
-    ),
-    'module' => 'comment',
-  );
-
   // Exported permission: access user profiles
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
@@ -217,21 +208,6 @@ function crm_student_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: post comments
-  $permissions['post comments'] = array(
-    'name' => 'post comments',
-    'roles' => array(
-      0 => 'advisor',
-    ),
-    'module' => 'comment',
-  );
-
-  // Exported permission: show format selection for comment
-  $permissions['show format selection for comment'] = array(
-    'name' => 'show format selection for comment',
-    'roles' => array(),
-  );
-
   // Exported permission: show format tips
   $permissions['show format tips'] = array(
     'name' => 'show format tips',
@@ -242,15 +218,6 @@ function crm_student_user_default_permissions() {
   $permissions['show more format tips link'] = array(
     'name' => 'show more format tips link',
     'roles' => array(),
-  );
-
-  // Exported permission: skip comment approval
-  $permissions['skip comment approval'] = array(
-    'name' => 'skip comment approval',
-    'roles' => array(
-      0 => 'advisor',
-    ),
-    'module' => 'comment',
   );
 
   // Exported permission: track user history
