@@ -68,8 +68,8 @@ projects[link][version] = "1.0-beta1"
 projects[options_element][subdir] = "contrib"
 projects[options_element][version] = "1.4"
 
-projects[privatemst][subdir] = "contrib"
-projects[privatemst][version] = "2.x-dev"
+projects[privatemsg][subdir] = "contrib"
+projects[privatemsg][version] = "2.x-dev"
 
 projects[relation][subdir] = "contrib"
 projects[relation][version] = "1.0-beta1"
