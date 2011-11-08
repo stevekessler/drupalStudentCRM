@@ -7,6 +7,7 @@ function student_crm_demo_install() {
                  'crm_demo_students' => 'students.csv',
                  'crm_demo_terms' => 'terms.csv',
                  'crm_demo_courses' => 'courses.csv',
+                 'crm_demo_enrollment' => 'enrollment.csv',
                  );
   foreach($feeds as $feed_name => $file) {
     $feed = feeds_source($feed_name, 0);

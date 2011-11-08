@@ -66,7 +66,7 @@ function student_crm_demo_feeds_importer_default() {
           5 => array(
             'source' => 'id',
             'target' => 'guid',
-            'unique' => FALSE,
+            'unique' => 1,
           ),
         ),
         'update_existing' => 0,
@@ -136,6 +136,82 @@ function student_crm_demo_feeds_importer_default() {
     'process_in_background' => 0,
   );
   $export['crm_demo_degrees'] = $feeds_importer;
+
+  $feeds_importer = new stdClass;
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'crm_demo_enrollment';
+  $feeds_importer->config = array(
+    'name' => 'Demo enrollment',
+    'description' => 'Course enrollment data.',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsFileFetcher',
+      'config' => array(
+        'allowed_extensions' => 'txt csv tsv xml opml',
+        'direct' => FALSE,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsCSVParser',
+      'config' => array(
+        'delimiter' => ',',
+        'no_headers' => 0,
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'CRMFeedsCourseEnrollmentProcessor',
+      'config' => array(
+        'expire' => -1,
+        'author' => 0,
+        'mappings' => array(
+          0 => array(
+            'source' => 'enrollment_id',
+            'target' => 'guid',
+            'unique' => 1,
+          ),
+          1 => array(
+            'source' => 'student_id',
+            'target' => 'student_id',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'course_id',
+            'target' => 'course_id',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'enrolled',
+            'target' => 'field_enrollment_status',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'grade_points',
+            'target' => 'field_enrollment_grade_points',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'letter_grade',
+            'target' => 'field_enrollment_grade_letter',
+            'unique' => FALSE,
+          ),
+          6 => array(
+            'source' => 'units',
+            'target' => 'field_enrollment_units',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => 0,
+        'input_format' => NULL,
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => 1800,
+    'expire_period' => 3600,
+    'import_on_create' => TRUE,
+    'process_in_background' => FALSE,
+  );
+  $export['crm_demo_enrollment'] = $feeds_importer;
 
   $feeds_importer = new stdClass;
   $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
