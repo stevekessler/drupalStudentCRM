@@ -68,6 +68,11 @@ dependencies[] = webform_submission_entity
 dependencies[] = token
 dependencies[] = entity_token
 
+;date
+dependencies[] = date
+dependencies[] = date_api
+dependencies[] = date_views
+
 ;features
 dependencies[] = features
 
