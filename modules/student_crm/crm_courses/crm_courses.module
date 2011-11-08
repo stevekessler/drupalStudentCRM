@@ -5,3 +5,29 @@
  */
 
 include_once('crm_courses.features.inc');
+
+/**
+ * Implements hook_feeds_plugins().
+ */
+function crm_courses_feeds_plugins() {
+  $info['CRMFeedsCourseEnrollmentProcessor'] = array(
+    'name' => 'CRM Course enrollment processor',
+    'description' => 'Add and update course enrollment records.',
+    'help' => 'Create and update enrollment records from parsed content.',
+    'handler' => array(
+      'parent' => 'FeedsProcessor',
+      'class' => 'CRMFeedsCourseEnrollmentProcessor',
+      'file' => 'CRMFeedsCourseEnrollmentProcessor.inc',
+      'path' => drupal_get_path('module', 'crm_courses') . '/plugins',
+    ),
+  );
+  return $info;
+}
+
+/*
+ * Implements hook_enable().
+ */
+function crm_courses_enable() {
+  //clear the cache to display in Feeds as available plugin.
+  cache_clear_all('plugins:feeds:plugins', 'cache');
+}
