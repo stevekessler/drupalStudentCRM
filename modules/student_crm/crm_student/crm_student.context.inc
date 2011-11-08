@@ -13,6 +13,45 @@ function crm_student_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'crm_anonymous_home';
+  $context->description = 'Anonymous user is on the homepage.';
+  $context->tag = 'crm_home';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'crm/home' => 'crm/home',
+        '<front>' => '<front>',
+      ),
+    ),
+    'user' => array(
+      'values' => array(
+        'anonymous user' => 'anonymous user',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'user-login' => array(
+          'module' => 'user',
+          'delta' => 'login',
+          'region' => 'sidebar_left',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Anonymous user is on the homepage.');
+  t('crm_home');
+  $export['crm_anonymous_home'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'crm_search';
   $context->description = 'Search context';
   $context->tag = 'crm';
@@ -46,6 +85,28 @@ function crm_student_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'crm_search_page';
+  $context->description = 'User is on the search page';
+  $context->tag = 'crm';
+  $context->conditions = array(
+    'views' => array(
+      'values' => array(
+        'search_contacts' => 'search_contacts',
+      ),
+    ),
+  );
+  $context->reactions = array();
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is on the search page');
+  t('crm');
+  $export['crm_search_page'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'crm_sitewide';
   $context->description = 'Site-wide settings for Student CRM';
   $context->tag = 'crm';
@@ -53,6 +114,11 @@ function crm_student_context_default_contexts() {
     'sitewide' => array(
       'values' => array(
         1 => 1,
+      ),
+    ),
+    'user' => array(
+      'values' => array(
+        'authenticated user' => 'authenticated user',
       ),
     ),
   );
@@ -80,7 +146,7 @@ function crm_student_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.

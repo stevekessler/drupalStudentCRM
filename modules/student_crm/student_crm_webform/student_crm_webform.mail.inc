@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file 
+ * Functions dealing with sending emails about forms.
+ */
+ 
+/**
  * Sends an email with a link to complete a form.
  */
 function student_crm_webform_send_email($entity_type, $entity, $field, $emails = FALSE) {

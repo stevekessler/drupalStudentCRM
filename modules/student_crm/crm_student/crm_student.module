@@ -21,7 +21,7 @@ function crm_student_menu() {
   $items = array();
   
   $items['crm/home'] = array(
-    'title' => NULL,
+    'title' => 'Home page',
     'page callback' => 'crm_student_home_page',
     'access arguments' => array('access content'),
   );
@@ -33,7 +33,7 @@ function crm_student_menu() {
  * Empty page callback for CRM homepage
  */
 function crm_student_home_page() {
-  return NULL;
+  return '';
 }
 
 /**
