@@ -13,6 +13,78 @@ function student_crm_demo_feeds_importer_default() {
   $feeds_importer = new stdClass;
   $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'crm_demo_courses';
+  $feeds_importer->config = array(
+    'name' => 'Demo courses',
+    'description' => 'Demo importer for course data.',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsFileFetcher',
+      'config' => array(
+        'allowed_extensions' => 'txt csv tsv xml opml',
+        'direct' => FALSE,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsCSVParser',
+      'config' => array(
+        'delimiter' => ',',
+        'no_headers' => 0,
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsNodeProcessor',
+      'config' => array(
+        'content_type' => 'course',
+        'expire' => -1,
+        'author' => 0,
+        'mappings' => array(
+          0 => array(
+            'source' => 'subject',
+            'target' => 'field_course_prefix',
+            'unique' => FALSE,
+          ),
+          1 => array(
+            'source' => 'title',
+            'target' => 'title',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'term',
+            'target' => 'field_course_term',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'number',
+            'target' => 'field_course_number',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'section',
+            'target' => 'field_course_section',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'id',
+            'target' => 'guid',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => 0,
+        'input_format' => NULL,
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => 1800,
+    'expire_period' => 3600,
+    'import_on_create' => TRUE,
+    'process_in_background' => FALSE,
+  );
+  $export['crm_demo_courses'] = $feeds_importer;
+
+  $feeds_importer = new stdClass;
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
   $feeds_importer->id = 'crm_demo_degrees';
   $feeds_importer->config = array(
     'name' => 'Demo Degrees',
@@ -256,6 +328,66 @@ function student_crm_demo_feeds_importer_default() {
     'process_in_background' => 0,
   );
   $export['crm_demo_students'] = $feeds_importer;
+
+  $feeds_importer = new stdClass;
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'crm_demo_terms';
+  $feeds_importer->config = array(
+    'name' => 'Demo Terms',
+    'description' => 'Imports term information.',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsFileFetcher',
+      'config' => array(
+        'allowed_extensions' => 'txt csv tsv xml opml',
+        'direct' => FALSE,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsCSVParser',
+      'config' => array(
+        'delimiter' => ',',
+        'no_headers' => 0,
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsTermProcessor',
+      'config' => array(
+        'vocabulary' => 'term',
+        'mappings' => array(
+          0 => array(
+            'source' => 'term',
+            'target' => 'guid',
+            'unique' => 0,
+          ),
+          1 => array(
+            'source' => 'start',
+            'target' => 'field_term_start:start',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'end',
+            'target' => 'field_term_end:start',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'term',
+            'target' => 'name',
+            'unique' => 0,
+          ),
+        ),
+        'update_existing' => '0',
+        'input_format' => 'plain_text',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => 1800,
+    'expire_period' => 3600,
+    'import_on_create' => TRUE,
+    'process_in_background' => FALSE,
+  );
+  $export['crm_demo_terms'] = $feeds_importer;
 
   return $export;
 }

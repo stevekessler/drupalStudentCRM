@@ -1,32 +1,20 @@
 <?php
 
 function student_crm_demo_install() {
-  $feed = feeds_source('crm_demo_degrees', 0);
-  $config = array(
-    'FeedsFileFetcher' => array(
-    'source' => drupal_realpath(drupal_get_path('module', 'student_crm_demo') . '/data/degrees.csv')));
-  $feed->addConfig($config);
-  while (FEEDS_BATCH_COMPLETE != $feed->import());
-  
-  $feed = feeds_source('crm_demo_status', 0);
-  $config = array(
-    'FeedsFileFetcher' => array(
-    'source' => drupal_realpath(drupal_get_path('module', 'student_crm_demo') . '/data/statuses.csv')));
-  $feed->addConfig($config);
-  while (FEEDS_BATCH_COMPLETE != $feed->import());
-  
-  $feed = feeds_source('crm_demo_levels', 0);
-  $config = array(
-    'FeedsFileFetcher' => array(
-    'source' => drupal_realpath(drupal_get_path('module', 'student_crm_demo') . '/data/levels.csv')));
-  $feed->addConfig($config);
-  while (FEEDS_BATCH_COMPLETE != $feed->import());
-  
-  
-  $feed = feeds_source('crm_demo_students', 0);
-  $config = array(
-    'FeedsFileFetcher' => array(
-    'source' => drupal_realpath(drupal_get_path('module', 'student_crm_demo') . '/data/students.csv')));
-  $feed->addConfig($config);
-  while (FEEDS_BATCH_COMPLETE != $feed->import());
+  $feeds = array('crm_demo_degrees' => 'degrees.csv',
+                 'crm_demo_status' => 'statuses.csv',
+                 'crm_demo_levels' => 'levels.csv',
+                 'crm_demo_students' => 'students.csv',
+                 'crm_demo_terms' => 'terms.csv',
+                 'crm_demo_courses' => 'courses.csv',
+                 );
+  foreach($feeds as $feed_name => $file) {
+    $feed = feeds_source($feed_name, 0);
+    $config = array(
+      'FeedsFileFetcher' => array(
+      'source' => drupal_realpath(drupal_get_path('module', 'student_crm_demo') . 
+                  '/data/'. $file)));
+    $feed->addConfig($config);
+    while (FEEDS_BATCH_COMPLETE != $feed->import());  
+  }
 }
