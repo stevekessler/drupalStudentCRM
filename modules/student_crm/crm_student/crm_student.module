@@ -6,9 +6,34 @@ include_once('crm_student.features.inc');
  * @file
  */
 
+/**
+ * Implements hook_init().
+ */
 function crm_student_init() {
   drupal_add_css(drupal_get_path('module', 'crm_student') . '/css/crm_student.css');
   drupal_add_js(drupal_get_path('module', 'crm_student') . '/js/crm_student.easycopy.js');
+}
+
+/**
+ * Implements hook_menu().
+ */
+function crm_student_menu() {
+  $items = array();
+  
+  $items['crm/home'] = array(
+    'title' => NULL,
+    'page callback' => 'crm_student_home_page',
+    'access arguments' => array('access content'),
+  );
+  
+  return $items;
+}
+
+/**
+ * Empty page callback for CRM homepage
+ */
+function crm_student_home_page() {
+  return NULL;
 }
 
 /**
