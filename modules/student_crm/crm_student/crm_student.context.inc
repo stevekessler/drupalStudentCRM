@@ -38,6 +38,12 @@ function crm_student_context_default_contexts() {
           'region' => 'sidebar_left',
           'weight' => '-10',
         ),
+        'crm_student-crm_student_welcome' => array(
+          'module' => 'crm_student',
+          'delta' => 'crm_student_welcome',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
       ),
     ),
   );
