@@ -14,7 +14,7 @@ function crm_courses_menu_default_menu_links() {
   $menu_links['menu-crm-navigation:crm/courses'] = array(
     'menu_name' => 'menu-crm-navigation',
     'link_path' => 'crm/courses',
-    'router_path' => 'crm/courses',
+    'router_path' => 'crm',
     'link_title' => 'Courses',
     'options' => array(
       'attributes' => array(

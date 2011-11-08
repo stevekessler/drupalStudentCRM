@@ -15,7 +15,7 @@ function crm_courses_relation_default_relation_types() {
   $relation_type->api_version = 1;
   $relation_type->relation_type = 'enrollment';
   $relation_type->label = 'Enrollment';
-  $relation_type->reverse_label = 'Reverse enrollment';
+  $relation_type->reverse_label = 'student';
   $relation_type->directional = 1;
   $relation_type->transitive = 0;
   $relation_type->r_unique = 0;
