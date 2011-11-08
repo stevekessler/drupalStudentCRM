@@ -62,7 +62,7 @@ function _crm_history_get_contact() {
 function crm_history_menu() {
   $items = array();
   
-  $items['admin/config/crm_history'] = array(
+  $items['admin/config/crm/crm_history'] = array(
     'title' => 'CRM History',
     'description' => 'Manage how history is tracked for users.',
     'page callback' => 'drupal_get_form',

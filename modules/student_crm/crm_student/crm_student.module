@@ -23,7 +23,25 @@ function crm_student_menu() {
   $items['crm/home'] = array(
     'title' => 'Home page',
     'page callback' => 'crm_student_home_page',
-    'access arguments' => array('access content'),
+    'access callback' => 'crm_student_homepage_access',
+  );
+  
+  $items['admin/config/crm'] = array(
+    'title' => 'Student CRM',
+    'description' => 'Generic settings for the student CRM site.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('crm_student_admin_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'crm_student.admin.inc',
+  );
+  
+  $items['admin/config/crm/settings'] = array(
+    'title' => 'General Settings',
+    'description' => 'Generic settings for the student CRM site.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('crm_student_admin_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'crm_student.admin.inc',
   );
   
   return $items;
@@ -33,7 +51,15 @@ function crm_student_menu() {
  * Empty page callback for CRM homepage
  */
 function crm_student_home_page() {
+  drupal_set_title(variable_get('site_name', 'Student CRM'));
   return '';
+}
+
+/**
+ * Always true homepage access callback.
+ */
+function crm_student_homepage_access() {
+  return TRUE;
 }
 
 /**
@@ -41,6 +67,7 @@ function crm_student_home_page() {
  */
 function crm_student_block_info() {
   $blocks['crm_student_search'] = array('info' => 'Student CRM search box');
+  $blocks['crm_student_welcome'] = array('info' => 'Generic welcome message');
   return $blocks;
 }
 
@@ -50,6 +77,10 @@ function crm_student_block_info() {
 function crm_student_block_view($delta) {
   if ($delta == 'crm_student_search') {
     return array('content' => drupal_get_form('_crm_student_search_form'));  
+  }
+  if ($delta == 'crm_student_welcome') {
+    $message = variable_get('crm_student_welcome_page', '');
+    return array('content' => check_markup($message['value'], $message['format']));
   }
 }
 
