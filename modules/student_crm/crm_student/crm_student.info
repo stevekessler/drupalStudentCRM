@@ -1,6 +1,5 @@
 core = "7.x"
 dependencies[] = "better_formats"
-dependencies[] = "comment"
 dependencies[] = "context"
 dependencies[] = "crm"
 dependencies[] = "crm_advisor"
