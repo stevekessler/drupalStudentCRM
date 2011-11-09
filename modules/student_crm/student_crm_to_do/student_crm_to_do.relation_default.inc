@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * student_crm_to_do.relation_type_default.inc
+ * student_crm_to_do.relation_default.inc
  */
 
 /**
@@ -21,15 +21,6 @@ function student_crm_to_do_relation_default_relation_types() {
   $relation_type->r_unique = 0;
   $relation_type->min_arity = 2;
   $relation_type->max_arity = 2;
-  $relation_type->source_bundles = array(
-    0 => 'user:*',
-  );
-  $relation_type->target_bundles = array(
-    0 => 'crm_contact:*',
-    1 => 'crm_activity:*',
-    2 => 'crm_case:*',
-    3 => 'node:*',
-  );
   $export['to_do_item'] = $relation_type;
 
   return $export;

@@ -1,0 +1,110 @@
+<?php
+/**
+ * @file
+ * Code for the Student CRM To Do feature.
+ */
+
+include_once('student_crm_to_do.features.inc');
+
+/**
+ * Implements hook_block_info().
+ */
+function student_crm_to_do_block_info() {
+  $blocks['student_crm_to_do'] = array('info' => 'To-do link');
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function student_crm_to_do_block_view($delta) {
+  if($delta == 'student_crm_to_do' && user_permission('maintain own to-do list')) {
+    return array('content' => drupal_get_form('student_crm_to_do_form'));
+  }
+}
+
+/**
+ * Form callback to create a to-do item
+ */
+function student_crm_to_do_form() {
+  $form = array();
+  
+  if($case = crm_case_get_item()) {
+    $target = array('id' => $case->cid,
+                    'bundle' => $case->type,
+                    'entity' => 'crm_case');
+  }
+  if($contact = _crm_advisor_get_contact()) {
+    $target = array('id' => $contact->contact_id,
+                    'bundle' => $contact->type,
+                    'entity' => 'crm_contact');
+  }
+  
+  $form['target_id'] = array(
+    '#type' => 'hidden',
+    '#value' => $target['id'],
+  );
+  
+  $form['target_entity'] = array(
+    '#type' => 'hidden',
+    '#value' => $target['entity'],
+  );
+  
+  $form['target_bundle'] = array(
+    '#type' => 'hidden',
+    '#value' => $target['bundle'],
+  );
+  
+  $form['to-do'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Add to tasks',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $form['to-do']['due-date'] = array(
+    '#type' => 'date_popup',
+    '#title' => 'Due date',
+    '#date_format' => 'Y-m-d',
+  );
+  
+  $form['to-do']['note'] = array(
+    '#type' => 'textfield',
+    '#title' => 'note',
+  );
+  
+  $form['to-do']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Save task',
+  );
+  
+  return $form;
+}
+
+function student_crm_to_do_form_submit($form, $form_state) {
+  global $user;
+  $relation = relation_create('to_do_item', array(
+                array('entity_type' => 'user',
+                       'entity_bundle' => 'user',
+                       'entity_id' => $user->uid,
+                       'r_index' => 0,
+                       ),
+                  array('entity_type' => $form_state['values']['target_entity'],
+                         'entity_bundle' => $form_state['values']['target_type'], 
+                         'entity_id' => $form_state['values']['target_id'],
+                         'r_index' => 1,
+                         ))
+             );
+  relation_save($relation);
+  drupal_set_message(t('Your task has been created'));
+}
+
+/**
+ * Implements hook_permission().
+ */
+function student_crm_to_do_permission() {
+  return array('maintain own to-do list' => array(
+            'title' => t('Maintain own to-do list'),
+            'description' => t('User can create and maintain their own to-do list')));
+}
+

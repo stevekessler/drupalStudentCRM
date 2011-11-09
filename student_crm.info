@@ -76,7 +76,6 @@ dependencies[] = date_views
 dependencies[] = features
 
 ;relation
-dependencies[] = relation_endpoints
 dependencies[] = relation
 
 ;user messaging

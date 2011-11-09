@@ -12,7 +12,6 @@ description = "Manages course and enrollment records between contacts and course
 features[context][] = "crm_courses_course"
 features[ctools][] = "context:context:3"
 features[ctools][] = "relation:relation_default:1"
-features[ctools][] = "relation:relation_type_default:1"
 features[ctools][] = "views:views_default:3.0"
 features[field][] = "node-course-field_course_number"
 features[field][] = "node-course-field_course_prefix"
