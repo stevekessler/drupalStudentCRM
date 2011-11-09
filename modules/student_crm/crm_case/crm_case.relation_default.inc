@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * crm_case.relation_type_default.inc
+ * crm_case.relation_default.inc
  */
 
 /**
@@ -21,12 +21,6 @@ function crm_case_relation_default_relation_types() {
   $relation_type->r_unique = 0;
   $relation_type->min_arity = 2;
   $relation_type->max_arity = 2;
-  $relation_type->source_bundles = array(
-    0 => 'crm_case:*',
-  );
-  $relation_type->target_bundles = array(
-    0 => 'crm_activity:*',
-  );
   $export['crm_case_activity'] = $relation_type;
 
   $relation_type = new stdClass;
@@ -40,12 +34,6 @@ function crm_case_relation_default_relation_types() {
   $relation_type->r_unique = 1;
   $relation_type->min_arity = 2;
   $relation_type->max_arity = 2;
-  $relation_type->source_bundles = array(
-    0 => 'crm_case:*',
-  );
-  $relation_type->target_bundles = array(
-    0 => 'crm_contact:*',
-  );
   $export['crm_contact_case'] = $relation_type;
 
   return $export;
