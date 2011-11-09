@@ -4,7 +4,9 @@
  * Code for the Student CRM Webform feature.
  */
 
-include_once('student_crm_webform.features.inc');
+if(module_exists('relation_endpoints')) {
+  include_once('student_crm_webform.features.inc');
+}
 
 /**
  * Implements hook_init().

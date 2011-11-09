@@ -293,7 +293,7 @@ function crm_courses_field_default_fields() {
           2 => 'r_index',
         ),
       ),
-      'module' => 'relation',
+      'module' => 'relation_endpoints',
       'settings' => array(),
       'translatable' => '0',
       'type' => 'relation_endpoint',
@@ -306,7 +306,7 @@ function crm_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'relation',
+          'module' => 'relation_endpoints',
           'settings' => array(),
           'type' => 'relation_endpoint',
           'weight' => 0,
@@ -320,7 +320,7 @@ function crm_courses_field_default_fields() {
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-        'module' => 'relation',
+        'module' => 'relation_endpoints',
         'settings' => array(),
         'type' => 'relation_endpoint',
         'weight' => '0',
