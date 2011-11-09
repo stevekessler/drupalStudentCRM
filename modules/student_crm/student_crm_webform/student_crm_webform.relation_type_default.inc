@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * student_crm_webform.relation_default.inc
+ * student_crm_webform.relation_type_default.inc
  */
 
 /**
@@ -21,6 +21,8 @@ function student_crm_webform_relation_default_relation_types() {
   $relation_type->r_unique = 0;
   $relation_type->min_arity = 2;
   $relation_type->max_arity = 2;
+  $relation_type->source_bundles = array();
+  $relation_type->target_bundles = array();
   $export['case_webform'] = $relation_type;
 
   $relation_type = new stdClass;
@@ -34,6 +36,13 @@ function student_crm_webform_relation_default_relation_types() {
   $relation_type->r_unique = 0;
   $relation_type->min_arity = 2;
   $relation_type->max_arity = 2;
+  $relation_type->source_bundles = array(
+    0 => 'webform_submission_entity:*',
+  );
+  $relation_type->target_bundles = array(
+    0 => 'crm_contact:*',
+    1 => 'crm_case:*',
+  );
   $export['webform_submission_to_entities'] = $relation_type;
 
   return $export;
