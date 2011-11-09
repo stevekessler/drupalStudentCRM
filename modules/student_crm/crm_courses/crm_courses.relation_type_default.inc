@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * crm_courses.relation_default.inc
+ * crm_courses.relation_type_default.inc
  */
 
 /**
@@ -21,6 +21,12 @@ function crm_courses_relation_default_relation_types() {
   $relation_type->r_unique = 0;
   $relation_type->min_arity = 2;
   $relation_type->max_arity = 2;
+  $relation_type->source_bundles = array(
+    0 => 'crm_contact:student',
+  );
+  $relation_type->target_bundles = array(
+    0 => 'node:course',
+  );
   $export['enrollment'] = $relation_type;
 
   return $export;
