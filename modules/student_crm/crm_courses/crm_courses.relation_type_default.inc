@@ -16,17 +16,16 @@ function crm_courses_relation_default_relation_types() {
   $relation_type->relation_type = 'enrollment';
   $relation_type->label = 'Enrollment';
   $relation_type->reverse_label = 'student';
-  $relation_type->directional = 1;
+  $relation_type->directional = 0;
   $relation_type->transitive = 0;
   $relation_type->r_unique = 0;
   $relation_type->min_arity = 2;
   $relation_type->max_arity = 2;
   $relation_type->source_bundles = array(
     0 => 'crm_contact:student',
+    1 => 'node:course',
   );
-  $relation_type->target_bundles = array(
-    0 => 'node:course',
-  );
+  $relation_type->target_bundles = array();
   $export['enrollment'] = $relation_type;
 
   return $export;

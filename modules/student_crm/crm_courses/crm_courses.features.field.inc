@@ -611,7 +611,7 @@ function crm_courses_field_default_fields() {
         'max' => '',
         'min' => '0',
         'prefix' => '',
-        'suffix' => 'units',
+        'suffix' => ' units',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
