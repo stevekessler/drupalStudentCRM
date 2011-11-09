@@ -11,7 +11,7 @@ function student_crm_webform_field_default_fields() {
   $fields = array();
 
   // Exported field: 'relation-case_webform_relationshiop-endpoints'
-  $fields['relation-case_webform_relationshiop-endpoints'] = array(
+  $fields['relation-case_webform_relationship-endpoints'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '-1',

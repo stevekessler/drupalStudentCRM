@@ -14,7 +14,7 @@ function student_crm_webform_relation_default_relation_types() {
   $relation_type->disabled = FALSE; /* Edit this to true to make a default relation_type disabled initially */
   $relation_type->api_version = 1;
   $relation_type->relation_type = 'case_webform';
-  $relation_type->label = 'Case Webform Relationshiop';
+  $relation_type->label = 'Case Webform Relationship';
   $relation_type->reverse_label = 'Webform for case';
   $relation_type->directional = 1;
   $relation_type->transitive = 0;
