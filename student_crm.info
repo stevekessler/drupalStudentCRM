@@ -71,12 +71,14 @@ dependencies[] = entity_token
 dependencies[] = date
 dependencies[] = date_api
 dependencies[] = date_views
+dependencies[] = date_popup
 
 ;features
 dependencies[] = features
 
 ;relation
 dependencies[] = relation
+dependencies[] = relation_endpoints
 
 ;user messaging
 dependencies[] = rules
