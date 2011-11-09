@@ -75,7 +75,7 @@ projects[privatemsg][subdir] = "contrib"
 projects[privatemsg][version] = "2.x-dev"
 
 projects[relation][subdir] = "contrib"
-projects[relation][version] = "1.x-dev"
+projects[relation][version] = "1.0-beta1"
 
 projects[rules][subdir] = "contrib"
 projects[rules][version] = "2.0"

@@ -16,10 +16,6 @@ function crm_courses_ctools_plugin_api() {
   if ($module == "relation" && $api == "relation_default") {
     return array("version" => "1");
   }
-  list($module, $api) = func_get_args();
-  if ($module == "relation" && $api == "relation_type_default") {
-    return array("version" => "1");
-  }
 }
 
 /**
