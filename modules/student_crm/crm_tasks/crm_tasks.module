@@ -82,6 +82,13 @@ function crm_tasks_create_task_form() {
 }
 
 /**
+ * Create task form submit
+ */
+function crm_tasks_create_task_form_submit() {
+  
+}
+
+/**
  * Implements hook_permission().
  */
 function crm_tasks_permission() {

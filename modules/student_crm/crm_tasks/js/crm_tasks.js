@@ -5,7 +5,8 @@
       $('#show-add-tasks').fancybox({
 				'onClosed' : function() {
 					$('#edit-task').addClass('element-invisible')
-										.addClass('element-invisible');
+					               .parent('div')
+					               .removeAttr('style');
 				},
 				'onStart'  : function() {
 					$('#edit-task').removeClass('element-invisible');

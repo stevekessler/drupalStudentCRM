@@ -33,12 +33,12 @@ function crm_advisor_menu() {
  * Page callback to delete a relation entity.
  */
 function crm_advisor_delete_relation_page($contact, $advisor) {
-  $contacts = _crm_advisor_get_advisor_contacts($advisor->uid);
-  $rid = $contacts[$contact->contact_id];
+  $contacts = _crm_advisor_get_advisor_contacts($advisor);
+  $rid = $contacts[$contact];
   relation_delete($rid);
   $destination = (isset($_GET['destination']))
                    ? $_GET['destination']
-                   : 'crm/contact/' . $contact->contact_id;
+                   : 'crm/contact/' . $contact;
   drupal_set_message(t('User has been removed from advising list'));
   drupal_goto($destination);
 }
@@ -54,7 +54,7 @@ function crm_advisor_create_relation_page($contact, $advisor) {
     drupal_goto('crm/contact/' . $contact->contact_id);
   }
   else {
-    $rid = crm_advisor_create_relation($contact, $advisor);
+    $relation = crm_advisor_create_relation($contact, $advisor);
     drupal_set_message(t('Advising relationship created'));
     $destination = (isset($_GET['destination']))
                    ? $_GET['destination']
@@ -80,7 +80,7 @@ function crm_advisor_create_relation($contact, $advisor) {
                          'r_index' => 1,
                          ))
              );
-   return relation_save($relation);
+   return $relation;
 }
 /**
  * Implements hook_permission().

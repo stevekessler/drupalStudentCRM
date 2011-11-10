@@ -1,4 +1,5 @@
 #edit-task { border: none; }
+  #edit-class.element-invisible { height: 0px; }
   #edit-task .form-type-date-popup { border: none; }
   #edit-task .form-type-date-popup .form-type-textfield label { display: none; }
   #edit-task .container-inline-date .date-padding { padding-left: 0px; }
