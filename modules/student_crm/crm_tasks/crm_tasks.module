@@ -19,7 +19,8 @@ function crm_tasks_block_info() {
  */
 function crm_tasks_block_view($delta) {
   if($delta == 'crm_tasks_new_task' && user_access('maintain own task list')) {
-    return array('content' => drupal_get_form('crm_tasks_create_task_form'));
+    $modal_link = l('Add to tasks', null, array('fragment' => 'edit-task-modal', 'external' => TRUE, 'attributes' => array('id' => 'show-add-tasks')));
+    return array('content' => $modal_link . drupal_render(drupal_get_form('crm_tasks_create_task_form')));
   }
 }
 
@@ -31,9 +32,7 @@ function crm_tasks_create_task_form() {
   drupal_add_css(drupal_get_path('module', 'crm_tasks') .'/css/crm_tasks.css');
   $form = array();
   
-  $form['modal-link'] = array(
-    '#markup' => l('Add to tasks', null, array('fragment' => 'edit-task', 'external' => TRUE, 'attributes' => array('id' => 'show-add-tasks'))), 
-  );
+  $form['#attributes']['id'] = 'edit-task-modal';
   
   $form['target_id'] = array(
     '#type' => 'hidden'
@@ -53,28 +52,23 @@ function crm_tasks_create_task_form() {
     $form['target_entity']['#value'] = 'crm_contact';
   }
   
-  $form['task'] = array(
-    '#type' => 'fieldset',
-    '#title' => 'Add to tasks',
-  );
-  
-  $form['task']['date'] = array(
+  $form['date'] = array(
     '#type' => 'date_popup',
     '#title' => 'Due date',
     '#date_format' => 'Y-m-d',
   );
   
-  $form['task']['note'] = array(
+  $form['note'] = array(
     '#type' => 'textfield',
     '#title' => 'Note',
   );
   
-  $form['task']['submit'] = array(
+  $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Save task',
   );
   
-  $form['task']['cancel'] = array(
+  $form['cancel'] = array(
     '#markup' => l('Cancel', '', array('fragment' => 'task-cancel', 'external' => TRUE, 'attributes' => array('id' => 'task-cancel'))),
   );
   
@@ -84,8 +78,27 @@ function crm_tasks_create_task_form() {
 /**
  * Create task form submit
  */
-function crm_tasks_create_task_form_submit() {
-  
+function crm_tasks_create_task_form_submit($form, $form_state) {
+  global $user;
+  $relation = relation_construct('crm_task', array(
+                  array('entity_type' => 'user',
+                         'entity_bundle' => 'user',
+                         'entity_id' => $user->uid,
+                         'r_index' => 0,
+                         ),
+                  array('entity_type' => $form_state['values']['target_entity'],
+                         'entity_bundle' => $form_state['values']['target_bundle'], 
+                         'entity_id' => $form_state['values']['target_id'],
+                         'r_index' => 1,
+                         ))
+               );
+  $rid = relation_save($relation);
+  $relation = relation_load($rid);
+  $language = ($relation->language) ? $relation->language : LANGUAGE_NONE;
+  $relation->field_task_due[$language][0]['value'] = $form_state['values']['date'];
+  $relation->field_task_note[$language][0]['value'] = $form_state['values']['note'];
+  relation_save($relation);
+  drupal_set_message(t('Your task has been created.'));
 }
 
 /**

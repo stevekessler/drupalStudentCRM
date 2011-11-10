@@ -1,15 +1,15 @@
 (function($) {
   Drupal.behaviors.CRMTasks = {
     attach: function() {
-      $('#edit-task').addClass('element-invisible');
+      $('#edit-task-modal').addClass('element-invisible');
       $('#show-add-tasks').fancybox({
 				'onClosed' : function() {
-					$('#edit-task').addClass('element-invisible')
+					$('#edit-task-modal').addClass('element-invisible')
 					               .parent('div')
 					               .removeAttr('style');
 				},
 				'onStart'  : function() {
-					$('#edit-task').removeClass('element-invisible');
+					$('#edit-task-modal').removeClass('element-invisible');
 				},
 				'autoDimensions' : false
 			});
