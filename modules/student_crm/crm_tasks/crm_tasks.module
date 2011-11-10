@@ -5,3 +5,90 @@
  */
 
 include_once('crm_tasks.features.inc');
+
+/**
+ * Implements hook_block_info().
+ */
+function crm_tasks_block_info() {
+  $blocks['crm_tasks_new_task'] = array('info' => 'New task form');
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function crm_tasks_block_view($delta) {
+  if($delta == 'crm_tasks_new_task' && user_access('maintain own task list')) {
+    return array('content' => drupal_get_form('crm_tasks_create_task_form'));
+  }
+}
+
+/**
+ * Create task form
+ */
+function crm_tasks_create_task_form() {
+  drupal_add_js(drupal_get_path('module', 'crm_tasks') .'/js/crm_tasks.js');
+  drupal_add_css(drupal_get_path('module', 'crm_tasks') .'/css/crm_tasks.css');
+  $form = array();
+  
+  $form['modal-link'] = array(
+    '#markup' => l('Add to tasks', null, array('fragment' => 'edit-task', 'external' => TRUE, 'attributes' => array('id' => 'show-add-tasks'))), 
+  );
+  
+  $form['target_id'] = array(
+    '#type' => 'hidden'
+  );
+  
+  $form['target_bundle'] = array(
+    '#type' => 'hidden'
+  );
+  
+  $form['target_entity'] = array(
+    '#type' => 'hidden'
+  );
+  
+  if($contact = _crm_history_get_contact()) {
+    $form['target_id']['#value'] = $contact->contact_id;
+    $form['target_bundle']['#value'] = $contact->type;
+    $form['target_entity']['#value'] = 'crm_contact';
+  }
+  
+  $form['task'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Add to tasks',
+  );
+  
+  $form['task']['date'] = array(
+    '#type' => 'date_popup',
+    '#title' => 'Due date',
+    '#date_format' => 'Y-m-d',
+  );
+  
+  $form['task']['note'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Note',
+  );
+  
+  $form['task']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Save task',
+  );
+  
+  $form['task']['cancel'] = array(
+    '#markup' => l('Cancel', '', array('fragment' => 'task-cancel', 'external' => TRUE, 'attributes' => array('id' => 'task-cancel'))),
+  );
+  
+  return $form;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function crm_tasks_permission() {
+  return array(
+    'maintain own task list' => array(
+      'title' => t('Maintain own task list'),
+      'description' => t('User can add and maintain their own list of tasks.'),
+    ),
+  );
+}
