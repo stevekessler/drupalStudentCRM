@@ -430,6 +430,9 @@ a.add {
 body .views-exposed-form .views-exposed-widget {
   float: none;
 }
+#content .views-exposed-widgets.clearfix::after {
+  clear: none;
+}
 /** TAGS **/
 .tags {
   margin: 5px 5px;
