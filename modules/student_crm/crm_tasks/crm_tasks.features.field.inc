@@ -27,8 +27,8 @@ function crm_tasks_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          0 => '',
-          1 => '',
+          0 => 'Not complete',
+          1 => 'Complete',
         ),
         'allowed_values_function' => '',
       ),

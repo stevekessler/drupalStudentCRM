@@ -14,7 +14,7 @@ function crm_tasks_menu_default_menu_links() {
   $menu_links['menu-crm-navigation:crm/tasks'] = array(
     'menu_name' => 'menu-crm-navigation',
     'link_path' => 'crm/tasks',
-    'router_path' => 'crm/tasks',
+    'router_path' => 'crm',
     'link_title' => 'Tasks',
     'options' => array(
       'attributes' => array(

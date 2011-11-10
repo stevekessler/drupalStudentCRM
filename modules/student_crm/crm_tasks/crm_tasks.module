@@ -7,6 +7,47 @@
 include_once('crm_tasks.features.inc');
 
 /**
+ * Implements hook_menu().
+ */
+function crm_tasks_menu() {
+  $items = array();
+  
+  $items['crm/tasks/mark/%/%'] = array(
+    'title' => 'Mark task',
+    'page callback' => 'crm_tasks_mark_task',
+    'page arguments' => array(3, 4),
+    'access callback' => 'crm_tasks_mark_task_access',
+    'access arguments' => array(3),
+  );
+  
+  return $items;
+}
+
+/**
+ * Menu access callback for marking tasks.
+ */
+function crm_tasks_mark_task_access($task) {
+  $relation = relation_load($task);
+  global $user;
+  if($relation) {
+    return ($relation->uid == $user->uid);
+  }
+  return FALSE;
+}
+
+/**
+ * Page callback to mark a task.
+ */
+function crm_tasks_mark_task($task, $status) {
+  $relation = relation_load($task);
+  $mark = ($status == 'mark') ? 1 : 0;
+  $language = ($relation->language) ? $relation->language : LANGUAGE_NONE;
+  $relation->field_task_complete[$language][0]['value'] = $mark;
+  relation_save($relation);
+  drupal_json_output(array('success' => true, 'mark' => $mark, 'relation' => $relation->rid));
+}
+
+/**
  * Implements hook_block_info().
  */
 function crm_tasks_block_info() {

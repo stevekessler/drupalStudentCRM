@@ -5,3 +5,5 @@
   #edit-task-modal .container-inline-date .date-padding { padding-left: 0px; }
   #edit-task-modal .fieldset-legend { display: none; }
 #task-cancel { margin: 0px 0px 0px 10px; }
+
+tr.completed, li.completed { text-decoration: line-through; }
