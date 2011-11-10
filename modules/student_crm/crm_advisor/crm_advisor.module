@@ -59,7 +59,7 @@ function crm_advisor_create_relation_page($contact, $advisor) {
     $destination = (isset($_GET['destination']))
                    ? $_GET['destination']
                    : 'crm/contact/' . $contact->contact_id;
-    drupal_goto('relation/' . $rid . '/edit', array('query' => array('destination' => $destination)));
+    drupal_goto('relation/' . $relation->rid . '/edit', array('query' => array('destination' => $destination)));
   }
   return NULL;
 }
@@ -80,7 +80,9 @@ function crm_advisor_create_relation($contact, $advisor) {
                          'r_index' => 1,
                          ))
              );
-   return $relation;
+  $contacts = _crm_advisor_get_advisor_contacts($advisor->uid);
+  return relation_load($contacts[$contact->contact_id]);
+  
 }
 /**
  * Implements hook_permission().
