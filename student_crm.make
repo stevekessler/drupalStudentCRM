@@ -51,7 +51,7 @@ projects[feeds][subdir] = "contrib"
 projects[feeds][version] = "2.0-alpha4"
 
 projects[field_group][subdir] = "contrib"
-projects[field_group][version] = "1.0"
+projects[field_group][version] = "1.1"
 
 projects[Guiders-JS][subdir] = "contrib"
 projects[Guiders-JS][version] = "1.0"
