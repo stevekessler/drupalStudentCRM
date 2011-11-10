@@ -79,7 +79,7 @@ function crm_student_block_view($delta) {
     return array('content' => drupal_get_form('_crm_student_search_form'));  
   }
   if ($delta == 'crm_student_welcome') {
-    $message = variable_get('crm_student_welcome_page', '');
+    $message = variable_get('crm_student_welcome_page', array('value' => '', 'format' => NULL));
     return array('content' => check_markup($message['value'], $message['format']));
   }
 }
