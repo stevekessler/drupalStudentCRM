@@ -218,8 +218,8 @@ ul.tabs { margin: 0px -10px 15px -10px; }
 /** PAGER **/
 ul.pager { margin: 15px 0; }
 	ul.pager li { padding: 0; margin: .25em 0; }
-	ul.pager a { background: #f3f3f3; .round-box(4px); font-weight: bold; text-decoration: none; padding: 0.5em; }
-	ul.pager li.pager-current { background: #e15440; color: #fff; .round-box(4px);}
+	ul.pager a { background: darken(@content-background, 5%); .round-box(4px); font-weight: bold; text-decoration: none; padding: 0.5em; }
+	ul.pager li.pager-current { background: darken(@blue-highlight, 30%); color: @content-background; .round-box(4px);}
 		ul.pager li.pager-current, ul.pager a { .box-shadow (1px, 1px, 1px, 0.2 ); }
-	ul.pager a:hover { background: @header-gradient; color: #fff; }
+	ul.pager a:hover { background: @blue-highlight; }
 	ul.pager .pager-next a, ul.pager .pager-last a { width: 70px; }

@@ -503,7 +503,7 @@ ul.pager li {
   margin: .25em 0;
 }
 ul.pager a {
-  background: #f3f3f3;
+  background: #f2f2f2;
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -512,8 +512,8 @@ ul.pager a {
   padding: 0.5em;
 }
 ul.pager li.pager-current {
-  background: #e15440;
-  color: #fff;
+  background: #75b2ce;
+  color: #ffffff;
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -524,8 +524,7 @@ ul.pager li.pager-current, ul.pager a {
   -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 ul.pager a:hover {
-  background: #fefefe;
-  color: #fff;
+  background: #e6f1f6;
 }
 ul.pager .pager-next a, ul.pager .pager-last a {
   width: 70px;
