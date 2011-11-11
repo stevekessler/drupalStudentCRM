@@ -328,5 +328,93 @@ function crm_advisor_views_default_views() {
   );
   $export['advisee_list'] = $view;
 
+  $view = new view;
+  $view->name = 'crm_student_advisors';
+  $view->description = 'Displays all advisors for a student.';
+  $view->tag = 'default';
+  $view->base_table = 'users';
+  $view->human_name = 'CRM Student Advisors';
+  $view->core = 7;
+  $view->api_version = '3.0-alpha1';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Advisors';
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'access user profiles';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '30';
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: User: Relation: Advisor (user <-> crm_contact) */
+  $handler->display->display_options['relationships']['relation_advisor_crm_contact']['id'] = 'relation_advisor_crm_contact';
+  $handler->display->display_options['relationships']['relation_advisor_crm_contact']['table'] = 'users';
+  $handler->display->display_options['relationships']['relation_advisor_crm_contact']['field'] = 'relation_advisor_crm_contact';
+  $handler->display->display_options['relationships']['relation_advisor_crm_contact']['required'] = 0;
+  $handler->display->display_options['relationships']['relation_advisor_crm_contact']['r_index'] = '0';
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['name']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['name']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['name']['link_to_user'] = 1;
+  $handler->display->display_options['fields']['name']['overwrite_anonymous'] = 0;
+  /* Contextual filter: CRM Contact: Contact ID */
+  $handler->display->display_options['arguments']['contact_id']['id'] = 'contact_id';
+  $handler->display->display_options['arguments']['contact_id']['table'] = 'crm_contact';
+  $handler->display->display_options['arguments']['contact_id']['field'] = 'contact_id';
+  $handler->display->display_options['arguments']['contact_id']['relationship'] = 'relation_advisor_crm_contact';
+  $handler->display->display_options['arguments']['contact_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['contact_id']['default_argument_type'] = 'raw';
+  $handler->display->display_options['arguments']['contact_id']['default_argument_options']['index'] = '2';
+  $handler->display->display_options['arguments']['contact_id']['default_argument_skip_url'] = 0;
+  $handler->display->display_options['arguments']['contact_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['contact_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['contact_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['contact_id']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['contact_id']['not'] = 0;
+  /* Filter criterion: User: Active */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'users';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 0;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block');
+  $translatables['crm_student_advisors'] = array(
+    t('Master'),
+    t('Advisors'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('Advisor'),
+    t('All'),
+    t('Block'),
+  );
+  $export['crm_student_advisors'] = $view;
+
   return $export;
 }

@@ -54,27 +54,6 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['relationships']['relation_base_crm_task_crm_contact']['relationship'] = 'relation_base_left_crm_task';
   $handler->display->display_options['relationships']['relation_base_crm_task_crm_contact']['label'] = 'CRM Task - contact';
   $handler->display->display_options['relationships']['relation_base_crm_task_crm_contact']['required'] = 0;
-  /* Relationship: Relation: Relation: CRM Task (relation <-> crm_activity) */
-  $handler->display->display_options['relationships']['relation_base_crm_task_crm_activity']['id'] = 'relation_base_crm_task_crm_activity';
-  $handler->display->display_options['relationships']['relation_base_crm_task_crm_activity']['table'] = 'relation';
-  $handler->display->display_options['relationships']['relation_base_crm_task_crm_activity']['field'] = 'relation_base_crm_task_crm_activity';
-  $handler->display->display_options['relationships']['relation_base_crm_task_crm_activity']['relationship'] = 'relation_base_left_crm_task';
-  $handler->display->display_options['relationships']['relation_base_crm_task_crm_activity']['label'] = 'CRM Task - activity';
-  $handler->display->display_options['relationships']['relation_base_crm_task_crm_activity']['required'] = 0;
-  /* Relationship: Relation: Relation: CRM Task (relation <-> crm_case) */
-  $handler->display->display_options['relationships']['relation_base_crm_task_crm_case']['id'] = 'relation_base_crm_task_crm_case';
-  $handler->display->display_options['relationships']['relation_base_crm_task_crm_case']['table'] = 'relation';
-  $handler->display->display_options['relationships']['relation_base_crm_task_crm_case']['field'] = 'relation_base_crm_task_crm_case';
-  $handler->display->display_options['relationships']['relation_base_crm_task_crm_case']['relationship'] = 'relation_base_left_crm_task';
-  $handler->display->display_options['relationships']['relation_base_crm_task_crm_case']['label'] = 'CRM Task - case';
-  $handler->display->display_options['relationships']['relation_base_crm_task_crm_case']['required'] = 0;
-  /* Relationship: Relation: Relation: CRM Task (relation <-> node) */
-  $handler->display->display_options['relationships']['relation_base_crm_task_node']['id'] = 'relation_base_crm_task_node';
-  $handler->display->display_options['relationships']['relation_base_crm_task_node']['table'] = 'relation';
-  $handler->display->display_options['relationships']['relation_base_crm_task_node']['field'] = 'relation_base_crm_task_node';
-  $handler->display->display_options['relationships']['relation_base_crm_task_node']['relationship'] = 'relation_base_left_crm_task';
-  $handler->display->display_options['relationships']['relation_base_crm_task_node']['label'] = 'CRM Task - node';
-  $handler->display->display_options['relationships']['relation_base_crm_task_node']['required'] = 0;
   /* Field: Relation: Complete */
   $handler->display->display_options['fields']['field_task_complete']['id'] = 'field_task_complete';
   $handler->display->display_options['fields']['field_task_complete']['table'] = 'field_data_field_task_complete';
@@ -125,35 +104,12 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['fields']['rid']['empty_zero'] = 0;
   $handler->display->display_options['fields']['rid']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['rid']['format_plural'] = 0;
-  /* Field: Tasks: Mark task */
-  $handler->display->display_options['fields']['mark_complete']['id'] = 'mark_complete';
-  $handler->display->display_options['fields']['mark_complete']['table'] = 'crm_tasks';
-  $handler->display->display_options['fields']['mark_complete']['field'] = 'mark_complete';
-  $handler->display->display_options['fields']['mark_complete']['relationship'] = 'relation_base_left_crm_task';
-  $handler->display->display_options['fields']['mark_complete']['label'] = '';
-  $handler->display->display_options['fields']['mark_complete']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['mark_complete']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['mark_complete']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['mark_complete']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['mark_complete']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['mark_complete']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['mark_complete']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['mark_complete']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['mark_complete']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['mark_complete']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['mark_complete']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['mark_complete']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['mark_complete']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['mark_complete']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['mark_complete']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['mark_complete']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['mark_complete']['hide_alter_empty'] = 0;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Name';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'NAME SOON';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name]';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['nothing']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['nothing']['alter']['external'] = 0;
@@ -198,6 +154,34 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['fields']['field_task_note']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_task_note']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_task_note']['field_api_classes'] = 0;
+  /* Field: Contact: First Name */
+  $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['relationship'] = 'relation_base_crm_task_crm_contact';
+  /* Field: Contact: Last name */
+  $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['relationship'] = 'relation_base_crm_task_crm_contact';
+  $handler->display->display_options['fields']['field_last_name']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_last_name']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_last_name']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_last_name']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_last_name']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['field_api_classes'] = 0;
   /* Sort criterion: User: Created date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'users';
@@ -355,7 +339,7 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['fields']['rid']['empty_zero'] = 0;
   $handler->display->display_options['fields']['rid']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['rid']['format_plural'] = 0;
-  /* Field: Tasks: Mark task */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['mark_complete']['id'] = 'mark_complete';
   $handler->display->display_options['fields']['mark_complete']['table'] = 'crm_tasks';
   $handler->display->display_options['fields']['mark_complete']['field'] = 'mark_complete';
@@ -415,21 +399,21 @@ function crm_tasks_views_default_views() {
     t('No tasks found.'),
     t('CRM Task - relation'),
     t('CRM Task - contact'),
-    t('CRM Task - activity'),
-    t('CRM Task - case'),
-    t('CRM Task - node'),
     t('.'),
     t(','),
     t('Name'),
-    t('NAME SOON'),
+    t('[field_first_name] [field_last_name]'),
     t('Due date'),
     t('Note'),
+    t('First Name'),
+    t('Last name'),
     t('All'),
     t('Completed'),
     t('Page'),
     t('Completed tasks'),
     t('Block'),
     t('Your Tasks'),
+    t('NAME SOON'),
   );
   $export['crm_tasks'] = $view;
 
