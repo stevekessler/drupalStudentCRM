@@ -92,6 +92,11 @@ function crm_tasks_create_task_form() {
     $form['target_bundle']['#value'] = $contact->type;
     $form['target_entity']['#value'] = 'crm_contact';
   }
+  if($case = crm_case_get_item()) {
+    $form['target_id']['#value'] = $case->cid;
+    $form['target_bundle']['#value'] = $case->type;
+    $form['target_entity']['#value'] = 'crm_case';
+  }
   
   $form['date'] = array(
     '#type' => 'date_popup',
