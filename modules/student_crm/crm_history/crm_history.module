@@ -29,7 +29,7 @@ function crm_history_block_view($delta) {
         $text .= theme('image_style', array('style_name' => 'history_small',
                           'path' => $history['image'][0]['uri'])) . ' '; 
       }
-      $text .= $history['title'][0]['safe_value'];
+      $text .= $history['title'];
       $items[] = l($text, $history['path'], array('html' => TRUE));
     }
     
@@ -86,21 +86,32 @@ function crm_history_permission() {
  * Implements hook_exit().
  */
 function crm_history_exit() {
-  $contact = _crm_history_get_contact();
-  if (!$contact) {
+  if(!user_access('track user history')) {
     return;
   }
-  $key = 'contact:' . $contact->contact_id;
   if (!isset($_SESSION['crm_history'])) {
     $_SESSION['crm_history'] = array();
+  }
+  if($contact = _crm_history_get_contact()) {
+    $key = 'contact:' . $contact->contact_id;
+    $image = field_get_items('crm_contact', $contact, 'contact_image');
+    $title = field_get_items('crm_contact', $contact, 'contact_name');
+    $title = $title[0]['safe_value'];
+  }
+  if($case = crm_case_get_item()) {
+    $key = 'case:' . $case->cid;
+    $title = $case->name;
+  }
+  if(!$key) {
+    return;
   }
   foreach ($_SESSION['crm_history'] as $item) {
     if ($item['key'] == $key) {
       return;
     }
   }
-  $item = array('image' => field_get_items('crm_contact', $contact, 'contact_image'),
-          'title' => field_get_items('crm_contact', $contact, 'contact_name'),
+  $item = array('image' => $image,
+          'title' => $title,
           'path' => $_GET['q'],
           'key' => $key);
   array_unshift($_SESSION['crm_history'], $item);
