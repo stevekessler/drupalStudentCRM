@@ -51,16 +51,23 @@ function crm_case_delete_form_wrapper($crm_case) {
  */
 function crm_case_edit_form($form, &$form_state, $crm_case) {
   drupal_set_title(t('Edit @name', array('@name' => $crm_case->name)));
-  
+  drupal_add_js(drupal_get_path('module', 'crm_case') .'/js/crm_case.form.js');
   // Add the default field elements.
-  $form['name'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Case name'),
-    '#default_value' => isset($crm_case->name) ? $crm_case->name : '',
-    '#maxlength' => 255,
-    '#required' => TRUE,
-    '#weight' => -5,
-  );
+  if(!isset($crm_case->name)) {
+    $form['name'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Case name'),
+      '#maxlength' => 255,
+      '#required' => TRUE,
+      '#weight' => -5,
+    );
+  }
+  else {
+    $form['name'] = array(
+      '#type' => 'hidden',
+      '#value' => $crm_case->name,
+    );
+  }
   
   $form['data']['#tree'] = TRUE;
   

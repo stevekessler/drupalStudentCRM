@@ -162,7 +162,7 @@ function crm_case_permission() {
     'administer crm_cases' => array(
       'title' => t('Administer crm_cases'),
       'description' => t('Edit and delete all crm_cases'),
-    ),  
+    ),
   );
   
   //Generate permissions per crm_case 
