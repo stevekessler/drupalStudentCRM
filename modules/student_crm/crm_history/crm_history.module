@@ -92,15 +92,19 @@ function crm_history_exit() {
   if (!isset($_SESSION['crm_history'])) {
     $_SESSION['crm_history'] = array();
   }
-  if($contact = _crm_history_get_contact()) {
+  if($contact = menu_get_object('crm_contact', 2)) {
     $key = 'contact:' . $contact->contact_id;
     $image = field_get_items('crm_contact', $contact, 'contact_image');
     $title = field_get_items('crm_contact', $contact, 'contact_name');
     $title = $title[0]['safe_value'];
   }
-  if($case = crm_case_get_item()) {
+  if($case = menu_get_object('crm_case', 2)) {
     $key = 'case:' . $case->cid;
     $title = $case->name;
+  }
+  if($node = menu_get_object('node') && $node->type == 'course') {
+    $key = 'node:' . $node->nid;
+    $title = $node->title;
   }
   if(!$key) {
     return;

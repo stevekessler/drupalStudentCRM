@@ -87,17 +87,17 @@ function crm_tasks_create_task_form() {
     '#type' => 'hidden'
   );
   
-  if($contact = _crm_history_get_contact()) {
+  if($contact = menu_get_object('crm_contact', 2)) {
     $form['target_id']['#value'] = $contact->contact_id;
     $form['target_bundle']['#value'] = $contact->type;
     $form['target_entity']['#value'] = 'crm_contact';
   }
-  if($case = crm_case_get_item()) {
+  if($case = menu_get_object('crm_case', 2)) {
     $form['target_id']['#value'] = $case->cid;
     $form['target_bundle']['#value'] = $case->type;
     $form['target_entity']['#value'] = 'crm_case';
   }
-  if($node = menu_get_object()) {
+  if($node = menu_get_object('node')) {
     $form['target_id']['#value'] = $node->nid;
     $form['target_bundle']['#value'] = $node->type;
     $form['target_entity']['#value'] = 'node';

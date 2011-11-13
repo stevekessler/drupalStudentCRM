@@ -45,7 +45,7 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
  * Form for ad-hoc form sending form.
  */
 function student_crm_webform_send_email_form() {
-  $case = crm_case_get_item();
+  $case = menu_get_object('crm_case', 2);
   
   $fields = field_info_instances();
   $fields = $fields['crm_case'][$case->type];

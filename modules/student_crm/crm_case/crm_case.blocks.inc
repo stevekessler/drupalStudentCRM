@@ -33,14 +33,12 @@ function _crm_case_blocks_crm_create_case_form() {
     '#options' => $types,
   );
   
-  $item = menu_get_item();
-    if (isset($item['load_functions'][2]) && $item['load_functions'][2] == 'crm_contact_load') {
-      if ($item['page_callback'] == 'crm_contact_view') {
-        $form['contact'] = array(
-          '#type' => 'hidden',
-          '#value' => $item['page_arguments'][0]->contact_id
-          );
-      }
+  $contact = menu_get_object('crm_contact', 2);
+  if($contact) {
+    $form['contact'] = array(
+      '#type' => 'hidden',
+      '#value' => $contact->contact_id
+      );
   }
   
   $form['submit'] = array(

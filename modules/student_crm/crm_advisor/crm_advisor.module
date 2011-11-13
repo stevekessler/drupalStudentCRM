@@ -107,7 +107,7 @@ function crm_advisor_block_info() {
  * Implements hook_block_view().
  */
 function crm_advisor_block_view($delta) {
-  $contact = _crm_advisor_get_contact();
+  $contact = menu_get_object('crm_contact', 2);
   if (!$contact || !user_access('advise students')) {
     return NULL;
   }
@@ -153,19 +153,4 @@ function _crm_advisor_get_advisor_contacts($advisor_id) {
   $relations = $query->execute()
               ->fetchAllKeyed();
   return $relations;
-}
-
-/**
- * Helper function to retrieve contact information from current page.
- */
-function _crm_advisor_get_contact() {
-  $item = menu_get_item();
-    if (isset($item['load_functions'][2]) && $item['load_functions'][2] == 'crm_contact_load') {
-      if ($item['page_callback'] == 'crm_contact_view') {
-        return $item['page_arguments'][0];
-      }
-      elseif ($item['page_callback'] == 'drupal_get_form') {
-        return $item['page_arguments'][1];
-      }
-  }
 }
