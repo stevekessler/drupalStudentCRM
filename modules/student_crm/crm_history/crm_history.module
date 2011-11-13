@@ -42,21 +42,6 @@ function crm_history_block_view($delta) {
 }
 
 /**
- * Helper function to retrieve contact information from current page.
- */
-function _crm_history_get_contact() {
-  $item = menu_get_item();
-    if (isset($item['load_functions'][2]) && $item['load_functions'][2] == 'crm_contact_load') {
-      if ($item['page_callback'] == 'crm_contact_view') {
-        return $item['page_arguments'][0];
-      }
-      elseif ($item['page_callback'] == 'drupal_get_form') {
-        return $item['page_arguments'][1];
-      }
-  }
-}
-
-/**
  * Implements hook_menu().
  */
 function crm_history_menu() {
