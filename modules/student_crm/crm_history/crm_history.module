@@ -87,7 +87,7 @@ function crm_history_exit() {
     $key = 'case:' . $case->cid;
     $title = $case->name;
   }
-  if($node = menu_get_object('node') && $node->type == 'course') {
+  if($node = menu_get_object('node')) {
     $key = 'node:' . $node->nid;
     $title = $node->title;
   }
