@@ -29,7 +29,7 @@ class CRMFeedsCourseEnrollmentProcessor extends FeedsProcessor {
    * Creates a new enrollment relation in memory and returns it.
    */
   public function newRelation(FeedsSource $source, $item) {
-    $relation = relation_construct('enrollment', array(
+    $relation = relation_create('enrollment', array(
                     array('entity_type' => 'crm_contact',
                           'entity_bundle' => 'student', 
                           'entity_id' => $item['student_entity'],

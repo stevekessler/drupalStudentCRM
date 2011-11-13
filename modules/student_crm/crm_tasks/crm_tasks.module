@@ -97,6 +97,11 @@ function crm_tasks_create_task_form() {
     $form['target_bundle']['#value'] = $case->type;
     $form['target_entity']['#value'] = 'crm_case';
   }
+  if($node = menu_get_object()) {
+    $form['target_id']['#value'] = $node->nid;
+    $form['target_bundle']['#value'] = $node->type;
+    $form['target_entity']['#value'] = 'node';
+  }
   
   $form['date'] = array(
     '#type' => 'date_popup',
@@ -126,7 +131,7 @@ function crm_tasks_create_task_form() {
  */
 function crm_tasks_create_task_form_submit($form, $form_state) {
   global $user;
-  $relation = relation_construct('crm_task', array(
+  $relation = relation_create('crm_task', array(
                   array('entity_type' => 'user',
                          'entity_bundle' => 'user',
                          'entity_id' => $user->uid,
