@@ -77,6 +77,7 @@ function crm_history_exit() {
   if (!isset($_SESSION['crm_history'])) {
     $_SESSION['crm_history'] = array();
   }
+  $key = false;
   if($contact = menu_get_object('crm_contact', 2)) {
     $key = 'contact:' . $contact->contact_id;
     $image = field_get_items('crm_contact', $contact, 'contact_image');
