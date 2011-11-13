@@ -26,7 +26,7 @@ function crm_case_field_default_fields() {
           2 => 'r_index',
         ),
       ),
-      'module' => 'relation_endpoints',
+      'module' => 'relation_endpoint',
       'settings' => array(),
       'translatable' => '0',
       'type' => 'relation_endpoint',
@@ -39,7 +39,7 @@ function crm_case_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'relation_endpoints',
+          'module' => 'relation_endpoint',
           'settings' => array(),
           'type' => 'relation_endpoint',
           'weight' => 0,
@@ -53,7 +53,7 @@ function crm_case_field_default_fields() {
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-        'module' => 'relation_endpoints',
+        'module' => 'relation_endpoint',
         'settings' => array(),
         'type' => 'relation_endpoint',
         'weight' => 0,
@@ -77,7 +77,7 @@ function crm_case_field_default_fields() {
           2 => 'r_index',
         ),
       ),
-      'module' => 'relation_endpoints',
+      'module' => 'relation_endpoint',
       'settings' => array(),
       'translatable' => '0',
       'type' => 'relation_endpoint',
@@ -90,7 +90,7 @@ function crm_case_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'relation_endpoints',
+          'module' => 'relation_endpoint',
           'settings' => array(),
           'type' => 'relation_endpoint',
           'weight' => 0,
@@ -104,7 +104,7 @@ function crm_case_field_default_fields() {
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-        'module' => 'relation_endpoints',
+        'module' => 'relation_endpoint',
         'settings' => array(),
         'type' => 'relation_endpoint',
         'weight' => 0,

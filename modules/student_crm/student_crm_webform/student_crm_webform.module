@@ -4,7 +4,7 @@
  * Code for the Student CRM Webform feature.
  */
 
-if(module_exists('relation_endpoints')) {
+if(module_exists('relation_endpoint')) {
   include_once('student_crm_webform.features.inc');
 }
 
