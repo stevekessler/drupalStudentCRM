@@ -154,6 +154,7 @@ fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; ma
 	#content { padding: @content-padding; }
 	#content .profile { clear: none; }
 	#content-wrapper .sidebar.right { width: (@min-width / 4); padding: @sidebar-padding; }
+	 #page #content .clearfix::after { clear: none; }
 
 /** BUTTONS **/
 a .add { background: url(../images/add.png) no-repeat 0 0; width: 9px; height: 9px; display: inline-block; margin-right: 5px; }
@@ -197,7 +198,6 @@ a.add { margin: 10px 0; }
 /** VIEWS **/
 .view .view-empty { font-size: 1.7em; color: lighten(@text-color, 60%); text-align: center;  }
 	body .views-exposed-form .views-exposed-widget { float: none; }
-  #content .views-exposed-widgets.clearfix::after { clear: none; }
 /** TAGS **/
 .tags { margin: 5px 5px; }
 	.tags ul li { float: left; margin: 0 10px 0 0; }
