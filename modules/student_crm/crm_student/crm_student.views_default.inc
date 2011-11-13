@@ -144,6 +144,30 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['nothing']['hide_empty'] = 0;
   $handler->display->display_options['fields']['nothing']['empty_zero'] = 0;
   $handler->display->display_options['fields']['nothing']['hide_alter_empty'] = 0;
+  /* Field: Contact: Class level */
+  $handler->display->display_options['fields']['field_student_level']['id'] = 'field_student_level';
+  $handler->display->display_options['fields']['field_student_level']['table'] = 'field_data_field_student_level';
+  $handler->display->display_options['fields']['field_student_level']['field'] = 'field_student_level';
+  $handler->display->display_options['fields']['field_student_level']['label'] = '';
+  $handler->display->display_options['fields']['field_student_level']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_student_level']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_student_level']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_student_level']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_student_level']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_student_level']['field_api_classes'] = 0;
   /* Field: Contact: Degrees */
   $handler->display->display_options['fields']['field_student_degrees']['id'] = 'field_student_degrees';
   $handler->display->display_options['fields']['field_student_degrees']['table'] = 'field_data_field_student_degrees';
@@ -254,12 +278,40 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_id']['alter']['html'] = 0;
   $handler->display->display_options['fields']['field_student_id']['element_type'] = 'span';
   $handler->display->display_options['fields']['field_student_id']['element_class'] = 'easy-copy';
+  $handler->display->display_options['fields']['field_student_id']['element_label_type'] = 'strong';
   $handler->display->display_options['fields']['field_student_id']['element_label_colon'] = 1;
   $handler->display->display_options['fields']['field_student_id']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['field_student_id']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_student_id']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_student_id']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_student_id']['field_api_classes'] = 0;
+  /* Field: Contact: Email address */
+  $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
+  $handler->display->display_options['fields']['field_contact_email']['label'] = 'Email';
+  $handler->display->display_options['fields']['field_contact_email']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_contact_email']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_contact_email']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['element_type'] = 'span';
+  $handler->display->display_options['fields']['field_contact_email']['element_class'] = 'easy-copy';
+  $handler->display->display_options['fields']['field_contact_email']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_contact_email']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_contact_email']['element_default_classes'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_contact_email']['type'] = 'email_plain';
+  $handler->display->display_options['fields']['field_contact_email']['field_api_classes'] = 0;
 
   /* Display: Student status */
   $handler = $view->new_display('block', 'Student status', 'block_2');
@@ -336,6 +388,7 @@ function crm_student_views_default_views() {
     t('Student fields'),
     t('Basic information'),
     t('Student ID'),
+    t('Email'),
     t('Student status'),
     t('term from field_student_status'),
     t('<div class="student-status student-status-[field_status_alert]">[field_student_status]</div>'),
