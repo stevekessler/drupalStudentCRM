@@ -81,17 +81,19 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No students found';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: CRM Contact: Relation: Enrollment (crm_contact <-> node) */
-  $handler->display->display_options['relationships']['relation_enrollment_node']['id'] = 'relation_enrollment_node';
-  $handler->display->display_options['relationships']['relation_enrollment_node']['table'] = 'crm_contact';
-  $handler->display->display_options['relationships']['relation_enrollment_node']['field'] = 'relation_enrollment_node';
-  $handler->display->display_options['relationships']['relation_enrollment_node']['label'] = 'Enrollment-node';
-  $handler->display->display_options['relationships']['relation_enrollment_node']['required'] = 0;
   /* Relationship: CRM Contact: Relation: Enrollment (crm_contact -> relation) */
   $handler->display->display_options['relationships']['relation_base_left_enrollment']['id'] = 'relation_base_left_enrollment';
   $handler->display->display_options['relationships']['relation_base_left_enrollment']['table'] = 'crm_contact';
   $handler->display->display_options['relationships']['relation_base_left_enrollment']['field'] = 'relation_base_left_enrollment';
+  $handler->display->display_options['relationships']['relation_base_left_enrollment']['label'] = 'Enrollment - relation';
   $handler->display->display_options['relationships']['relation_base_left_enrollment']['required'] = 0;
+  /* Relationship: Relation: Relation: Enrollment (relation -> node) */
+  $handler->display->display_options['relationships']['relation_base_enrollment_right_node']['id'] = 'relation_base_enrollment_right_node';
+  $handler->display->display_options['relationships']['relation_base_enrollment_right_node']['table'] = 'relation';
+  $handler->display->display_options['relationships']['relation_base_enrollment_right_node']['field'] = 'relation_base_enrollment_right_node';
+  $handler->display->display_options['relationships']['relation_base_enrollment_right_node']['relationship'] = 'relation_base_left_enrollment';
+  $handler->display->display_options['relationships']['relation_base_enrollment_right_node']['label'] = 'Enrollment - node';
+  $handler->display->display_options['relationships']['relation_base_enrollment_right_node']['required'] = 0;
   /* Field: CRM Contact: Contact ID */
   $handler->display->display_options['fields']['contact_id']['id'] = 'contact_id';
   $handler->display->display_options['fields']['contact_id']['table'] = 'crm_contact';
@@ -241,20 +243,37 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['sorts']['field_first_name_value']['id'] = 'field_first_name_value';
   $handler->display->display_options['sorts']['field_first_name_value']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['sorts']['field_first_name_value']['field'] = 'field_first_name_value';
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'relation_base_enrollment_right_node';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'raw';
+  $handler->display->display_options['arguments']['nid']['default_argument_options']['index'] = '2';
+  $handler->display->display_options['arguments']['nid']['default_argument_skip_url'] = 0;
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['nid']['not'] = 0;
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
+  /* Display: Students page */
+  $handler = $view->new_display('page', 'Students page', 'page');
   $handler->display->display_options['path'] = 'node/%/students';
 
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block');
+  /* Display: Course page */
+  $handler = $view->new_display('block', 'Course page', 'block');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Students';
 
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block_1');
+  /* Display: Student page */
+  $handler = $view->new_display('block', 'Student page', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Courses';
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
@@ -269,7 +288,7 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['fields']['field_course_number']['id'] = 'field_course_number';
   $handler->display->display_options['fields']['field_course_number']['table'] = 'field_data_field_course_number';
   $handler->display->display_options['fields']['field_course_number']['field'] = 'field_course_number';
-  $handler->display->display_options['fields']['field_course_number']['relationship'] = 'relation_enrollment_node';
+  $handler->display->display_options['fields']['field_course_number']['relationship'] = 'relation_base_enrollment_right_node';
   $handler->display->display_options['fields']['field_course_number']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_course_number']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_course_number']['alter']['make_link'] = 0;
@@ -293,7 +312,7 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['fields']['field_course_prefix']['id'] = 'field_course_prefix';
   $handler->display->display_options['fields']['field_course_prefix']['table'] = 'field_data_field_course_prefix';
   $handler->display->display_options['fields']['field_course_prefix']['field'] = 'field_course_prefix';
-  $handler->display->display_options['fields']['field_course_prefix']['relationship'] = 'relation_enrollment_node';
+  $handler->display->display_options['fields']['field_course_prefix']['relationship'] = 'relation_base_enrollment_right_node';
   $handler->display->display_options['fields']['field_course_prefix']['label'] = '';
   $handler->display->display_options['fields']['field_course_prefix']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_course_prefix']['alter']['alter_text'] = 0;
@@ -318,7 +337,7 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['fields']['field_course_section']['id'] = 'field_course_section';
   $handler->display->display_options['fields']['field_course_section']['table'] = 'field_data_field_course_section';
   $handler->display->display_options['fields']['field_course_section']['field'] = 'field_course_section';
-  $handler->display->display_options['fields']['field_course_section']['relationship'] = 'relation_enrollment_node';
+  $handler->display->display_options['fields']['field_course_section']['relationship'] = 'relation_base_enrollment_right_node';
   $handler->display->display_options['fields']['field_course_section']['label'] = 'Course';
   $handler->display->display_options['fields']['field_course_section']['alter']['alter_text'] = 1;
   $handler->display->display_options['fields']['field_course_section']['alter']['text'] = '[field_course_prefix] [field_course_number]: [field_course_section]';
@@ -343,6 +362,40 @@ function crm_courses_views_default_views() {
     'prefix_suffix' => 1,
   );
   $handler->display->display_options['fields']['field_course_section']['field_api_classes'] = 0;
+  /* Field: CRM Contact: Contact ID */
+  $handler->display->display_options['fields']['contact_id']['id'] = 'contact_id';
+  $handler->display->display_options['fields']['contact_id']['table'] = 'crm_contact';
+  $handler->display->display_options['fields']['contact_id']['field'] = 'contact_id';
+  $handler->display->display_options['fields']['contact_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['contact_id']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['contact_id']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['contact_id']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['contact_id']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['contact_id']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['contact_id']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['contact_id']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['contact_id']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['contact_id']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['contact_id']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['contact_id']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['contact_id']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['contact_id']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['contact_id']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['contact_id']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['contact_id']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['contact_id']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['contact_id']['link_to_contact'] = 0;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Course number (field_course_number) */
+  $handler->display->display_options['sorts']['field_course_number_value']['id'] = 'field_course_number_value';
+  $handler->display->display_options['sorts']['field_course_number_value']['table'] = 'field_data_field_course_number';
+  $handler->display->display_options['sorts']['field_course_number_value']['field'] = 'field_course_number_value';
+  $handler->display->display_options['sorts']['field_course_number_value']['relationship'] = 'relation_base_enrollment_right_node';
+  /* Sort criterion: Content: Course prefix (field_course_prefix) */
+  $handler->display->display_options['sorts']['field_course_prefix_value']['id'] = 'field_course_prefix_value';
+  $handler->display->display_options['sorts']['field_course_prefix_value']['table'] = 'field_data_field_course_prefix';
+  $handler->display->display_options['sorts']['field_course_prefix_value']['field'] = 'field_course_prefix_value';
+  $handler->display->display_options['sorts']['field_course_prefix_value']['relationship'] = 'relation_base_enrollment_right_node';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: CRM Contact: Contact ID */
   $handler->display->display_options['arguments']['contact_id']['id'] = 'contact_id';
@@ -376,8 +429,8 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['filters']['field_course_term_tid']['error_message'] = 0;
   $handler->display->display_options['block_description'] = 'Student courses';
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page_1');
+  /* Display: Enrollment history */
+  $handler = $view->new_display('page', 'Enrollment history', 'page_1');
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['grouping'] = 'field_course_term';
@@ -681,8 +734,8 @@ function crm_courses_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('No students found'),
-    t('Enrollment-node'),
-    t('Enrollment'),
+    t('Enrollment - relation'),
+    t('Enrollment - node'),
     t('Contact ID'),
     t('Last name'),
     t('crm/contact/[contact_id]'),
@@ -690,16 +743,19 @@ function crm_courses_views_default_views() {
     t('Level'),
     t('Degrees'),
     t('Student ID'),
-    t('Page'),
-    t('Block'),
+    t('All'),
+    t('Students page'),
+    t('Course page'),
+    t('Student page'),
     t('Courses'),
     t('No courses found'),
     t('Course number'),
     t('Course'),
     t('[field_course_prefix] [field_course_number]: [field_course_section]'),
-    t('All'),
     t('Term'),
     t('Student courses'),
+    t('Enrollment history'),
+    t('Enrollment'),
     t('Enrollment - course'),
     t('[field_course_prefix] [field_course_number] [field_course_section]'),
     t('Title'),

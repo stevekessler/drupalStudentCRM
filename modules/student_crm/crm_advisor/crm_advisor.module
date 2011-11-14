@@ -80,8 +80,8 @@ function crm_advisor_create_relation($contact, $advisor) {
                          'r_index' => 1,
                          ))
              );
-  $contacts = _crm_advisor_get_advisor_contacts($advisor->uid);
-  return relation_load($contacts[$contact->contact_id]);
+  $rid = relation_save($relation);
+  return relation_load($rid);
   
 }
 /**

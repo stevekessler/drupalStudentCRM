@@ -449,7 +449,7 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['path'] = 'crm/tasks/pending';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'Tasks';
-  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['weight'] = '-5';
   $handler->display->display_options['tab_options']['type'] = 'normal';
   $handler->display->display_options['tab_options']['title'] = 'Tasks';
   $handler->display->display_options['tab_options']['weight'] = '0';

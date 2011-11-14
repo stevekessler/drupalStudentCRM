@@ -345,18 +345,32 @@ function crm_advisor_views_default_views() {
   $handler->display->display_options['access']['perm'] = 'access user profiles';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Relationship: User: Relation: Advisor (user <-> crm_contact) */
-  $handler->display->display_options['relationships']['relation_advisor_crm_contact']['id'] = 'relation_advisor_crm_contact';
-  $handler->display->display_options['relationships']['relation_advisor_crm_contact']['table'] = 'users';
-  $handler->display->display_options['relationships']['relation_advisor_crm_contact']['field'] = 'relation_advisor_crm_contact';
-  $handler->display->display_options['relationships']['relation_advisor_crm_contact']['required'] = 0;
-  $handler->display->display_options['relationships']['relation_advisor_crm_contact']['r_index'] = '0';
+  $handler->display->display_options['row_options']['inline'] = array(
+    'name' => 'name',
+    'field_advisor_type' => 'field_advisor_type',
+  );
+  $handler->display->display_options['row_options']['separator'] = ' - ';
+  $handler->display->display_options['row_options']['hide_empty'] = 0;
+  $handler->display->display_options['row_options']['default_field_elements'] = 1;
+  /* Relationship: User: Relation: Advisor (user -> relation) */
+  $handler->display->display_options['relationships']['relation_base_left_advisor']['id'] = 'relation_base_left_advisor';
+  $handler->display->display_options['relationships']['relation_base_left_advisor']['table'] = 'users';
+  $handler->display->display_options['relationships']['relation_base_left_advisor']['field'] = 'relation_base_left_advisor';
+  $handler->display->display_options['relationships']['relation_base_left_advisor']['required'] = 0;
+  /* Relationship: Relation: Relation: Advisor (relation -> crm_contact) */
+  $handler->display->display_options['relationships']['relation_base_advisor_right_crm_contact']['id'] = 'relation_base_advisor_right_crm_contact';
+  $handler->display->display_options['relationships']['relation_base_advisor_right_crm_contact']['table'] = 'relation';
+  $handler->display->display_options['relationships']['relation_base_advisor_right_crm_contact']['field'] = 'relation_base_advisor_right_crm_contact';
+  $handler->display->display_options['relationships']['relation_base_advisor_right_crm_contact']['relationship'] = 'relation_base_left_advisor';
+  $handler->display->display_options['relationships']['relation_base_advisor_right_crm_contact']['label'] = 'Advisor - contact';
+  $handler->display->display_options['relationships']['relation_base_advisor_right_crm_contact']['required'] = 0;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -374,11 +388,36 @@ function crm_advisor_views_default_views() {
   $handler->display->display_options['fields']['name']['empty_zero'] = 0;
   $handler->display->display_options['fields']['name']['link_to_user'] = 1;
   $handler->display->display_options['fields']['name']['overwrite_anonymous'] = 0;
+  /* Field: Relation: Advisor type */
+  $handler->display->display_options['fields']['field_advisor_type']['id'] = 'field_advisor_type';
+  $handler->display->display_options['fields']['field_advisor_type']['table'] = 'field_data_field_advisor_type';
+  $handler->display->display_options['fields']['field_advisor_type']['field'] = 'field_advisor_type';
+  $handler->display->display_options['fields']['field_advisor_type']['relationship'] = 'relation_base_left_advisor';
+  $handler->display->display_options['fields']['field_advisor_type']['label'] = '';
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_advisor_type']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_advisor_type']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_advisor_type']['field_api_classes'] = 0;
   /* Contextual filter: CRM Contact: Contact ID */
   $handler->display->display_options['arguments']['contact_id']['id'] = 'contact_id';
   $handler->display->display_options['arguments']['contact_id']['table'] = 'crm_contact';
   $handler->display->display_options['arguments']['contact_id']['field'] = 'contact_id';
-  $handler->display->display_options['arguments']['contact_id']['relationship'] = 'relation_advisor_crm_contact';
+  $handler->display->display_options['arguments']['contact_id']['relationship'] = 'relation_base_advisor_right_crm_contact';
   $handler->display->display_options['arguments']['contact_id']['default_action'] = 'default';
   $handler->display->display_options['arguments']['contact_id']['default_argument_type'] = 'raw';
   $handler->display->display_options['arguments']['contact_id']['default_argument_options']['index'] = '2';
@@ -411,6 +450,7 @@ function crm_advisor_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('Advisor'),
+    t('Advisor - contact'),
     t('All'),
     t('Block'),
   );
