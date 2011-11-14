@@ -68,6 +68,12 @@ projects[libraries][version] = "1.0"
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.0-beta1"
 
+projects[notifications][subdir] = "contrib"
+projects[notifications][version] = "1.0-alpha1"
+
+projects[messaging][subdir] = "contrib"
+projects[messaging][version] = "1.0-alpha1"
+
 projects[options_element][subdir] = "contrib"
 projects[options_element][version] = "1.4"
 
@@ -160,3 +166,10 @@ libraries[guiders][destination] = "libraries"
 projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"
 projects[email][patch][] = "http://drupal.org/files/email_feeds_target-718414-36.patch"
 projects[relation][patch][] = "http://drupal.org/files/1260252-relationship-right-better-key.patch"
+
+; Hosted modules
+projects[views_savedsearches][type] = module
+projects[views_savedsearches][subdir] = "contrib"
+projects[views_savedsearches][version] = "7.x-dev"
+projects[views_savedsearches][download][type] = "file"
+projects[views_savedsearches][download][url] = "http://s4.csumb.edu/hosted_modules/views_savedsearches.tar.gz"
