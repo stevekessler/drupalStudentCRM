@@ -33,6 +33,87 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '40';
   $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'name' => 'name',
+    'field_first_name' => 'field_first_name',
+    'field_last_name' => 'field_last_name',
+    'title_1' => 'title_1',
+    'rid' => 'rid',
+    'field_task_complete' => 'field_task_complete',
+    'task_checkbox' => 'task_checkbox',
+    'nothing' => 'nothing',
+    'field_task_due' => 'field_task_due',
+    'field_task_note' => 'field_task_note',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_task_due';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+    ),
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+    ),
+    'field_first_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+    ),
+    'field_last_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+    ),
+    'title_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+    ),
+    'rid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+    ),
+    'field_task_complete' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+    ),
+    'task_checkbox' => array(
+      'align' => '',
+      'separator' => '',
+    ),
+    'nothing' => array(
+      'align' => '',
+      'separator' => '',
+    ),
+    'field_task_due' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+    ),
+    'field_task_note' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+    ),
+  );
+  $handler->display->display_options['style_options']['override'] = 1;
+  $handler->display->display_options['style_options']['sticky'] = 0;
+  $handler->display->display_options['style_options']['empty_table'] = 0;
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -363,8 +444,8 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['filters']['field_task_complete_value']['expose']['identifier'] = 'field_task_complete_value';
   $handler->display->display_options['filters']['field_task_complete_value']['expose']['reduce'] = 0;
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
+  /* Display: Tasks page */
+  $handler = $view->new_display('page', 'Tasks page', 'page');
   $handler->display->display_options['path'] = 'crm/tasks/pending';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'Tasks';
@@ -373,8 +454,8 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['tab_options']['title'] = 'Tasks';
   $handler->display->display_options['tab_options']['weight'] = '0';
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page_1');
+  /* Display: Completed page */
+  $handler = $view->new_display('page', 'Completed page', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Completed tasks';
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -651,7 +732,8 @@ function crm_tasks_views_default_views() {
     t('Note'),
     t('All'),
     t('Completed'),
-    t('Page'),
+    t('Tasks page'),
+    t('Completed page'),
     t('Completed tasks'),
     t('Block'),
     t('Your Tasks'),

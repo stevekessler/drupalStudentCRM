@@ -53,9 +53,6 @@ projects[feeds][version] = "2.0-alpha4"
 projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.1"
 
-projects[fullcalendar][subdir] = "contrib"
-projects[fullcalendar][version] = "2.0-alpha7"
-
 projects[Guiders-JS][subdir] = "contrib"
 projects[Guiders-JS][version] = "1.0"
 
@@ -144,7 +141,7 @@ projects[webform_submission_entity][download][branch] = "master"
 ;libraries[chosen][directory_name] = "chosen"
 ;libraries[chosen][destination] = "libraries"
 
-; Download fancybox as a library
+; Download fancybox library
 libraries[fancybox][download][type] = "get"
 libraries[fancybox][download][url] = "http://fancybox.googlecode.com/files/jquery.fancybox-1.3.4.zip"
 libraries[fancybox][directory_name] = "fancybox"
