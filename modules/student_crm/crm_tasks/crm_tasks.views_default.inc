@@ -365,9 +365,11 @@ function crm_tasks_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'crm/tasks';
+  $handler->display->display_options['path'] = 'crm/tasks/pending';
+  $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'Tasks';
   $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['tab_options']['type'] = 'normal';
   $handler->display->display_options['tab_options']['title'] = 'Tasks';
   $handler->display->display_options['tab_options']['weight'] = '0';
 
@@ -403,6 +405,7 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['filters']['field_task_complete_value']['expose']['identifier'] = 'field_task_complete_value';
   $handler->display->display_options['filters']['field_task_complete_value']['expose']['reduce'] = 0;
   $handler->display->display_options['path'] = 'crm/tasks/completed';
+  $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Completed';
   $handler->display->display_options['menu']['weight'] = '0';
 
