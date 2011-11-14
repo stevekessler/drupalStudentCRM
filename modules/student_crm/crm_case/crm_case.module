@@ -516,6 +516,7 @@ class CRMCaseTypeController extends EntityAPIControllerExportable {
     $values += array( 
       'id' => '',
       'is_new' => TRUE,
+      'instructions' => '',
       'data' => '',
     );
     $crm_case_type = parent::create($values);

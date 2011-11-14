@@ -35,7 +35,16 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
     ),
     '#description' => t('A unique machine-readable name for this crm_case type. It must only contain lowercase letters, numbers, and underscores.'),
   );
-
+  
+  $instructions = $crm_case_type->data['instructions'];
+  $form['instructions'] = array(
+    '#type' => 'text_format',
+    '#title' => t('Form instructions'),
+    '#description' => t('Additional instructions that appear on the top of the case form.'),
+    '#default_value' => (isset($instructions['value'])) ? $instructions['value'] : '',
+    '#format' => (isset($instructions['format'])) ? $instructions['format'] : NULL,
+  );
+  
   $form['data']['#tree'] = TRUE;
 
   $form['actions'] = array('#type' => 'actions');
@@ -53,6 +62,7 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
  */
 function crm_case_type_form_submit(&$form, &$form_state) {
   $crm_case_type = entity_ui_form_submit_build_entity($form, $form_state);
+  $crm_case_type->data['instructions'] = $crm_case_type->instructions;
   $crm_case_type->save();
   $form_state['redirect'] = 'crm/admin/case/types';
 }

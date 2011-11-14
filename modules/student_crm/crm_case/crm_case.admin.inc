@@ -52,6 +52,13 @@ function crm_case_delete_form_wrapper($crm_case) {
 function crm_case_edit_form($form, &$form_state, $crm_case) {
   drupal_set_title(t('Edit @name', array('@name' => $crm_case->name)));
   drupal_add_js(drupal_get_path('module', 'crm_case') .'/js/crm_case.form.js');
+  $type = crm_case_type_load($crm_case->type);
+  if($message = check_markup($type->data['instructions']['value'], $type->data['instructions']['format'])) {
+    $form['form_instructions'] = array(
+      '#markup' => $message,
+    );
+  }
+  
   // Add the default field elements.
   if(!isset($crm_case->name)) {
     $form['name'] = array(
