@@ -72,6 +72,9 @@ dependencies[] = date
 dependencies[] = date_api
 dependencies[] = date_views
 
+;homebox
+dependencies[] = homebox
+
 ;features
 dependencies[] = features
 

@@ -395,6 +395,89 @@ function crm_advisor_views_default_views() {
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Advisees';
   $handler->display->display_options['menu']['weight'] = '0';
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block_1');
+  $handler->display->display_options['defaults']['use_ajax'] = FALSE;
+  $handler->display->display_options['use_ajax'] = TRUE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'mini';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = 0;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Contact: Last name */
+  $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['relationship'] = 'relation_base_advisor_right_crm_contact';
+  $handler->display->display_options['fields']['field_last_name']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_last_name']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_last_name']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_last_name']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_last_name']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['field_api_classes'] = 0;
+  /* Field: Contact: First Name */
+  $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['relationship'] = 'relation_base_advisor_right_crm_contact';
+  $handler->display->display_options['fields']['field_first_name']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_first_name']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_first_name']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_first_name']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_first_name']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['field_api_classes'] = 0;
+  /* Field: Relation: Advisor type */
+  $handler->display->display_options['fields']['field_advisor_type']['id'] = 'field_advisor_type';
+  $handler->display->display_options['fields']['field_advisor_type']['table'] = 'field_data_field_advisor_type';
+  $handler->display->display_options['fields']['field_advisor_type']['field'] = 'field_advisor_type';
+  $handler->display->display_options['fields']['field_advisor_type']['relationship'] = 'relation_base_left_advisor';
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_advisor_type']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_advisor_type']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_advisor_type']['field_api_classes'] = 0;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  $handler->display->display_options['block_description'] = 'Advisee list';
   $translatables['advisee_list'] = array(
     t('Master'),
     t('Your students'),
@@ -419,6 +502,8 @@ function crm_advisor_views_default_views() {
     t('All'),
     t('Page'),
     t('Advisees'),
+    t('Block'),
+    t('Advisee list'),
   );
   $export['advisee_list'] = $view;
 

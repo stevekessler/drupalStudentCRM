@@ -56,6 +56,9 @@ projects[field_group][version] = "1.1"
 projects[Guiders-JS][subdir] = "contrib"
 projects[Guiders-JS][version] = "1.0"
 
+projects[homebox][subdir] = "contrib"
+projects[homebox][version] = "2.0-beta6"
+
 ;projects[interface][subdir] = "contrib"
 ;projects[interface][version] = "1.x-dev"
 
