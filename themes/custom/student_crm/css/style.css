@@ -336,9 +336,20 @@ input.button-yes, #edit-submit {
   background-position: -2401px 50%;
   padding-left: 25px;
 }
+input.button-yes:active, #edit-submit:active {
+  background-position: -2801px 50%;
+}
 input.button-no, #edit-delete {
   background-position: -3201px 50%;
   padding-left: 25px;
+}
+input.button-no:active, #edit-delete:active {
+  background-position: -3601px 50%;
+}
+input.form-submit:active {
+  border-color: #808080;
+  background: url(../images/buttons.png) -401px 50% no-repeat;
+  color: #666666;
 }
 /** MESSAGES **/
 #messages .messages {
