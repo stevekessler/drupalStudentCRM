@@ -53,6 +53,9 @@ projects[feeds][version] = "2.0-alpha4"
 projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.1"
 
+projects[fullcalendar][subdir] = "contrib"
+projects[fullcalendar][version] = "2.0-alpha7"
+
 projects[Guiders-JS][subdir] = "contrib"
 projects[Guiders-JS][version] = "1.0"
 
