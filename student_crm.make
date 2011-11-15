@@ -39,7 +39,7 @@ projects[email][subdir] = "contrib"
 projects[email][version] = "1.x-dev"
 
 projects[entity][subdir] = "contrib"
-projects[entity][version] = "1.0-rc1"
+projects[entity][version] = "1.0-beta11"
 
 projects[fancybox][subdir] = "contrib"
 projects[fancybox][version] = "1.x-dev"
