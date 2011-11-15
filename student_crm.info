@@ -39,7 +39,6 @@ dependencies[] = libraries
 ;contrib
 dependencies[] = addressfield
 dependencies[] = admin_menu
-dependencies[] = auto_nodetitle
 dependencies[] = better_formats
 dependencies[] = cck_phone
 ;dependencies[] = chosen
