@@ -57,6 +57,18 @@ function crm_student_homebox() {
         'title' => '',
         'weight' => -25,
       ),
+      'views_crm_tasks-block_1' => 
+      array (
+        'module' => 'views',
+        'delta' => 'crm_tasks-block_1',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -25,
+      ),
     ),
     'widths' => 
     array (
