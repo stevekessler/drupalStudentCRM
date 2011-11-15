@@ -115,3 +115,5 @@ variables[admin_theme] = rubik
 variables[fancybox_path] = "profiles/student_crm/libraries/fancybox/fancybox"
 variables[webform_use_cookies] = 1
 variables[webform_submission_access_control] = 0
+variables[ant_course] = 1
+variables[ant_pattern_course] = [node:field_course_prefix] [node:field_course_number] ([node:field_course_section]): [node:field_course_title]
