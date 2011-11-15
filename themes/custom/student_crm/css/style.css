@@ -609,3 +609,10 @@ h3.ui-accordion-header.ui-state-active {
 .ui-accordion-content-active {
   border-color: #36ce51;
 }
+/** HOMEBOX **/
+.portlet-icon.portlet-maximize {
+  display: none;
+}
+#page #homebox .homebox-portlet {
+  border: none;
+}
