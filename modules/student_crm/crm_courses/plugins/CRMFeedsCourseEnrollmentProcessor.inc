@@ -85,7 +85,7 @@ class CRMFeedsCourseEnrollmentProcessor extends FeedsProcessor {
             $entity = $this->newRelation($source, $item);
             $this->newItemInfo($entity, $source->feed_nid, $hash);
           }
-          else {
+          elseif($item['student_entity'] && $item['course_entity']) {
             $entity = $this->entityLoad($source, $entity_id);
             // The feeds_item table is always updated with the info for the most recently processed entity.
             // The only carryover is the entity_id.

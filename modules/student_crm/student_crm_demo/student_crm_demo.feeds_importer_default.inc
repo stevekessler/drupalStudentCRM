@@ -35,7 +35,7 @@ function student_crm_demo_feeds_importer_default() {
       'plugin_key' => 'FeedsNodeProcessor',
       'config' => array(
         'content_type' => 'course',
-        'expire' => -1,
+        'expire' => '-1',
         'author' => 0,
         'mappings' => array(
           0 => array(
@@ -69,8 +69,8 @@ function student_crm_demo_feeds_importer_default() {
             'unique' => FALSE,
           ),
         ),
-        'update_existing' => 0,
-        'input_format' => NULL,
+        'update_existing' => '2',
+        'input_format' => 'plain_text',
       ),
     ),
     'content_type' => '',
