@@ -9,7 +9,6 @@
  * Generates the crm_case type editing form.
  */
 function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
-  drupal_add_js(drupal_get_path('module', 'crm_case') .'/js/crm_case_type.form.js');
   if ($op == 'clone') {
     $crm_case_type->label .= ' (cloned)';
     $crm_case_type->type = '';
@@ -45,14 +44,21 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
     '#format' => (isset($instructions['format'])) ? $instructions['format'] : NULL,
   );
   
-  $form['email_contact'] = array(
+  $form['email'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Email options',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $form['email']['email_contact'] = array(
     '#type' => 'checkbox',
     '#title' => t('Email contact on case creation'),
     '#description' => t('Enable sending the related contact an email upon case creation.'),
     '#default_value' => $crm_case_type->data['email_contact'],
   );
   
-  $form['email_subject'] = array(
+  $form['email']['email_subject'] = array(
     '#type' => 'textfield',
     '#title' => t('Email subject'),
     '#description' => t('Subject of email to send to the contact.'),
@@ -60,7 +66,7 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
   );
   
   $email = $crm_case_type->data['email_body'];
-  $form['email_body'] = array(
+  $form['email']['email_body'] = array(
     '#type' => 'text_format',
     '#title' => t('Email body'),
     '#description' => t('Email body to send to the contact.'),
@@ -69,7 +75,7 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
   );
   
   if (module_exists('token')) {
-    $form['email_tokens'] = array(
+    $form['email']['email_tokens'] = array(
       '#theme' => 'token_tree',
       '#token_types' => array('crm_case', 'crm_contact'),
     );
