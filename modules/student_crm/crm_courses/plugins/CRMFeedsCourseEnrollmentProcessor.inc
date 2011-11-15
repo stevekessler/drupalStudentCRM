@@ -81,7 +81,7 @@ class CRMFeedsCourseEnrollmentProcessor extends FeedsProcessor {
         
         try {
           // Assemble relation, map item to it, save.
-          if (empty($entity_id)) {
+          if (empty($entity_id) && $item['student_entity'] && $item['course_entity']) {
             $entity = $this->newRelation($source, $item);
             $this->newItemInfo($entity, $source->feed_nid, $hash);
           }
