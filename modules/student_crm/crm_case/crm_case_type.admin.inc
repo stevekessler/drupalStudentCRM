@@ -70,7 +70,7 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
     '#type' => 'text_format',
     '#title' => t('Email body'),
     '#description' => t('Email body to send to the contact.'),
-    '#default_value' => (isset($email['value'])) ? $$email['value'] : '',
+    '#default_value' => (isset($email['value'])) ? $email['value'] : '',
     '#format' => (isset($email['format'])) ? $email['format'] : NULL,
   );
   
