@@ -154,3 +154,51 @@ function _crm_advisor_get_advisor_contacts($advisor_id) {
               ->fetchAllKeyed();
   return $relations;
 }
+
+/**
+ * Implements hook_action_info().
+ */
+function crm_advisor_action_info() {
+  return array(
+    'crm_advisor_add_advisor' => array(
+        'type' => 'crm_contact',
+        'label' => t('Add to advisee list'),
+        'configurable' => TRUE,
+        'triggers' => array('any'),
+      ),
+  );
+}
+
+/**
+ * Configuration form to attach an advisor relationship.
+ */
+function crm_advisor_add_advisor_form($context) {
+  $form = array();
+  $relation = relation_create('advisor', array());
+  $form_state['relation'] = $relation;
+  field_attach_form('relation', $relation, $form, $form_state);
+  return $form;
+}
+
+function crm_advisor_add_advisor_submit($form, $form_state) {
+  $params = array(
+    'values' => $form_state['values']
+  );
+  return $params;
+}
+
+/**
+ * Action callback to attach an advisor relationship.
+ */
+function crm_advisor_add_advisor($entity, $context) {
+  global $user;
+  $relation = crm_advisor_create_relation($entity, $user);
+  $fields = field_info_instances('relation', 'advisor');
+  unset($fields['endpoints']);
+  foreach($fields as $key => $field) {
+    if(isset($context['values'][$key])) {
+      $relation->{$key} = $context['values'][$key];
+    }
+  }
+  relation_save($relation);
+}

@@ -128,7 +128,7 @@ function student_crm_webform_theme_registry_alter(&$theme_registry) {
 /**
  * Implements hook_action_info().
  */
-function s4_core_action_info() {
+function student_crm_webform_action_info() {
   return array(
     'student_crm_webform_action_send_form_email' => array(
         'type' => 'system',
