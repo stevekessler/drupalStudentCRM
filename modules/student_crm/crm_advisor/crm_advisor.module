@@ -192,7 +192,18 @@ function crm_advisor_add_advisor_submit($form, $form_state) {
  */
 function crm_advisor_add_advisor($entity, $context) {
   global $user;
-  $relation = crm_advisor_create_relation($entity, $user);
+  $relation = relation_create('advisor', array(
+                array('entity_type' => 'user',
+                       'entity_bundle' => 'user',
+                       'entity_id' => $user->uid,
+                       'r_index' => 0,
+                       ),
+                  array('entity_type' => 'crm_contact',
+                         'entity_bundle' => $entity->type, 
+                         'entity_id' => $entity->contact_id,
+                         'r_index' => 1,
+                         ))
+             );
   $fields = field_info_instances('relation', 'advisor');
   unset($fields['endpoints']);
   foreach($fields as $key => $field) {
@@ -200,5 +211,5 @@ function crm_advisor_add_advisor($entity, $context) {
       $relation->{$key} = $context['values'][$key];
     }
   }
-  relation_save($relation);
+  dpm(relation_save($relation));
 }
