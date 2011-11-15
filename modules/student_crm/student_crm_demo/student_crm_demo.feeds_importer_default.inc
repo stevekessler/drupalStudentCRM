@@ -44,29 +44,29 @@ function student_crm_demo_feeds_importer_default() {
             'unique' => FALSE,
           ),
           1 => array(
-            'source' => 'title',
-            'target' => 'title',
-            'unique' => FALSE,
-          ),
-          2 => array(
             'source' => 'term',
             'target' => 'field_course_term',
             'unique' => FALSE,
           ),
-          3 => array(
+          2 => array(
             'source' => 'number',
             'target' => 'field_course_number',
             'unique' => FALSE,
           ),
-          4 => array(
+          3 => array(
             'source' => 'section',
             'target' => 'field_course_section',
             'unique' => FALSE,
           ),
-          5 => array(
+          4 => array(
             'source' => 'id',
             'target' => 'guid',
             'unique' => 1,
+          ),
+          5 => array(
+            'source' => 'title',
+            'target' => 'field_course_title',
+            'unique' => FALSE,
           ),
         ),
         'update_existing' => 0,
