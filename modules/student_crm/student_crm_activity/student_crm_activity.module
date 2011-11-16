@@ -87,8 +87,22 @@ function student_crm_activity_create($form, $form_state) {
   $form['form-actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Save note',
+    '#ajax' => array(
+      'callback' => 'student_crm_activity_activity_ajax_callback',
+      'wrapper' => 'activity-form',
+      'name' => 'activity-submit',
+      'progress' => array(
+				'type' => 'throbber',
+				'message' => 'Saving note',
+			),
+    ),
   );
   
+  return $form;
+}
+
+function student_crm_activity_activity_ajax_callback($form, $form_state) {
+  student_crm_activity_create_submit($form, $form_state);
   return $form;
 }
 

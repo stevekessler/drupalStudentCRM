@@ -117,3 +117,16 @@ variables[webform_use_cookies] = 1
 variables[webform_submission_access_control] = 0
 variables[ant_course] = 1
 variables[ant_pattern_course] = [node:field_course_prefix] [node:field_course_number] ([node:field_course_section]): [node:field_course_title]
+
+; terms
+terms[phone][name] = Phone
+terms[phone][vocabulary_machine_name] = activity_types
+
+terms[email][name] = Email
+terms[email][vocabulary_machine_name] = activity_types
+
+terms[dropin][name] = Drop-in
+terms[dropin][vocabulary_machine_name] = activity_types
+
+terms[letter][name] = Letter
+terms[letter][vocabulary_machine_name] = activity_types
