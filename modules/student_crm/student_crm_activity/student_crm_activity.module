@@ -190,3 +190,29 @@ function student_crm_activity_form_crm_activity_type_form_alter_submit($form, $f
   }
   variable_set('student_crm_activity_restrict_'. $form['type']['#default_value'], $save);
 }
+
+/**
+ * Implements hook_feeds_plugins().
+ */
+function student_crm_activity_feeds_plugins() {
+  $info['StudentCRMActivityFeedsProcessor'] = array(
+    'name' => 'CRM Activity processor',
+    'description' => 'Add and update activities attached to contacts.',
+    'help' => 'Create and update activities from parsed content.',
+    'handler' => array(
+      'parent' => 'FeedsProcessor',
+      'class' => 'StudentCRMActivityFeedsProcessor',
+      'file' => 'StudentCRMActivityFeedsProcessor.inc',
+      'path' => drupal_get_path('module', 'student_crm_activity') . '/plugins',
+    ),
+  );
+  return $info;
+}
+
+/*
+ * Implements hook_enable().
+ */
+function student_crm_activity_enable() {
+  //clear the cache to display in Feeds as available plugin.
+  cache_clear_all('plugins:feeds:plugins', 'cache');
+}
