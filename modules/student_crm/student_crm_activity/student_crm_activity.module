@@ -87,7 +87,7 @@ function student_crm_activity_create($form, $form_state) {
   $form['form-actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Save note',
-    '#ajax' => array(
+    /*'#ajax' => array(
       'callback' => 'student_crm_activity_activity_ajax_callback',
       'wrapper' => 'activity-form',
       'name' => 'activity-submit',
@@ -95,7 +95,7 @@ function student_crm_activity_create($form, $form_state) {
 				'type' => 'throbber',
 				'message' => 'Saving note',
 			),
-    ),
+    ),*/
   );
   
   return $form;
@@ -115,11 +115,13 @@ function student_crm_activity_activity_form(&$form, $form_state) {
  */
 function student_crm_activity_create_submit($form, $form_state) {
   $crm_activity = entity_ui_controller('crm_activity')->entityFormSubmitBuildEntity($form, $form_state);
+  $crm_activity->created = time();
+  $crm_activity->changed = time();
   $activity_id = crm_activity_save($crm_activity);
   $relation = relation_create('crm_activity', array(
                 array('entity_type' => 'crm_activity',
                        'entity_bundle' => $crm_activity->type,
-                       'entity_id' => $activity_id,
+                       'entity_id' => $crm_activity->crm_activity_id,
                        'r_index' => 0,
                        ),
                   array('entity_type' => $form_state['values']['entity']['type'],
