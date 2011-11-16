@@ -104,7 +104,7 @@ dependencies[] = crm_advisor
 dependencies[] = crm_history
 dependencies[] = crm_courses
 dependencies[] = crm_case
-dependencies[] = student_crm_activities
+dependencies[] = student_crm_activity
 dependencies[] = student_crm_webform
 ;dependencies[] = student_crm_blocks
 
