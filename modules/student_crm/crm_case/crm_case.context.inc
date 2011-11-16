@@ -24,6 +24,16 @@ function crm_case_context_default_contexts() {
     ),
   );
   $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-crm_contact_cases-block_1' => array(
+          'module' => 'views',
+          'delta' => 'crm_contact_cases-block_1',
+          'region' => 'sidebar_right',
+          'weight' => '-10',
+        ),
+      ),
+    ),
     'menu' => 'crm/search',
   );
   $context->condition_mode = 0;

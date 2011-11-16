@@ -462,6 +462,9 @@ input.form-submit:active {
 .sidebar.right label {
   font-weight: normal;
 }
+.sidebar.right .contact-name {
+  font-size: 120%;
+}
 #content-wrapper .sidebar.right .block {
   margin-bottom: 10px;
 }
