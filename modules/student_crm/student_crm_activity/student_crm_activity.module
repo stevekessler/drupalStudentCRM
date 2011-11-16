@@ -28,6 +28,10 @@ function student_crm_activity_block_view($delta) {
 }
 
 /**
+ * Implements hook_theme_registry_alter().
+ */
+
+/**
  * Create activity form.
  */
 function student_crm_activity_create($form, $form_state) {
@@ -45,6 +49,7 @@ function student_crm_activity_create($form, $form_state) {
     '#type' => 'select',
     '#title' => 'Note type',
     '#options' => $options,
+    '#default_value' => STUDENT_CRM_DEFAULT_TYPE,
     '#ajax' => array(
 			'callback' => 'student_crm_activity_activity_form',
 			'wrapper' => 'activity-sub-form',
@@ -92,6 +97,9 @@ function student_crm_activity_create($form, $form_state) {
   return $form;
 }
 
+/**
+ * Ajax callback to redraw form when the note type changes.
+ */
 function student_crm_activity_activity_form(&$form, $form_state) {
 	return $form;
 }
