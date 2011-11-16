@@ -29,7 +29,7 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
    * Creates a new crm_activity crm_activity in memory and returns it.
    */
   public function newActivity(FeedsSource $source, $item) {
-      $crm_activity = crm_activity_create($this->config['activity_type']);
+      $crm_activity = crm_activity_create(array('type' => $this->config['activity_type']));
       $crm_activity->crm_contact_id = $item['student_entity'];
       return $crm_activity;
   }
