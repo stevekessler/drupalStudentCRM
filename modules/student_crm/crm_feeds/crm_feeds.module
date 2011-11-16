@@ -15,17 +15,6 @@ function crm_feeds_feeds_plugins() {
       'path' => drupal_get_path('module', 'crm_feeds') . '/plugins',
     ),
   );
-  $info['CRMFeedsActivityProcessor'] = array(
-    'name' => 'CRM Activity processor',
-    'description' => 'Create and update CRM activities.',
-    'help' => 'Create and update CRM activities from parsed content.',
-    'handler' => array(
-      'parent' => 'FeedsProcessor',
-      'class' => 'CRMFeedsActivityProcessor',
-      'file' => 'CRMFeedsActivityProcessor.inc',
-      'path' => drupal_get_path('module', 'crm_feeds') . '/plugins',
-    ),
-  );
   return $info;
 }
 

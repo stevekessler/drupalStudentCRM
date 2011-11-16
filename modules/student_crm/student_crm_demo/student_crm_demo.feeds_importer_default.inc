@@ -13,6 +13,73 @@ function student_crm_demo_feeds_importer_default() {
   $feeds_importer = new stdClass;
   $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'crm_demo_activities';
+  $feeds_importer->config = array(
+    'name' => 'Demo activities',
+    'description' => 'Demonstration activity importer',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsFileFetcher',
+      'config' => array(
+        'allowed_extensions' => 'txt csv tsv xml opml',
+        'direct' => FALSE,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsCSVParser',
+      'config' => array(
+        'delimiter' => ',',
+        'no_headers' => 0,
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'StudentCRMActivityFeedsProcessor',
+      'config' => array(
+        'expire' => '-1',
+        'author' => 0,
+        'mappings' => array(
+          0 => array(
+            'source' => 'student_id',
+            'target' => 'student_id',
+            'unique' => FALSE,
+          ),
+          1 => array(
+            'source' => 'activity_id',
+            'target' => 'guid',
+            'unique' => 1,
+          ),
+          2 => array(
+            'source' => 'date',
+            'target' => 'created',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'type',
+            'target' => 'field_activity_contact_method',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'note',
+            'target' => 'field_activity_note',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '0',
+        'input_format' => 'plain_text',
+        'activity_type' => 'note',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => 1800,
+    'expire_period' => 3600,
+    'import_on_create' => TRUE,
+    'process_in_background' => FALSE,
+  );
+  $export['crm_demo_activities'] = $feeds_importer;
+
+  $feeds_importer = new stdClass;
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
   $feeds_importer->id = 'crm_demo_courses';
   $feeds_importer->config = array(
     'name' => 'Demo courses',
