@@ -35,15 +35,33 @@ function student_crm_activity_block_view($delta) {
  * Create activity form.
  */
 function student_crm_activity_create($form, $form_state) {
-  $types = crm_activity_get_types();
-  $options = array();
-  foreach($types as $type) {
-    $options[$type->type] = $type->label;
-  }
+  
   $form = array();
   
   $form['#prefix'] = '<div id="activity-sub-form">';
   $form['#suffix'] = '</div>';
+  
+  $entity = array();
+  
+  if($case = menu_get_object('crm_case', 2)) {
+    $entity['type'] = 'crm_case';
+    $entity['bundle'] = $case->type;
+    $entity['id'] = $case->cid;   
+  }
+  if($contact = menu_get_object('crm_contact', 2)) {
+    $entity['type'] = 'crm_contact';
+    $entity['bundle'] = $contact->type;
+    $entity['id'] = $contact->contact_id;   
+  }
+  
+  $types = crm_activity_get_types();
+  $options = array();
+  foreach($types as $type) {
+    $restrict = variable_get('student_crm_activity_restrict_'. $type->type, FALSE);
+    if(!$restrict || $restrict[$entity['type'] .':'. $entity['bundle']] || $restrict[$entity['type'] .':*']) {
+      $options[$type->type] = $type->label;    
+    }
+  }
   
   $form['activity_type'] = array(
     '#type' => 'select',
@@ -58,20 +76,9 @@ function student_crm_activity_create($form, $form_state) {
 				'message' => 'Getting form',
 			),
 		),
+		'#weight' => -20,
   );
   
-  $entity = array();
-  
-  if($case = menu_get_object('crm_case', 2)) {
-    $entity['type'] = 'crm_case';
-    $entity['bundle'] = $case->type;
-    $entity['id'] = $case->cid;   
-  }
-  if($contact = menu_get_object('crm_contact', 2)) {
-    $entity['type'] = 'crm_contact';
-    $entity['bundle'] = $contact->type;
-    $entity['id'] = $contact->contact_id;   
-  }
   $form['entity'] = array(
     '#type' => 'value',
     '#value' => $entity,
@@ -127,4 +134,51 @@ function student_crm_activity_create_submit($form, $form_state) {
                          ))
              );
   relation_save($relation);
+}
+
+/**
+ * Alter the activity type form to add in options for restricitng posting to certain
+ * entity/bundle types.
+ */
+function student_crm_activity_form_crm_activity_type_form_alter(&$form, $form_state) {
+  
+  $form['entity_restrictions'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Advanced options',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $bundles = array();
+  foreach (entity_get_info() as $entity_type => $entity) {
+    $bundles[$entity['label']]["$entity_type:*"] = 'all ' . $entity['label'] . ' bundles';
+    $counter += 2;
+    if (isset($entity['bundles'])) {
+      foreach ($entity['bundles'] as $bundle_id => $bundle) {
+        $bundles[$entity['label']]["$entity_type:$bundle_id"] = $bundle['label'];
+        $counter++;
+      }
+    }
+  }
+  
+  $form['entity_restrictions']['entity_types'] = array(
+    '#type' => 'select',
+    '#title' => 'Restrict to only entity types',
+    '#options' => $bundles,
+    '#default_value' => variable_get('student_crm_activity_restrict_'. $form['type']['#default_value'], array()),
+    '#multiple' => TRUE,
+  );
+  
+  $form['#submit'][] = 'student_crm_activity_form_crm_activity_type_form_alter_submit';
+}
+
+function student_crm_activity_form_crm_activity_type_form_alter_submit($form, $form_state) {
+  $save = false;
+  foreach($form_state['values']['entity_types'] as $type) {
+    if($type) {
+      $save = $form_state['values']['entity_types'];
+      break;
+    }
+  }
+  variable_set('student_crm_activity_restrict_'. $form['type']['#default_value'], $save);
 }
