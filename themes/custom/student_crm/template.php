@@ -10,6 +10,28 @@ function student_crm_preprocess_html(&$vars) {
 }
 
 /**
+ * Add themed user info to activities.
+ */
+function student_crm_preprocess_entity(&$variables) {
+  if($variables['elements']['#entity_type'] == 'crm_activity') {
+    $activity = $variables['crm_activity'];
+    $author = user_load($variables['crm_activity']->uid);
+    $variables['date'] = format_date($variables['crm_activity']->created, 'short');
+    $variables['submitted'] = t('By !username <span class="date">on !datetime</span>', array('!username' => $variables['name'], '!datetime' => $variables['date']));
+    
+    $picture = field_get_items('user', $author, 'field_user_picture');
+    $image_path = ($picture[0]['uri'])
+             ? $picture[0]['uri']
+             : 'public://default_images/generic_person.png';
+    $variables['picture'] = theme('image_style', array('style_name' => 'history_small',
+                                                       'path' => $image_path,
+                                                       'alt' => strip_tags($variables['name'])));
+    $variables['contact_type'] = $variables['content']['field_activity_contact_method'][0]['#title'];
+    unset($variables['content']['field_activity_contact_method']);
+  }
+}
+
+/**
 *	Override the status messages to place a container div within them
 */
 function student_crm_status_messages($variables) {
