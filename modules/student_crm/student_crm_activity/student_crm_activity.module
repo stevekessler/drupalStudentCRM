@@ -114,5 +114,6 @@ function student_crm_activity_create_submit($form, $form_state) {
                          'r_index' => 1,
                          ))
              );
-  dpm(relation_save($relation));
+  relation_save($relation);
+  drupal_set_message(t('Note saved.'));
 }
