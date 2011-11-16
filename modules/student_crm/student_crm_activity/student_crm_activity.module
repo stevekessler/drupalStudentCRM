@@ -87,22 +87,8 @@ function student_crm_activity_create($form, $form_state) {
   $form['form-actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Save note',
-    /*'#ajax' => array(
-      'callback' => 'student_crm_activity_activity_ajax_callback',
-      'wrapper' => 'activity-form',
-      'name' => 'activity-submit',
-      'progress' => array(
-				'type' => 'throbber',
-				'message' => 'Saving note',
-			),
-    ),*/
   );
   
-  return $form;
-}
-
-function student_crm_activity_activity_ajax_callback($form, $form_state) {
-  student_crm_activity_create_submit($form, $form_state);
   return $form;
 }
 
@@ -114,9 +100,11 @@ function student_crm_activity_activity_form(&$form, $form_state) {
  * Create activity form submit.
  */
 function student_crm_activity_create_submit($form, $form_state) {
+  global $user;
   $crm_activity = entity_ui_controller('crm_activity')->entityFormSubmitBuildEntity($form, $form_state);
   $crm_activity->created = time();
   $crm_activity->changed = time();
+  $crm_activity->uid = $user->uid;
   $activity_id = crm_activity_save($crm_activity);
   $relation = relation_create('crm_activity', array(
                 array('entity_type' => 'crm_activity',
@@ -131,5 +119,4 @@ function student_crm_activity_create_submit($form, $form_state) {
                          ))
              );
   relation_save($relation);
-  drupal_set_message(t('Note saved.'));
 }
