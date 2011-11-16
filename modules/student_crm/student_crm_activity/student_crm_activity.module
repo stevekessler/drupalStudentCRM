@@ -58,12 +58,12 @@ function student_crm_activity_create($form, $form_state) {
   $options = array();
   foreach($types as $type) {
     $restrict = variable_get('student_crm_activity_restrict_'. $type->type, FALSE);
-    $roles = variable_get('student_crm_activity_restrict_role_edit_'. $type->type);
-    if(!$restrict || $restrict[$entity['type'] .':'. $entity['bundle']] || $restrict[$entity['type'] .':*']) {
-      if(!$roles || user_access('administer crm_activity types') 
-                 || count(array_intersect($roles, array_keys($user->roles)))) { 
-        $options[$type->type] = $type->label;
-      } 
+    if(user_access("edit any $type->type crm_activity") && (
+        !$restrict || 
+        $restrict[$entity['type'] .':'. $entity['bundle']] || 
+        $restrict[$entity['type'] .':*'])
+        ) {
+      $options[$type->type] = $type->label;
     }
   }
   
@@ -173,23 +173,12 @@ function student_crm_activity_form_crm_activity_type_form_alter(&$form, $form_st
     '#multiple' => TRUE,
   );
   
-  $form['entity_restrictions']['roles_view'] = array(
-    '#type' => 'checkboxes',
-    '#title' => 'Roles who can view these activity types',
-    '#default_value' => variable_get('student_crm_activity_restrict_role_view_'. $form['type']['#default_value']),
-    '#options' => user_roles(),
-  );
-  
-  $form['entity_restrictions']['roles_edit'] = array(
-    '#type' => 'checkboxes',
-    '#title' => 'Roles who can create and edit these activity types',
-    '#default_value' => variable_get('student_crm_activity_restrict_role_edit_'. $form['type']['#default_value']),
-    '#options' => user_roles(),
-  );
-  
   $form['#submit'][] = 'student_crm_activity_form_crm_activity_type_form_alter_submit';
 }
 
+/**
+ * Form submit callback for editing activity types.
+ */
 function student_crm_activity_form_crm_activity_type_form_alter_submit($form, $form_state) {
   $save = false;
   foreach($form_state['values']['entity_types'] as $type) {
@@ -199,10 +188,4 @@ function student_crm_activity_form_crm_activity_type_form_alter_submit($form, $f
     }
   }
   variable_set('student_crm_activity_restrict_'. $form['type']['#default_value'], $save);
-  variable_set('student_crm_activity_restrict_role_view_'. $form['type']['#default_value'], $form_state['values']['roles_view']);
-  variable_set('student_crm_activity_restrict_role_edit_'. $form['type']['#default_value'], $form_state['values']['roles_edit']);
-}
-
-function student_crm_activity_entity_info_alter(&$entity_info) {
-  dpm($entity_info['crm_activity']);
 }
