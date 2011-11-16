@@ -1,0 +1,118 @@
+<?php
+
+define('STUDENT_CRM_DEFAULT_TYPE', 'note');
+
+/**
+ * @file
+ * Code for the Student CRM Activity feature.
+ */
+
+include_once('student_crm_activity.features.inc');
+
+/**
+ * Implements hook_block_info().
+ */
+function student_crm_activity_block_info() {
+  $blocks['student_crm_activity_create'] = array('info' => 'Create activity form');
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function student_crm_activity_block_view($delta) {
+  if($delta == 'student_crm_activity_create') {
+    return array('subject' => 'Add a note',
+                 'content' => drupal_get_form('student_crm_activity_create'));
+  }
+}
+
+/**
+ * Create activity form.
+ */
+function student_crm_activity_create($form, $form_state) {
+  $types = crm_activity_get_types();
+  $options = array();
+  foreach($types as $type) {
+    $options[$type->type] = $type->label;
+  }
+  $form = array();
+  
+  $form['#prefix'] = '<div id="activity-sub-form">';
+  $form['#suffix'] = '</div>';
+  
+  $form['activity_type'] = array(
+    '#type' => 'select',
+    '#title' => 'Note type',
+    '#options' => $options,
+    '#ajax' => array(
+			'callback' => 'student_crm_activity_activity_form',
+			'wrapper' => 'activity-sub-form',
+			'progress' => array(
+				'type' => 'throbber',
+				'message' => 'Getting form',
+			),
+		),
+  );
+  
+  $entity = array();
+  
+  if($case = menu_get_object('crm_case', 2)) {
+    $entity['type'] = 'crm_case';
+    $entity['bundle'] = $case->type;
+    $entity['id'] = $case->cid;   
+  }
+  if($contact = menu_get_object('crm_contact', 2)) {
+    $entity['type'] = 'crm_contact';
+    $entity['bundle'] = $contact->type;
+    $entity['id'] = $contact->contact_id;   
+  }
+  $form['entity'] = array(
+    '#type' => 'value',
+    '#value' => $entity,
+  );
+  
+  $activity_type = ($form_state['values']['activity_type']) 
+                   ? $form_state['values']['activity_type'] 
+                   : STUDENT_CRM_DEFAULT_TYPE;
+  $crm_activity = crm_activity_create(array('type' => $activity_type));
+  
+  $form_state['crm_activity'] = $crm_activity;
+  field_attach_form('crm_activity', $crm_activity, $form, $form_state);
+  
+  $form['form-actions'] = array(
+    '#type' => 'actions',
+  );
+  
+  $form['form-actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Save note',
+  );
+  
+  return $form;
+}
+
+function student_crm_activity_activity_form(&$form, $form_state) {
+	return $form;
+}
+
+/**
+ * Create activity form submit.
+ */
+function student_crm_activity_create_submit($form, $form_state) {
+  $crm_activity = entity_ui_controller('crm_activity')->entityFormSubmitBuildEntity($form, $form_state);
+  $activity_id = crm_activity_save($crm_activity);
+  $relation = relation_create('crm_activity', array(
+                array('entity_type' => 'crm_activity',
+                       'entity_bundle' => $crm_activity->type,
+                       'entity_id' => $activity_id,
+                       'r_index' => 0,
+                       ),
+                  array('entity_type' => $form_state['values']['entity']['type'],
+                         'entity_bundle' => $form_state['values']['entity']['bundle'], 
+                         'entity_id' => $form_state['values']['entity']['id'],
+                         'r_index' => 1,
+                         ))
+             );
+  dpm(relation_save($relation));
+}
