@@ -8,6 +8,8 @@ function crm_student_install() {
   menu_rebuild();
   cache_clear_all();
   
+  $path = 'public://default_images';
+  file_prepare_directory($path, FILE_CREATE_DIRECTORY);
   //Install the generic person outline.
   $file = (object)array('uri' => 
                         drupal_get_path('module', 'crm_student') .'/images/generic_person.png');
