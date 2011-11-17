@@ -60,9 +60,18 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
   
   public function process(FeedsSource $source, FeedsParserResult $parser_result) {
     $state = $source->state(FEEDS_PROCESS);
-
+    $mappings = $this->config['mappings'];
+    foreach($mappings as $map) {
+      if($map['target'] == 'student_id') {
+        $student_id_key = $map['source'];
+      }
+      if($map['target'] == 'author_name') {
+        $author_name_key = $map['source'];
+      }
+    }
     while ($item = $parser_result->shiftItem()) {
-      $item['student_entity'] = $this->getTargetEntity($item['student_id'], 'crm_contact');
+      $item['author_name'] = $item[$author_name_key];
+      $item['student_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_contact');
       if (!($entity_id = $this->existingEntityId($source, $parser_result)) ||
            ($this->config['update_existing'] != FEEDS_SKIP_EXISTING)) {
 

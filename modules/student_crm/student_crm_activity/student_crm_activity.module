@@ -89,7 +89,7 @@ function student_crm_activity_create($form, $form_state) {
     '#value' => $entity,
   );
   
-  $activity_type = ($form_state['values']['activity_type']) 
+  $activity_type = (isset($form_state['values']['activity_type'])) 
                    ? $form_state['values']['activity_type'] 
                    : STUDENT_CRM_DEFAULT_TYPE;
   $crm_activity = crm_activity_create(array('type' => $activity_type));
