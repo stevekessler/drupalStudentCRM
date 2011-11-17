@@ -29,8 +29,8 @@ projects[cck_phone][version] = "1.x-dev"
 projects[context][subdir] = "contrib"
 projects[context][version] = "3.0-beta2"
 
-;projects[chosen][subdir] = "contrib"
-;projects[chosen][version] = "1.0"
+projects[chosen][subdir] = "contrib"
+projects[chosen][version] = "1.0"
 
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.x-dev"
