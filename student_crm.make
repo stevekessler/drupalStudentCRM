@@ -141,12 +141,6 @@ projects[webform_submission_entity][download][branch] = "master"
 
 ; Libraries
 
-; Download the Chosen JS library
-;libraries[chosen][download][type] = "get"
-;libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/zipball/master"
-;libraries[chosen][directory_name] = "chosen"
-;libraries[chosen][destination] = "libraries"
-
 ; Download fancybox library
 libraries[fancybox][download][type] = "get"
 libraries[fancybox][download][url] = "http://fancybox.googlecode.com/files/jquery.fancybox-1.3.4.zip"
@@ -172,7 +166,7 @@ libraries[guiders][destination] = "libraries"
 projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"
 projects[email][patch][] = "http://drupal.org/files/email_feeds_target-718414-36.patch"
 projects[relation][patch][] = "http://drupal.org/files/1260252-relationship-right-better-key.patch"
-projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_help_block-1342418-3.patch"
+projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_help_block-1342418-4.patch"
 projects[crm][patch][] = "http://drupal.org/files/trellon_crm_activity_fix-1342600-5.patch"
 
 ; Hosted modules
