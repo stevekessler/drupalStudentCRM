@@ -186,8 +186,8 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
     
     $relation = relation_create('crm_activity', array(
                     array('entity_type' => 'crm_activity',
-                          'entity_bundle' => $crm_activity->type,
-                          'entity_id' => $crm_activity->crm_activity_id,
+                          'entity_bundle' => $entity->type,
+                          'entity_id' => $entity->crm_activity_id,
                           'r_index' => 0,
                           ),
                     array('entity_type' => 'crm_contact',
