@@ -62,6 +62,11 @@ function student_crm_demo_feeds_importer_default() {
             'target' => 'field_activity_note',
             'unique' => FALSE,
           ),
+          5 => array(
+            'source' => 'user',
+            'target' => 'author_name',
+            'unique' => FALSE,
+          ),
         ),
         'update_existing' => '0',
         'input_format' => 'plain_text',
@@ -531,6 +536,81 @@ function student_crm_demo_feeds_importer_default() {
     'process_in_background' => FALSE,
   );
   $export['crm_demo_terms'] = $feeds_importer;
+
+  $feeds_importer = new stdClass;
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'crm_demo_users';
+  $feeds_importer->config = array(
+    'name' => 'Demo users',
+    'description' => 'Imports users and makes them advisors.',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsFileFetcher',
+      'config' => array(
+        'allowed_extensions' => 'txt csv tsv xml opml',
+        'direct' => FALSE,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsCSVParser',
+      'config' => array(
+        'delimiter' => ',',
+        'no_headers' => 0,
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsUserProcessor',
+      'config' => array(
+        'roles' => array(
+          3 => '3',
+          4 => 0,
+        ),
+        'status' => '1',
+        'defuse_mail' => 1,
+        'mappings' => array(
+          0 => array(
+            'source' => 'sis_id',
+            'target' => 'field_user_sis_id',
+            'unique' => FALSE,
+          ),
+          1 => array(
+            'source' => 'login',
+            'target' => 'name',
+            'unique' => 1,
+          ),
+          2 => array(
+            'source' => 'pass',
+            'target' => 'pass',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'first_name',
+            'target' => 'field_user_name_first',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'last_name',
+            'target' => 'field_user_name_last',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'email',
+            'target' => 'mail',
+            'unique' => 1,
+          ),
+        ),
+        'update_existing' => 0,
+        'input_format' => 'plain_text',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => 1800,
+    'expire_period' => 3600,
+    'import_on_create' => TRUE,
+    'process_in_background' => FALSE,
+  );
+  $export['crm_demo_users'] = $feeds_importer;
 
   return $export;
 }

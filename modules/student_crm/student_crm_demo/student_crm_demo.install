@@ -1,7 +1,8 @@
 <?php
 
 function student_crm_demo_install() {
-  $feeds = array('crm_demo_degrees' => 'degrees.csv',
+  $feeds = array('crm_demo_users' => 'users.csv',
+                 'crm_demo_degrees' => 'degrees.csv',
                  'crm_demo_status' => 'statuses.csv',
                  'crm_demo_levels' => 'levels.csv',
                  'crm_demo_students' => 'students.csv',

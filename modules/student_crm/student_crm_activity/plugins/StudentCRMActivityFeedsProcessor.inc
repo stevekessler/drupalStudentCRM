@@ -31,6 +31,16 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
   public function newActivity(FeedsSource $source, $item) {
       $crm_activity = crm_activity_create(array('type' => $this->config['activity_type']));
       $crm_activity->crm_contact_id = $item['student_entity'];
+      if($item['author_name']) {
+        $author = db_select('users', 'u')
+                  ->fields('u', array('uid'))
+                  ->condition('u.name', $item['author_name'])
+                  ->execute()
+                  ->fetchField();
+        if($author) {
+          $crm_activity->uid = $author;
+        }
+      }
       return $crm_activity;
   }
   
@@ -361,6 +371,10 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
       'student_id' => array(
         'name' => t('Student ID'),
         'description' => t('The ID of the student.'),
+      ),
+      'author_name' => array(
+        'name' => t('Author username'),
+        'description' => t('The username of the author.'),
       ),
     );
 
