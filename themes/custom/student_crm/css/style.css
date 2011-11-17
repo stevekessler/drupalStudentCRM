@@ -655,6 +655,9 @@ h3.ui-accordion-header.ui-state-active {
 .activity .submitted, .activity .submitted a {
   color: #737373;
 }
+.activity .submitted.read-more {
+  margin-top: 10px;
+}
 .activity .field-name-field-activity-note .field-label {
   display: none;
 }

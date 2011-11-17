@@ -29,11 +29,6 @@
  */
 ?>
 <div class="<?php print $classes; ?> activity clearfix"<?php print $attributes; ?>>
-  <?php if (!$page): ?>
-    <h2<?php print $title_attributes; ?>>
-        <a href="<?php print $url; ?>"><?php print $title; ?></a>
-    </h2>
-  <?php endif; ?>
   <div class="meta">
     <?php print $picture; ?>
     <div class="activity-type">
@@ -42,9 +37,20 @@
   </div>
   
   <div class="content"<?php print $content_attributes; ?>>
-  <div class="submitted"><?php print $submitted; ?></div>  
-    <?php
-      print render($content);
-    ?>
+  <div class="submitted"><?php print $submitted; ?> - <?php print $permalink; ?></div>  
+    <div class="note">
+      <?php if($show_trimmed): ?>
+        <?php
+          print text_summary(render($content), 'full_html', 1000);
+        ?>
+      <?php else: ?>
+        <?php
+          print render($content);
+        ?>
+      <?php endif; ?>
+    </div>
+    <?php if($show_trimmed): ?>
+      <div class="submitted read-more"><?php print $read_more_link; ?></div>
+    <?php endif; ?>
   </div>
 </div>
