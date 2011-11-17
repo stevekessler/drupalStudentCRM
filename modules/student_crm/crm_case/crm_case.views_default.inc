@@ -67,7 +67,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['fields']['link_crm_case']['hide_empty'] = 0;
   $handler->display->display_options['fields']['link_crm_case']['empty_zero'] = 0;
   $handler->display->display_options['fields']['link_crm_case']['hide_alter_empty'] = 0;
-  /* Field: Case: Type */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'crm_case';
   $handler->display->display_options['fields']['type']['field'] = 'type';
@@ -103,6 +103,11 @@ function crm_case_views_default_views() {
   $handler->display->display_options['arguments']['contact_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['contact_id']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['contact_id']['not'] = 0;
+  /* Filter criterion: Case: User has access to view case */
+  $handler->display->display_options['filters']['case_access']['id'] = 'case_access';
+  $handler->display->display_options['filters']['case_access']['table'] = 'crm_case';
+  $handler->display->display_options['filters']['case_access']['field'] = 'case_access';
+  $handler->display->display_options['filters']['case_access']['value'] = '1';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -154,7 +159,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['fields']['link_crm_case']['hide_empty'] = 0;
   $handler->display->display_options['fields']['link_crm_case']['empty_zero'] = 0;
   $handler->display->display_options['fields']['link_crm_case']['hide_alter_empty'] = 0;
-  /* Field: Case: Type */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'crm_case';
   $handler->display->display_options['fields']['type']['field'] = 'type';
@@ -351,7 +356,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['fields']['field_student_id']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_student_id']['field_api_classes'] = 0;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Case: Case ID */
+  /* Contextual filter: Broken/missing handler */
   $handler->display->display_options['arguments']['cid']['id'] = 'cid';
   $handler->display->display_options['arguments']['cid']['table'] = 'crm_case';
   $handler->display->display_options['arguments']['cid']['field'] = 'cid';
@@ -362,8 +367,6 @@ function crm_case_views_default_views() {
   $handler->display->display_options['arguments']['cid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['cid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['cid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['cid']['break_phrase'] = 0;
-  $handler->display->display_options['arguments']['cid']['not'] = 0;
   $translatables['crm_contact_cases'] = array(
     t('Master'),
     t('Cases'),

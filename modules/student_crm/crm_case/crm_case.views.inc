@@ -42,3 +42,25 @@ function crm_case_views_data_alter(&$data) {
   );
 }
 
+/**
+*  Implementation of hook_views_data
+*/
+function crm_case_views_data() {
+  $data['crm_case']['table']['group'] = t('Case');
+  $data['crm_case']['table']['join'] = array(
+    'users' => array(
+      'left_field' => 'uid',
+      'field' => 'uid',
+    ),
+  );
+  
+  $data['crm_case']['case_access'] = array(
+    'title' => t('User has access to view case'),
+    'help' => t('Hides cases that users don not have access to view.'),
+    'filter' => array(
+      'handler' => 'crm_case_handler_access',
+    ),
+  );
+  
+  return $data;
+}
