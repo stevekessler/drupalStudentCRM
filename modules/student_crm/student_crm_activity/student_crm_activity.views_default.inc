@@ -62,7 +62,7 @@ function student_crm_activity_views_default_views() {
   $handler->display->display_options['arguments']['contact_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['contact_id']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['contact_id']['not'] = 0;
-  /* Filter criterion: Activities: Activities with access */
+  /* Filter criterion: Activities: User has access to view activity */
   $handler->display->display_options['filters']['activity_access']['id'] = 'activity_access';
   $handler->display->display_options['filters']['activity_access']['table'] = 'crm_activity';
   $handler->display->display_options['filters']['activity_access']['field'] = 'activity_access';
