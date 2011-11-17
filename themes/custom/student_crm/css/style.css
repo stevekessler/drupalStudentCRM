@@ -210,6 +210,11 @@ body {
 .sidebar.left {
   padding: 10px 0 0 10px;
 }
+.sidebar.left form .form-actions {
+  padding: 0px;
+  background: none;
+  border: none;
+}
 .right {
   float: right;
 }
