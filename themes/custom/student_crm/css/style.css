@@ -477,7 +477,7 @@ input.form-submit:active {
   max-width: 180px;
 }
 /** VIEWS **/
-.view .view-empty {
+.view .view-empty, .empty {
   font-size: 1.7em;
   color: #999999;
   text-align: center;

@@ -35,6 +35,8 @@ function student_crm_activity_block_view($delta) {
  * Create activity form.
  */
 function student_crm_activity_create($form, $form_state) {
+  drupal_add_js(drupal_get_path('module', 'student_crm_activity') .'/js/jquery.color.js');
+  drupal_add_js(drupal_get_path('module', 'student_crm_activity') .'/js/student_crm_activity.form.js');
   global $user;
   $form = array();
   
@@ -43,16 +45,25 @@ function student_crm_activity_create($form, $form_state) {
   
   $entity = array();
   
-  if($case = menu_get_object('crm_case', 2)) {
-    $entity['type'] = 'crm_case';
-    $entity['bundle'] = $case->type;
-    $entity['id'] = $case->cid;   
+  if($form_state['values']['entity']) {
+    $entity = $form_state['values']['entity'];
   }
-  if($contact = menu_get_object('crm_contact', 2)) {
-    $entity['type'] = 'crm_contact';
-    $entity['bundle'] = $contact->type;
-    $entity['id'] = $contact->contact_id;   
-  }
+  else {
+    if($case = menu_get_object('crm_case', 2)) {
+      $entity['type'] = 'crm_case';
+      $entity['bundle'] = $case->type;
+      $entity['id'] = $case->cid;   
+    }
+    if($contact = menu_get_object('crm_contact', 2)) {
+      $entity['type'] = 'crm_contact';
+      $entity['bundle'] = $contact->type;
+      $entity['id'] = $contact->contact_id;   
+    }
+  }    
+  $form['entity'] = array(
+    '#type' => 'value',
+    '#value' => $entity,
+  );
   
   $types = crm_activity_get_types();
   $options = array();
@@ -66,6 +77,13 @@ function student_crm_activity_create($form, $form_state) {
         ) {
       $options[$type->type] = $type->label;
     }
+  }
+  if(!count($options)) {
+    $form = array();
+    $form['message'] = array(
+      '#markup' => '<h3 class="empty">'. t('You cannot create a note on this page.') .'</h3>',
+    );
+    return $form;
   }
   
   $form['activity_type'] = array(
@@ -84,11 +102,6 @@ function student_crm_activity_create($form, $form_state) {
 		'#weight' => -20,
   );
   
-  $form['entity'] = array(
-    '#type' => 'value',
-    '#value' => $entity,
-  );
-  
   $activity_type = (isset($form_state['values']['activity_type'])) 
                    ? $form_state['values']['activity_type'] 
                    : STUDENT_CRM_DEFAULT_TYPE;
@@ -104,6 +117,11 @@ function student_crm_activity_create($form, $form_state) {
   $form['form-actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Save note',
+    '#ajax' => array(
+      'callback' => 'student_crm_activity_activity_form',
+      'wrapper' => 'activity-sub-form',
+      'name' => 'submit1',
+    ),
   );
   
   return $form;
