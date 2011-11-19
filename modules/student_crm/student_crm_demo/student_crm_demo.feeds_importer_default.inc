@@ -85,6 +85,78 @@ function student_crm_demo_feeds_importer_default() {
   $feeds_importer = new stdClass;
   $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'crm_demo_cases';
+  $feeds_importer->config = array(
+    'name' => 'Demo cases',
+    'description' => 'Demonstration case importer',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsFileFetcher',
+      'config' => array(
+        'allowed_extensions' => 'txt csv tsv xml opml',
+        'direct' => FALSE,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsCSVParser',
+      'config' => array(
+        'delimiter' => ',',
+        'no_headers' => 0,
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'CRMCaseFeedsProcessor',
+      'config' => array(
+        'expire' => '-1',
+        'author' => 0,
+        'case_type' => 'simple_case',
+        'mappings' => array(
+          0 => array(
+            'source' => 'case_id',
+            'target' => 'guid',
+            'unique' => 1,
+          ),
+          1 => array(
+            'source' => 'student_id',
+            'target' => 'student_id',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'date',
+            'target' => 'created',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'description',
+            'target' => 'field_case_description',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'name',
+            'target' => 'name',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'author',
+            'target' => 'author_name',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '0',
+        'input_format' => 'plain_text',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => 1800,
+    'expire_period' => 3600,
+    'import_on_create' => TRUE,
+    'process_in_background' => FALSE,
+  );
+  $export['crm_demo_cases'] = $feeds_importer;
+
+  $feeds_importer = new stdClass;
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
   $feeds_importer->id = 'crm_demo_courses';
   $feeds_importer->config = array(
     'name' => 'Demo courses',

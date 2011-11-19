@@ -28,8 +28,8 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
   /**
    * Creates a new crm_case crm_case in memory and returns it.
    */
-  public function newActivity(FeedsSource $source, $item) {
-      $crm_case = crm_case_create(array('type' => $this->config['case_type']));
+  public function newCase(FeedsSource $source, $item) {
+      $crm_case = crm_case_create(array('type' => $this->config['case_type'], 'name' => $item['name']));
       $crm_case->crm_contact_id = $item['student_entity'];
       if($item['author_name']) {
         $author = db_select('users', 'u')
@@ -68,9 +68,13 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
       if($map['target'] == 'author_name') {
         $author_name_key = $map['source'];
       }
+      if($map['target'] == 'name') {
+        $name_key = $map['source'];
+      }
     }
     while ($item = $parser_result->shiftItem()) {
       $item['author_name'] = $item[$author_name_key];
+      $item['name'] = $item[$name_key];
       $item['student_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_contact');
       if (!($entity_id = $this->existingEntityId($source, $parser_result)) ||
            ($this->config['update_existing'] != FEEDS_SKIP_EXISTING)) {
@@ -84,7 +88,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
         try {
           // Assemble crm_case, map item to it, save.
           if (empty($entity_id)) {
-            $entity = $this->newActivity($source, $item);
+            $entity = $this->newCase($source, $item);
             $this->newItemInfo($entity, $source->feed_nid, $hash);
           }
           else {
@@ -376,6 +380,10 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
       'created' => array(
         'name' => t('Published date'),
         'description' => t('The UNIX time when a crm_case crm_case has been created.'),
+      ),
+      'name' => array(
+        'name' => t('Case name'),
+        'description' => t('The name of the case.'),
       ),
       'student_id' => array(
         'name' => t('Student ID'),
