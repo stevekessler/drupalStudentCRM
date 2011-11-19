@@ -23,10 +23,9 @@ function crm_tasks_relation_default_relation_types() {
   $relation_type->max_arity = 2;
   $relation_type->source_bundles = array(
     0 => 'crm_contact:*',
-    1 => 'crm_activity:*',
-    2 => 'crm_case:*',
-    3 => 'node:course',
-    4 => 'user:*',
+    1 => 'crm_case:*',
+    2 => 'node:course',
+    3 => 'user:*',
   );
   $relation_type->target_bundles = array();
   $export['crm_task'] = $relation_type;
