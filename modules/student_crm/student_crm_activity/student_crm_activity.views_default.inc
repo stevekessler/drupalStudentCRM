@@ -23,6 +23,7 @@ function student_crm_activity_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Notes';
+  $handler->display->display_options['css_class'] = 'ajax-loaded-view';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -37,6 +38,14 @@ function student_crm_activity_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'entity';
   $handler->display->display_options['row_options']['view_mode'] = 'default';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'No notes yet! Use the above form to create a new note about this person.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['empty']['area']['tokenize'] = 0;
   /* Relationship: Activities: Relation: CRM Activity (crm_activity <-> crm_contact) */
   $handler->display->display_options['relationships']['relation_crm_activity_crm_contact']['id'] = 'relation_crm_activity_crm_contact';
   $handler->display->display_options['relationships']['relation_crm_activity_crm_contact']['table'] = 'crm_activity';
@@ -73,6 +82,15 @@ function student_crm_activity_views_default_views() {
 
   /* Display: Case activities */
   $handler = $view->new_display('block', 'Case activities', 'block_1');
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'No notes yet! Use the above form to create a new note about this case.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['empty']['area']['tokenize'] = 0;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Activities: Relation: CRM Activity (crm_activity <-> crm_case) */
   $handler->display->display_options['relationships']['relation_crm_activity_crm_case']['id'] = 'relation_crm_activity_crm_case';
@@ -107,10 +125,12 @@ function student_crm_activity_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
+    t('No notes yet! Use the above form to create a new note about this person.'),
     t('CRM Activity'),
     t('All'),
     t('Contact activities'),
     t('Case activities'),
+    t('No notes yet! Use the above form to create a new note about this case.'),
   );
   $export['crm_activities'] = $view;
 

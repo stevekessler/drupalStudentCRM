@@ -139,7 +139,8 @@ function crm_advisor_views_default_views() {
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['relationship'] = 'relation_base_advisor_right_crm_contact';
   $handler->display->display_options['fields']['field_last_name']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_last_name']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_last_name']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['field_last_name']['alter']['path'] = 'crm/contact/[contact_id]';
   $handler->display->display_options['fields']['field_last_name']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_last_name']['alter']['external'] = 0;
   $handler->display->display_options['fields']['field_last_name']['alter']['replace_spaces'] = 0;
@@ -162,7 +163,8 @@ function crm_advisor_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'relation_base_advisor_right_crm_contact';
   $handler->display->display_options['fields']['field_first_name']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_first_name']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_first_name']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['field_first_name']['alter']['path'] = 'crm/contact/[contact_id]';
   $handler->display->display_options['fields']['field_first_name']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_first_name']['alter']['external'] = 0;
   $handler->display->display_options['fields']['field_first_name']['alter']['replace_spaces'] = 0;
@@ -493,6 +495,7 @@ function crm_advisor_views_default_views() {
     t('Advisor'),
     t('Advisor - contact'),
     t('Last name'),
+    t('crm/contact/[contact_id]'),
     t('First Name'),
     t('Advisor type'),
     t('Degrees'),
