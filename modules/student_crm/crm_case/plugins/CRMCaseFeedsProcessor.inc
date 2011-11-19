@@ -207,7 +207,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
     $contact = crm_contact_load($entity->crm_contact_id);
     crm_case_save($entity);
     
-    $relation = relation_create('crm_case', array(
+    $relation = relation_create('crm_contact_case', array(
                     array('entity_type' => 'crm_case',
                           'entity_bundle' => $entity->type,
                           'entity_id' => $entity->cid,

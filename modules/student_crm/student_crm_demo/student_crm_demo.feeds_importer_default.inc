@@ -131,13 +131,13 @@ function student_crm_demo_feeds_importer_default() {
             'unique' => FALSE,
           ),
           4 => array(
-            'source' => 'name',
-            'target' => 'name',
+            'source' => 'author',
+            'target' => 'author_name',
             'unique' => FALSE,
           ),
           5 => array(
-            'source' => 'author',
-            'target' => 'author_name',
+            'source' => 'title',
+            'target' => 'name',
             'unique' => FALSE,
           ),
         ),
