@@ -51,6 +51,9 @@ function student_crm_webform_send_email_form() {
   $fields = $fields['crm_case'][$case->type];
   $form_fields = array();
   $field_settings = array();
+  if(!$fields) {
+    return null;
+  }
   foreach ($fields as $field_name => $field) {
     if ($field['settings']['webform']) {
       $form_fields[$field_name] = $field['label'];

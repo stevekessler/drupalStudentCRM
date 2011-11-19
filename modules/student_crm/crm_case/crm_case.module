@@ -671,3 +671,29 @@ class CRMCaseTypeUIController extends EntityDefaultUIController {
     return $items;
   }
 }
+
+/**
+ * Implements hook_feeds_plugins().
+ */
+function crm_case_feeds_plugins() {
+  $info['CRMCaseFeedsProcessor'] = array(
+    'name' => 'CRM Case processor',
+    'description' => 'Add and update cases attached to contacts.',
+    'help' => 'Create and update cases from parsed content.',
+    'handler' => array(
+      'parent' => 'FeedsProcessor',
+      'class' => 'CRMCaseFeedsProcessor',
+      'file' => 'CRMCaseFeedsProcessor.inc',
+      'path' => drupal_get_path('module', 'crm_case') . '/plugins',
+    ),
+  );
+  return $info;
+}
+
+/*
+ * Implements hook_enable().
+ */
+function crm_case_enable() {
+  //clear the cache to display in Feeds as available plugin.
+  cache_clear_all('plugins:feeds:plugins', 'cache');
+}

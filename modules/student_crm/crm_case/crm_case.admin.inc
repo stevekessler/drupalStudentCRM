@@ -53,7 +53,7 @@ function crm_case_edit_form($form, &$form_state, $crm_case) {
   drupal_set_title(t('Edit @name', array('@name' => $crm_case->name)));
   drupal_add_js(drupal_get_path('module', 'crm_case') .'/js/crm_case.form.js');
   $type = crm_case_type_load($crm_case->type);
-  if($message = check_markup($type->data['instructions']['value'], $type->data['instructions']['format'])) {
+  if(isset($type->data['instructions']) && $message = check_markup($type->data['instructions']['value'], $type->data['instructions']['format'])) {
     $form['form_instructions'] = array(
       '#markup' => $message,
     );
