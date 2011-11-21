@@ -175,6 +175,9 @@ function crm_case_permission() {
       "view any $type_name crm_case" => array(
         'title' => t('%type_name: View any crm_case', array('%type_name' => $type->label)),
       ),
+      "delete any $type_name crm_case" => array(
+        'title' => t('%type_name: View any crm_case', array('%type_name' => $type->label)),
+      ),
     );
   }
   return $permissions;  
@@ -204,8 +207,18 @@ function crm_case_access($op, $crm_case = NULL, $account = NULL) {
     return TRUE;
   }
   if (isset($crm_case) && $type_name = $crm_case->type) {
-    $op = ($op == 'view') ? 'view' : 'edit';
     if (user_access("$op any $type_name crm_case", $account)) {
+      return TRUE;
+    }
+    if($op == 'delete') {
+      return user_access("$op any $type_name crm_case", $account); 
+    }
+  }
+  $type = crm_case_get_types($crm_case->type);
+  if($type->data['contact_edit']) {
+    return TRUE;
+    $contact = crm_case_get_contact($crm_case);
+    if($account->crm_contact_records[$contact->contact_id]) {
       return TRUE;
     }
   }

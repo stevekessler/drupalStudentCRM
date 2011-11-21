@@ -109,7 +109,7 @@ function crm_case_edit_form($form, &$form_state, $crm_case) {
     '#submit' => $submit + array('crm_case_edit_form_submit'),
   );
   
-  if (!empty($crm_case->name)) {
+  if (!empty($crm_case->name) && crm_case_access('delete', $crm_case)) {
     $form['actions']['delete'] = array(
       '#type' => 'submit',
       '#value' => t('Delete case'),

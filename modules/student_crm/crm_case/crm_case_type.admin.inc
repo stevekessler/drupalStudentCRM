@@ -44,6 +44,13 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
     '#format' => (isset($instructions['format'])) ? $instructions['format'] : NULL,
   );
   
+  $form['contact_edit'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Allow contacts to edit their own cases.'),
+    '#description' => t('When checked, contacts with this case type will be able to edit it.'),
+    '#default_value' => ($crm_case_type->data['contact_edit']) ? TRUE : FALSE,
+  );
+  
   $form['email'] = array(
     '#type' => 'fieldset',
     '#title' => 'Email options',
@@ -103,6 +110,7 @@ function crm_case_type_form_submit(&$form, &$form_state) {
   $crm_case_type->data['email_contact'] = $crm_case_type->email_contact;
   $crm_case_type->data['email_subject'] = $crm_case_type->email_subject;
   $crm_case_type->data['email_body'] = $crm_case_type->email_body;
+  $crm_case_type->data['contact_edit'] = $crm_case_type->contact_edit;
   $crm_case_type->save();
   $form_state['redirect'] = 'crm/admin/case/types';
 }
