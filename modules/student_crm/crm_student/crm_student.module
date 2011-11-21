@@ -199,3 +199,10 @@ function crm_student_user_login(&$edit, $account) {
     } 
   }
 }
+
+/**
+ * Implements hook_user_insert().
+ */
+function crm_student_user_insert(&$edit, $account, $category) {
+  crm_student_user_login($edit, $account);
+}

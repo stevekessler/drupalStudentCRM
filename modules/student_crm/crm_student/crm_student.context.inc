@@ -227,5 +227,46 @@ function crm_student_context_default_contexts() {
   t('crm student');
   $export['crm_student_view'] = $context;
 
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'crm_user_page';
+  $context->description = 'User is on a user\'s page';
+  $context->tag = 'crm';
+  $context->conditions = array(
+    'user' => array(
+      'values' => array(
+        'advisor' => 'advisor',
+      ),
+    ),
+    'user_page' => array(
+      'values' => array(
+        'view' => 'view',
+      ),
+      'options' => array(
+        'mode' => 'all',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-crm_user_contact_records-block' => array(
+          'module' => 'views',
+          'delta' => 'crm_user_contact_records-block',
+          'region' => 'sidebar_right',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is on a user\'s page');
+  t('crm');
+  $export['crm_user_page'] = $context;
+
   return $export;
 }
