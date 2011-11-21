@@ -1,0 +1,26 @@
+<?php
+/**
+ * @file
+ * Code for the Student CRM Activity Mailer feature.
+ */
+
+include_once('student_crm_activity_mailer.features.inc');
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function student_crm_activity_mailer_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' && $plugin_type == 'commands_plugin') {
+    return 'plugins/' . $plugin_type;
+  }
+  if ($owner == 'mailhandler') {
+    return 'plugins/' . $plugin_type;
+  }
+}
+
+/**
+ * Form alter function to remove email notes from the create note form.
+ */
+function student_crm_activity_mailer_form_student_crm_activity_create_alter(&$form, $form_state) {
+  unset($form['activity_type']['#options']['email_activity']);
+}
