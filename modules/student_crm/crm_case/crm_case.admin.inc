@@ -155,7 +155,6 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
   $crm_case->changed = time();
   
   $crm_case->save();
-  
   if ($crm_case->crm_contact) {
     $contact = crm_contact_load($crm_case->crm_contact);
     $relation = relation_create('crm_contact_case', array(
@@ -170,6 +169,7 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
                              'r_index' => 1, 
                           )
                  ));
+    relation_save($relation);
     $rid = $relation->rid;
   }
   
