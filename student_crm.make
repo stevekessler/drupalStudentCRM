@@ -77,6 +77,9 @@ projects[link][version] = "1.0-beta1"
 projects[notifications][subdir] = "contrib"
 projects[notifications][version] = "1.0-alpha1"
 
+projects[mailhandler][subdir] = "contrib"
+projects[mailhandler][version] = "2.0-rc1"
+
 projects[messaging][subdir] = "contrib"
 projects[messaging][version] = "1.0-alpha1"
 
