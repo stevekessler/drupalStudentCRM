@@ -140,3 +140,62 @@ function _crm_student_search_form() {
 function _crm_student_search_form_submit($form, &$form_state) {
   drupal_goto('crm/search', array('query' => array('name' => $form_state['values']['search'])));
 }
+
+/**
+ * Implements hook_user_load().
+ */
+function crm_student_user_load($users) {
+  foreach($users as $uid => $user) {
+    $users[$uid]->crm_contact_records = crm_student_get_user_contact_records($user);
+  }
+}
+
+/**
+ * Helper function to retrieve the contact records for the given user.
+ */
+function crm_student_get_user_contact_records($account) {
+  $query = db_select('field_data_endpoints', 'e')
+              ->condition('e.entity_type', 'relation')
+              ->condition('e.bundle', 'user_contact_record')
+              ->condition('e.endpoints_entity_type', 'user')
+              ->condition('e.endpoints_entity_id', $account->uid);
+  $query->leftJoin('field_data_endpoints', 'e2', 'e2.entity_id = e.entity_id AND e2.entity_type = e.entity_type');
+  $query->fields('e2', array('endpoints_entity_id'))
+              ->condition('e2.endpoints_entity_type', 'crm_contact');
+  return $query->execute()
+              ->fetchAllKeyed(0, 0);
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function crm_student_user_login(&$edit, $account) {
+  $sis_id = field_get_items('user', $account, 'field_user_sis_id');
+  if(!$sis_id = $sis_id[0]['value']) {
+    return;
+  }
+  $ids = db_select('field_data_field_student_id', 'i')
+            ->condition('entity_type', 'crm_contact')
+            ->condition('field_student_id_value', $sis_id)
+            ->fields('i', array('entity_id'))
+            ->execute()
+            ->fetchAllKeyed(0, 0);
+  foreach($ids as $id) {
+    if(!$account->crm_contact_records[$id]) {
+      $contact = crm_contact_load($id);
+      $relation = relation_create('user_contact_record', array(
+                array('entity_type' => 'user',
+                       'entity_bundle' => 'user',
+                       'entity_id' => $account->uid,
+                       'r_index' => 0,
+                       ),
+                  array('entity_type' => 'crm_contact',
+                         'entity_bundle' => $contact->type, 
+                         'entity_id' => $contact->contact_id,
+                         'r_index' => 1,
+                         ))
+             );
+      relation_save($relation);
+    } 
+  }
+}
