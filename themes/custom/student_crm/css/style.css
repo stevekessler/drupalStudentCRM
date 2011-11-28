@@ -226,7 +226,7 @@ fieldset {
   margin: 10px 0;
 }
 input.search-box {
-  border: #bcd9ee 1px solid;
+  border: #5eb0d6 1px solid;
   border-radius: 7px;
   -moz-border-radius: 7px;
   -webkit-border-radius: 7px;
@@ -236,23 +236,23 @@ input.search-box {
 }
 /** HEADER **/
 #header {
-  background-color: #e4f0f8;
-  background-image: -moz-linear-gradient(top, #e4f0f8, #bcd9ee);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e4f0f8), color-stop(1, #bcd9ee));
-  background-image: -webkit-linear-gradient(#e4f0f8, #bcd9ee);
-  background-image: linear-gradient(top, #e4f0f8, #bcd9ee);
+  background-color: #87c4e0;
+  background-image: -moz-linear-gradient(top, #87c4e0, #5eb0d6);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #87c4e0), color-stop(1, #5eb0d6));
+  background-image: -webkit-linear-gradient(#87c4e0, #5eb0d6);
+  background-image: linear-gradient(top, #87c4e0, #5eb0d6);
   padding: 15px 30px;
-  border-bottom: 1px solid #93c3e3;
+  border-bottom: 1px solid #369ccb;
 }
 #header h1 {
   float: left;
-  color: #0e2636;
+  color: #000000;
   font-size: 2em;
   margin: 0;
   font-weight: bold;
 }
 #header h1 a {
-  color: #0e2636;
+  color: #000000;
   text-decoration: none;
 }
 #header .right {
@@ -460,7 +460,7 @@ input.form-submit:active {
   list-style-type: none;
 }
 .sidebar.right li {
-  border-bottom: 1px solid #e4f0f8;
+  border-bottom: 1px solid #87c4e0;
 }
 .sidebar.right .block-title, .sidebar.right .views-label {
   color: #999999;
