@@ -2,3 +2,11 @@ Student CRM
 ===========
 
 A Drupal install profile for a student-services customer relations management (CRM) system.
+
+Downloads
+=========
+
+We automatically build a head version of the install profile for folks who don't want/can't run drush to build the site. This is only built once a site is built successfully and all tests pass. You can download:
+
+*Head (most current version, possibly unstable): http://webprojects.csumb.edu/crm/downloads/student_crm_head.tar.gz
+*Stable: Coming soon!
