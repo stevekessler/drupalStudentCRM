@@ -34,8 +34,6 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
   $message['body'] = token_replace($body, $tokens);
   $message['subject'] = token_replace(check_plain($field['settings']['email_subject']), $tokens);
   foreach ($emails as $email) {
-    dpm($email);
-    dpm($message);
     drupal_mail('student_crm_webform', 'form_prompt', $email, language_default(), $message);
   }
   return $emails;
