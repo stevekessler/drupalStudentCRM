@@ -20,8 +20,34 @@ function crm_tasks_menu() {
     'access arguments' => array(3),
   );
   
+  $items['ajax/crm/tasks/user-autocomplete'] = array(
+    'title' => 'Username autocomplete',
+    'page callback' => 'crm_tasks_username_autocomplete',
+    'access arguments' => array('access user profiles'),
+  );
+  
   return $items;
 }
+
+/**
+ * Autocomplete callback to return users who can have a task list.
+ */
+function crm_tasks_username_autocomplete($string = '') {
+  $matches = array();
+  if ($string) {
+    $result = db_select('users')->fields('users', array('uid', 'name'))->condition('name', db_like($string) . '%', 'LIKE')->range(0, 100)->execute();
+    foreach ($result as $user) {
+      if(user_access('maintain own task list', user_load($user->uid))) {
+        $matches[$user->name] = check_plain($user->name);
+      }
+    }
+    $matches = array_chunk($matches, 10, TRUE);
+    $matches = $matches[0];
+  }
+
+  drupal_json_output($matches);
+}
+
 
 /**
  * Menu access callback for marking tasks.
@@ -103,6 +129,16 @@ function crm_tasks_create_task_form() {
     $form['target_entity']['#value'] = 'node';
   }
   
+  if(user_access('create tasks for other users')) {
+    global $user;
+    $form['assigned_user'] = array(
+      '#type' => 'textfield',
+      '#title' => 'Assign to someone else',
+      '#default_value' => strip_tags(theme('username', array('account' => $user, 'link_path' => FALSE))),
+      '#autocomplete_path' => 'ajax/crm/tasks/user-autocomplete',
+    );
+  }
+  
   $form['date'] = array(
     '#type' => 'date_popup',
     '#title' => 'Due date',
@@ -130,11 +166,18 @@ function crm_tasks_create_task_form() {
  * Create task form submit
  */
 function crm_tasks_create_task_form_submit($form, $form_state) {
-  global $user;
+  if($form_state['values']['assigned_user']) {
+    $uid = db_select('users')->fields('users', array('uid'))->condition('name', $form_state['values']['assigned_user'])->execute()->fetchField();
+    $target_user = user_load($uid);
+  }
+  else {
+    global $user;
+    $target_user = $user;
+  }
   $relation = relation_create('crm_task', array(
                   array('entity_type' => 'user',
                          'entity_bundle' => 'user',
-                         'entity_id' => $user->uid,
+                         'entity_id' => $target_user->uid,
                          'r_index' => 0,
                          ),
                   array('entity_type' => $form_state['values']['target_entity'],
@@ -160,6 +203,10 @@ function crm_tasks_permission() {
     'maintain own task list' => array(
       'title' => t('Maintain own task list'),
       'description' => t('User can add and maintain their own list of tasks.'),
+    ),
+    'create tasks for other users' => array(
+      'title' => t('Create tasks for other users'),
+      'description' => t('User can add tasks to the lists of other users.'),
     ),
   );
 }
