@@ -267,7 +267,7 @@ input.search-box {
 }
 #header #guiders-help {
   display: block;
-  margin: 3px 10px 0 0;
+  margin: 4px 10px 0 0;
   background: #e47531;
   font-size: .8em;
   border: #c85c1a;
@@ -278,7 +278,7 @@ input.search-box {
   -webkit-border-radius: 7px;
 }
 #header #guiders-help:hover {
-  background: #9b4714;
+  background: #c85c1a;
 }
 #block-guiders-js-guiders-js-link .contextual-links-wrapper {
   display: none;
@@ -645,6 +645,9 @@ h3.ui-accordion-header.ui-state-active {
 }
 #page #homebox .homebox-portlet {
   border: none;
+}
+.homebox-maximized {
+  float: left;
 }
 /** ACTIVITIES **/
 .activity {
