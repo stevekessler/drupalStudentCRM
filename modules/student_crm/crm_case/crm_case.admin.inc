@@ -171,6 +171,20 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
                  ));
     relation_save($relation);
     $rid = $relation->rid;
+    $case_type = crm_case_type_load($crm_case->type);
+    if($case_type->data['email_contact']) {
+      $email = field_get_items('crm_contact', $contact, 'field_contact_email');
+      if(valid_email_address($email[0]['email'])) {
+        $email_body = token_replace($case_type->data['email_body']['value'], array(
+                          'crm_contact' => $contact,
+                          'crm_case' => $crm_case,
+                        ));
+        $email_body = check_markup($email_body, $case_type->data['email_body']['format']);
+        $email_options = array('body' => $email_body,
+                               'subject' => check_plain($case_type->data['email_subject']));
+        drupal_mail('crm_case', 'crm_case_create', $email[0]['email'], language_default(), $email_options);
+      }
+    }
   }
   
   $form_state['redirect'] = 'crm/case/' . $crm_case->cid;
