@@ -169,6 +169,7 @@ projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing
 projects[email][patch][] = "http://drupal.org/files/email_feeds_target-718414-36.patch"
 projects[relation][patch][] = "http://drupal.org/files/1260252-relationship-right-better-key.patch"
 projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_help_block-1342418-5.txt"
+projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_js_features.patch"
 projects[crm][patch][] = "http://drupal.org/files/trellon_crm_activity_fix-1342600-5.patch"
 
 ; Hosted modules
