@@ -76,6 +76,7 @@
 /** BUTTON COLORS **/
 @green-button     : #93c117;
 @red-button       : #f75342;
+@orange-button    : #e47531;
 @blue-button      : #34b0ff;
 
 /** LAYOUT **/
@@ -148,15 +149,19 @@ body { width: 100%; background: @body-background; }
 
 /** FORMS **/
 fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; margin: 10px 0; }
-  input.search-box { border: darken(@header-gradient, 10%) 1px solid; .round-box(7px); font-size: 1.2em; width: (@min-width / 2); padding: 4px; }
+  input.search-box { border: darken(@header-gradient, 10%) 1px solid; .round-box(7px); font-size: 1.2em; width: (@min-width / 3); padding: 4px; }
 
 /** HEADER **/
 #header { .gradient(@header-gradient, darken(@header-gradient, 10%)); padding: 15px 30px; border-bottom: 1px solid darken(@header-gradient, 20%); }
+	#header a { color: darken(@header-gradient, 80%); text-decoration: none; }
 	#header h1 { float: left; color: darken(@header-gradient, 80%); font-size: 2em; margin: 0; font-weight: bold;}
-		#header h1 a { color: darken(@header-gradient, 80%); text-decoration: none; }
 	#header .right { width: (@min-width / 2); }
-	#header .right .views-exposed-widgets, #header .right .views-exposed-widget { margin: 0; padding: 0; }
-	
+	  #header .right .block { float: right; }
+    	#header .right .views-exposed-widgets, #header .right .views-exposed-widget { margin: 0; padding: 0; }
+	      #header #guiders-help { display: block; margin: 3px 10px 0 0; background: @orange-button; font-size: .8em; border: darken(@orange-button, 10%); color: white; padding: 5px; .round-box(7px); }
+	       #header #guiders-help:hover { background: darken(@orange-button, 20%); }
+	      #block-guiders-js-guiders-js-link .contextual-links-wrapper { display: none; }
+	   
 /** PAGE **/
 #page { }
 	#page #page-title { margin: 0px 0px .5em 0px; font-size: 2.7em; }
