@@ -56,8 +56,8 @@ projects[feeds][version] = "2.0-alpha4"
 projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.1"
 
-projects[Guiders-JS][subdir] = "contrib"
-projects[Guiders-JS][version] = "1.x-dev"
+;projects[Guiders-JS][subdir] = "contrib"
+;projects[Guiders-JS][version] = "1.x-dev"
 
 projects[homebox][subdir] = "contrib"
 projects[homebox][version] = "2.0-beta6"
@@ -134,6 +134,14 @@ projects[formalize][download][type] = "git"
 projects[formalize][download][url] = "http://git.drupal.org/project/formalize.git"
 projects[formalize][download][branch] = "7.x-1.x"
 
+; Fixed Guiders-JS module module
+projects[guiders_js_fixed][type] = module
+projects[guiders_js_fixed][subdir] = "contrib"
+projects[guiders_js_fixed][version] = "1.x-dev"
+projects[guiders_js_fixed][download][type] = "git"
+projects[guiders_js_fixed][download][url] = "http://git.drupal.org/sandbox/kevee/1355900.git"
+projects[guiders_js_fixed][download][branch] = "master"
+
 ; Webform submission entity module
 projects[webform_submission_entity][type] = module
 projects[webform_submission_entity][subdir] = "contrib"
@@ -169,7 +177,6 @@ projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing
 projects[email][patch][] = "http://drupal.org/files/email_feeds_target-718414-36.patch"
 projects[relation][patch][] = "http://drupal.org/files/1260252-relationship-right-better-key.patch"
 projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_help_block-1342418-5.txt"
-projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_js_features.patch"
 projects[crm][patch][] = "http://drupal.org/files/trellon_crm_activity_fix-1342600-5.patch"
 
 ; Hosted modules
