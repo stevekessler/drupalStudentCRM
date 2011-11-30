@@ -106,6 +106,9 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
  */
 function crm_case_type_form_submit(&$form, &$form_state) {
   $crm_case_type = entity_ui_form_submit_build_entity($form, $form_state);
+  if(!$crm_case_type->id) {
+    crm_case_add_status_field($crm_case_type);
+  }
   $crm_case_type->data['instructions'] = $crm_case_type->instructions;
   $crm_case_type->data['email_contact'] = $crm_case_type->email_contact;
   $crm_case_type->data['email_subject'] = $crm_case_type->email_subject;
