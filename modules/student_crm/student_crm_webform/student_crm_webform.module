@@ -56,7 +56,7 @@ function student_crm_webform_ajax_webform_list($string = '') {
  */
 function student_crm_webform_block_info() {
   $blocks['student_crm_webform_send_form'] = array('info' => 'Send form emails.');
-  $blocks['student_crm_webform_send_contact_form'] = array('info' => 'Send contact form emails.');
+  $blocks['student_crm_webform_contact'] = array('info' => 'Send contact form emails.');
   return $blocks;
 }
 
