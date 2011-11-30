@@ -7,20 +7,19 @@
 include_once('student_crm_activity_mailer.features.inc');
 
 /**
- * Implements hook_ctools_plugin_directory().
+ * Implements hook_feeds_plugins().
  */
-function student_crm_activity_mailer_ctools_plugin_directory($owner, $plugin_type) {
-  if ($owner == 'ctools' && $plugin_type == 'commands_plugin') {
-    return 'plugins/' . $plugin_type;
-  }
-  if ($owner == 'mailhandler') {
-    return 'plugins/' . $plugin_type;
-  }
-}
-
-/**
- * Form alter function to remove email notes from the create note form.
- */
-function student_crm_activity_mailer_form_student_crm_activity_create_alter(&$form, $form_state) {
-  unset($form['activity_type']['#options']['email_activity']);
+function student_crm_activity_mailer_feeds_plugins() {
+  $info['StudentCRMActivityEmailFeedsProcessor'] = array(
+    'name' => 'CRM Email Activity processor',
+    'description' => 'Create email activities.',
+    'help' => 'Only useful for emailed activities, this will convert an email to a special activity type.',
+    'handler' => array(
+      'parent' => 'FeedsProcessor',
+      'class' => 'StudentCRMActivityEmailFeedsProcessor',
+      'file' => 'StudentCRMActivityEmailFeedsProcessor.inc',
+      'path' => drupal_get_path('module', 'student_crm_activity_mailer') . '/plugins',
+    ),
+  );
+  return $info;
 }

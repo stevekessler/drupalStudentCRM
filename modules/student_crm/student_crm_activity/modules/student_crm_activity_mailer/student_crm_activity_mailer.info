@@ -1,10 +1,15 @@
-name=Student CRM Activity mail handler
-description=Handles activities being emailed to the CRM.
-package=Student CRM
-core=7.x
-dependencies[] = mailhandler
+core = "7.x"
 dependencies[] = "crm_activity"
 dependencies[] = "features"
-
+dependencies[] = "feeds"
+dependencies[] = "file"
+dependencies[] = "mailhandler"
+description = "Handles activities being emailed to the CRM."
 features[crm_activity_type][] = "email_activity"
+features[ctools][] = "feeds:feeds_importer_default:1"
+features[feeds_importer][] = "crm_activity_mail_handler"
+features[field][] = "crm_activity-email_activity-field_activity_attachments"
 features[field][] = "crm_activity-email_activity-field_activity_note"
+name = "Student CRM Activity mail handler"
+package = "Student CRM"
+php = "5.2.4"
