@@ -28,7 +28,27 @@ function student_crm_webform_menu() {
     'access callback' => 'student_crm_webform_complete_form_access',
   );
   
+  $items['ajax/crm/webform-list'] = array(
+    'page callback' => 'student_crm_webform_ajax_webform_list',
+    'access callback' => user_access('access content'),
+  );
+  
   return $items;
+}
+
+/**
+ * Autocomplete to provide a list of webforms in the site.
+ */
+function student_crm_webform_ajax_webform_list($string = '') {
+  $matches = array();
+  if ($string) {
+    $result = db_select('node')->fields('node', array('title'))->condition('status', 1)->condition('title', db_like($string) . '%', 'LIKE')->condition('type', 'webform')->range(0, 10)->execute();
+    foreach ($result as $webform) {
+      $matches[$webform->title] = check_plain($webform->title);
+    }
+  }
+
+  drupal_json_output($matches);
 }
 
 /**
@@ -36,6 +56,7 @@ function student_crm_webform_menu() {
  */
 function student_crm_webform_block_info() {
   $blocks['student_crm_webform_send_form'] = array('info' => 'Send form emails.');
+  $blocks['student_crm_webform_send_contact_form'] = array('info' => 'Send contact form emails.');
   return $blocks;
 }
 
@@ -43,10 +64,15 @@ function student_crm_webform_block_info() {
  *  Implements hook_block_view().
  */
 function student_crm_webform_block_view($delta) {
-  if ($delta = 'student_crm_webform_send_form') {
+  if ($delta == 'student_crm_webform_send_form') {
     module_load_include('inc', 'student_crm_webform', 'student_crm_webform.mail');
     return array('subject' => 'Send forms',
                  'content' => drupal_get_form('student_crm_webform_send_email_form'));  
+  }
+  if ($delta == 'student_crm_webform_send_contact_form') {
+    module_load_include('inc', 'student_crm_webform', 'student_crm_webform.mail');
+    return array('subject' => 'Send forms',
+                 'content' => drupal_get_form('student_crm_webform_send_contact_email_form'));  
   }
 }
 

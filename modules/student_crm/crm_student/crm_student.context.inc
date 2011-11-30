@@ -191,6 +191,12 @@ function crm_student_context_default_contexts() {
           'region' => 'sidebar_left',
           'weight' => '3',
         ),
+        'student_crm_webform-student_crm_webform_send_contact_form' => array(
+          'module' => 'student_crm_webform',
+          'delta' => 'student_crm_webform_send_contact_form',
+          'region' => 'sidebar_left',
+          'weight' => '-10',
+        ),
         'views-crm_contact_fields-block_2' => array(
           'module' => 'views',
           'delta' => 'crm_contact_fields-block_2',

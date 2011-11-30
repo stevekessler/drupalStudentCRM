@@ -465,6 +465,9 @@ input.form-submit:active {
   font-size: 1.5em;
   margin-right: -7px;
 }
+#sidebar-left input {
+  width: 180px;
+}
 /** RIGHT SIDEBAR **/
 .sidebar.right h1,
 .sidebar.right h2,

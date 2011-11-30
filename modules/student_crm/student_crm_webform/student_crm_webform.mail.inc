@@ -40,6 +40,65 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
 }
 
 /**
+ * Form for ad-hoc form sending contact form.
+ */
+function student_crm_webform_send_contact_email_form() {
+  $contact = menu_get_object('crm_contact', 2);
+  $email = field_get_items('crm_contact', $contact, 'field_contact_email');
+  drupal_add_js(drupal_get_path('module', 'student_crm_webform') . '/js/student_crm_webform.send_form.js');
+  $form = array();
+  
+  $form['contact'] = array(
+    '#type' => 'hidden',
+    '#value' => $contact->crm_contact_id,
+  );
+  
+  $form['webform'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Form',
+    '#autocomplete_path' => 'ajax/crm/webform-list',
+    '#required' => TRUE,
+  );
+  
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Send form to',
+    '#default_value' => $email[0]['email'],
+    '#required' => TRUE,
+  );
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Send form',
+  );
+  
+  return $form;
+}
+
+/**
+ * Validation for ad-hoc form sending form. Checks for valid emails.
+ */
+function student_crm_webform_send_contact_email_form_validate($form, $form_state) {
+  if (!valid_email_address($form_state['values']['email'])) {
+    form_set_error('email', t('The provided email address is not valid.'));
+  }
+}
+
+/**
+ * Form submit callback for ad-hoc form sending form.
+ */
+function student_crm_webform_send_contact_email_form_submit($form, $form_state) {
+  $contact = crm_contact_load($form_state['values']['contact']);
+  $email_addresses = student_crm_webform_send_email('crm_contact', $contact, $form_state['values']['field'], $form_state['values']['manual-email']);
+  
+  $case = crm_case_load($form_state['values']['case']);
+  $fields = field_info_instances();
+  $field = $fields['crm_case'][$case->type][$form_state['values']['field']];
+
+  drupal_set_message(t('The form %form has been sent to: !email-addresses', array('%form' => $field['label'], '!email-addresses' => theme('item_list', array('items' => $email_addresses)))));
+}
+
+/**
  * Form for ad-hoc form sending form.
  */
 function student_crm_webform_send_email_form() {
