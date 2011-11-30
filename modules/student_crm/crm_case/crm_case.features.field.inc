@@ -114,6 +114,7 @@ function crm_case_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Case is open');
   t('endpoints');
 
   return $fields;

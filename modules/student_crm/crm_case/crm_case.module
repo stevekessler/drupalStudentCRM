@@ -163,6 +163,10 @@ function crm_case_permission() {
       'title' => t('Administer crm_cases'),
       'description' => t('Edit and delete all crm_cases'),
     ),
+    'open and close cases' => array(
+      'title' => t('Open and close cases'),
+      'description' => t('Change the status of any crm case.'),
+    ),
   );
   
   //Generate permissions per crm_case 
@@ -401,6 +405,86 @@ function crm_case_theme() {
   );
 }  
 
+/**
+ * Add default status field to a case type.
+ *
+ * @param $type
+ *   A crm case type object.
+ * @param $label
+ *   The label for the status instance.
+ *
+ * @return
+ *   Status field instance.
+ */
+function crm_case_add_status_field($type, $label = 'Body') {
+  $field = field_info_field('case_status');
+  $instance = field_info_instance('crm_case', 'case_status', $type->type);
+  if (empty($field)) {
+    $field = array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'case_status',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => t('Closed'),
+          1 => t('Open'),
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    );
+    $field = field_create_field($field);
+  }
+  if (empty($instance)) {
+    $instance = array(
+      'bundle' => $type->type,
+      'default_value' => array(
+        0 => array(
+          'value' => 1,
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 1,
+        ),
+      ),
+      'entity_type' => 'crm_case',
+      'field_name' => 'case_status',
+      'label' => t('Case is open'),
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => '2',
+      ),
+    );
+    $instance = field_create_instance($instance);
+  }
+  return $instance;
+}
 
 /**
  * Implements hook_menu_local_tasks_alter().
