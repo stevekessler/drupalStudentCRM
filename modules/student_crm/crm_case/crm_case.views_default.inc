@@ -114,6 +114,29 @@ function crm_case_views_default_views() {
   $handler->display->display_options['fields']['type']['hide_empty'] = 0;
   $handler->display->display_options['fields']['type']['empty_zero'] = 0;
   $handler->display->display_options['fields']['type']['hide_alter_empty'] = 0;
+  /* Field: Case: Case is open */
+  $handler->display->display_options['fields']['case_status']['id'] = 'case_status';
+  $handler->display->display_options['fields']['case_status']['table'] = 'field_data_case_status';
+  $handler->display->display_options['fields']['case_status']['field'] = 'case_status';
+  $handler->display->display_options['fields']['case_status']['label'] = 'Case status';
+  $handler->display->display_options['fields']['case_status']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['case_status']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['case_status']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['case_status']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['case_status']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['case_status']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['case_status']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['case_status']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['case_status']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['case_status']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['case_status']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['case_status']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['case_status']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['case_status']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['case_status']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['case_status']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['case_status']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['case_status']['field_api_classes'] = 0;
   /* Contextual filter: CRM Contact: Contact ID */
   $handler->display->display_options['arguments']['contact_id']['id'] = 'contact_id';
   $handler->display->display_options['arguments']['contact_id']['table'] = 'crm_contact';
@@ -216,6 +239,15 @@ function crm_case_views_default_views() {
   $handler->display->display_options['arguments']['contact_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['contact_id']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['contact_id']['not'] = 0;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Case: Case is open (case_status) */
+  $handler->display->display_options['filters']['case_status_value']['id'] = 'case_status_value';
+  $handler->display->display_options['filters']['case_status_value']['table'] = 'field_data_case_status';
+  $handler->display->display_options['filters']['case_status_value']['field'] = 'case_status_value';
+  $handler->display->display_options['filters']['case_status_value']['operator'] = 'not in';
+  $handler->display->display_options['filters']['case_status_value']['value'] = array(
+    0 => '0',
+  );
 
   /* Display: Case contact list */
   $handler = $view->new_display('block', 'Case contact list', 'block_1');
@@ -407,6 +439,7 @@ function crm_case_views_default_views() {
     t(','),
     t('crm/case/[case_id]'),
     t('Case type'),
+    t('Case status'),
     t('All'),
     t('Page'),
     t('Block'),

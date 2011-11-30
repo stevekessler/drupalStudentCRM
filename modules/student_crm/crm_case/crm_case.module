@@ -416,7 +416,7 @@ function crm_case_theme() {
  * @return
  *   Status field instance.
  */
-function crm_case_add_status_field($type, $label = 'Body') {
+function crm_case_add_status_field($type) {
   $field = field_info_field('case_status');
   $instance = field_info_instance('crm_case', 'case_status', $type->type);
   if (empty($field)) {
