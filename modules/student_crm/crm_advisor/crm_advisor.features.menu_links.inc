@@ -26,7 +26,7 @@ function crm_advisor_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-49',
+    'weight' => '-48',
   );
   // Translatables
   // Included for use with string extractors like potx.

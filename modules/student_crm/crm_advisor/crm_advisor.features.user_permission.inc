@@ -22,7 +22,10 @@ function crm_advisor_user_default_permissions() {
   // Exported permission: maintain own task list
   $permissions['maintain own task list'] = array(
     'name' => 'maintain own task list',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'advisor',
+    ),
+    'module' => 'crm_tasks',
   );
 
   return $permissions;
