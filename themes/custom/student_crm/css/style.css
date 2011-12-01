@@ -525,6 +525,9 @@ input.form-submit:active {
 body .views-exposed-form .views-exposed-widget {
   float: none;
 }
+body .view-content::after {
+  clear: none;
+}
 /** TAGS **/
 .tags {
   margin: 5px 5px;
