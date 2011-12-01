@@ -106,6 +106,7 @@ dependencies[] = crm_courses
 dependencies[] = crm_case
 dependencies[] = student_crm_activity
 dependencies[] = student_crm_webform
+dependencies[] = student_crm_activity_case_alter
 ;dependencies[] = student_crm_blocks
 
 ; variables

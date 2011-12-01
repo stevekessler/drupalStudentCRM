@@ -1,0 +1,105 @@
+<?php
+
+/**
+ * Alter the field UI form to add additional checkbox allowing users to alter the field
+ * via the use of activities.
+ */
+function student_crm_activity_case_alter_form_field_ui_field_edit_form_alter(&$form, $form_state, $form_id) {
+  if($form['instance']['entity_type']['#value'] != 'crm_case') {
+    return;
+  }
+  $form['instance']['crm_case_alter'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Allow field to be changed by activities posted to the case.',
+    '#default_value' => (isset($form['#instance']['crm_case_alter'])) ? $form['#instance']['crm_case_alter'] : 0,
+  );
+}
+
+function student_crm_activity_case_alter_form_student_crm_activity_create_alter(&$form, $form_state) {
+  $case = menu_get_object('crm_case', 2);
+  if(!$case || !user_access('open and close cases')) {
+    return;
+  }
+  drupal_add_css(drupal_get_path('module', 'student_crm_activity_case_alter') .'/css/student_crm_activity_case_alter.css');
+  $fields = field_info_instances('crm_case', $case->type);
+  $alterable_fields = array();
+  foreach($fields as $field_name => $field) {
+    if($field['crm_case_alter']) {
+      $alterable_fields[$field_name] = $field;
+    }
+  }
+  if(count($alterable_fields)) {
+    $form['case_fields'] = array(
+      '#type' => 'fieldset',
+      '#title' => 'Change case values',
+      '#collapsible' => true,
+    );
+    field_attach_form('crm_case', $case, $form['case_fields'], $form_state, $case->language);
+    foreach($fields as $field_name => $field) {
+      if(!$alterable_fields[$field_name]) {
+        unset($form['case_fields'][$field_name]);
+      }
+    }
+    unset($form['case_fields']['#groups']);
+    unset($form['case_fields']['#fieldgroups']);
+  }
+  
+  //Add a status change checkbox.
+  $status = field_get_items('crm_case', $case, 'case_status');
+  $form['form-actions']['case_status_change'] = array(
+    '#type' => 'checkbox',
+    '#title' => ($status[0]['value']) ? 'Close case' : 'Re-open case',
+    '#prefix' => '<div class="case-status-change">',
+    '#suffix' => '</div>',
+    '#weight' => -3,
+  );
+  $form['#submit'][] = 'student_crm_activity_case_alter_form_student_crm_activity_create_alter_submit';
+}
+
+function student_crm_activity_case_alter_form_student_crm_activity_create_alter_submit($form, $form_state) {
+  $case = crm_case_load($form_state['values']['entity']['id']);
+  $language = ($case->language) ? $case->language : LANGUAGE_NONE;
+  $activity = crm_activity_load($form_state['activity_id']);
+  if($form_state['values']['case_status_change']) {
+    $case->case_status[$language][0]['value'] = ($case->case_status[$language][0]['value']) ? 0 : 1;
+    $activity->data['display_extra']['status']['label'] = t('Case status changed');
+    $activity->data['display_extra']['status']['message'] = ($case->case_status[$language][0]['value'])
+                                    ? t('Case was closed')
+                                    : t('Case was re-opened');
+  }
+  
+  $fields = field_info_instances('crm_case', $case->type);
+  $alterable_fields = array();
+  foreach($fields as $field_name => $field) {
+    if($field['crm_case_alter'] && md5(serialize($form_state['values'][$field_name])) != md5(serialize($case->{$field_name}))) {
+      $rendered = field_attach_view('crm_case', $case, 'page');
+      $rendered[$field_name]['#label_display'] = 'hidden';
+      $activity->data['display_extra'][$field_name]['old'] = drupal_render($rendered[$field_name]);
+      $case->{$field_name} = $form_state['values'][$field_name];
+      $rendered = field_attach_view('crm_case', $case, 'page');
+      $rendered[$field_name]['#label_display'] = 'hidden';
+      $activity->data['display_extra'][$field_name]['label'] = $field['label'];
+      $activity->data['display_extra'][$field_name]['message'] = drupal_render($rendered[$field_name]);
+    }
+  }
+  
+  crm_case_save($case);
+  crm_activity_save($activity);
+  //drupal_goto('crm/case/'. $case->cid);
+}
+
+function student_crm_activity_case_alter_crm_activity_view($activity) {
+  if(is_array($activity->data['display_extra']) && count($activity->data['display_extra'])) {
+    $headers = array('Field', 'Old value', 'New value');
+    $rows = array();
+    foreach($activity->data['display_extra'] as $changed) {
+      $rows[] = array($changed['label'], $changed['old'], $changed['message']);
+    }
+    $activity->content['changed'] = array(
+      '#theme' => 'table',
+      '#header' => $headers,
+      '#rows' => $rows,
+      '#weight' => 10,
+    );
+  }
+}

@@ -23,3 +23,10 @@ function student_crm_activity_mailer_feeds_plugins() {
   );
   return $info;
 }
+
+/**
+ * Alter the create case form to hide email activities.
+ */
+function student_crm_activity_mailer_form_student_crm_activity_create_alter(&$form, $form_state) {
+  unset($form['activity_type']['#options']['email_activity']);
+}
