@@ -255,8 +255,12 @@ input.search-box {
   margin: 0;
   font-weight: bold;
 }
+#header .left {
+  width: 200px;
+  padding: 0px;
+}
 #header .right {
-  width: 400px;
+  width: 600px;
 }
 #header .right .block {
   float: right;
@@ -265,7 +269,7 @@ input.search-box {
   margin: 0;
   padding: 0;
 }
-#header #guiders-help, #user-manage {
+#header #guiders-help, #user-manage, #site-manage {
   display: block;
   margin: 4px 10px 0 0;
   background: #e47531;
@@ -280,11 +284,11 @@ input.search-box {
 #header #guiders-help:hover {
   background: #c85c1a;
 }
-#header #user-manage {
+#header #user-manage, #header #site-manage {
   background: #369ccb;
   color: #fff;
 }
-#header #user-manage:hover {
+#header #user-manage:hover, #header #site-manage:hover {
   background: #2a7ea4;
   color: #fff;
 }

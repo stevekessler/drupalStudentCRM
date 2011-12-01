@@ -155,13 +155,14 @@ fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; ma
 #header { .gradient(@header-gradient, darken(@header-gradient, 10%)); padding: 15px 30px; border-bottom: 1px solid darken(@header-gradient, 20%); }
 	#header a { color: darken(@header-gradient, 80%); text-decoration: none; }
 	#header h1 { float: left; color: darken(@header-gradient, 80%); font-size: 2em; margin: 0; font-weight: bold;}
-	#header .right { width: (@min-width / 2); }
+	#header .left { width: (@min-width / 4); padding: 0px; }
+	#header .right { width: (@min-width - (@min-width / 4)); }
 	  #header .right .block { float: right; }
     	#header .right .views-exposed-widgets, #header .right .views-exposed-widget { margin: 0; padding: 0; }
-	      #header #guiders-help, #user-manage { display: block; margin: 4px 10px 0 0; background: @orange-button; font-size: .8em; border: darken(@orange-button, 10%); color: white; padding: 5px; .round-box(7px); }
+	      #header #guiders-help, #user-manage, #site-manage { display: block; margin: 4px 10px 0 0; background: @orange-button; font-size: .8em; border: darken(@orange-button, 10%); color: white; padding: 5px; .round-box(7px); }
 	       #header #guiders-help:hover { background: darken(@orange-button, 10%); }
-	       #header #user-manage { background: darken(@header-gradient, 20%); color: #fff; }
-	         #header #user-manage:hover { background: darken(@header-gradient, 30%); color: #fff; }
+	       #header #user-manage, #header #site-manage { background: darken(@header-gradient, 20%); color: #fff; }
+	         #header #user-manage:hover, #header #site-manage:hover { background: darken(@header-gradient, 30%); color: #fff; }
 	      #block-guiders-js-guiders-js-link .contextual-links-wrapper { display: none; }
 	   
 /** PAGE **/
