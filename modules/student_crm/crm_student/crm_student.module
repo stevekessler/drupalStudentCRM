@@ -44,6 +44,13 @@ function crm_student_menu() {
     'file' => 'crm_student.admin.inc',
   );
   
+  $items['crm/admin/student'] = array(
+    'title' => 'Student CRM Administration',
+    'page callback' => 'crm_student_admin_page',
+    'access arguments' => array('administer site configuration'),
+    'file' => 'crm_student.admin.inc',
+  );
+  
   return $items;
 }
 
@@ -83,6 +90,7 @@ function crm_student_block_info() {
   $blocks['crm_student_search'] = array('info' => 'Student CRM search box');
   $blocks['crm_student_welcome'] = array('info' => 'Generic welcome message');
   $blocks['crm_student_user_widget'] = array('info' => 'User management & logout widget');
+  $blocks['crm_student_admin_link'] = array('info' => 'Administer site link');
   return $blocks;
 }
 
@@ -90,15 +98,18 @@ function crm_student_block_info() {
  * Implements hook_block_view().
  */
 function crm_student_block_view($delta) {
-  if ($delta == 'crm_student_search') {
-    return array('content' => drupal_get_form('_crm_student_search_form'));  
-  }
-  if ($delta == 'crm_student_welcome') {
-    $message = variable_get('crm_student_welcome_page', array('value' => '', 'format' => NULL));
-    return array('content' => check_markup($message['value'], $message['format']));
-  }
-  if ($delta == 'crm_student_user_widget') {
-    return array('content' => l('Log out', 'user/logout', array('attributes' => array('id' => 'user-manage'))));
+  switch($delta) {
+    case 'crm_student_search':
+      return array('content' => drupal_get_form('_crm_student_search_form'));
+    case 'crm_student_welcome':
+      $message = variable_get('crm_student_welcome_page', array('value' => '', 'format' => NULL));
+      return array('content' => check_markup($message['value'], $message['format']));
+    case 'crm_student_user_widget':
+      return array('content' => l('Log out', 'user/logout', array('attributes' => array('id' => 'user-manage'))));
+    case 'crm_student_admin_link':
+      if(user_access('administer site configuration')) {
+        return array('content' => l('Administer', 'crm/admin/student', array('attributes' => array('id' => 'site-manage'))));
+      }
   }
 }
 
@@ -209,4 +220,36 @@ function crm_student_user_login(&$edit, $account) {
  */
 function crm_student_user_insert(&$edit, $account, $category) {
   crm_student_user_login($edit, $account);
+}
+
+/**
+ * Implements hook_crm_student_admin_links().
+ */
+function crm_student_crm_student_admin_links() {
+	return array(
+		'crm_contact' => array(
+			'group' => t('Contact Records'),
+			'title' => t('Manage contact types'),
+			'description' => t('Manage the types of contacts (like "Student," or "Alumni").'),
+			'href' => 'crm/admin/contact/types',
+		),
+		'crm_activities' => array(
+			'group' => t('Activities'),
+			'title' => t('Manage activity types'),
+			'description' => t('Manage the types of activities or notes.'),
+			'href' => 'crm/admin/activity/types',
+		),
+		'student_level' => array(
+			'group' => t('Students'),
+			'title' => t('Manage student levels'),
+			'description' => t('Define and edit student levels (like "Junior" and "Senior").'),
+			'href' => 'admin/structure/taxonomy/student_level',
+		),
+		'student_status' => array(
+			'group' => t('Students'),
+			'title' => t('Manage student statuses'),
+			'description' => t('Define and edit student stauses (like "Graduated" and "Matriculated").'),
+			'href' => 'admin/structure/taxonomy/student_status',
+		),
+	);
 }

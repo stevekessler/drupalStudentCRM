@@ -805,3 +805,17 @@ function crm_case_mail($key, &$message, $params) {
     $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
   }
 }
+
+/**
+ * Implements hook_crm_student_admin_links().
+ */
+function crm_case_crm_student_admin_links() {
+	return array(
+		'crm_cases' => array(
+			'group' => t('Cases'),
+			'title' => t('Manage case types'),
+			'description' => t('Manage the types of cases that can be opened on contacts.'),
+			'href' => 'crm/admin/case/types',
+		),
+	);
+}

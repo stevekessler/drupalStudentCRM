@@ -388,3 +388,23 @@ function student_crm_webform_tokens($type, $tokens, $data = array(), $options = 
   return array('[crm_case:student_crm_webform_link]' => url('crm/webform/' . $data['entity_type'] . '/' . $id . '/' . $data['webform'] . '/' . _student_crm_webform_generate_key($data['entity_type'], $id, $data['webform']), array('absolute' => TRUE))
               );
 }
+
+/**
+ * Implements hook_crm_student_admin_links().
+ */
+function student_crm_webform_crm_student_admin_links() {
+	return array(
+		'webform_create' => array(
+			'group' => t('Web Forms'),
+			'title' => t('Add a new web form template'),
+			'description' => t('Create a new web form template.'),
+			'href' => 'node/add/webform',
+		),
+		'webform_manage' => array(
+			'group' => t('Web Forms'),
+			'title' => t('Manage web forms'),
+			'description' => t('View, edit, and delete existing webforms.'),
+			'href' => 'admin/content/webform',
+		),
+	);
+}
