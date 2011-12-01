@@ -40,7 +40,10 @@ function crm_case_views_data_alter(&$data) {
       'handler' => 'crm_case_handler_crm_case_operations_field',
     ),
   );
-
+  
+  $data['crm_case']['created']['field']['handler'] = 'views_handler_field_date';
+  $data['crm_case']['changed']['field']['handler'] = 'views_handler_field_date';
+  
   $data['crm_case']['case_access'] = array(
     'title' => t('User has access to view case'),
     'help' => t('Hides cases that users don not have access to view.'),

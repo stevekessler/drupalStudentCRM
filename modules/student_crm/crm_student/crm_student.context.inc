@@ -58,6 +58,44 @@ function crm_student_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'crm_authenticated_home';
+  $context->description = 'Authenticated, non advisor user is on the homepage.';
+  $context->tag = 'crm_home';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'crm/home' => 'crm/home',
+      ),
+    ),
+    'user' => array(
+      'values' => array(
+        'authenticated user' => 'authenticated user',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-crm_user_cases-block' => array(
+          'module' => 'views',
+          'delta' => 'crm_user_cases-block',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Authenticated, non advisor user is on the homepage.');
+  t('crm_home');
+  $export['crm_authenticated_home'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'crm_search';
   $context->description = 'Search context';
   $context->tag = 'crm';
@@ -140,7 +178,7 @@ function crm_student_context_default_contexts() {
           'module' => 'guiders_js',
           'delta' => 'guiders_js_link',
           'region' => 'header_right',
-          'weight' => '-10',
+          'weight' => '-1',
         ),
         'system-help' => array(
           'module' => 'system',
@@ -191,7 +229,13 @@ function crm_student_context_default_contexts() {
           'module' => 'crm_student',
           'delta' => 'crm_student_user_widget',
           'region' => 'header_right',
-          'weight' => '-10',
+          'weight' => '-3',
+        ),
+        'crm_student-crm_student_admin_link' => array(
+          'module' => 'crm_student',
+          'delta' => 'crm_student_admin_link',
+          'region' => 'header_right',
+          'weight' => '-2',
         ),
       ),
     ),

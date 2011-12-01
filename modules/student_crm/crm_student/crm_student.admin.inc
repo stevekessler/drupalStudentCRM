@@ -7,9 +7,9 @@ function crm_student_admin_form() {
   
   $form['crm_student_welcome_page'] = array(
     '#type' => 'text_format',
-    '#title' => 'Email body',
+    '#title' => 'Welcome page message',
     '#default_value' => (isset($message['value'])) ? $message['value'] : '',
-    '#format' => (isset($message['format'])) ? $message['value'] : NULL,
+    '#format' => (isset($message['format'])) ? $message['forma'] : NULL,
   );
   
   return system_settings_form($form);
