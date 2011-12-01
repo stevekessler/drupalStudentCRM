@@ -67,6 +67,11 @@ function crm_student_context_default_contexts() {
         1 => 1,
       ),
     ),
+    'user' => array(
+      'values' => array(
+        'advisor' => 'advisor',
+      ),
+    ),
   );
   $context->reactions = array(
     'block' => array(
@@ -80,7 +85,7 @@ function crm_student_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
@@ -124,7 +129,7 @@ function crm_student_context_default_contexts() {
     ),
     'user' => array(
       'values' => array(
-        'authenticated user' => 'authenticated user',
+        'advisor' => 'advisor',
       ),
     ),
   );

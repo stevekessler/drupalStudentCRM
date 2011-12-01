@@ -10,6 +10,24 @@
 function crm_student_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: access content
+  $permissions['access content'] = array(
+    'name' => 'access content',
+    'roles' => array(
+      0 => 'advisor',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: access guiders
+  $permissions['access guiders'] = array(
+    'name' => 'access guiders',
+    'roles' => array(
+      0 => 'advisor',
+    ),
+    'module' => 'guiders_js',
+  );
+
   // Exported permission: access user profiles
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
@@ -109,6 +127,16 @@ function crm_student_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: complete crm webforms
+  $permissions['complete crm webforms'] = array(
+    'name' => 'complete crm webforms',
+    'roles' => array(
+      0 => 'advisor',
+      1 => 'anonymous user',
+    ),
+    'module' => 'student_crm_webform',
+  );
+
   // Exported permission: create relations
   $permissions['create relations'] = array(
     'name' => 'create relations',
@@ -116,6 +144,15 @@ function crm_student_user_default_permissions() {
       0 => 'advisor',
     ),
     'module' => 'relation',
+  );
+
+  // Exported permission: create tasks for other users
+  $permissions['create tasks for other users'] = array(
+    'name' => 'create tasks for other users',
+    'roles' => array(
+      0 => 'advisor',
+    ),
+    'module' => 'crm_tasks',
   );
 
   // Exported permission: create webform content
@@ -130,7 +167,10 @@ function crm_student_user_default_permissions() {
   // Exported permission: delete any webform content
   $permissions['delete any webform content'] = array(
     'name' => 'delete any webform content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'advisor',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: delete own webform content
@@ -148,10 +188,19 @@ function crm_student_user_default_permissions() {
     'module' => 'relation',
   );
 
+  // Exported permission: delete terms in 5
+  $permissions['delete terms in 5'] = array(
+    'name' => 'delete terms in 5',
+    'roles' => array(),
+  );
+
   // Exported permission: edit any webform content
   $permissions['edit any webform content'] = array(
     'name' => 'edit any webform content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'advisor',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: edit contacts
@@ -176,6 +225,15 @@ function crm_student_user_default_permissions() {
       0 => 'advisor',
     ),
     'module' => 'relation',
+  );
+
+  // Exported permission: edit terms in 5
+  $permissions['edit terms in 5'] = array(
+    'name' => 'edit terms in 5',
+    'roles' => array(
+      0 => 'advisor',
+    ),
+    'module' => 'taxonomy',
   );
 
   // Exported permission: export relation types
@@ -208,6 +266,12 @@ function crm_student_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: open and close cases
+  $permissions['open and close cases'] = array(
+    'name' => 'open and close cases',
+    'roles' => array(),
+  );
+
   // Exported permission: show format tips
   $permissions['show format tips'] = array(
     'name' => 'show format tips',
@@ -227,6 +291,22 @@ function crm_student_user_default_permissions() {
       0 => 'advisor',
     ),
     'module' => 'crm_history',
+  );
+
+  // Exported permission: use text format filtered_html
+  $permissions['use text format filtered_html'] = array(
+    'name' => 'use text format filtered_html',
+    'roles' => array(
+      0 => 'advisor',
+      1 => 'authenticated user',
+    ),
+    'module' => 'filter',
+  );
+
+  // Exported permission: use text format full_html
+  $permissions['use text format full_html'] = array(
+    'name' => 'use text format full_html',
+    'roles' => array(),
   );
 
   return $permissions;
