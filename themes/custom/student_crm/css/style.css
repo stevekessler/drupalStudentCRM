@@ -303,6 +303,9 @@ input.search-box {
   margin-left: 210px;
   margin-right: 10px;
 }
+.no-sidebars #page #content-wrapper {
+  margin-left: 10px;
+}
 #page.has-right-sidebar #content {
   margin-right: 230px;
 }

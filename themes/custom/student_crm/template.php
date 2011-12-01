@@ -7,6 +7,16 @@ function student_crm_preprocess_html(&$vars) {
   if(isset($vars['page']['tabs'])) {
     $vars['classes_array'][] = 'with-tabs';
   }
+  if(!isset($vars['page']['sidebar_left']) && !isset($vars['page']['sidebar_right'])) {
+    $vars['classes_array'][] = 'no-sidebars';
+  }
+  else {
+    foreach($vars['classes_array'] as $k => $class) {
+      if($class == 'no-sidebars') {
+        unset($vars['classes_array'][$k]);
+      }
+    }
+  }
 }
 
 /**
