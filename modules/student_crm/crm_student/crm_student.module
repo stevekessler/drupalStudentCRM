@@ -82,6 +82,7 @@ function crm_student_homepage_access() {
 function crm_student_block_info() {
   $blocks['crm_student_search'] = array('info' => 'Student CRM search box');
   $blocks['crm_student_welcome'] = array('info' => 'Generic welcome message');
+  $blocks['crm_student_user_widget'] = array('info' => 'User management & logout widget');
   return $blocks;
 }
 
@@ -95,6 +96,9 @@ function crm_student_block_view($delta) {
   if ($delta == 'crm_student_welcome') {
     $message = variable_get('crm_student_welcome_page', array('value' => '', 'format' => NULL));
     return array('content' => check_markup($message['value'], $message['format']));
+  }
+  if ($delta == 'crm_student_user_widget') {
+    return array('content' => l('Log out', 'user/logout', array('attributes' => array('id' => 'user-manage'))));
   }
 }
 

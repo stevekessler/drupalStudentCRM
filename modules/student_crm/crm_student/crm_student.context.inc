@@ -174,6 +174,39 @@ function crm_student_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'crm_sitewide_authenticated';
+  $context->description = 'Any authenticated user is in the site.';
+  $context->tag = 'crm';
+  $context->conditions = array(
+    'user' => array(
+      'values' => array(
+        'authenticated user' => 'authenticated user',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'crm_student-crm_student_user_widget' => array(
+          'module' => 'crm_student',
+          'delta' => 'crm_student_user_widget',
+          'region' => 'header_right',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Any authenticated user is in the site.');
+  t('crm');
+  $export['crm_sitewide_authenticated'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'crm_student_view';
   $context->description = 'Viewing a student CRM contact';
   $context->tag = 'crm student';
