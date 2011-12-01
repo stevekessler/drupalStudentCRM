@@ -1,6 +1,6 @@
 <div id="header">
 	<div class="container">
-		<div class=" sidebar">
+		<div class="left sidebar">
 			<?php if ($site_name): ?>
 				<h1>
 					<?php if ($logo): ?>
