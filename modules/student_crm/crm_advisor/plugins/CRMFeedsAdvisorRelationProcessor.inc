@@ -45,7 +45,6 @@ class CRMFeedsAdvisorRelationProcessor extends FeedsProcessor {
     $relation->changed = REQUEST_TIME;
     $relation->created = REQUEST_TIME;
     $relation->language = LANGUAGE_NONE;
-    $relation->log = t('Imported by feeds.');
     $relation->uid = $this->config['author'];
     return $relation;
   }
@@ -185,12 +184,6 @@ class CRMFeedsAdvisorRelationProcessor extends FeedsProcessor {
       $relation->uid = $this->config['author'];
     }
     // Populate properties that are set by advisor relation_object_prepare().
-    if ($this->config['update_existing'] == FEEDS_UPDATE_EXISTING) {
-      $relation->log = 'Updated by CRMFeedsAdvisorRelationProcessor';
-    }
-    else {
-      $relation->log = 'Replaced by CRMFeedsAdvisorRelationProcessor';
-    }
     return $relation;
   }
 
