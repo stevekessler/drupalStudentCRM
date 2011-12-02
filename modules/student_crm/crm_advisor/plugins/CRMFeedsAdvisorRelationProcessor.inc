@@ -29,17 +29,18 @@ class CRMFeedsAdvisorRelationProcessor extends FeedsProcessor {
    * Creates a new advisor relation in memory and returns it.
    */
   public function newRelation(FeedsSource $source, $item) {
+    $contact = crm_contact_load($item['student_entity']);
     $relation = relation_create('advisor', array(
-                    array('entity_type' => 'crm_contact',
-                          'entity_bundle' => 'student', 
-                          'entity_id' => $item['student_entity'],
-                          'r_index' => 0,
-                          ),
                     array('entity_type' => 'user',
                           'entity_bundle' => 'user', 
                           'entity_id' => $item['advisor_entity'],
-                          'r_index' => 1,
+                          'r_index' => 0,
                          ),
+                    array('entity_type' => 'crm_contact',
+                          'entity_bundle' => $contact->type, 
+                          'entity_id' => $contact->contact_id,
+                          'r_index' => 1,
+                          ),
                     )
                );
     $relation->changed = REQUEST_TIME;
