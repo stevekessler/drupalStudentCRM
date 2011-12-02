@@ -188,12 +188,6 @@ function crm_student_user_default_permissions() {
     'module' => 'relation',
   );
 
-  // Exported permission: delete terms in 5
-  $permissions['delete terms in 5'] = array(
-    'name' => 'delete terms in 5',
-    'roles' => array(),
-  );
-
   // Exported permission: edit any webform content
   $permissions['edit any webform content'] = array(
     'name' => 'edit any webform content',
@@ -225,15 +219,6 @@ function crm_student_user_default_permissions() {
       0 => 'advisor',
     ),
     'module' => 'relation',
-  );
-
-  // Exported permission: edit terms in 5
-  $permissions['edit terms in 5'] = array(
-    'name' => 'edit terms in 5',
-    'roles' => array(
-      0 => 'advisor',
-    ),
-    'module' => 'taxonomy',
   );
 
   // Exported permission: export relation types
