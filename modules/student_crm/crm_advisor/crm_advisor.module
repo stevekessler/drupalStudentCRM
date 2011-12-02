@@ -114,12 +114,12 @@ function crm_advisor_block_view($delta) {
   if ($delta == 'crm_advisor_select_advisor') {
     global $user;
     if (_crm_advisor_user_is_advisor($contact, $user)) {
-      $link = l('Remove from your advising list', 
+      $link = l('Remove from advising list', 
                 'crm/advisor/remove/' . $contact->contact_id . '/' . $user->uid,
                 array('attributes' => array('class' => array('tag', 'advisor-link', 'remove'))));
     }
     else {
-      $link = l('Add to your advising list', 
+      $link = l('Add to advising list', 
                 'crm/advisor/add/' . $contact->contact_id . '/' . $user->uid,
                 array('attributes' => array('class' => array('tag', 'advisor-link', 'add'))));
     }
@@ -226,4 +226,30 @@ function crm_advisor_crm_student_admin_links() {
 			'href' => 'admin/structure/relation/manage/advisor/fields',
 		),
 	);
+}
+
+/**
+ * Implements hook_feeds_plugins().
+ */
+function crm_advisor_feeds_plugins() {
+  $info['CRMFeedsAdvisorRelationProcessor'] = array(
+    'name' => 'CRM Advisor processor',
+    'description' => 'Add and update advisor records.',
+    'help' => 'Create and update advisor records from parsed content.',
+    'handler' => array(
+      'parent' => 'FeedsProcessor',
+      'class' => 'CRMFeedsAdvisorRelationProcessor',
+      'file' => 'CRMFeedsAdvisorRelationProcessor.inc',
+      'path' => drupal_get_path('module', 'crm_advisor') . '/plugins',
+    ),
+  );
+  return $info;
+}
+
+/*
+ * Implements hook_enable().
+ */
+function crm_advisor_enable() {
+  //clear the cache to display in Feeds as available plugin.
+  cache_clear_all('plugins:feeds:plugins', 'cache');
 }

@@ -661,6 +661,9 @@ h3.ui-accordion-header.ui-state-active {
   border-color: #36ce51;
 }
 /** PAGE TOOLS **/
+#page-tools {
+  min-height: 20px;
+}
 #page-tools .block {
   float: right;
 }

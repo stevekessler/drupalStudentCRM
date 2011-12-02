@@ -13,7 +13,13 @@ function student_crm_demo_default_crm_case_type() {
     "type" : "simple_case",
     "label" : "Simple case",
     "weight" : "0",
-    "data" : "",
+    "data" : {
+      "instructions" : { "value" : "", "format" : "filtered_html" },
+      "email_contact" : 0,
+      "email_subject" : "",
+      "email_body" : { "value" : "", "format" : "filtered_html" },
+      "contact_edit" : 1
+    },
     "rdf_mapping" : []
   }');
   return $items;
