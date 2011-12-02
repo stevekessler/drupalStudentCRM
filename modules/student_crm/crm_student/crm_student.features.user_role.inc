@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * crm_advisor.features.user_role.inc
+ * crm_student.features.user_role.inc
  */
 
 /**
  * Implements hook_user_default_roles().
  */
-function crm_advisor_user_default_roles() {
+function crm_student_user_default_roles() {
   $roles = array();
 
   // Exported role: advisor

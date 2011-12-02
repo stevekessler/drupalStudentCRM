@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function crm_student_install() {
+  //We give the super admin user the "advisor" role to make contexts happy.
+  $user = user_load(1);
+  foreach(user_roles() as $rid => $role) {
+    if($role == 'advisor') {
+      $user->roles[$rid] = $role;
+    }
+  }
+  user_save($user);
+}
