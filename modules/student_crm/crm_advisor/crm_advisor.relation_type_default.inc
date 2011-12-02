@@ -16,17 +16,16 @@ function crm_advisor_relation_default_relation_types() {
   $relation_type->relation_type = 'advisor';
   $relation_type->label = 'Advisor';
   $relation_type->reverse_label = 'Advisee';
-  $relation_type->directional = 1;
+  $relation_type->directional = 0;
   $relation_type->transitive = 0;
   $relation_type->r_unique = 1;
   $relation_type->min_arity = 2;
   $relation_type->max_arity = 2;
   $relation_type->source_bundles = array(
-    0 => 'user:*',
+    0 => 'crm_contact:*',
+    1 => 'user:*',
   );
-  $relation_type->target_bundles = array(
-    0 => 'crm_contact:student',
-  );
+  $relation_type->target_bundles = array();
   $export['advisor'] = $relation_type;
 
   return $export;

@@ -45,7 +45,7 @@ class CRMFeedsAdvisorRelationProcessor extends FeedsProcessor {
     $relation->changed = REQUEST_TIME;
     $relation->created = REQUEST_TIME;
     $relation->language = LANGUAGE_NONE;
-    $relation->uid = $this->config['author'];
+    $relation->uid = $item['advisor_entity'];
     return $relation;
   }
   
@@ -69,7 +69,7 @@ class CRMFeedsAdvisorRelationProcessor extends FeedsProcessor {
     while ($item = $parser_result->shiftItem()) {
       $item['advisor_entity'] = $this->getTargetEntity($item['advisor_id'], 'user');
       $item['student_entity'] = $this->getTargetEntity($item['student_id'], 'crm_contact');
-      if (!($entity_id = $this->existingEntityId($source, $parser_result)) ||
+      if ($item['advisor_entity'] && $item['student_entity'] && !($entity_id = $this->existingEntityId($source, $parser_result)) ||
            ($this->config['update_existing'] != FEEDS_SKIP_EXISTING)) {
 
         // Only proceed if item has actually changed.

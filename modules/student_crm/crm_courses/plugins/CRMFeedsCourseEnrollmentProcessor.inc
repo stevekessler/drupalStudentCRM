@@ -69,7 +69,7 @@ class CRMFeedsCourseEnrollmentProcessor extends FeedsProcessor {
     while ($item = $parser_result->shiftItem()) {
       $item['course_entity'] = $this->getTargetEntity($item['course_id'], 'node');
       $item['student_entity'] = $this->getTargetEntity($item['student_id'], 'crm_contact');
-      if (!($entity_id = $this->existingEntityId($source, $parser_result)) ||
+      if ($item['course_entity'] && $item['student_entity'] && !($entity_id = $this->existingEntityId($source, $parser_result)) ||
            ($this->config['update_existing'] != FEEDS_SKIP_EXISTING)) {
 
         // Only proceed if item has actually changed.
