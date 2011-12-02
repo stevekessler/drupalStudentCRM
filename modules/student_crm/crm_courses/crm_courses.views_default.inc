@@ -810,30 +810,30 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['style_options']['override'] = 1;
   $handler->display->display_options['style_options']['sticky'] = 0;
   $handler->display->display_options['style_options']['empty_table'] = 0;
-  /* Field: Content: Path */
-  $handler->display->display_options['fields']['path']['id'] = 'path';
-  $handler->display->display_options['fields']['path']['table'] = 'node';
-  $handler->display->display_options['fields']['path']['field'] = 'path';
-  $handler->display->display_options['fields']['path']['label'] = '';
-  $handler->display->display_options['fields']['path']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['path']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['path']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['path']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['path']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['path']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['path']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['path']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['path']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['path']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['path']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['path']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['path']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['path']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['path']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['path']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['path']['hide_alter_empty'] = 0;
-  $handler->display->display_options['fields']['path']['absolute'] = 0;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['nid']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['nid']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nid']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['nid']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['nid']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['nid']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['nid']['link_to_node'] = 0;
   /* Field: Content: Term */
   $handler->display->display_options['fields']['field_course_term']['id'] = 'field_course_term';
   $handler->display->display_options['fields']['field_course_term']['table'] = 'field_data_field_course_term';
@@ -864,7 +864,7 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['fields']['field_course_prefix']['label'] = 'Prefix';
   $handler->display->display_options['fields']['field_course_prefix']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_course_prefix']['alter']['make_link'] = 1;
-  $handler->display->display_options['fields']['field_course_prefix']['alter']['path'] = '[path]';
+  $handler->display->display_options['fields']['field_course_prefix']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_course_prefix']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_course_prefix']['alter']['external'] = 0;
   $handler->display->display_options['fields']['field_course_prefix']['alter']['replace_spaces'] = 0;
@@ -888,7 +888,7 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['fields']['field_course_number']['label'] = 'Number';
   $handler->display->display_options['fields']['field_course_number']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_course_number']['alter']['make_link'] = 1;
-  $handler->display->display_options['fields']['field_course_number']['alter']['path'] = '[path]';
+  $handler->display->display_options['fields']['field_course_number']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_course_number']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_course_number']['alter']['external'] = 0;
   $handler->display->display_options['fields']['field_course_number']['alter']['replace_spaces'] = 0;
@@ -912,7 +912,7 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['fields']['field_course_section']['label'] = 'Section';
   $handler->display->display_options['fields']['field_course_section']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_course_section']['alter']['make_link'] = 1;
-  $handler->display->display_options['fields']['field_course_section']['alter']['path'] = '[path]';
+  $handler->display->display_options['fields']['field_course_section']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_course_section']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_course_section']['alter']['external'] = 0;
   $handler->display->display_options['fields']['field_course_section']['alter']['replace_spaces'] = 0;
@@ -940,7 +940,7 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['fields']['field_course_title']['label'] = 'Title';
   $handler->display->display_options['fields']['field_course_title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_course_title']['alter']['make_link'] = 1;
-  $handler->display->display_options['fields']['field_course_title']['alter']['path'] = '[path]';
+  $handler->display->display_options['fields']['field_course_title']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_course_title']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_course_title']['alter']['external'] = 0;
   $handler->display->display_options['fields']['field_course_title']['alter']['replace_spaces'] = 0;
@@ -996,18 +996,6 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['filters']['field_course_number_value']['expose']['required'] = 0;
   $handler->display->display_options['filters']['field_course_number_value']['expose']['remember'] = 1;
   $handler->display->display_options['filters']['field_course_number_value']['expose']['multiple'] = FALSE;
-  /* Filter criterion: Content: Course prefix (field_course_prefix) */
-  $handler->display->display_options['filters']['field_course_prefix_value']['id'] = 'field_course_prefix_value';
-  $handler->display->display_options['filters']['field_course_prefix_value']['table'] = 'field_data_field_course_prefix';
-  $handler->display->display_options['filters']['field_course_prefix_value']['field'] = 'field_course_prefix_value';
-  $handler->display->display_options['filters']['field_course_prefix_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_course_prefix_value']['expose']['operator_id'] = 'field_course_prefix_value_op';
-  $handler->display->display_options['filters']['field_course_prefix_value']['expose']['label'] = 'Prefix';
-  $handler->display->display_options['filters']['field_course_prefix_value']['expose']['operator'] = 'field_course_prefix_value_op';
-  $handler->display->display_options['filters']['field_course_prefix_value']['expose']['identifier'] = 'field_course_prefix_value';
-  $handler->display->display_options['filters']['field_course_prefix_value']['expose']['required'] = 0;
-  $handler->display->display_options['filters']['field_course_prefix_value']['expose']['remember'] = 1;
-  $handler->display->display_options['filters']['field_course_prefix_value']['expose']['multiple'] = FALSE;
   /* Filter criterion: Content: Section number (field_course_section) */
   $handler->display->display_options['filters']['field_course_section_value']['id'] = 'field_course_section_value';
   $handler->display->display_options['filters']['field_course_section_value']['table'] = 'field_data_field_course_section';
@@ -1057,7 +1045,7 @@ function crm_courses_views_default_views() {
     t('Offset'),
     t('Term'),
     t('Prefix'),
-    t('[path]'),
+    t('node/[nid]'),
     t('Number'),
     t('Section'),
     t('Title'),
