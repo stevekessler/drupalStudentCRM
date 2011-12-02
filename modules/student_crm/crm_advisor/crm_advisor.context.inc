@@ -37,8 +37,8 @@ function crm_advisor_context_default_contexts() {
         'crm_advisor-crm_advisor_select_advisor' => array(
           'module' => 'crm_advisor',
           'delta' => 'crm_advisor_select_advisor',
-          'region' => 'sidebar_right',
-          'weight' => '1',
+          'region' => 'page_tools',
+          'weight' => '-10',
         ),
       ),
     ),

@@ -272,6 +272,13 @@ ul.pager { margin: 15px 0; }
   h3.ui-accordion-header.ui-state-active { background: darken(@green-highlight, 40%); border-color: darken(@green-highlight, 40%); }
   .ui-accordion-content-active { border-color: darken(@green-highlight, 40%); }
 
+/** PAGE TOOLS **/
+#page-tools {  }
+  #page-tools .block { float: right; }
+  #page-tools .block a { display: block; float: right; font-size: 11px; font-weight: bold; color: #000; .round-box(4px); padding: 4px 7px; border: 1px solid darken(@content-background, 20%); margin: 0px 0px 0px 10px; .gradient(darken(@content-background, 5%), darken(@content-background, 2%)); .text-shadow(1px, 1px, 1px, #fff); text-decoration: none; }
+    #page-tools .block a:hover { color: #fff; .text-shadow(1px, 1px, 1px, @tag-background); .gradient(@tag-background, darken(@tag-background, 5%)); border-color: darken(@tag-background, 10%); }
+    #page-tools .contextual-links-wrapper { display: none; }
+
 /** HOMEBOX **/
 .portlet-icon.portlet-maximize { display: none; }
 #page #homebox .homebox-portlet { border: none; }

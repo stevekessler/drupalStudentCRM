@@ -13,7 +13,7 @@ regions[header_middle]		  = Header Middle
 regions[header_right]		    = Header Right
 
 regions[help]				        = Help
-
+regions[page_tools]		      = Page Tools
 regions[sidebar_left]		    = Sidebar Left
 regions[sidebar_right]		  = Sidebar Right
 

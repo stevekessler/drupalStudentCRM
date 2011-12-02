@@ -660,6 +660,47 @@ h3.ui-accordion-header.ui-state-active {
 .ui-accordion-content-active {
   border-color: #36ce51;
 }
+/** PAGE TOOLS **/
+#page-tools .block {
+  float: right;
+}
+#page-tools .block a {
+  display: block;
+  float: right;
+  font-size: 11px;
+  font-weight: bold;
+  color: #000;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  padding: 4px 7px;
+  border: 1px solid #cccccc;
+  margin: 0px 0px 0px 10px;
+  background-color: #f2f2f2;
+  background-image: -moz-linear-gradient(top, #f2f2f2, #fafafa);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f2f2f2), color-stop(1, #fafafa));
+  background-image: -webkit-linear-gradient(#f2f2f2, #fafafa);
+  background-image: linear-gradient(top, #f2f2f2, #fafafa);
+  text-shadow: 1px 1px 1px #ffffff;
+  -webkit-text-shadow: 1px 1px 1px #ffffff;
+  -moz-text-shadow: 1px 1px 1px #ffffff;
+  text-decoration: none;
+}
+#page-tools .block a:hover {
+  color: #fff;
+  text-shadow: 1px 1px 1px #2486c0;
+  -webkit-text-shadow: 1px 1px 1px #2486c0;
+  -moz-text-shadow: 1px 1px 1px #2486c0;
+  background-color: #2486c0;
+  background-image: -moz-linear-gradient(top, #2486c0, #2077ab);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2486c0), color-stop(1, #2077ab));
+  background-image: -webkit-linear-gradient(#2486c0, #2077ab);
+  background-image: linear-gradient(top, #2486c0, #2077ab);
+  border-color: #1c6895;
+}
+#page-tools .contextual-links-wrapper {
+  display: none;
+}
 /** HOMEBOX **/
 .portlet-icon.portlet-maximize {
   display: none;

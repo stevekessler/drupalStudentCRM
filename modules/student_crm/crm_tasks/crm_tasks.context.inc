@@ -39,7 +39,7 @@ function crm_tasks_context_default_contexts() {
         'crm_tasks-crm_tasks_new_task' => array(
           'module' => 'crm_tasks',
           'delta' => 'crm_tasks_new_task',
-          'region' => 'sidebar_right',
+          'region' => 'page_tools',
           'weight' => '-10',
         ),
       ),
