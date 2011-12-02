@@ -24,7 +24,7 @@ function crm_tasks_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Tasks';
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'access user profiles';
+  $handler->display->display_options['access']['perm'] = 'maintain own task list';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
@@ -149,6 +149,28 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['relationships']['relation_base_crm_task_right_node']['relationship'] = 'relation_base_left_crm_task';
   $handler->display->display_options['relationships']['relation_base_crm_task_right_node']['label'] = 'CRM Task - node';
   $handler->display->display_options['relationships']['relation_base_crm_task_right_node']['required'] = 0;
+  /* Field: Site Data: Task checkbox */
+  $handler->display->display_options['fields']['task_checkbox']['id'] = 'task_checkbox';
+  $handler->display->display_options['fields']['task_checkbox']['table'] = 'crm_tasks';
+  $handler->display->display_options['fields']['task_checkbox']['field'] = 'task_checkbox';
+  $handler->display->display_options['fields']['task_checkbox']['label'] = '';
+  $handler->display->display_options['fields']['task_checkbox']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['task_checkbox']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['task_checkbox']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['task_checkbox']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['task_checkbox']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['task_checkbox']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['task_checkbox']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['task_checkbox']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['task_checkbox']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['task_checkbox']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['task_checkbox']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['task_checkbox']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['task_checkbox']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['task_checkbox']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['task_checkbox']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['task_checkbox']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['task_checkbox']['hide_alter_empty'] = 0;
   /* Field: Case: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'crm_case';
@@ -298,34 +320,12 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['fields']['field_task_complete']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_task_complete']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_task_complete']['field_api_classes'] = 0;
-  /* Field: Site Data: Task checkbox */
-  $handler->display->display_options['fields']['task_checkbox']['id'] = 'task_checkbox';
-  $handler->display->display_options['fields']['task_checkbox']['table'] = 'crm_tasks';
-  $handler->display->display_options['fields']['task_checkbox']['field'] = 'task_checkbox';
-  $handler->display->display_options['fields']['task_checkbox']['label'] = 'Done';
-  $handler->display->display_options['fields']['task_checkbox']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['task_checkbox']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['task_checkbox']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['task_checkbox']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['task_checkbox']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['task_checkbox']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['task_checkbox']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['task_checkbox']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['task_checkbox']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['task_checkbox']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['task_checkbox']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['task_checkbox']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['task_checkbox']['element_label_colon'] = 0;
-  $handler->display->display_options['fields']['task_checkbox']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['task_checkbox']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['task_checkbox']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['task_checkbox']['hide_alter_empty'] = 0;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Name';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name] [title] [name] [title_1]';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_first_name] [field_last_name] [name] [title_1]';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['nothing']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['nothing']['alter']['external'] = 0;
@@ -800,9 +800,8 @@ function crm_tasks_views_default_views() {
     t('CRM Task - node'),
     t('.'),
     t(','),
-    t('Done'),
     t('Name'),
-    t('[field_first_name] [field_last_name] [title] [name] [title_1]'),
+    t('[field_first_name] [field_last_name] [name] [title_1]'),
     t('Due date'),
     t('Note'),
     t('All'),
@@ -813,6 +812,7 @@ function crm_tasks_views_default_views() {
     t('Block'),
     t('Your Tasks'),
     t('Title'),
+    t('[field_first_name] [field_last_name] [title] [name] [title_1]'),
     t('Due'),
   );
   $export['crm_tasks'] = $view;
