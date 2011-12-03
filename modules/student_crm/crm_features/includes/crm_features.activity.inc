@@ -85,7 +85,7 @@ function crm_activity_features_export_render($module, $data, $export = NULL) {
  * name of module to revert content for
  */
 function crm_activity_features_revert($module = NULL) {
-  if ($default_types = features_get_default('crm_features_activity_defaults', $module)) {
+  if ($default_types = features_get_default('crm_activity', $module)) {
     foreach ($default_types as $type_name => $type_info) {
       db_delete('crm_activity_type')
         ->condition('type', $type_name)
