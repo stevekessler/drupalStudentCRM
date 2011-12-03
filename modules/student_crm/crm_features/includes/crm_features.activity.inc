@@ -91,7 +91,7 @@ function crm_activity_features_revert($module = NULL) {
         ->condition('type', $type_name)
         ->execute();
     }
-    crm_activity_features_enable($module)
+    crm_activity_features_enable($module);
     cache_clear_all();
     menu_rebuild();
   }
