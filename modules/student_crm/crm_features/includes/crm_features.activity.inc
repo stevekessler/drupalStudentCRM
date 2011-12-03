@@ -91,6 +91,7 @@ function crm_activity_features_revert($module = NULL) {
         ->condition('type', $type_name)
         ->execute();
     }
+    crm_activity_features_enable($module)
     cache_clear_all();
     menu_rebuild();
   }
@@ -113,5 +114,19 @@ function crm_activity_features_disable($module) {
  *   Name of module that has been enabled.
  */
 function crm_activity_features_enable($module) {
-
+  if ($default_types = features_get_default('crm_activity', $module)) {
+    foreach ($default_types as $type_name => $type_info) {
+      $type_info = (object)$type_info;
+      // Ensure the type exists.
+      if ($existing_type = crm_activity_type_load($type_name)) {
+        $existing_type = (object)$existing_type;
+        $existing_type->custom = 0;
+        crm_activity_type_save($type_info);
+      }
+      else {
+        $type_info->is_new = TRUE;
+        crm_activity_type_save($type_info);
+      }
+    }
+  }
 }
