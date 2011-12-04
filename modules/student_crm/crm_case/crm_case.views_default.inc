@@ -453,6 +453,144 @@ function crm_case_views_default_views() {
   $export['crm_contact_cases'] = $view;
 
   $view = new view;
+  $view->name = 'crm_contact_my_cases';
+  $view->description = 'Lists the currently logged-in user\'s cases';
+  $view->tag = 'default';
+  $view->base_table = 'crm_case';
+  $view->human_name = 'CRM Contact my cases';
+  $view->core = 7;
+  $view->api_version = '3.0-alpha1';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'My Cases';
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['style_plugin'] = 'table';
+  /* Relationship: Case: Relation: CRM Contact Case (crm_case <-> crm_contact) */
+  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['id'] = 'relation_crm_contact_case_crm_contact';
+  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['table'] = 'crm_case';
+  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['field'] = 'relation_crm_contact_case_crm_contact';
+  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['required'] = 0;
+  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['r_index'] = '-1';
+  /* Relationship: CRM Contact: Relation: User contact record (crm_contact <-> user) */
+  $handler->display->display_options['relationships']['relation_user_contact_record_user']['id'] = 'relation_user_contact_record_user';
+  $handler->display->display_options['relationships']['relation_user_contact_record_user']['table'] = 'crm_contact';
+  $handler->display->display_options['relationships']['relation_user_contact_record_user']['field'] = 'relation_user_contact_record_user';
+  $handler->display->display_options['relationships']['relation_user_contact_record_user']['relationship'] = 'relation_crm_contact_case_crm_contact';
+  $handler->display->display_options['relationships']['relation_user_contact_record_user']['required'] = 0;
+  /* Field: Case: Case ID */
+  $handler->display->display_options['fields']['cid']['id'] = 'cid';
+  $handler->display->display_options['fields']['cid']['table'] = 'crm_case';
+  $handler->display->display_options['fields']['cid']['field'] = 'cid';
+  /* Field: Case: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'crm_case';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['name']['alter']['path'] = 'crm/case/[cid]';
+  $handler->display->display_options['fields']['name']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['name']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['name']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['name']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['name']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['name']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['name']['hide_alter_empty'] = 0;
+  /* Field: Case: Type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'crm_case';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['type']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['type']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['type']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['type']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['type']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['type']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['type']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['type']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['type']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['type']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['type']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['type']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['type']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['type']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['type']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['type']['hide_alter_empty'] = 0;
+  /* Contextual filter: User: Uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'users';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['relationship'] = 'relation_user_contact_record_user';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['uid']['default_argument_skip_url'] = 0;
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['uid']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['uid']['not'] = 0;
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'my/cases';
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'My cases';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $translatables['crm_contact_my_cases'] = array(
+    t('Master'),
+    t('My Cases'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('CRM Contact Case'),
+    t('User contact record'),
+    t('Case ID'),
+    t('.'),
+    t(','),
+    t('Name'),
+    t('crm/case/[cid]'),
+    t('Type'),
+    t('All'),
+    t('Page'),
+    t('Block'),
+    t('My cases'),
+  );
+  $export['crm_contact_my_cases'] = $view;
+
+  $view = new view;
   $view->name = 'crm_user_cases';
   $view->description = 'Lists the current user\'s open cases';
   $view->tag = 'default';
@@ -473,6 +611,24 @@ function crm_case_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['style_plugin'] = 'table';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Header message';
+  $handler->display->display_options['header']['area']['empty'] = TRUE;
+  $handler->display->display_options['header']['area']['content'] = 'Below is a list of cases about you that you are allowed to edit. You will only be able to edit a case while it is still open, you can view a list of your closed cases using the "Closed" tab below.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['header']['area']['tokenize'] = 0;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No results';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'Sorry, we couldn\'t find any cases for you. Sometimes cases are made private so only advisors and other users can view them.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['empty']['area']['tokenize'] = 0;
   /* Relationship: Case: Relation: CRM Contact Case (crm_case <-> crm_contact) */
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['id'] = 'relation_crm_contact_case_crm_contact';
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['table'] = 'crm_case';
@@ -611,6 +767,10 @@ function crm_case_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
+    t('Header message'),
+    t('Below is a list of cases about you that you are allowed to edit. You will only be able to edit a case while it is still open, you can view a list of your closed cases using the "Closed" tab below.'),
+    t('No results'),
+    t('Sorry, we couldn\'t find any cases for you. Sometimes cases are made private so only advisors and other users can view them.'),
     t('CRM Contact Case'),
     t('User contact record'),
     t('Case ID'),

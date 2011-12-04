@@ -22,6 +22,11 @@ function crm_case_context_default_contexts() {
         'crm/case/*' => 'crm/case/*',
       ),
     ),
+    'user' => array(
+      'values' => array(
+        'advisor' => 'advisor',
+      ),
+    ),
   );
   $context->reactions = array(
     'block' => array(
@@ -36,7 +41,7 @@ function crm_case_context_default_contexts() {
     ),
     'menu' => 'crm/search',
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
