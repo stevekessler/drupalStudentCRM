@@ -7,4 +7,9 @@ function student_crm_activity_install() {
   $note->description = t('A simple activity type that stores a note.');
   $note->is_new = TRUE;
   crm_core_activity_type_save($note);
+  
+  //Delete the standard activity types.
+  db_delete('crm_core_activity_type')
+    ->condition('type', array('phone_call', 'meeting'))
+    ->execute();
 }
