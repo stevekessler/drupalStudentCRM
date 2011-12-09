@@ -28,6 +28,15 @@ function crm_student_user_default_permissions() {
     'module' => 'guiders_js',
   );
 
+  // Exported permission: access student_crm dashboard
+  $permissions['access student_crm dashboard'] = array(
+    'name' => 'access student_crm dashboard',
+    'roles' => array(
+      0 => 'advisor',
+    ),
+    'module' => 'crm_student',
+  );
+
   // Exported permission: access user profiles
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',

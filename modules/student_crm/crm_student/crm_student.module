@@ -58,8 +58,8 @@ function crm_student_menu() {
  * Implements hook_permission().
  */
 function crm_student_permission() {
-  return array('access crm dashboard' => array(
-                'title' => t('Access CRM dashboard'),
+  return array('access student_crm dashboard' => array(
+                'title' => t('Access Student CRM dashboard'),
                 'description' => t('User can access the default dashboard homepage.'),
               )
              );
@@ -69,7 +69,7 @@ function crm_student_permission() {
  * Empty page callback for CRM homepage
  */
 function crm_student_home_page() {
-  if(user_access('access dashboard')) {
+  if(user_access('access student_crm dashboard')) {
     drupal_goto('dashboard');
   }
   drupal_set_title(variable_get('site_name', 'Student CRM'));
