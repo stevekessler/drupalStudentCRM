@@ -13,7 +13,7 @@ function crm_student_guiders_js_pack_features_default() {
       'name' => 'homebox',
       'title' => 'homebox',
       'path' => 'dashboard',
-      'auto_start' => '1',
+      'auto_start' => '0',
       'guiders' => array(
         'your-dashboard' => array(
                              'name' => 'your-dashboard',
