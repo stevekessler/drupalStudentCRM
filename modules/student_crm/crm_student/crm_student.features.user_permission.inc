@@ -194,7 +194,10 @@ function crm_student_user_default_permissions() {
   // Exported permission: open and close cases
   $permissions['open and close cases'] = array(
     'name' => 'open and close cases',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'advisor',
+    ),
+    'module' => 'crm_case',
   );
 
   // Exported permission: show format tips
