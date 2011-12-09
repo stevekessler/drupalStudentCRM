@@ -13,7 +13,7 @@ class views_handler_filter_student_crm_activity_access extends views_handler_fil
           }
         }
       }
-      $alias = $this->query->tables['crm_activity']['crm_activity']['alias'];
+      $alias = $this->query->tables['crm_core_activity']['crm_core_activity']['alias'];
       $this->query->add_where($this->options['group'], "$alias.type", $types, 'IN');
     }
   }

@@ -48,7 +48,7 @@ function crm_advisor_delete_relation_page($contact, $advisor) {
  */
 function crm_advisor_create_relation_page($contact, $advisor) {
   $advisor = user_load($advisor);
-  $contact = crm_contact_load($contact);
+  $contact = crm_core_contact_load($contact);
   if (!user_access('advise students', $advisor)) {
     drupal_set_message(t('This user cannot advise students'), 'error');
     drupal_goto('crm/contact/' . $contact->contact_id);
@@ -74,7 +74,7 @@ function crm_advisor_create_relation($contact, $advisor) {
                        'entity_id' => $advisor->uid,
                        'r_index' => 0,
                        ),
-                  array('entity_type' => 'crm_contact',
+                  array('entity_type' => 'crm_core_contact',
                          'entity_bundle' => $contact->type, 
                          'entity_id' => $contact->contact_id,
                          'r_index' => 1,
@@ -107,7 +107,7 @@ function crm_advisor_block_info() {
  * Implements hook_block_view().
  */
 function crm_advisor_block_view($delta) {
-  $contact = menu_get_object('crm_contact', 2);
+  $contact = menu_get_object('crm_core_contact', 2);
   if (!$contact || !user_access('advise students')) {
     return NULL;
   }
@@ -149,7 +149,7 @@ function _crm_advisor_get_advisor_contacts($advisor_id) {
               ->condition('e.endpoints_entity_id', $advisor_id);
   $query->leftJoin('field_data_endpoints', 'e2', 'e2.entity_id = e.entity_id AND e2.entity_type = e.entity_type');
   $query->fields('e2', array('endpoints_entity_id', 'entity_id'))
-              ->condition('e2.endpoints_entity_type', 'crm_contact');
+              ->condition('e2.endpoints_entity_type', 'crm_core_contact');
   $relations = $query->execute()
               ->fetchAllKeyed();
   return $relations;
@@ -161,7 +161,7 @@ function _crm_advisor_get_advisor_contacts($advisor_id) {
 function crm_advisor_action_info() {
   return array(
     'crm_advisor_add_advisor' => array(
-        'type' => 'crm_contact',
+        'type' => 'crm_core_contact',
         'label' => t('Add to advisee list'),
         'configurable' => TRUE,
         'triggers' => array('any'),
@@ -198,7 +198,7 @@ function crm_advisor_add_advisor($entity, $context) {
                        'entity_id' => $user->uid,
                        'r_index' => 0,
                        ),
-                  array('entity_type' => 'crm_contact',
+                  array('entity_type' => 'crm_core_contact',
                          'entity_bundle' => $entity->type, 
                          'entity_id' => $entity->contact_id,
                          'r_index' => 1,

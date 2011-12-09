@@ -3,6 +3,10 @@ Student CRM
 
 A Drupal install profile for a student-services customer relations management (CRM) system.
 
+NOTE
+====
+*There are currently problems with this build due to a few big changes in contributed modules. We are working on this and tracking new development efforts in the crm_core branch.*
+
 Downloads
 =========
 

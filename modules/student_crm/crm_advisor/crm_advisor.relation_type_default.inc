@@ -22,7 +22,7 @@ function crm_advisor_relation_default_relation_types() {
   $relation_type->min_arity = 2;
   $relation_type->max_arity = 2;
   $relation_type->source_bundles = array(
-    0 => 'crm_contact:*',
+    0 => 'crm_core_contact:*',
     1 => 'user:*',
   );
   $relation_type->target_bundles = array();

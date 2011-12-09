@@ -13,7 +13,7 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
    * Define entity type.
    */
   public function entityType() {
-    return 'crm_contact';
+    return 'crm_core_contact';
   }
 
   /**
@@ -43,15 +43,15 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
    * Loads an existing contact.
    *
    * If the update existing method is not FEEDS_UPDATE_EXISTING, only the contact
-   * table will be loaded, foregoing the crm_contact_load API for better performance.
+   * table will be loaded, foregoing the crm_core_contact_load API for better performance.
    */
   protected function entityLoad(FeedsSource $source, $contact_id) {
     if ($this->config['update_existing'] == FEEDS_UPDATE_EXISTING) {
-      $contact = crm_contact_load($contact_id, NULL, TRUE);
+      $contact = crm_core_contact_load($contact_id, NULL, TRUE);
     }
     else {
       // We're replacing the existing contact. Only save the absolutely necessary.
-      $contact = db_query("SELECT created, contact_id, vid, type FROM {crm_contact} WHERE contact_id = :contact_id", array(':contact_id' => $contact_id))->fetchObject();
+      $contact = db_query("SELECT created, contact_id, vid, type FROM {crm_core_contact} WHERE contact_id = :contact_id", array(':contact_id' => $contact_id))->fetchObject();
       $contact->uid = $this->config['author'];
     }
     // Populate properties that are set by contact_object_prepare().
@@ -68,7 +68,7 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
    * Save a contact.
    */
   public function entitySave($entity) {
-    crm_contact_save($entity);
+    crm_core_contact_save($entity);
   }
 
   /**
@@ -91,13 +91,13 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
       return;
     }
     $count = $this->getLimit();
-    $contacts = db_query_range("SELECT c.contact_id FROM {crm_contact} c JOIN {feeds_item} fi ON fi.entity_type = 'crm_contact' AND c.contact_id = fi.entity_id WHERE fi.id = :id AND c.created < :created", 0, $count, array(':id' => $this->id, ':created' => REQUEST_TIME - $time));
+    $contacts = db_query_range("SELECT c.contact_id FROM {crm_core_contact} c JOIN {feeds_item} fi ON fi.entity_type = 'crm_core_contact' AND c.contact_id = fi.entity_id WHERE fi.id = :id AND c.created < :created", 0, $count, array(':id' => $this->id, ':created' => REQUEST_TIME - $time));
     $contact_ids = array();
     foreach ($contacts as $contact) {
       $contact_ids[$contact->contact_id] = $contact->contact_id;
     }
     $this->entityDeleteMultiple($contact_ids);
-    if (db_query_range("SELECT 1 FROM {crm_contact} c JOIN {feeds_item} fi ON fi.entity_type = 'crm_contact' AND c.contact_id = fi.entity_id WHERE fi.id = :id AND c.created < :created", 0, 1, array(':id' => $this->id, ':created' => REQUEST_TIME - $time))->fetchField()) {
+    if (db_query_range("SELECT 1 FROM {crm_core_contact} c JOIN {feeds_item} fi ON fi.entity_type = 'crm_core_contact' AND c.contact_id = fi.entity_id WHERE fi.id = :id AND c.created < :created", 0, 1, array(':id' => $this->id, ':created' => REQUEST_TIME - $time))->fetchField()) {
       return FEEDS_BATCH_ACTIVE;
     }
     return FEEDS_BATCH_COMPLETE;
@@ -112,7 +112,7 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
 
   private function getContactTypeNames() {
     $types = array();
-    foreach (crm_contact_types() as $type) {
+    foreach (crm_core_contact_types() as $type) {
       $types[$type->type] = $type->name;
     }
     return $types;
@@ -220,7 +220,7 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
    * Return available mapping targets.
    */
   public function getMappingTargets() {
-    $types = crm_contact_types();
+    $types = crm_core_contact_types();
     $type = $types[$this->config['contact_type']];
     $targets = parent::getMappingTargets();
     
@@ -256,7 +256,7 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
 
     // Let other modules expose mapping targets.
     self::loadMappers();
-    feeds_alter('feeds_processor_targets', $targets, 'crm_contact', $this->config['contact_type']);
+    feeds_alter('feeds_processor_targets', $targets, 'crm_core_contact', $this->config['contact_type']);
 
     return $targets;
   }
@@ -274,11 +274,11 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
     foreach ($this->uniqueTargets($source, $result) as $target => $value) {
       switch ($target) {
         case 'contact_id':
-          $contact_id = db_query("SELECT contact_id FROM {crm_contact} WHERE contact_id = :contact_id", array(':contact_id' => $value))->fetchField();
+          $contact_id = db_query("SELECT contact_id FROM {crm_core_contact} WHERE contact_id = :contact_id", array(':contact_id' => $value))->fetchField();
           break;
         case 'feeds_source':
           if ($id = feeds_get_importer_id($this->config['contact_type'])) {
-            $contact_id = db_query("SELECT fs.feed_contact_id FROM {crm_contact} c JOIN {feeds_source} fs ON c.contact_id = fs.feed_contact_id WHERE fs.id = :id AND fs.source = :source", array(':id' => $id, ':source' => $value))->fetchField();
+            $contact_id = db_query("SELECT fs.feed_contact_id FROM {crm_core_contact} c JOIN {feeds_source} fs ON c.contact_id = fs.feed_contact_id WHERE fs.id = :id AND fs.source = :source", array(':id' => $id, ':source' => $value))->fetchField();
           }
           break;
       }

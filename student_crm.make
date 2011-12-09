@@ -44,6 +44,9 @@ projects[email][version] = "1.x-dev"
 projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.0-beta11"
 
+projects[entityreference][subdir] = "contrib"
+projects[entityreference][version] = "1.0-beta2"
+
 projects[fancybox][subdir] = "contrib"
 projects[fancybox][version] = "1.x-dev"
 
@@ -83,6 +86,9 @@ projects[mailhandler][version] = "2.0-rc1"
 projects[messaging][subdir] = "contrib"
 projects[messaging][version] = "1.0-alpha1"
 
+projects[name][subdir] = "contrib"
+projects[name][version] = "1.x-dev"
+
 projects[options_element][subdir] = "contrib"
 projects[options_element][version] = "1.4"
 
@@ -119,12 +125,12 @@ projects[tao][version] = "3.0-beta4"
 
 ; Trellon CRM
 
-projects[crm][type] = module
-projects[crm][subdir] = "contrib"
-projects[crm][version] = "1.x-dev"
-projects[crm][download][type] = "git"
-projects[crm][download][url] = "http://git.drupal.org/sandbox/citizenkane/1260982.git"
-projects[crm][download][branch] = "master"
+projects[crm_core][type] = module
+projects[crm_core][subdir] = "contrib"
+projects[crm_core][version] = "1.x-dev"
+projects[crm_core][download][type] = "git"
+projects[crm_core][download][url] = "http://git.drupal.org/project/crm_core.git"
+projects[crm_core][download][branch] = "master"
 
 ; Formalize module
 projects[formalize][type] = module
@@ -175,8 +181,7 @@ libraries[guiders][destination] = "libraries"
 projects[chosen][patch][] = http://drupal.org/files/issues/chosen-7.x-1.x-install_profile.patch
 projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"
 projects[email][patch][] = "http://drupal.org/files/email_feeds_target-718414-36.patch"
-projects[relation][patch][] = "http://drupal.org/files/1260252-relationship-right-better-key.patch"
-projects[crm][patch][] = "http://drupal.org/files/trellon_crm_activity_fix-1342600-5.patch"
+projects[name][patch][] = "http://drupal.org/files/name_feeds_parser-1160190-3.patch"
 
 ; Hosted modules
 projects[views_savedsearches][type] = module
@@ -184,3 +189,9 @@ projects[views_savedsearches][subdir] = "contrib"
 projects[views_savedsearches][version] = "7.x-dev"
 projects[views_savedsearches][download][type] = "file"
 projects[views_savedsearches][download][url] = "http://s4.csumb.edu/hosted_modules/views_savedsearches.tar.gz"
+
+projects[relation][type] = module
+projects[relation][subdir] = "contrib"
+projects[relation][version] = "7.x-dev"
+projects[relation][download][type] = "file"
+projects[relation][download][url] = "http://webprojects.csumb.edu/crm/downloads/relation.tar.gz"

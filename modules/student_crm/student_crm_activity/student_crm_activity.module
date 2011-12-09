@@ -30,7 +30,14 @@ function student_crm_activity_block_view($delta) {
 /**
  * Implements hook_theme_registry_alter().
  */
-
+function student_crm_activity_theme($existing, $type, $theme, $path) {
+  return array(
+    'crm_core_activity' => array(
+      'variables' => array('element' => null),
+      'template' => 'crm_core_activity'
+    ),
+  );
+}
 /**
  * Create activity form.
  */
@@ -45,7 +52,7 @@ function student_crm_activity_create($form, $form_state) {
   
   $entity = array();
   
-  if($form_state['values']['entity']) {
+  if(isset($form_state['values']['entity'])) {
     $entity = $form_state['values']['entity'];
   }
   else {
@@ -53,11 +60,13 @@ function student_crm_activity_create($form, $form_state) {
       $entity['type'] = 'crm_case';
       $entity['bundle'] = $case->type;
       $entity['id'] = $case->cid;
+      $crm_contact = crm_case_get_contact($case);
     }
-    if($contact = menu_get_object('crm_contact', 2)) {
-      $entity['type'] = 'crm_contact';
+    if($contact = menu_get_object('crm_core_contact', 2)) {
+      $entity['type'] = 'crm_core_contact';
       $entity['bundle'] = $contact->type;
-      $entity['id'] = $contact->contact_id;   
+      $entity['id'] = $contact->contact_id;
+      $crm_contact = $contact;
     }
   }    
   $form['entity'] = array(
@@ -65,7 +74,7 @@ function student_crm_activity_create($form, $form_state) {
     '#value' => $entity,
   );
   
-  $types = crm_activity_get_types();
+  $types = crm_core_activity_types();
   $options = array();
   foreach($types as $type) {
     $restrict = variable_get('student_crm_activity_restrict_'. $type->type, FALSE);
@@ -105,11 +114,20 @@ function student_crm_activity_create($form, $form_state) {
   $activity_type = (isset($form_state['values']['activity_type'])) 
                    ? $form_state['values']['activity_type'] 
                    : STUDENT_CRM_DEFAULT_TYPE;
-  $crm_activity = crm_activity_create(array('type' => $activity_type));
+  $crm_activity = crm_core_activity_create(array('type' => $activity_type,
+                                                 'field_activity_participants' => array(
+                                                  LANGUAGE_NONE => array(array(
+                                                      'target_id' => $crm_contact->contact_id,
+                                                      'target_type' => 'crm_core_contact',
+                                                    ),
+                                                  )),
+                                                  ));
   
-  $form_state['crm_activity'] = $crm_activity;
-  field_attach_form('crm_activity', $crm_activity, $form, $form_state);
-  
+  $form_state['crm_core_activity'] = $crm_activity;
+  field_attach_form('crm_core_activity', $crm_activity, $form, $form_state);
+    
+  $form['field_activity_participants']['#access'] = FALSE;
+  $form['field_activity_date']['#access'] = FALSE;
   $form['form-actions'] = array(
     '#type' => 'actions',
   );
@@ -139,16 +157,20 @@ function student_crm_activity_activity_form(&$form, $form_state) {
  */
 function student_crm_activity_create_submit($form, &$form_state) {
   global $user;
-  $crm_activity = entity_ui_controller('crm_activity')->entityFormSubmitBuildEntity($form, $form_state);
+  $crm_activity = $form_state['crm_core_activity'];
+  // Notify field widgets.
+  
+  field_attach_submit('crm_core_activity', $crm_activity, $form, $form_state);
+
   $crm_activity->created = time();
   $crm_activity->changed = time();
   $crm_activity->uid = $user->uid;
-  $activity_id = crm_activity_save($crm_activity);
-  $form_state['activity_id'] = $crm_activity->crm_activity_id;
-  $relation = relation_create('crm_activity', array(
-                array('entity_type' => 'crm_activity',
+  $activity_id = crm_core_activity_save($crm_activity);
+  $form_state['activity_id'] = $crm_activity->activity_id;
+  $relation = relation_create('crm_core_activity', array(
+                array('entity_type' => 'crm_core_activity',
                        'entity_bundle' => $crm_activity->type,
-                       'entity_id' => $crm_activity->crm_activity_id,
+                       'entity_id' => $crm_activity->activity_id,
                        'r_index' => 0,
                        ),
                   array('entity_type' => $form_state['values']['entity']['type'],

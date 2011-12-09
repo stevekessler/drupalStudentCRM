@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Sets up a table to track activity data.
+ */
+
+
+/**
+ * Implements hook_schema().
+ */
+function student_crm_activity_case_alter_schema() {
+  $schema = array();
+
+  $schema['student_crm_activity_case_alter'] = array(
+    'description' => 'The table to track changes to cases via activities.',
+    'fields' => array(
+      'activity_id' => array(
+        'description' => 'Primary Key: Identifier for a crm_case.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'data' => array(
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+        'serialize' => TRUE,
+        'description' => 'A serialized array of additional data.',
+      ),
+    ),
+    'primary key' => array('activity_id'),
+  );
+
+  return $schema;
+}

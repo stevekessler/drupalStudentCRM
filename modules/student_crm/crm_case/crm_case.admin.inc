@@ -86,8 +86,8 @@ function crm_case_edit_form($form, &$form_state, $crm_case) {
     $form['case_status']['#access'] = FALSE;
   }
   
-  if (arg(4) && $contact = crm_contact_load(arg(4))) {
-    $form['crm_contact'] = array(
+  if (arg(4) && $contact = crm_core_contact_load(arg(4))) {
+    $form['crm_core_contact'] = array(
       '#type' => 'hidden',
       '#value' => $contact->contact_id,
     );
@@ -159,15 +159,15 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
   $crm_case->changed = time();
   
   $crm_case->save();
-  if ($crm_case->crm_contact) {
-    $contact = crm_contact_load($crm_case->crm_contact);
+  if ($crm_case->crm_core_contact) {
+    $contact = crm_core_contact_load($crm_case->crm_core_contact);
     $relation = relation_create('crm_contact_case', array(
                     array('entity_type' => 'crm_case',
                            'entity_bundle' => $crm_case->type,
                            'entity_id' => $crm_case->cid,
                            'r_index' => 0,
                            ),
-                      array('entity_type' => 'crm_contact',
+                      array('entity_type' => 'crm_core_contact',
                              'entity_bundle' => $contact->type, 
                              'entity_id' => $contact->contact_id,
                              'r_index' => 1, 
@@ -177,10 +177,10 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
     $rid = $relation->rid;
     $case_type = crm_case_type_load($crm_case->type);
     if($case_type->data['email_contact']) {
-      $email = field_get_items('crm_contact', $contact, 'field_contact_email');
+      $email = field_get_items('crm_core_contact', $contact, 'field_contact_email');
       if(valid_email_address($email[0]['email'])) {
         $email_body = token_replace($case_type->data['email_body']['value'], array(
-                          'crm_contact' => $contact,
+                          'crm_core_contact' => $contact,
                           'crm_case' => $crm_case,
                         ));
         $email_body = check_markup($email_body, $case_type->data['email_body']['format']);
@@ -274,7 +274,7 @@ function theme_crm_case_add_list($variables) {
   }
   else {
     if (user_access('administer crm_case types')) {
-      $output = '<p>' . t('CRMCase Entities cannot be added because you have not created any case types yet. Go to the <a href="@create-crm_case-type">crm_case type creation page</a> to add a new crm_case type.', array('@create-crm_case-type' => url('crm/admin/case/types/add'))) . '</p>';
+      $output = '<p>' . t('CRMCase Entities cannot be added because you have not created any case types yet. Go to the <a href="@create-crm_case-type">crm_case type creation page</a> to add a new crm_case type.', array('@create-crm_case-type' => url('admin/structure/crm/case-types/add'))) . '</p>';
     }
     else {
       $output = '<p>' . t('No crm_case types have been created yet for you to use.') . '</p>';

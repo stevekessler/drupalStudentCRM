@@ -25,7 +25,7 @@ function crm_case_relation_default_relation_types() {
     0 => 'crm_case:*',
   );
   $relation_type->target_bundles = array(
-    0 => 'crm_contact:*',
+    0 => 'crm_core_contact:*',
   );
   $export['crm_contact_case'] = $relation_type;
 

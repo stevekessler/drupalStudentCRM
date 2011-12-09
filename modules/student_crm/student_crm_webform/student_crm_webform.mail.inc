@@ -20,7 +20,7 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
   }
   $body = check_markup($field['settings']['email_body']['value'], $field['settings']['email_body']['format']);
   if ($entity_type == 'case') {
-    $tokens = array('crm_contact' => crm_case_get_contact($entity),
+    $tokens = array('crm_core_contact' => crm_case_get_contact($entity),
                     'crm_case' => $entity);
   }
   else {
@@ -29,7 +29,7 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
   $tokens['webform'] = $field['settings']['webform'];
   $tokens['entity_type'] = $entity_type;
   if($entity_type == 'crm_case') {
-    $tokens['crm_contact'] = crm_case_get_contact($entity);
+    $tokens['crm_core_contact'] = crm_case_get_contact($entity);
   }
   $message['body'] = token_replace($body, $tokens);
   $message['subject'] = token_replace(check_plain($field['settings']['email_subject']), $tokens);
@@ -43,8 +43,8 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
  * Form for ad-hoc form sending contact form.
  */
 function student_crm_webform_send_contact_email_form() {
-  $contact = menu_get_object('crm_contact', 2);
-  $email = field_get_items('crm_contact', $contact, 'field_contact_email');
+  $contact = menu_get_object('crm_core_contact', 2);
+  $email = field_get_items('crm_core_contact', $contact, 'field_contact_email');
   drupal_add_js(drupal_get_path('module', 'student_crm_webform') . '/js/student_crm_webform.send_form.js');
   $form = array();
   
@@ -88,8 +88,8 @@ function student_crm_webform_send_contact_email_form_validate($form, $form_state
  * Form submit callback for ad-hoc form sending form.
  */
 function student_crm_webform_send_contact_email_form_submit($form, $form_state) {
-  $contact = crm_contact_load($form_state['values']['contact']);
-  $email_addresses = student_crm_webform_send_email('crm_contact', $contact, $form_state['values']['field'], $form_state['values']['manual-email']);
+  $contact = crm_core_contact_load($form_state['values']['contact']);
+  $email_addresses = student_crm_webform_send_email('crm_core_contact', $contact, $form_state['values']['field'], $form_state['values']['manual-email']);
   
   $case = crm_case_load($form_state['values']['case']);
   $fields = field_info_instances();
@@ -190,9 +190,9 @@ function _student_crm_webform_get_field_email_addresses($field, $entity, $entity
   if ($field['settings']['email_address'] == 'contact') {
     $contact = crm_case_get_contact($case);
     $fields = field_info_instances();
-    foreach ($fields['crm_contact'][$contact->type] as $field_name => $field) {
+    foreach ($fields['crm_core_contact'][$contact->type] as $field_name => $field) {
       if ($field['widget']['module'] == 'email') {
-        $items = field_get_items('crm_contact', $contact, $field_name);
+        $items = field_get_items('crm_core_contact', $contact, $field_name);
         foreach ($items as $address) {
           $emails[$address['email']] = $address['email'];
         }

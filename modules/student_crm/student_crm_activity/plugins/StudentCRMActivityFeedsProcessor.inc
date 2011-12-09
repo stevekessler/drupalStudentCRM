@@ -13,7 +13,7 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
    * Define entity type.
    */
   public function entityType() {
-    return 'crm_activity';
+    return 'crm_core_activity';
   }
 
   /**
@@ -29,7 +29,7 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
    * Creates a new crm_activity crm_activity in memory and returns it.
    */
   public function newActivity(FeedsSource $source, $item) {
-      $crm_activity = crm_activity_create(array('type' => $this->config['activity_type']));
+      $crm_activity = crm_core_activity_create(array('type' => $this->config['activity_type']));
       $crm_activity->crm_contact_id = $item['student_entity'];
       if($item['author_name']) {
         $author = db_select('users', 'u')
@@ -71,7 +71,7 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
     }
     while ($item = $parser_result->shiftItem()) {
       $item['author_name'] = $item[$author_name_key];
-      $item['student_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_contact');
+      $item['student_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_core_contact');
       if (!($entity_id = $this->existingEntityId($source, $parser_result)) ||
            ($this->config['update_existing'] != FEEDS_SKIP_EXISTING)) {
 
@@ -175,15 +175,15 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
    * Loads an existing crm_activity crm_activity.
    *
    * If the update existing method is not FEEDS_UPDATE_EXISTING, only the crm_activity crm_activity
-   * table will be loaded, foregoing the crm_activity_load API for better performance.
+   * table will be loaded, foregoing the crm_core_activity_load API for better performance.
    */
   protected function entityLoad(FeedsSource $source, $crm_activity_id) {
     if ($this->config['update_existing'] == FEEDS_UPDATE_EXISTING) {
-      $crm_activity = crm_activity_load($crm_activity_id, NULL, TRUE);
+      $crm_activity = crm_core_activity_load($crm_activity_id, NULL, TRUE);
     }
     else {
       // We're replacing the existing crm_activity crm_activity. Only save the absolutely necessary.
-      $crm_activity = db_query("SELECT created, crm_activity_id, vid, type FROM {crm_activity} WHERE crm_activity_id = :crm_activity_id", array(':crm_activity_id' => $crm_activity_id))->fetchObject();
+      $crm_activity = db_query("SELECT created, crm_activity_id, vid, type FROM {crm_core_activity} WHERE crm_activity_id = :crm_activity_id", array(':crm_activity_id' => $crm_activity_id))->fetchObject();
       $crm_activity->uid = $this->config['author'];
     }
     // Populate properties that are set by crm_activity crm_activity_object_prepare().
@@ -200,16 +200,16 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
    * Save a crm_activity crm_activity.
    */
   public function entitySave($entity) {
-    $contact = crm_contact_load($entity->crm_contact_id);
-    crm_activity_save($entity);
+    $contact = crm_core_contact_load($entity->crm_contact_id);
+    crm_core_activity_save($entity);
     
-    $relation = relation_create('crm_activity', array(
-                    array('entity_type' => 'crm_activity',
+    $relation = relation_create('crm_core_activity', array(
+                    array('entity_type' => 'crm_core_activity',
                           'entity_bundle' => $entity->type,
-                          'entity_id' => $entity->crm_activity_id,
+                          'entity_id' => $entity->activity_id,
                           'r_index' => 0,
                           ),
-                    array('entity_type' => 'crm_contact',
+                    array('entity_type' => 'crm_core_contact',
                           'entity_bundle' => $contact->type, 
                           'entity_id' => $contact->contact_id,
                           'r_index' => 1,
@@ -242,13 +242,13 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
       return;
     }
     $count = $this->getLimit();
-    $activities = db_query_range("SELECT c.crm_activity_id FROM {crm_activity} c JOIN {feeds_item} fi ON fi.entity_type = 'crm_activity' AND c.crm_activity_id = fi.entity_id WHERE fi.id = :id AND c.created < :created", 0, $count, array(':id' => $this->id, ':created' => REQUEST_TIME - $time));
+    $activities = db_query_range("SELECT c.crm_activity_id FROM {crm_core_activity} c JOIN {feeds_item} fi ON fi.entity_type = 'crm_core_activity' AND c.crm_activity_id = fi.entity_id WHERE fi.id = :id AND c.created < :created", 0, $count, array(':id' => $this->id, ':created' => REQUEST_TIME - $time));
     $crm_activity_ids = array();
     foreach ($activities as $crm_activity) {
       $crm_activity_ids[$crm_activity->crm_activity_id] = $crm_activity->crm_activity_id;
     }
     $this->entityDeleteMultiple($crm_activity_ids);
-    if (db_query_range("SELECT 1 FROM {crm_activity} c JOIN {feeds_item} fi ON fi.entity_type = 'crm_activity' AND c.crm_activity_id = fi.entity_id WHERE fi.id = :id AND c.created < :created", 0, 1, array(':id' => $this->id, ':created' => REQUEST_TIME - $time))->fetchField()) {
+    if (db_query_range("SELECT 1 FROM {crm_core_activity} c JOIN {feeds_item} fi ON fi.entity_type = 'crm_core_activity' AND c.crm_activity_id = fi.entity_id WHERE fi.id = :id AND c.created < :created", 0, 1, array(':id' => $this->id, ':created' => REQUEST_TIME - $time))->fetchField()) {
       return FEEDS_BATCH_ACTIVE;
     }
     return FEEDS_BATCH_COMPLETE;
@@ -287,7 +287,7 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
       '#default_value' => empty($author->name) ?  'anonymous' : check_plain($author->name),
     );
     
-    $activity_types = crm_activity_get_types();
+    $activity_types = crm_core_activity_types();
     $types = array();
     foreach($activity_types as $type) {
       $types[$type->type] = $type->label;
@@ -348,7 +348,7 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
       case 'feeds_source':
         // Get the class of the feed crm_activity crm_activity importer's fetcher and set the source
         // property. See feeds_crm_activity crm_activity_update() how $crm_activity->feeds gets stored.
-        if ($id = feeds_get_importer_id('crm_activity')) {
+        if ($id = feeds_get_importer_id('crm_core_activity')) {
           $class = get_class(feeds_importer($id)->fetcher);
           $target_crm_activity->feeds[$class]['source'] = $value;
           // This effectively suppresses 'import on submission' feature.
@@ -388,7 +388,7 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
     );
 
     // If the target content type is a Feed crm_activity crm_activity, expose its source field.
-    if ($id = feeds_get_importer_id('crm_activity')) {
+    if ($id = feeds_get_importer_id('crm_core_activity')) {
       $name = feeds_importer($id)->config['name'];
       $targets['feeds_source'] = array(
         'name' => t('Feed source'),
@@ -399,7 +399,7 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
 
     // Let other modules expose mapping targets.
     self::loadMappers();
-    feeds_alter('feeds_processor_targets', $targets, 'crm_activity', $this->config['activity_type']);
+    feeds_alter('feeds_processor_targets', $targets, 'crm_core_activity', $this->config['activity_type']);
 
     return $targets;
   }
@@ -417,11 +417,11 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
     foreach ($this->uniqueTargets($source, $result) as $target => $value) {
       switch ($target) {
         case 'crm_activity_id':
-          $crm_activity_id = db_query("SELECT crm_activity_id FROM {crm_activity} WHERE crm_activity_id = :crm_activity_id", array(':crm_activity_id' => $value))->fetchField();
+          $crm_activity_id = db_query("SELECT crm_activity_id FROM {crm_core_activity} WHERE crm_activity_id = :crm_activity_id", array(':crm_activity_id' => $value))->fetchField();
           break;
         case 'feeds_source':
-          if ($id = feeds_get_importer_id('crm_activity')) {
-            $crm_activity_id = db_query("SELECT fs.feed_crm_activity_id FROM {crm_activity} c JOIN {feeds_source} fs ON c.crm_activity_id = fs.feed_crm_activity_id WHERE fs.id = :id AND fs.source = :source", array(':id' => $id, ':source' => $value))->fetchField();
+          if ($id = feeds_get_importer_id('crm_core_activity')) {
+            $crm_activity_id = db_query("SELECT fs.feed_crm_activity_id FROM {crm_core_activity} c JOIN {feeds_source} fs ON c.crm_activity_id = fs.feed_crm_activity_id WHERE fs.id = :id AND fs.source = :source", array(':id' => $id, ':source' => $value))->fetchField();
           }
           break;
       }

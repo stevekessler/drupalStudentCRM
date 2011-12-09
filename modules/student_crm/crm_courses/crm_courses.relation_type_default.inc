@@ -22,7 +22,7 @@ function crm_courses_relation_default_relation_types() {
   $relation_type->min_arity = 2;
   $relation_type->max_arity = 2;
   $relation_type->source_bundles = array(
-    0 => 'crm_contact:student',
+    0 => 'crm_core_contact:student',
     1 => 'node:course',
   );
   $relation_type->target_bundles = array();

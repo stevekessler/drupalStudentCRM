@@ -542,48 +542,43 @@ function student_crm_demo_feeds_importer_default() {
         'author' => 0,
         'mappings' => array(
           0 => array(
-            'source' => 'first_name',
-            'target' => 'field_first_name',
-            'unique' => FALSE,
-          ),
-          1 => array(
-            'source' => 'last_name',
-            'target' => 'field_last_name',
-            'unique' => FALSE,
-          ),
-          2 => array(
-            'source' => 'full_name',
-            'target' => 'contact_name',
-            'unique' => FALSE,
-          ),
-          3 => array(
             'source' => 'student_id',
             'target' => 'field_student_id',
             'unique' => FALSE,
           ),
-          4 => array(
+          1 => array(
             'source' => 'student_id',
             'target' => 'guid',
             'unique' => 1,
           ),
-          5 => array(
+          2 => array(
             'source' => 'degree',
             'target' => 'field_student_degrees',
             'unique' => FALSE,
           ),
-          6 => array(
+          3 => array(
             'source' => 'email',
             'target' => 'field_contact_email',
             'unique' => FALSE,
           ),
-          7 => array(
+          4 => array(
             'source' => 'status',
             'target' => 'field_student_status',
             'unique' => FALSE,
           ),
-          8 => array(
+          5 => array(
             'source' => 'level',
             'target' => 'field_student_level',
+            'unique' => FALSE,
+          ),
+          6 => array(
+            'source' => 'first_name',
+            'target' => 'contact_name:given',
+            'unique' => FALSE,
+          ),
+          7 => array(
+            'source' => 'last_name',
+            'target' => 'contact_name:family',
             'unique' => FALSE,
           ),
         ),

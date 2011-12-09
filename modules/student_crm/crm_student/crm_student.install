@@ -12,4 +12,12 @@ function crm_student_install() {
     }
   }
   user_save($user);
+    
+  $student = crm_core_contact_type_new();
+  $student->type = 'student';
+  $student->name = t('Student');
+  $student->description = t('A student contact record.');
+  $student->locked = 1;
+  $student->is_new = TRUE;
+  crm_core_contact_type_save($student);
 }

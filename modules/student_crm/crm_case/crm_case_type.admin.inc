@@ -84,7 +84,7 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
   if (module_exists('token')) {
     $form['email']['email_tokens'] = array(
       '#theme' => 'token_tree',
-      '#token_types' => array('crm_case', 'crm_contact'),
+      '#token_types' => array('crm_case', 'crm_core_contact'),
     );
   }
 
@@ -115,12 +115,12 @@ function crm_case_type_form_submit(&$form, &$form_state) {
   $crm_case_type->data['email_body'] = $crm_case_type->email_body;
   $crm_case_type->data['contact_edit'] = $crm_case_type->contact_edit;
   $crm_case_type->save();
-  $form_state['redirect'] = 'crm/admin/case/types';
+  $form_state['redirect'] = 'admin/structure/crm/case-types';
 }
 
 /**
  * Form API submit callback for the delete button.
  */
 function crm_case_type_form_submit_delete(&$form, &$form_state) {
-  $form_state['redirect'] = 'crm/admin/case/types/' . $form_state['crm_case_type']->type . '/delete';
+  $form_state['redirect'] = 'admin/structure/crm/case-types/' . $form_state['crm_case_type']->type . '/delete';
 }

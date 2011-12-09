@@ -10,8 +10,8 @@
 function student_crm_activity_mailer_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'crm_activity-email_activity-field_activity_attachments'
-  $fields['crm_activity-email_activity-field_activity_attachments'] = array(
+  // Exported field: 'crm_core_activity-email_activity-field_activity_attachments'
+  $fields['crm_core_activity-email_activity-field_activity_attachments'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '-1',
@@ -53,7 +53,7 @@ function student_crm_activity_mailer_field_default_fields() {
           'weight' => 1,
         ),
       ),
-      'entity_type' => 'crm_activity',
+      'entity_type' => 'crm_core_activity',
       'field_name' => 'field_activity_attachments',
       'label' => 'Attachments',
       'required' => 0,
@@ -76,8 +76,8 @@ function student_crm_activity_mailer_field_default_fields() {
     ),
   );
 
-  // Exported field: 'crm_activity-email_activity-field_activity_note'
-  $fields['crm_activity-email_activity-field_activity_note'] = array(
+  // Exported field: 'crm_core_activity-email_activity-field_activity_note'
+  $fields['crm_core_activity-email_activity-field_activity_note'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
@@ -116,7 +116,7 @@ function student_crm_activity_mailer_field_default_fields() {
           'weight' => 0,
         ),
       ),
-      'entity_type' => 'crm_activity',
+      'entity_type' => 'crm_core_activity',
       'field_name' => 'field_activity_note',
       'label' => 'Note',
       'required' => 0,

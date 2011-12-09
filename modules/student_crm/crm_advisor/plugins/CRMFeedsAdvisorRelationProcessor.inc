@@ -29,14 +29,14 @@ class CRMFeedsAdvisorRelationProcessor extends FeedsProcessor {
    * Creates a new advisor relation in memory and returns it.
    */
   public function newRelation(FeedsSource $source, $item) {
-    $contact = crm_contact_load($item['student_entity']);
+    $contact = crm_core_contact_load($item['student_entity']);
     $relation = relation_create('advisor', array(
                     array('entity_type' => 'user',
                           'entity_bundle' => 'user', 
                           'entity_id' => $item['advisor_entity'],
                           'r_index' => 0,
                          ),
-                    array('entity_type' => 'crm_contact',
+                    array('entity_type' => 'crm_core_contact',
                           'entity_bundle' => $contact->type, 
                           'entity_id' => $contact->contact_id,
                           'r_index' => 1,
@@ -69,7 +69,7 @@ class CRMFeedsAdvisorRelationProcessor extends FeedsProcessor {
 
     while ($item = $parser_result->shiftItem()) {
       $item['advisor_entity'] = $this->getTargetEntity($item['advisor_id'], 'user');
-      $item['student_entity'] = $this->getTargetEntity($item['student_id'], 'crm_contact');
+      $item['student_entity'] = $this->getTargetEntity($item['student_id'], 'crm_core_contact');
       if ($item['advisor_entity'] && $item['student_entity'] && !($entity_id = $this->existingEntityId($source, $parser_result)) ||
            ($this->config['update_existing'] != FEEDS_SKIP_EXISTING)) {
 

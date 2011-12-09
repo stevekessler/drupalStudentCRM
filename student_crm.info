@@ -57,6 +57,7 @@ dependencies[] = guiders_js
 ;dependencies[] = interface
 dependencies[] = job_scheduler
 dependencies[] = link
+dependencies[] = name
 dependencies[] = options_element
 dependencies[] = views
 dependencies[] = views_ui
@@ -92,8 +93,12 @@ dependencies[] = privatemsg_rules
 dependencies[] = privatemsg_filter
 
 ;crm
-dependencies[] = crm
-dependencies[] = crm_activity
+dependencies[] = crm_core
+dependencies[] = crm_core_contact
+dependencies[] = crm_core_activity
+dependencies[] = crm_ui
+dependencies[] = crm_core_contact_ui
+dependencies[] = crm_core_activity_ui
 
 ;student crm
 dependencies[] = crm_context
@@ -132,3 +137,9 @@ terms[dropin][vocabulary_machine_name] = activity_types
 
 terms[letter][name] = Letter
 terms[letter][vocabulary_machine_name] = activity_types
+
+terms[faculty][name] = Faculty
+terms[faculty][vocabulary_machine_name] = advisor_type
+
+terms[major_advisor][name] = Major advisor
+terms[major_advisor][vocabulary_machine_name] = advisor_type

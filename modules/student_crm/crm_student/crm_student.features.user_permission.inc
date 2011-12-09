@@ -37,33 +37,6 @@ function crm_student_user_default_permissions() {
     'module' => 'user',
   );
 
-  // Exported permission: add contacts
-  $permissions['add contacts'] = array(
-    'name' => 'add contacts',
-    'roles' => array(
-      0 => 'advisor',
-    ),
-    'module' => 'crm',
-  );
-
-  // Exported permission: administer contact types
-  $permissions['administer contact types'] = array(
-    'name' => 'administer contact types',
-    'roles' => array(),
-  );
-
-  // Exported permission: administer crm_case types
-  $permissions['administer crm_case types'] = array(
-    'name' => 'administer crm_case types',
-    'roles' => array(),
-  );
-
-  // Exported permission: administer crm_cases
-  $permissions['administer crm_cases'] = array(
-    'name' => 'administer crm_cases',
-    'roles' => array(),
-  );
-
   // Exported permission: administer features
   $permissions['administer features'] = array(
     'name' => 'administer features',
@@ -106,18 +79,6 @@ function crm_student_user_default_permissions() {
   // Exported permission: bypass node access
   $permissions['bypass node access'] = array(
     'name' => 'bypass node access',
-    'roles' => array(),
-  );
-
-  // Exported permission: clear crm_demo_degrees feeds
-  $permissions['clear crm_demo_degrees feeds'] = array(
-    'name' => 'clear crm_demo_degrees feeds',
-    'roles' => array(),
-  );
-
-  // Exported permission: clear crm_demo_students feeds
-  $permissions['clear crm_demo_students feeds'] = array(
-    'name' => 'clear crm_demo_students feeds',
     'roles' => array(),
   );
 
@@ -197,15 +158,6 @@ function crm_student_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: edit contacts
-  $permissions['edit contacts'] = array(
-    'name' => 'edit contacts',
-    'roles' => array(
-      0 => 'advisor',
-    ),
-    'module' => 'crm',
-  );
-
   // Exported permission: edit own webform content
   $permissions['edit own webform content'] = array(
     'name' => 'edit own webform content',
@@ -224,18 +176,6 @@ function crm_student_user_default_permissions() {
   // Exported permission: export relation types
   $permissions['export relation types'] = array(
     'name' => 'export relation types',
-    'roles' => array(),
-  );
-
-  // Exported permission: import crm_demo_degrees feeds
-  $permissions['import crm_demo_degrees feeds'] = array(
-    'name' => 'import crm_demo_degrees feeds',
-    'roles' => array(),
-  );
-
-  // Exported permission: import crm_demo_students feeds
-  $permissions['import crm_demo_students feeds'] = array(
-    'name' => 'import crm_demo_students feeds',
     'roles' => array(),
   );
 

@@ -28,7 +28,7 @@ class crm_context_context_condition_contact_type extends context_condition {
   
   function condition_values() {
     $values = array();
-    foreach (crm_contact_types() as $type) {
+    foreach (crm_core_contact_types() as $type) {
       $values[$type->type] = check_plain($type->name);
     }
     return $values;

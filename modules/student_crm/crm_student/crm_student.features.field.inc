@@ -10,139 +10,8 @@
 function crm_student_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'crm_contact-student-contact_image'
-  $fields['crm_contact-student-contact_image'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(
-        0 => 'crm_contact',
-      ),
-      'field_name' => 'contact_image',
-      'foreign keys' => array(
-        'fid' => array(
-          'columns' => array(
-            'fid' => 'fid',
-          ),
-          'table' => 'file_managed',
-        ),
-      ),
-      'indexes' => array(
-        'fid' => array(
-          0 => 'fid',
-        ),
-      ),
-      'module' => 'image',
-      'settings' => array(
-        'default_image' => 0,
-        'uri_scheme' => 'public',
-      ),
-      'translatable' => '0',
-      'type' => 'image',
-    ),
-    'field_instance' => array(
-      'bundle' => 'student',
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '4',
-        ),
-      ),
-      'entity_type' => 'crm_contact',
-      'field_name' => 'contact_image',
-      'label' => 'Image',
-      'required' => FALSE,
-      'settings' => array(
-        'alt_field' => 0,
-        'file_directory' => '',
-        'file_extensions' => 'png gif jpg jpeg',
-        'max_filesize' => '',
-        'max_resolution' => '',
-        'min_resolution' => '',
-        'title_field' => 0,
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'module' => 'image',
-        'settings' => array(
-          'preview_image_style' => 'thumbnail',
-          'progress_indicator' => 'throbber',
-        ),
-        'type' => 'image_image',
-        'weight' => '1',
-      ),
-    ),
-  );
-
-  // Exported field: 'crm_contact-student-contact_name'
-  $fields['crm_contact-student-contact_name'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(
-        0 => 'crm_contact',
-      ),
-      'field_name' => 'contact_name',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'module' => 'text',
-      'settings' => array(
-        'max_length' => 255,
-      ),
-      'translatable' => '0',
-      'type' => 'text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'student',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '3',
-        ),
-      ),
-      'entity_type' => 'crm_contact',
-      'field_name' => 'contact_name',
-      'label' => 'Name',
-      'required' => TRUE,
-      'settings' => array(
-        'text_processing' => 0,
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'module' => 'text',
-        'settings' => array(
-          'size' => 60,
-        ),
-        'type' => 'text_textfield',
-        'weight' => '0',
-      ),
-    ),
-  );
-
-  // Exported field: 'crm_contact-student-field_contact_email'
-  $fields['crm_contact-student-field_contact_email'] = array(
+  // Exported field: 'crm_core_contact-student-field_contact_email'
+  $fields['crm_core_contact-student-field_contact_email'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
@@ -169,7 +38,7 @@ function crm_student_field_default_fields() {
           'weight' => '0',
         ),
       ),
-      'entity_type' => 'crm_contact',
+      'entity_type' => 'crm_core_contact',
       'field_name' => 'field_contact_email',
       'label' => 'Email address',
       'required' => 0,
@@ -188,130 +57,8 @@ function crm_student_field_default_fields() {
     ),
   );
 
-  // Exported field: 'crm_contact-student-field_first_name'
-  $fields['crm_contact-student-field_first_name'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_first_name',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'module' => 'text',
-      'settings' => array(
-        'max_length' => '255',
-      ),
-      'translatable' => '0',
-      'type' => 'text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'student',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '5',
-        ),
-      ),
-      'entity_type' => 'crm_contact',
-      'field_name' => 'field_first_name',
-      'label' => 'First Name',
-      'required' => 1,
-      'settings' => array(
-        'text_processing' => '0',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'text',
-        'settings' => array(
-          'size' => '60',
-        ),
-        'type' => 'text_textfield',
-        'weight' => '2',
-      ),
-    ),
-  );
-
-  // Exported field: 'crm_contact-student-field_last_name'
-  $fields['crm_contact-student-field_last_name'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_last_name',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'module' => 'text',
-      'settings' => array(
-        'max_length' => '255',
-      ),
-      'translatable' => '0',
-      'type' => 'text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'student',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '6',
-        ),
-      ),
-      'entity_type' => 'crm_contact',
-      'field_name' => 'field_last_name',
-      'label' => 'Last name',
-      'required' => 0,
-      'settings' => array(
-        'text_processing' => '0',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'text',
-        'settings' => array(
-          'size' => '60',
-        ),
-        'type' => 'text_textfield',
-        'weight' => '3',
-      ),
-    ),
-  );
-
-  // Exported field: 'crm_contact-student-field_student_degrees'
-  $fields['crm_contact-student-field_student_degrees'] = array(
+  // Exported field: 'crm_core_contact-student-field_student_degrees'
+  $fields['crm_core_contact-student-field_student_degrees'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '-1',
@@ -356,7 +103,7 @@ function crm_student_field_default_fields() {
           'weight' => '7',
         ),
       ),
-      'entity_type' => 'crm_contact',
+      'entity_type' => 'crm_core_contact',
       'field_name' => 'field_student_degrees',
       'label' => 'Degrees',
       'required' => 0,
@@ -373,8 +120,8 @@ function crm_student_field_default_fields() {
     ),
   );
 
-  // Exported field: 'crm_contact-student-field_student_id'
-  $fields['crm_contact-student-field_student_id'] = array(
+  // Exported field: 'crm_core_contact-student-field_student_id'
+  $fields['crm_core_contact-student-field_student_id'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
@@ -414,7 +161,7 @@ function crm_student_field_default_fields() {
           'weight' => '9',
         ),
       ),
-      'entity_type' => 'crm_contact',
+      'entity_type' => 'crm_core_contact',
       'field_name' => 'field_student_id',
       'label' => 'Student ID',
       'required' => 1,
@@ -434,8 +181,8 @@ function crm_student_field_default_fields() {
     ),
   );
 
-  // Exported field: 'crm_contact-student-field_student_level'
-  $fields['crm_contact-student-field_student_level'] = array(
+  // Exported field: 'crm_core_contact-student-field_student_level'
+  $fields['crm_core_contact-student-field_student_level'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
@@ -480,7 +227,7 @@ function crm_student_field_default_fields() {
           'weight' => '1',
         ),
       ),
-      'entity_type' => 'crm_contact',
+      'entity_type' => 'crm_core_contact',
       'field_name' => 'field_student_level',
       'label' => 'Class level',
       'required' => 1,
@@ -497,8 +244,8 @@ function crm_student_field_default_fields() {
     ),
   );
 
-  // Exported field: 'crm_contact-student-field_student_status'
-  $fields['crm_contact-student-field_student_status'] = array(
+  // Exported field: 'crm_core_contact-student-field_student_status'
+  $fields['crm_core_contact-student-field_student_status'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
@@ -543,7 +290,7 @@ function crm_student_field_default_fields() {
           'weight' => '8',
         ),
       ),
-      'entity_type' => 'crm_contact',
+      'entity_type' => 'crm_core_contact',
       'field_name' => 'field_student_status',
       'label' => 'Status',
       'required' => 1,
@@ -560,8 +307,8 @@ function crm_student_field_default_fields() {
     ),
   );
 
-  // Exported field: 'crm_contact-student-field_student_tags'
-  $fields['crm_contact-student-field_student_tags'] = array(
+  // Exported field: 'crm_core_contact-student-field_student_tags'
+  $fields['crm_core_contact-student-field_student_tags'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '-1',
@@ -606,7 +353,7 @@ function crm_student_field_default_fields() {
           'weight' => '2',
         ),
       ),
-      'entity_type' => 'crm_contact',
+      'entity_type' => 'crm_core_contact',
       'field_name' => 'field_student_tags',
       'label' => 'Tags',
       'required' => 0,
@@ -1012,10 +759,7 @@ function crm_student_field_default_fields() {
   t('Degrees');
   t('Email address');
   t('First Name');
-  t('Image');
   t('Last Name');
-  t('Last name');
-  t('Name');
   t('Profile picture');
   t('Status');
   t('Student ID');

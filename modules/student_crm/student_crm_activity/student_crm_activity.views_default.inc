@@ -14,10 +14,10 @@ function student_crm_activity_views_default_views() {
   $view->name = 'crm_activities';
   $view->description = '';
   $view->tag = 'default';
-  $view->base_table = 'crm_activity';
+  $view->base_table = 'crm_core_activity';
   $view->human_name = 'CRM Activities';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -46,22 +46,22 @@ function student_crm_activity_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No notes yet! Use the above form to create a new note about this person.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: Activities: Relation: CRM Activity (crm_activity <-> crm_contact) */
-  $handler->display->display_options['relationships']['relation_crm_activity_crm_contact']['id'] = 'relation_crm_activity_crm_contact';
-  $handler->display->display_options['relationships']['relation_crm_activity_crm_contact']['table'] = 'crm_activity';
-  $handler->display->display_options['relationships']['relation_crm_activity_crm_contact']['field'] = 'relation_crm_activity_crm_contact';
-  $handler->display->display_options['relationships']['relation_crm_activity_crm_contact']['required'] = 0;
-  $handler->display->display_options['relationships']['relation_crm_activity_crm_contact']['r_index'] = '-1';
-  /* Sort criterion: Activities: Created */
+  /* Relationship: Array: Relation: CRM Activity (crm_core_activity <-> crm_core_contact) */
+  $handler->display->display_options['relationships']['relation_crm_core_activity_crm_core_contact']['id'] = 'relation_crm_core_activity_crm_core_contact';
+  $handler->display->display_options['relationships']['relation_crm_core_activity_crm_core_contact']['table'] = 'crm_core_activity';
+  $handler->display->display_options['relationships']['relation_crm_core_activity_crm_core_contact']['field'] = 'relation_crm_core_activity_crm_core_contact';
+  $handler->display->display_options['relationships']['relation_crm_core_activity_crm_core_contact']['required'] = 1;
+  $handler->display->display_options['relationships']['relation_crm_core_activity_crm_core_contact']['r_index'] = '-1';
+  /* Sort criterion: Array: Date created */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'crm_activity';
+  $handler->display->display_options['sorts']['created']['table'] = 'crm_core_activity';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   /* Contextual filter: CRM Contact: Contact ID */
   $handler->display->display_options['arguments']['contact_id']['id'] = 'contact_id';
-  $handler->display->display_options['arguments']['contact_id']['table'] = 'crm_contact';
+  $handler->display->display_options['arguments']['contact_id']['table'] = 'crm_core_contact';
   $handler->display->display_options['arguments']['contact_id']['field'] = 'contact_id';
-  $handler->display->display_options['arguments']['contact_id']['relationship'] = 'relation_crm_activity_crm_contact';
+  $handler->display->display_options['arguments']['contact_id']['relationship'] = 'relation_crm_core_activity_crm_core_contact';
   $handler->display->display_options['arguments']['contact_id']['default_action'] = 'default';
   $handler->display->display_options['arguments']['contact_id']['default_argument_type'] = 'raw';
   $handler->display->display_options['arguments']['contact_id']['default_argument_options']['index'] = '2';
@@ -71,9 +71,9 @@ function student_crm_activity_views_default_views() {
   $handler->display->display_options['arguments']['contact_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['contact_id']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['contact_id']['not'] = 0;
-  /* Filter criterion: Activities: User has access to view activity */
+  /* Filter criterion: Array: User has access to view activity */
   $handler->display->display_options['filters']['activity_access']['id'] = 'activity_access';
-  $handler->display->display_options['filters']['activity_access']['table'] = 'crm_activity';
+  $handler->display->display_options['filters']['activity_access']['table'] = 'crm_core_activity';
   $handler->display->display_options['filters']['activity_access']['field'] = 'activity_access';
   $handler->display->display_options['filters']['activity_access']['value'] = '1';
 
@@ -92,18 +92,18 @@ function student_crm_activity_views_default_views() {
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Activities: Relation: CRM Activity (crm_activity <-> crm_case) */
-  $handler->display->display_options['relationships']['relation_crm_activity_crm_case']['id'] = 'relation_crm_activity_crm_case';
-  $handler->display->display_options['relationships']['relation_crm_activity_crm_case']['table'] = 'crm_activity';
-  $handler->display->display_options['relationships']['relation_crm_activity_crm_case']['field'] = 'relation_crm_activity_crm_case';
-  $handler->display->display_options['relationships']['relation_crm_activity_crm_case']['required'] = 0;
-  $handler->display->display_options['relationships']['relation_crm_activity_crm_case']['r_index'] = '-1';
+  /* Relationship: Array: Relation: CRM Activity (crm_core_activity <-> crm_case) */
+  $handler->display->display_options['relationships']['relation_crm_core_activity_crm_case']['id'] = 'relation_crm_core_activity_crm_case';
+  $handler->display->display_options['relationships']['relation_crm_core_activity_crm_case']['table'] = 'crm_core_activity';
+  $handler->display->display_options['relationships']['relation_crm_core_activity_crm_case']['field'] = 'relation_crm_core_activity_crm_case';
+  $handler->display->display_options['relationships']['relation_crm_core_activity_crm_case']['required'] = 1;
+  $handler->display->display_options['relationships']['relation_crm_core_activity_crm_case']['r_index'] = '-1';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Case: Case ID */
   $handler->display->display_options['arguments']['cid']['id'] = 'cid';
   $handler->display->display_options['arguments']['cid']['table'] = 'crm_case';
   $handler->display->display_options['arguments']['cid']['field'] = 'cid';
-  $handler->display->display_options['arguments']['cid']['relationship'] = 'relation_crm_activity_crm_case';
+  $handler->display->display_options['arguments']['cid']['relationship'] = 'relation_crm_core_activity_crm_case';
   $handler->display->display_options['arguments']['cid']['default_action'] = 'default';
   $handler->display->display_options['arguments']['cid']['default_argument_type'] = 'raw';
   $handler->display->display_options['arguments']['cid']['default_argument_options']['index'] = '2';

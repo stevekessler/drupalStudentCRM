@@ -75,7 +75,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
     while ($item = $parser_result->shiftItem()) {
       $item['author_name'] = $item[$author_name_key];
       $item['name'] = $item[$name_key];
-      $item['student_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_contact');
+      $item['student_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_core_contact');
       if (!($entity_id = $this->existingEntityId($source, $parser_result)) ||
            ($this->config['update_existing'] != FEEDS_SKIP_EXISTING)) {
 
@@ -204,7 +204,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
    * Save a crm_case crm_case.
    */
   public function entitySave($entity) {
-    $contact = crm_contact_load($entity->crm_contact_id);
+    $contact = crm_core_contact_load($entity->crm_contact_id);
     crm_case_save($entity);
     
     $relation = relation_create('crm_contact_case', array(
@@ -213,7 +213,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
                           'entity_id' => $entity->cid,
                           'r_index' => 0,
                           ),
-                    array('entity_type' => 'crm_contact',
+                    array('entity_type' => 'crm_core_contact',
                           'entity_bundle' => $contact->type, 
                           'entity_id' => $contact->contact_id,
                           'r_index' => 1,

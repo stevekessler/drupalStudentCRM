@@ -30,7 +30,7 @@ class CRMFeedsCourseEnrollmentProcessor extends FeedsProcessor {
    */
   public function newRelation(FeedsSource $source, $item) {
     $relation = relation_create('enrollment', array(
-                    array('entity_type' => 'crm_contact',
+                    array('entity_type' => 'crm_core_contact',
                           'entity_bundle' => 'student', 
                           'entity_id' => $item['student_entity'],
                           'r_index' => 0,
@@ -68,7 +68,7 @@ class CRMFeedsCourseEnrollmentProcessor extends FeedsProcessor {
 
     while ($item = $parser_result->shiftItem()) {
       $item['course_entity'] = $this->getTargetEntity($item['course_id'], 'node');
-      $item['student_entity'] = $this->getTargetEntity($item['student_id'], 'crm_contact');
+      $item['student_entity'] = $this->getTargetEntity($item['student_id'], 'crm_core_contact');
       if ($item['course_entity'] && $item['student_entity'] && !($entity_id = $this->existingEntityId($source, $parser_result)) ||
            ($this->config['update_existing'] != FEEDS_SKIP_EXISTING)) {
 

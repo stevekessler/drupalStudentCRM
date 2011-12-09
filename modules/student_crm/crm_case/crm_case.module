@@ -61,10 +61,11 @@ function crm_case_entity_info() {
     'access callback' => 'crm_case_type_access',
     'module' => 'crm_case',
     'admin ui' => array(
-      'path' => 'crm/admin/case/types',
+      'path' => 'admin/structure/crm/case-types',
       'file' => 'crm_case_type.admin.inc',
       'controller class' => 'CRMCaseTypeUIController',
       'menu wildcard' => '%crm_case_type',
+      'type' => MENU_LOCAL_TASK,
     ),
   );
 
@@ -82,11 +83,11 @@ function crm_case_get_contact($case) {
               ->condition('e.endpoints_entity_id', $case->cid);
   $query->leftJoin('field_data_endpoints', 'e2', 'e2.entity_id = e.entity_id AND e2.entity_type = e.entity_type');
   $query->fields('e2', array('endpoints_entity_id'))
-              ->condition('e2.endpoints_entity_type', 'crm_contact');
+              ->condition('e2.endpoints_entity_type', 'crm_core_contact');
   $id = $query->execute()
               ->fetchField();
   if ($id) {
-    return crm_contact_load($id);
+    return crm_core_contact_load($id);
   }
   return FALSE;
 }
@@ -138,15 +139,14 @@ function crm_case_entity_info_alter(&$entity_info) {
     $entity_info['crm_case']['bundles'][$type] = array(
       'label' => $info->label,
       'admin' => array(
-        'path' => 'crm/admin/case/types/manage/%crm_case_type',
-        'real path' => 'crm/admin/case/types/manage/' . $type,
+        'path' => 'admin/structure/crm/case-types/manage/%crm_case_type',
+        'real path' => 'admin/structure/crm/case-types/manage/' . $type,
         'bundle argument' => 5,
         'access arguments' => array('administer crm_case types'),
       ),
     );
   }
 }
-  
 
 /**
  * Implements hook_permission().
@@ -763,8 +763,9 @@ class CRMCaseTypeUIController extends EntityDefaultUIController {
    */
   public function hook_menu() {
     $items = parent::hook_menu();
-    $items[$this->path]['description'] = 'Manage crm_case entity types, including adding
+    $items[$this->path]['description'] = 'Manage cases, including adding
     and removing fields and the display of fields.';
+    $items[$this->path]['type'] = MENU_LOCAL_TASK;
     return $items;
   }
 }
@@ -815,7 +816,7 @@ function crm_case_crm_student_admin_links() {
 			'group' => t('Cases'),
 			'title' => t('Manage case types'),
 			'description' => t('Manage the types of cases that can be opened on contacts.'),
-			'href' => 'crm/admin/case/types',
+			'href' => 'admin/structure/crm/case-types',
 		),
 	);
 }

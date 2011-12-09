@@ -25,7 +25,7 @@ function student_crm_webform_relation_default_relation_types() {
     0 => 'webform_submission_entity:*',
   );
   $relation_type->target_bundles = array(
-    0 => 'crm_contact:*',
+    0 => 'crm_core_contact:*',
     1 => 'crm_case:*',
   );
   $export['webform_submission_to_entities'] = $relation_type;

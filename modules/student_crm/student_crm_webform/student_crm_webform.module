@@ -122,8 +122,8 @@ function student_crm_webform_permission() {
  */
 function student_crm_webform_webform_submission_entity_insert($entity) {
   $submission = $_SESSION['student_crm_webform_form'][$entity->nid];
-  if ($submission['entity_type'] == 'crm_contact') {
-    $target = crm_contact_load($submission['entity_id']);
+  if ($submission['entity_type'] == 'crm_core_contact') {
+    $target = crm_core_contact_load($submission['entity_id']);
     $target_type = $target->type;
   }
   
@@ -280,7 +280,7 @@ function student_crm_webform_field_instance_settings_form($field, $instance) {
   if (module_exists('token')) {
     $form['email_tokens'] = array(
       '#theme' => 'token_tree',
-      '#token_types' => array('crm_case', 'crm_contact'),
+      '#token_types' => array('crm_case', 'crm_core_contact'),
     );
   }
 
@@ -367,7 +367,7 @@ function student_crm_webform_token_info() {
             ),
   );
   return array('tokens' => array('crm_case'    => $link,
-                                 'crm_contact' => $link));
+                                 'crm_core_contact' => $link));
 }
 
 /**
@@ -376,14 +376,14 @@ function student_crm_webform_token_info() {
 function student_crm_webform_tokens($type, $tokens, $data = array(), $options = array()) {
   //$entity_type, $entity_id, $webform, $key
   //crm/webform/%/%/%node/%
-  if (!in_array($type, array('crm_case', 'crm_contact'))) {
+  if (!in_array($type, array('crm_case', 'crm_core_contact'))) {
     return;
   }
   if ($data['entity_type'] == 'crm_case') {
     $id = $data['crm_case']->cid;
   }
-  if ($data['entity_type'] == 'crm_contact') {
-    $id = $data['crm_contact']->contact_id;
+  if ($data['entity_type'] == 'crm_core_contact') {
+    $id = $data['crm_core_contact']->contact_id;
   }
   return array('[crm_case:student_crm_webform_link]' => url('crm/webform/' . $data['entity_type'] . '/' . $id . '/' . $data['webform'] . '/' . _student_crm_webform_generate_key($data['entity_type'], $id, $data['webform']), array('absolute' => TRUE))
               );

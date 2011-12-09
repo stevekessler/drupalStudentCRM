@@ -23,10 +23,14 @@ function student_crm_preprocess_html(&$vars) {
  * Add themed user info to activities.
  */
 function student_crm_preprocess_entity(&$variables) {
-  if($variables['elements']['#entity_type'] == 'crm_activity') {
-    $activity = $variables['crm_activity'];
-    $author = user_load($variables['crm_activity']->uid);
-    $variables['date'] = format_date($variables['crm_activity']->created, 'short');
+  if($variables['elements']['#entity_type'] == 'crm_core_activity') {
+    $variables['elements']['elements']['#template'] = 'templates/crm_core_activity';
+    $activity = $variables['crm_core_activity'];
+    $variables['content']['field_activity_participants'] = $variables['field_activity_participants'] = null;
+    $variables['content']['field_activity_date'] = $variables['field_activity_date'] = null;
+    $author = user_load($activity->uid);
+    $variables['date'] = format_date($activity->created, 'short');
+    $variables['name'] = theme('username', array('account' => $author));
     $variables['submitted'] = t('By !username <span class="date">on !datetime</span>', array('!username' => $variables['name'], '!datetime' => $variables['date']));
     
     $picture = field_get_items('user', $author, 'field_user_picture');
@@ -38,14 +42,14 @@ function student_crm_preprocess_entity(&$variables) {
                                                        'alt' => strip_tags($variables['name'])));
     $variables['contact_type'] = $variables['content']['field_activity_contact_method'][0]['#title'];
     unset($variables['content']['field_activity_contact_method']);
-    
-    $variables['permalink'] = l(t('permalink'), 'crm/activity/'. $activity->crm_activity_id);
+    $variables['content']['field_activity_notes']['#label_display'] = 'hidden';
+    $variables['permalink'] = l(t('permalink'), 'crm/activity/'. $activity->activity_id);
     if(!$variables['page']) {
       $rendered_content = render($variables['content']);
       $trimmed_content = text_summary($rendered_content, 'full_html', 1000);
       if(strlen($trimmed_content) < strlen($rendered_content)) {
         $variables['show_trimmed'] = TRUE;
-        $variables['read_more_link'] = l(t('Read more...'), 'crm/activity/'. $activity->crm_activity_id);
+        $variables['read_more_link'] = l(t('Read more...'), 'crm/activity/'. $activity->activity_id);
       }
     }
   }

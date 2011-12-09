@@ -14,10 +14,10 @@ function crm_courses_views_default_views() {
   $view->name = 'crm_course_students';
   $view->description = 'Provides a listing of all students within a course.';
   $view->tag = 'default';
-  $view->base_table = 'crm_contact';
+  $view->base_table = 'crm_core_contact';
   $view->human_name = 'CRM Course students';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -81,9 +81,9 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No students found';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: CRM Contact: Relation: Enrollment (crm_contact -> relation) */
+  /* Relationship: CRM Contact: Relation: Enrollment (crm_core_contact -> relation) */
   $handler->display->display_options['relationships']['relation_base_left_enrollment']['id'] = 'relation_base_left_enrollment';
-  $handler->display->display_options['relationships']['relation_base_left_enrollment']['table'] = 'crm_contact';
+  $handler->display->display_options['relationships']['relation_base_left_enrollment']['table'] = 'crm_core_contact';
   $handler->display->display_options['relationships']['relation_base_left_enrollment']['field'] = 'relation_base_left_enrollment';
   $handler->display->display_options['relationships']['relation_base_left_enrollment']['label'] = 'Enrollment - relation';
   $handler->display->display_options['relationships']['relation_base_left_enrollment']['required'] = 0;
@@ -96,7 +96,7 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['relationships']['relation_base_enrollment_right_node']['required'] = 0;
   /* Field: CRM Contact: Contact ID */
   $handler->display->display_options['fields']['contact_id']['id'] = 'contact_id';
-  $handler->display->display_options['fields']['contact_id']['table'] = 'crm_contact';
+  $handler->display->display_options['fields']['contact_id']['table'] = 'crm_core_contact';
   $handler->display->display_options['fields']['contact_id']['field'] = 'contact_id';
   $handler->display->display_options['fields']['contact_id']['exclude'] = TRUE;
   $handler->display->display_options['fields']['contact_id']['alter']['alter_text'] = 0;
@@ -117,52 +117,58 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['fields']['contact_id']['empty_zero'] = 0;
   $handler->display->display_options['fields']['contact_id']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['contact_id']['link_to_contact'] = 0;
-  /* Field: Contact: Last name */
-  $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
-  $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
-  $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
-  $handler->display->display_options['fields']['field_last_name']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_last_name']['alter']['make_link'] = 1;
-  $handler->display->display_options['fields']['field_last_name']['alter']['path'] = 'crm/contact/[contact_id]';
-  $handler->display->display_options['fields']['field_last_name']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_last_name']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_last_name']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_last_name']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_last_name']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_last_name']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_last_name']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_last_name']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_last_name']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_last_name']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_last_name']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['field_last_name']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_last_name']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_last_name']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_last_name']['hide_alter_empty'] = 0;
-  $handler->display->display_options['fields']['field_last_name']['field_api_classes'] = 0;
-  /* Field: Contact: First Name */
-  $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
-  $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
-  $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
-  $handler->display->display_options['fields']['field_first_name']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_first_name']['alter']['make_link'] = 1;
-  $handler->display->display_options['fields']['field_first_name']['alter']['path'] = 'crm/contact/[contact_id]';
-  $handler->display->display_options['fields']['field_first_name']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_first_name']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_first_name']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_first_name']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_first_name']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_first_name']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_first_name']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_first_name']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_first_name']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_first_name']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_first_name']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['field_first_name']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_first_name']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_first_name']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_first_name']['hide_alter_empty'] = 0;
-  $handler->display->display_options['fields']['field_first_name']['field_api_classes'] = 0;
+  /* Field: Contact: Name */
+  $handler->display->display_options['fields']['contact_name_1']['id'] = 'contact_name_1';
+  $handler->display->display_options['fields']['contact_name_1']['table'] = 'field_data_contact_name';
+  $handler->display->display_options['fields']['contact_name_1']['field'] = 'contact_name';
+  $handler->display->display_options['fields']['contact_name_1']['label'] = 'Last name';
+  $handler->display->display_options['fields']['contact_name_1']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['contact_name_1']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['contact_name_1']['alter']['path'] = 'crm/contact/[contact_id]';
+  $handler->display->display_options['fields']['contact_name_1']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['contact_name_1']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['contact_name_1']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['contact_name_1']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['contact_name_1']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['contact_name_1']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['contact_name_1']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['contact_name_1']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['contact_name_1']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['contact_name_1']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['contact_name_1']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['contact_name_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['contact_name_1']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['contact_name_1']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['contact_name_1']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['contact_name_1']['click_sort_column'] = 'title';
+  $handler->display->display_options['fields']['contact_name_1']['type'] = 'name_default_family';
+  $handler->display->display_options['fields']['contact_name_1']['field_api_classes'] = 0;
+  /* Field: Contact: Name */
+  $handler->display->display_options['fields']['contact_name']['id'] = 'contact_name';
+  $handler->display->display_options['fields']['contact_name']['table'] = 'field_data_contact_name';
+  $handler->display->display_options['fields']['contact_name']['field'] = 'contact_name';
+  $handler->display->display_options['fields']['contact_name']['label'] = 'First Name';
+  $handler->display->display_options['fields']['contact_name']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['contact_name']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['contact_name']['alter']['path'] = 'crm/contact/[contact_id]';
+  $handler->display->display_options['fields']['contact_name']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['contact_name']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['contact_name']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['contact_name']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['contact_name']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['contact_name']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['contact_name']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['contact_name']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['contact_name']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['contact_name']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['contact_name']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['contact_name']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['contact_name']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['contact_name']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['contact_name']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['contact_name']['click_sort_column'] = 'title';
+  $handler->display->display_options['fields']['contact_name']['type'] = 'name_default_given';
+  $handler->display->display_options['fields']['contact_name']['field_api_classes'] = 0;
   /* Field: Contact: Class level */
   $handler->display->display_options['fields']['field_student_level']['id'] = 'field_student_level';
   $handler->display->display_options['fields']['field_student_level']['table'] = 'field_data_field_student_level';
@@ -235,14 +241,6 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['fields']['field_student_id']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_student_id']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_student_id']['field_api_classes'] = 0;
-  /* Sort criterion: Contact: Last name (field_last_name) */
-  $handler->display->display_options['sorts']['field_last_name_value']['id'] = 'field_last_name_value';
-  $handler->display->display_options['sorts']['field_last_name_value']['table'] = 'field_data_field_last_name';
-  $handler->display->display_options['sorts']['field_last_name_value']['field'] = 'field_last_name_value';
-  /* Sort criterion: Contact: First Name (field_first_name) */
-  $handler->display->display_options['sorts']['field_first_name_value']['id'] = 'field_first_name_value';
-  $handler->display->display_options['sorts']['field_first_name_value']['table'] = 'field_data_field_first_name';
-  $handler->display->display_options['sorts']['field_first_name_value']['field'] = 'field_first_name_value';
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
@@ -266,6 +264,20 @@ function crm_courses_views_default_views() {
   $handler = $view->new_display('block', 'Course page', 'block');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Students';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'relation_base_enrollment_right_node';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['default_argument_skip_url'] = 0;
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['nid']['not'] = 0;
 
   /* Display: Student page */
   $handler = $view->new_display('block', 'Student page', 'block_1');
@@ -376,7 +388,7 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: CRM Contact: Contact ID */
   $handler->display->display_options['arguments']['contact_id']['id'] = 'contact_id';
-  $handler->display->display_options['arguments']['contact_id']['table'] = 'crm_contact';
+  $handler->display->display_options['arguments']['contact_id']['table'] = 'crm_core_contact';
   $handler->display->display_options['arguments']['contact_id']['field'] = 'contact_id';
   $handler->display->display_options['arguments']['contact_id']['default_action'] = 'default';
   $handler->display->display_options['arguments']['contact_id']['default_argument_type'] = 'raw';
@@ -460,9 +472,9 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: CRM Contact: Relation: Enrollment (crm_contact -> relation) */
+  /* Relationship: CRM Contact: Relation: Enrollment (crm_core_contact -> relation) */
   $handler->display->display_options['relationships']['relation_base_left_enrollment']['id'] = 'relation_base_left_enrollment';
-  $handler->display->display_options['relationships']['relation_base_left_enrollment']['table'] = 'crm_contact';
+  $handler->display->display_options['relationships']['relation_base_left_enrollment']['table'] = 'crm_core_contact';
   $handler->display->display_options['relationships']['relation_base_left_enrollment']['field'] = 'relation_base_left_enrollment';
   $handler->display->display_options['relationships']['relation_base_left_enrollment']['required'] = 1;
   /* Relationship: Relation: Relation: Enrollment (relation -> node) */
@@ -684,7 +696,7 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: CRM Contact: Contact ID */
   $handler->display->display_options['arguments']['contact_id']['id'] = 'contact_id';
-  $handler->display->display_options['arguments']['contact_id']['table'] = 'crm_contact';
+  $handler->display->display_options['arguments']['contact_id']['table'] = 'crm_core_contact';
   $handler->display->display_options['arguments']['contact_id']['field'] = 'contact_id';
   $handler->display->display_options['arguments']['contact_id']['default_action'] = 'default';
   $handler->display->display_options['arguments']['contact_id']['default_argument_type'] = 'raw';
@@ -750,7 +762,7 @@ function crm_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'CRM Courses';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
