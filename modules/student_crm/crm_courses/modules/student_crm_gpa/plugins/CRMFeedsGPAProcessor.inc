@@ -77,7 +77,6 @@ class CRMFeedsGPAProcessor extends FeedsProcessor {
     while ($item = $parser_result->shiftItem()) {
       $item['student_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_core_contact');
       $item['term_entity'] = $this->getTargetEntity($item[$term_id_key], 'taxonomy_term');
-      dpm($item);
       if ($item['student_entity'] && $item['term_entity'] && !($entity_id = $this->existingEntityId($source, $parser_result)) ||
            ($this->config['update_existing'] != FEEDS_SKIP_EXISTING)) {
 
