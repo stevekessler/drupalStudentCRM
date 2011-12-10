@@ -37,7 +37,7 @@ class CRMFeedsGPAProcessor extends FeedsProcessor {
                           ),
                     array('entity_type' => 'taxonomy_term',
                           'entity_bundle' => 'term', 
-                          'entity_id' => $item['term_tid'],
+                          'entity_id' => $item['term_entity'],
                           'r_index' => 1,
                          ),
                     )
@@ -65,11 +65,20 @@ class CRMFeedsGPAProcessor extends FeedsProcessor {
   
   public function process(FeedsSource $source, FeedsParserResult $parser_result) {
     $state = $source->state(FEEDS_PROCESS);
-
+    $mappings = $this->config['mappings'];
+    foreach($mappings as $map) {
+      if($map['target'] == 'student_id') {
+        $student_id_key = $map['source'];
+      }
+      if($map['target'] == 'term_id') {
+        $term_id_key = $map['source'];
+      }
+    }
     while ($item = $parser_result->shiftItem()) {
-      $item['course_entity'] = $this->getTargetEntity($item['course_id'], 'node');
-      $item['term_tid'] = $this->getTargetEntity($item['term_id'], 'taxonomy_term');
-      if ($item['course_entity'] && $item['student_entity'] && !($entity_id = $this->existingEntityId($source, $parser_result)) ||
+      $item['student_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_core_contact');
+      $item['term_entity'] = $this->getTargetEntity($item[$term_id_key], 'taxonomy_term');
+      dpm($item);
+      if ($item['student_entity'] && $item['term_entity'] && !($entity_id = $this->existingEntityId($source, $parser_result)) ||
            ($this->config['update_existing'] != FEEDS_SKIP_EXISTING)) {
 
         // Only proceed if item has actually changed.
