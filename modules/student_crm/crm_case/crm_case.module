@@ -831,3 +831,18 @@ function crm_case_form_field_ui_field_edit_form_alter(&$form, $form_state) {
     '#default_value' => isset($form['#instance']['crm_case_contact_editable']) ? $form['#instance']['crm_case_contact_editable'] : 0,
   );
 }
+
+/**
+ * Implementation of hook_FORM_ID_alter().
+ * We're removing case types from the case search view which the user does not have access to.
+ */
+function crm_case_form_views_exposed_form_alter(&$form, $form_state) {
+  if($form_state['view']->name != 'crm_cases') {
+    return;
+  }
+  foreach($form['type']['#options'] as $key => $title) {
+    if(!user_access("view any $key crm_case")) {
+      unset($form['type']['#options'][$key]);
+    }
+  }
+}
