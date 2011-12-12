@@ -89,3 +89,11 @@ function student_crm_status_messages($variables) {
   }
   return $output;
 }
+
+/**
+ * Implements theme_preprocess_node().
+ * Remove submitted-by line completely - not needed in a CRM.
+ */
+function student_crm_preprocess_node(&$variables) {
+  unset($variables['submitted']);
+}
