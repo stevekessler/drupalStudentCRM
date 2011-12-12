@@ -31,6 +31,7 @@ function crm_case_views_data_alter(&$data) {
       'handler' => 'crm_case_handler_delete_link_field',
     ),
   );
+  $data['crm_case']['type']['field']['handler'] = 'crm_case_handler_type_field';
   // This content of this field are decided based on the menu structure that
   // follows crm_cases/crm_case/%crm_case_id/op
   $data['crm_case']['operations'] = array(
