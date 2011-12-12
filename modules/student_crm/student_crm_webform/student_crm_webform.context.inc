@@ -22,6 +22,11 @@ function student_crm_webform_context_default_contexts() {
         'crm/case/*' => 'crm/case/*',
       ),
     ),
+    'user' => array(
+      'values' => array(
+        'advisor' => 'advisor',
+      ),
+    ),
   );
   $context->reactions = array(
     'block' => array(
@@ -41,7 +46,7 @@ function student_crm_webform_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.

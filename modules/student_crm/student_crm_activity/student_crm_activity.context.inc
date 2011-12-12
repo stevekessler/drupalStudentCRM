@@ -25,6 +25,11 @@ function student_crm_activity_context_default_contexts() {
         '~*/delete' => '~*/delete',
       ),
     ),
+    'user' => array(
+      'values' => array(
+        'advisor' => 'advisor',
+      ),
+    ),
   );
   $context->reactions = array(
     'block' => array(
@@ -38,7 +43,7 @@ function student_crm_activity_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
@@ -60,6 +65,11 @@ function student_crm_activity_context_default_contexts() {
         '~*/delete' => '~*/delete',
       ),
     ),
+    'user' => array(
+      'values' => array(
+        'advisor' => 'advisor',
+      ),
+    ),
   );
   $context->reactions = array(
     'block' => array(
@@ -73,7 +83,7 @@ function student_crm_activity_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
@@ -95,6 +105,11 @@ function student_crm_activity_context_default_contexts() {
         '~*/delete' => '~*/delete',
       ),
     ),
+    'user' => array(
+      'values' => array(
+        'advisor' => 'advisor',
+      ),
+    ),
   );
   $context->reactions = array(
     'block' => array(
@@ -108,7 +123,7 @@ function student_crm_activity_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
