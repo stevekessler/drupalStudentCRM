@@ -234,3 +234,10 @@ function crm_student_crm_student_admin_links() {
 		),
 	);
 }
+
+/**
+ * Implementation of hook_FORM_ID_alter().
+ */
+function crm_student_form_views_exposed_form_alter(&$form, $form_state) {
+  $form['submit']['#value'] = t('Search');
+}
