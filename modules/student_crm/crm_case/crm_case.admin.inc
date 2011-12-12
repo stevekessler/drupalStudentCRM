@@ -81,8 +81,12 @@ function crm_case_edit_form($form, &$form_state, $crm_case) {
   // Add the field related form elements.
   $form_state['crm_case'] = $crm_case;
   field_attach_form('crm_case', $crm_case, $form, $form_state);
-  
-  if(!user_access('open and close cases')) {
+  foreach (field_info_instances('crm_case', $crm_case->type) as $field_name => $field) {
+    if (!user_access("edit any $crm_case->type crm_case") && !$field['crm_case_contact_editable']) {
+      $form[$field_name]['#access'] = FALSE;
+    }
+  }
+  if (!user_access('open and close cases')) {
     $form['case_status']['#access'] = FALSE;
   }
   

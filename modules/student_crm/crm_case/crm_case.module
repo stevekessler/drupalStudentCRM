@@ -820,3 +820,14 @@ function crm_case_crm_student_admin_links() {
 		),
 	);
 }
+
+/**
+ * Implementation of hook_FORM_ID_alter().
+ */
+function crm_case_form_field_ui_field_edit_form_alter(&$form, $form_state) {
+  $form['instance']['crm_case_contact_editable'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'This field is editable by the contact related to the case.',
+    '#default_value' => isset($form['#instance']['crm_case_contact_editable']) ? $form['#instance']['crm_case_contact_editable'] : 0,
+  );
+}
