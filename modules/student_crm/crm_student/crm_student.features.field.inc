@@ -43,15 +43,9 @@ function crm_student_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'addressfield',
-          'settings' => array(
-            'format_handlers' => array(
-              0 => 'address',
-            ),
-            'use_widget_handlers' => 1,
-          ),
-          'type' => 'addressfield_default',
-          'weight' => 11,
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '3',
         ),
       ),
       'entity_type' => 'crm_core_contact',
@@ -104,7 +98,7 @@ function crm_student_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '0',
+          'weight' => '4',
         ),
       ),
       'entity_type' => 'crm_core_contact',
@@ -150,10 +144,9 @@ function crm_student_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'cck_phone',
           'settings' => array(),
-          'type' => 'global_phone_number',
-          'weight' => 10,
+          'type' => 'hidden',
+          'weight' => '2',
         ),
       ),
       'entity_type' => 'crm_core_contact',
@@ -581,7 +574,7 @@ function crm_student_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '1',
+          'weight' => '5',
         ),
       ),
       'entity_type' => 'crm_core_contact',
@@ -707,7 +700,7 @@ function crm_student_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '2',
+          'weight' => '6',
         ),
       ),
       'entity_type' => 'crm_core_contact',
