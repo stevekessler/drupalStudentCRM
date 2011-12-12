@@ -92,9 +92,6 @@ projects[name][version] = "1.x-dev"
 projects[options_element][subdir] = "contrib"
 projects[options_element][version] = "1.4"
 
-projects[privatemsg][subdir] = "contrib"
-projects[privatemsg][version] = "2.x-dev"
-
 projects[relation][subdir] = "contrib"
 projects[relation][version] = "1.x-dev"
 
