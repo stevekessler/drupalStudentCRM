@@ -111,7 +111,8 @@ dependencies[] = student_crm_activity_case_alter
 ;dependencies[] = student_crm_blocks
 
 ; variables
-variables[chosen_jquery_selector] = "select[multiple]:visible:not(.tao select)"
+variables[chosen_jquery_selector] = "select:visible:not(.tao select)"
+variables[chosen_minimum] = 0
 variables[site_frontpage] = crm/home
 variables[site_name] = Student CRM
 variables[admin_theme] = rubik
