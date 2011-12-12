@@ -64,6 +64,9 @@ function student_crm_webform_block_info() {
  *  Implements hook_block_view().
  */
 function student_crm_webform_block_view($delta) {
+  if(!user_access('manage crm webforms')) {
+    return;
+  }
   if ($delta == 'student_crm_webform_send_form') {
     module_load_include('inc', 'student_crm_webform', 'student_crm_webform.mail');
     return array('subject' => 'Send forms',
@@ -114,7 +117,10 @@ function _student_crm_webform_generate_key($entity_type, $entity_id, $webform_ni
 function student_crm_webform_permission() {
   return array('complete crm webforms' => array(
               'title' => t('Fill out webforms attached to CRM entities'),
-              'description' => t('Allowed to complete webforms that are later attached to CRM contacts or cases.')));
+              'description' => t('Allowed to complete webforms that are later attached to CRM contacts or cases.')),
+              'manage crm webforms' => array(
+              'title' => t('Manage case webforms'),
+              'description' => t('Allowed to re-send and manage webforms attached to cases.')));
 }
 
 /**
@@ -139,6 +145,9 @@ function student_crm_webform_webform_submission_entity_insert($entity) {
                          ),
                     )
                );
+  relation_save($relation);
+  drupal_set_message(t('Thank you for your submission.'));
+  drupal_goto('<front>');
 }
 
 /**
