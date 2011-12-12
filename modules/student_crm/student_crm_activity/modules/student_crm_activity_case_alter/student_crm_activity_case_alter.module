@@ -40,8 +40,10 @@ function student_crm_activity_case_alter_form_student_crm_activity_create_alter(
   if(count($alterable_fields)) {
     $form['case_fields'] = array(
       '#type' => 'fieldset',
-      '#title' => 'Change case values',
+      '#title' => t('Update case fields'),
       '#collapsible' => true,
+      '#collapsed' => TRUE,
+      '#weight' => 10,
     );
     field_attach_form('crm_case', $case, $form['case_fields'], $form_state, $case->language);
     foreach($fields as $field_name => $field) {
@@ -57,7 +59,7 @@ function student_crm_activity_case_alter_form_student_crm_activity_create_alter(
   $status = field_get_items('crm_case', $case, 'case_status');
   $form['form-actions']['case_status_change'] = array(
     '#type' => 'checkbox',
-    '#title' => ($status[0]['value']) ? 'Close case' : 'Re-open case',
+    '#title' => ($status[0]['value']) ? t('Close case') : t('Re-open case'),
     '#prefix' => '<div class="case-status-change">',
     '#suffix' => '</div>',
     '#weight' => -3,
