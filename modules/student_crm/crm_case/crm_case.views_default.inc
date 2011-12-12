@@ -572,17 +572,18 @@ function crm_case_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'Sorry, we couldn\'t find any cases for you. Sometimes cases are made private so only advisors and other users can view them.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: Broken/missing handler */
-  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['id'] = 'relation_crm_contact_case_crm_contact';
-  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['table'] = 'crm_case';
-  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['field'] = 'relation_crm_contact_case_crm_contact';
-  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_contact']['required'] = 0;
-  /* Relationship: CRM Contact: Relation: User contact record (crm_core_contact <-> user) */
-  $handler->display->display_options['relationships']['relation_user_contact_record_user']['id'] = 'relation_user_contact_record_user';
-  $handler->display->display_options['relationships']['relation_user_contact_record_user']['table'] = 'crm_core_contact';
-  $handler->display->display_options['relationships']['relation_user_contact_record_user']['field'] = 'relation_user_contact_record_user';
-  $handler->display->display_options['relationships']['relation_user_contact_record_user']['relationship'] = 'relation_crm_contact_case_crm_contact';
-  $handler->display->display_options['relationships']['relation_user_contact_record_user']['required'] = 0;
+  /* Relationship: Case: Relation: CRM Contact Case (crm_case <-> crm_core_contact) */
+  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['id'] = 'relation_crm_contact_case_crm_core_contact';
+  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['table'] = 'crm_case';
+  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['field'] = 'relation_crm_contact_case_crm_core_contact';
+  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['required'] = 0;
+  $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['r_index'] = '-1';
+  /* Relationship: Entity Reference: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_user_contact_user']['id'] = 'reverse_field_user_contact_user';
+  $handler->display->display_options['relationships']['reverse_field_user_contact_user']['table'] = 'crm_core_contact';
+  $handler->display->display_options['relationships']['reverse_field_user_contact_user']['field'] = 'reverse_field_user_contact_user';
+  $handler->display->display_options['relationships']['reverse_field_user_contact_user']['relationship'] = 'relation_crm_contact_case_crm_core_contact';
+  $handler->display->display_options['relationships']['reverse_field_user_contact_user']['required'] = 0;
   /* Field: Case: Case ID */
   $handler->display->display_options['fields']['cid']['id'] = 'cid';
   $handler->display->display_options['fields']['cid']['table'] = 'crm_case';
@@ -678,7 +679,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
   $handler->display->display_options['arguments']['uid']['table'] = 'users';
   $handler->display->display_options['arguments']['uid']['field'] = 'uid';
-  $handler->display->display_options['arguments']['uid']['relationship'] = 'relation_user_contact_record_user';
+  $handler->display->display_options['arguments']['uid']['relationship'] = 'reverse_field_user_contact_user';
   $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
   $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
   $handler->display->display_options['arguments']['uid']['default_argument_skip_url'] = 0;
@@ -713,8 +714,8 @@ function crm_case_views_default_views() {
     t('Below is a list of cases about you that you are allowed to edit. You will only be able to edit a case while it is still open, you can view a list of your closed cases using the "Closed" tab below.'),
     t('No results'),
     t('Sorry, we couldn\'t find any cases for you. Sometimes cases are made private so only advisors and other users can view them.'),
-    t('relation_crm_contact_case_crm_contact'),
-    t('User contact record'),
+    t('CRM Contact Case'),
+    t('User referencing Contact from field_user_contact'),
     t('Case ID'),
     t('.'),
     t(','),

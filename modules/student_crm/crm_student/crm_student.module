@@ -157,31 +157,6 @@ function _crm_student_search_form_submit($form, &$form_state) {
 }
 
 /**
- * Implements hook_user_load().
- */
-function crm_student_user_load($users) {
-  foreach($users as $uid => $user) {
-    $users[$uid]->crm_contact_records = crm_student_get_user_contact_records($user);
-  }
-}
-
-/**
- * Helper function to retrieve the contact records for the given user.
- */
-function crm_student_get_user_contact_records($account) {
-  $query = db_select('field_data_endpoints', 'e')
-              ->condition('e.entity_type', 'relation')
-              ->condition('e.bundle', 'user_contact_record')
-              ->condition('e.endpoints_entity_type', 'user')
-              ->condition('e.endpoints_entity_id', $account->uid);
-  $query->leftJoin('field_data_endpoints', 'e2', 'e2.entity_id = e.entity_id AND e2.entity_type = e.entity_type');
-  $query->fields('e2', array('endpoints_entity_id'))
-              ->condition('e2.endpoints_entity_type', 'crm_core_contact');
-  return $query->execute()
-              ->fetchAllKeyed(0, 0);
-}
-
-/**
  * Implements hook_user_login().
  */
 function crm_student_user_login(&$edit, $account) {
@@ -195,23 +170,29 @@ function crm_student_user_login(&$edit, $account) {
             ->fields('i', array('entity_id'))
             ->execute()
             ->fetchAllKeyed(0, 0);
+  $changed = false;
+  $language = ($account->language) ? $account->language : LANGUAGE_NONE;
+  $existing = field_get_items('user', $account, 'field_user_contact');
+  $existing_contacts = array();
+  foreach($existing as $k => $e) {
+    $existing_contacts[$e['target_id']] = $e['target_id'];
+    if(!$ids[$e['target_id']]) {
+      unset($account->field_user_contact[$language][$k]);
+      $changed = true;
+    }
+  }
   foreach($ids as $id) {
-    if(!$account->crm_contact_records[$id]) {
+    if(!$existing_contacts[$id]) {
       $contact = crm_core_contact_load($id);
-      $relation = relation_create('user_contact_record', array(
-                array('entity_type' => 'user',
-                       'entity_bundle' => 'user',
-                       'entity_id' => $account->uid,
-                       'r_index' => 0,
-                       ),
-                  array('entity_type' => 'crm_core_contact',
-                         'entity_bundle' => $contact->type, 
-                         'entity_id' => $contact->contact_id,
-                         'r_index' => 1,
-                         ))
-             );
-      relation_save($relation);
+      if($contact) {
+        $account->field_user_contact[$language][] = array('target_id' => $contact->contact_id,
+                                                        'target_type' => 'crm_core_contact');
+        $changed = true;
+      }
     } 
+  }
+  if($changed) {
+    user_save($account);
   }
 }
 
