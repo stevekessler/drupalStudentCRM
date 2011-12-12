@@ -1,0 +1,6 @@
+"code","name","description","severity"
+"DEMO-PAY","Pay for school","The student has not yet paid for school.","bad"
+"DEMO-TB","TB Shot needed","The student has not yet received a TB short.","bad"
+"DEMO-PAID","Tuition paid","The student's financial holds are clear.","neutral"
+"DEMO-SCHOLAR","Scholarship awarded","The student has received a scholarship.","good"
+
