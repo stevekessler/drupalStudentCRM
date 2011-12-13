@@ -816,18 +816,16 @@ function crm_student_views_default_views() {
   $handler->display->display_options['filters']['field_student_status_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_student_status_tid']['vocabulary'] = 'student_status';
   $handler->display->display_options['filters']['field_student_status_tid']['error_message'] = 1;
-  /* Filter criterion: Contact: Name (contact_name:family) */
-  $handler->display->display_options['filters']['contact_name_family']['id'] = 'contact_name_family';
-  $handler->display->display_options['filters']['contact_name_family']['table'] = 'field_data_contact_name';
-  $handler->display->display_options['filters']['contact_name_family']['field'] = 'contact_name_family';
-  $handler->display->display_options['filters']['contact_name_family']['operator'] = 'contains';
-  $handler->display->display_options['filters']['contact_name_family']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['contact_name_family']['expose']['operator_id'] = 'contact_name_family_op';
-  $handler->display->display_options['filters']['contact_name_family']['expose']['label'] = 'Last Name';
-  $handler->display->display_options['filters']['contact_name_family']['expose']['operator'] = 'contact_name_family_op';
-  $handler->display->display_options['filters']['contact_name_family']['expose']['identifier'] = 'contact_name_family';
-  $handler->display->display_options['filters']['contact_name_family']['expose']['required'] = 0;
-  $handler->display->display_options['filters']['contact_name_family']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Contact: Name */
+  $handler->display->display_options['filters']['contact_name']['id'] = 'contact_name';
+  $handler->display->display_options['filters']['contact_name']['table'] = 'field_data_contact_name';
+  $handler->display->display_options['filters']['contact_name']['field'] = 'contact_name';
+  $handler->display->display_options['filters']['contact_name']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['contact_name']['expose']['operator_id'] = 'contact_name_op';
+  $handler->display->display_options['filters']['contact_name']['expose']['label'] = 'Name';
+  $handler->display->display_options['filters']['contact_name']['expose']['operator'] = 'contact_name_op';
+  $handler->display->display_options['filters']['contact_name']['expose']['identifier'] = 'name';
+  $handler->display->display_options['filters']['contact_name']['expose']['multiple'] = FALSE;
 
   /* Display: Search page */
   $handler = $view->new_display('page', 'Search page', 'page');
@@ -853,6 +851,7 @@ function crm_student_views_default_views() {
     t('Level'),
     t('Degrees'),
     t('Degree'),
+    t('Name'),
     t('Search page'),
   );
   $export['search_contacts'] = $view;
