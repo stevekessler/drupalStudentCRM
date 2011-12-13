@@ -23,6 +23,7 @@ function crm_courses_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Students';
+  $handler->display->display_options['css_class'] = 'quicksearch';
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -283,6 +284,7 @@ function crm_courses_views_default_views() {
   $handler = $view->new_display('block', 'Student page', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Courses';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['defaults']['query'] = FALSE;
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
@@ -295,6 +297,20 @@ function crm_courses_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No courses found';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: CRM Contact: Relation: Enrollment (crm_core_contact -> relation) */
+  $handler->display->display_options['relationships']['relation_base_left_enrollment']['id'] = 'relation_base_left_enrollment';
+  $handler->display->display_options['relationships']['relation_base_left_enrollment']['table'] = 'crm_core_contact';
+  $handler->display->display_options['relationships']['relation_base_left_enrollment']['field'] = 'relation_base_left_enrollment';
+  $handler->display->display_options['relationships']['relation_base_left_enrollment']['label'] = 'Enrollment - relation';
+  $handler->display->display_options['relationships']['relation_base_left_enrollment']['required'] = 1;
+  /* Relationship: Relation: Relation: Enrollment (relation -> node) */
+  $handler->display->display_options['relationships']['relation_base_enrollment_right_node']['id'] = 'relation_base_enrollment_right_node';
+  $handler->display->display_options['relationships']['relation_base_enrollment_right_node']['table'] = 'relation';
+  $handler->display->display_options['relationships']['relation_base_enrollment_right_node']['field'] = 'relation_base_enrollment_right_node';
+  $handler->display->display_options['relationships']['relation_base_enrollment_right_node']['relationship'] = 'relation_base_left_enrollment';
+  $handler->display->display_options['relationships']['relation_base_enrollment_right_node']['label'] = 'Enrollment - node';
+  $handler->display->display_options['relationships']['relation_base_enrollment_right_node']['required'] = 1;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';

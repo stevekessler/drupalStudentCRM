@@ -21,6 +21,7 @@ function student_crm_activity_context_default_contexts() {
       'values' => array(
         'crm/case/*' => 'crm/case/*',
         'crm/contact/*' => 'crm/contact/*',
+        '~crm/contact/*/*' => '~crm/contact/*/*',
         '~*/edit' => '~*/edit',
         '~*/delete' => '~*/delete',
       ),
@@ -61,6 +62,7 @@ function student_crm_activity_context_default_contexts() {
     'path' => array(
       'values' => array(
         'crm/contact/*' => 'crm/contact/*',
+        '~crm/contact/*/*' => '~crm/contact/*/*',
         '~*/edit' => '~*/edit',
         '~*/delete' => '~*/delete',
       ),
