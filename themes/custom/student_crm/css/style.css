@@ -589,6 +589,13 @@ ul.primary li a:hover {
   width: 200px;
   float: right;
 }
+/** CHOSEN **/
+.chzn-container {
+  min-width: 100px !important;
+}
+.left .chzn-container {
+  max-width: 190px !important;
+}
 /** PAGER **/
 ul.pager {
   margin: 15px 0;
