@@ -320,6 +320,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
   $handler->display->display_options['filters']['type']['expose']['remember'] = 1;
+  $handler->display->display_options['filters']['type']['expose']['multiple'] = 1;
   $handler->display->display_options['filters']['type']['expose']['reduce'] = 0;
   /* Filter criterion: Contact: Name (contact_name:family) */
   $handler->display->display_options['filters']['contact_name_family']['id'] = 'contact_name_family';
@@ -394,6 +395,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
   $handler->display->display_options['filters']['type']['expose']['remember'] = 1;
+  $handler->display->display_options['filters']['type']['expose']['multiple'] = 1;
   $handler->display->display_options['filters']['type']['expose']['reduce'] = 0;
   /* Filter criterion: Contact: Name (contact_name:family) */
   $handler->display->display_options['filters']['contact_name_family']['id'] = 'contact_name_family';

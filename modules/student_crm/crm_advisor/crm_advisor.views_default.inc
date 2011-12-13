@@ -101,14 +101,14 @@ function crm_advisor_views_default_views() {
   $handler->display->display_options['relationships']['relation_base_left_advisor']['id'] = 'relation_base_left_advisor';
   $handler->display->display_options['relationships']['relation_base_left_advisor']['table'] = 'users';
   $handler->display->display_options['relationships']['relation_base_left_advisor']['field'] = 'relation_base_left_advisor';
-  $handler->display->display_options['relationships']['relation_base_left_advisor']['required'] = 0;
+  $handler->display->display_options['relationships']['relation_base_left_advisor']['required'] = 1;
   /* Relationship: Relation: Relation: Advisor (relation -> crm_core_contact) */
   $handler->display->display_options['relationships']['relation_base_advisor_right_crm_core_contact']['id'] = 'relation_base_advisor_right_crm_core_contact';
   $handler->display->display_options['relationships']['relation_base_advisor_right_crm_core_contact']['table'] = 'relation';
   $handler->display->display_options['relationships']['relation_base_advisor_right_crm_core_contact']['field'] = 'relation_base_advisor_right_crm_core_contact';
   $handler->display->display_options['relationships']['relation_base_advisor_right_crm_core_contact']['relationship'] = 'relation_base_left_advisor';
   $handler->display->display_options['relationships']['relation_base_advisor_right_crm_core_contact']['label'] = 'Advisor - contact';
-  $handler->display->display_options['relationships']['relation_base_advisor_right_crm_core_contact']['required'] = 0;
+  $handler->display->display_options['relationships']['relation_base_advisor_right_crm_core_contact']['required'] = 1;
   /* Field: CRM Contact: Contact ID */
   $handler->display->display_options['fields']['contact_id']['id'] = 'contact_id';
   $handler->display->display_options['fields']['contact_id']['table'] = 'crm_core_contact';

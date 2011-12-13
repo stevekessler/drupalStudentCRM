@@ -255,12 +255,10 @@ function crm_student_context_default_contexts() {
   $context->description = 'Viewing a student CRM contact';
   $context->tag = 'crm student';
   $context->conditions = array(
-    'crm_context_condition_contact_type' => array(
+    'path' => array(
       'values' => array(
-        'student' => 'student',
-      ),
-      'options' => array(
-        'contact_form' => '1',
+        'crm/contact/*' => 'crm/contact/*',
+        '~crm/contact/*/edit' => '~crm/contact/*/edit',
       ),
     ),
   );
@@ -272,12 +270,6 @@ function crm_student_context_default_contexts() {
           'delta' => 'crm_create_case',
           'region' => 'sidebar_left',
           'weight' => '3',
-        ),
-        'student_crm_webform-student_crm_webform_contact' => array(
-          'module' => 'student_crm_webform',
-          'delta' => 'student_crm_webform_send_contact_form',
-          'region' => 'sidebar_left',
-          'weight' => '-10',
         ),
         'views-crm_contact_fields-block_2' => array(
           'module' => 'views',
