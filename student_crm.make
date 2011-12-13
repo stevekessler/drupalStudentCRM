@@ -179,6 +179,7 @@ projects[chosen][patch][] = http://drupal.org/files/issues/chosen-7.x-1.x-instal
 projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"
 projects[cck_phone][patch][] = "http://drupal.org/files/cck_phone_feeds-1160186-2.patch"
 projects[email][patch][] = "http://drupal.org/files/email_feeds_target-718414-36.patch"
+projects[name][patch][] = "http://drupal.org/files/name_fullname_search-1369618-1.patch"
 
 ; Hosted modules
 projects[views_savedsearches][type] = module
