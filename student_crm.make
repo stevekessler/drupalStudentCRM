@@ -86,8 +86,8 @@ projects[mailhandler][version] = "2.0-rc1"
 projects[messaging][subdir] = "contrib"
 projects[messaging][version] = "1.0-alpha1"
 
-projects[name][subdir] = "contrib"
-projects[name][version] = "1.x-dev"
+;projects[name][subdir] = "contrib"
+;projects[name][version] = "1.x-dev"
 
 projects[options_element][subdir] = "contrib"
 projects[options_element][version] = "1.4"
@@ -144,6 +144,14 @@ projects[guiders_js_fixed][version] = "1.x-dev"
 projects[guiders_js_fixed][download][type] = "git"
 projects[guiders_js_fixed][download][url] = "http://git.drupal.org/sandbox/kevee/1355900.git"
 projects[guiders_js_fixed][download][branch] = "master"
+
+; Name module
+projects[name][type] = module
+projects[name][subdir] = "contrib"
+projects[name][version] = "1.x-dev"
+projects[name][download][type] = "git"
+projects[name][download][url] = "http://git.drupal.org/project/name.git"
+projects[name][download][branch] = "7.x-1.x"
 
 ; Webform submission entity module
 projects[webform_submission_entity][type] = module
