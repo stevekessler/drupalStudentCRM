@@ -241,3 +241,21 @@ function crm_student_crm_student_admin_links() {
 function crm_student_form_views_exposed_form_alter(&$form, $form_state) {
   $form['submit']['#value'] = t('Search');
 }
+
+/**
+ * Implements hook_feeds_plugins().
+ */
+function crm_student_feeds_plugins() {
+  $info['CRMStudentAddresses'] = array(
+    'name' => 'CRM Student address processor',
+    'description' => 'Add and update addresses attached to contacts.',
+    'help' => 'Create and update addresses from parsed content.',
+    'handler' => array(
+      'parent' => 'FeedsProcessor',
+      'class' => 'CRMStudentAddresses',
+      'file' => 'CRMStudentAddresses.inc',
+      'path' => drupal_get_path('module', 'crm_student') . '/plugins',
+    ),
+  );
+  return $info;
+}
