@@ -1,17 +1,20 @@
 <?php
 
-module_load_include('test', 'crm_student', 'tests/crm_student_base_test');
+//module_load_include('test', 'crm_student', 'tests/crm_student_base_test');
 
-class StudentCRMBaseTests extends StudentCRMWebTestCase {
+class StudentCRMBaseTests extends DrupalWebTestCase {
   
-  var $advisor;
+  var $profile = 'student_crm';
   
-  var $authenticated;
+  var $roles = array();
   
-  public function setUp() {
-      $this->advisor = $this->drupalCreateUser($this->roles['advisor']);
-      $this->authenticated = $this->drupalCreateUser($this->roles['authenticated']);
-      parent::setUp();
+  function setUp() {
+    parent::setUp();
+    
+    $this->advisor = $this->drupalCreateUser(array('administer contact types',
+                                                   'create crm_core_contact entities',
+                                                   'administer crm_core_contact entities'));
+    $this->drupalLogin($this->advisor);
   }
   
   public static function getInfo() {
@@ -23,7 +26,6 @@ class StudentCRMBaseTests extends StudentCRMWebTestCase {
   }
   
   public function testStudentEntityExists() {
-    $this->drupalLogin($this->advisor);
     $this->drupalGet('crm/contact/add');
     $this->assertText(t('Add Student'));
   }

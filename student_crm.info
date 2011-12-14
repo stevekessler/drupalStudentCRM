@@ -47,6 +47,7 @@ dependencies[] = context_ui
 dependencies[] = context
 dependencies[] = conditional_fields
 dependencies[] = ctools
+dependencies[] = entityreference
 dependencies[] = email
 dependencies[] = fancybox
 dependencies[] = feeds
