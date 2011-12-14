@@ -261,3 +261,13 @@ function crm_student_feeds_plugins() {
   );
   return $info;
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * Removing endpoints from relation forms.
+ */
+function crm_student_form_relation_edit_form_alter(&$form, $form_stateqrelation) {
+  if(!user_access('administer relation types')) {
+    $form['endpoints']['#access'] = FALSE;
+  }
+}
