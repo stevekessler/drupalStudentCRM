@@ -26,6 +26,9 @@ projects[better_formats][version] = "1.x-dev"
 projects[cck_phone][subdir] = "contrib"
 projects[cck_phone][version] = "1.x-dev"
 
+projects[conditional_fields][subdir] = "contrib"
+projects[conditional_fields][version] = "3.x-dev"
+
 projects[context][subdir] = "contrib"
 projects[context][version] = "3.0-beta2"
 

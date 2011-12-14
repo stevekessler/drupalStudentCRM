@@ -45,6 +45,7 @@ dependencies[] = cck_phone
 dependencies[] = chosen
 dependencies[] = context_ui
 dependencies[] = context
+dependencies[] = conditional_fields
 dependencies[] = ctools
 dependencies[] = email
 dependencies[] = fancybox
