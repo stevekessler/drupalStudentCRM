@@ -4,7 +4,7 @@
 		attach : function() {
 			$('.view.quicksearch').each(function(index, element) {
 		      $(this).prepend('<div class="search-filter"><label for="filter-' + index + 
-		               '">' + Drupal.t('Filter') +': </label><input type="text" id="filter-' + index +
+		               '">' + Drupal.t('Quick search') +': </label><input type="text" id="filter-' + index +
 		               '" name="filter-' + index + '"></div>');
 		      if ($(this).find('.view-content table').length) {
 		        $(this).find('.view-content table').attr('id', 'list-' + index);
