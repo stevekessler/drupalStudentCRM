@@ -7,14 +7,43 @@ class StudentCRMBaseTests extends DrupalWebTestCase {
   var $profile = 'student_crm';
   
   var $roles = array();
-  
+
   function setUp() {
     parent::setUp();
     
-    $this->advisor = $this->drupalCreateUser(array('administer contact types',
-                                                   'create crm_core_contact entities',
-                                                   'administer crm_core_contact entities'));
+    $this->advisor = $this->getUserFromNamedRole('advisor');
     $this->drupalLogin($this->advisor);
+  }
+  
+  protected function getUserFromNamedRole($role) {
+    $rid = db_select('role', 'r')
+           ->condition('r.name', $role)
+           ->fields('r', array('rid'))
+           ->execute()
+           ->fetchField();
+    $this->assertTrue(($rid && $rid > 0), t('Role %role found', array('%role' => $role)));
+    if(!$rid) {
+      return FALSE;
+    }
+
+    // Create a user assigned to that role.
+    $edit = array();
+    $edit['name']   = $this->randomName();
+    $edit['mail']   = $edit['name'] . '@example.com';
+    $edit['roles']  = array($rid => $rid);
+    $edit['pass']   = user_password();
+    $edit['status'] = 1;
+
+    $account = user_save(drupal_anonymous_user(), $edit);
+
+    $this->assertTrue(!empty($account->uid), t('User created with name %name and pass %pass', array('%name' => $edit['name'], '%pass' => $edit['pass'])), t('User login'));
+    if (empty($account->uid)) {
+      return FALSE;
+    }
+
+    // Add the raw password so that we can log in as this user.
+    $account->pass_raw = $edit['pass'];
+    return $account;
   }
   
   public static function getInfo() {
@@ -28,5 +57,15 @@ class StudentCRMBaseTests extends DrupalWebTestCase {
   public function testStudentEntityExists() {
     $this->drupalGet('crm/contact/add');
     $this->assertText(t('Add Student'));
+  }
+  
+  public function testDashboardExists() {
+    $this->drupalGet('dashboard');
+    $this->assertText(t('Add a block'));
+  }
+  
+  public function testDashboardHelpAvailable() {
+    $this->drupalGet('dashboard');
+    $this->assertText(t('Help'));
   }
 }
