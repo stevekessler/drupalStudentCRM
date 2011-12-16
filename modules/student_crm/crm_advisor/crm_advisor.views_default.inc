@@ -213,6 +213,7 @@ function crm_advisor_views_default_views() {
   $handler->display->display_options['fields']['field_advisor_type']['click_sort_column'] = array(
     0 => 'tid',
   );
+  $handler->display->display_options['fields']['field_advisor_type']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_advisor_type']['field_api_classes'] = 0;
   /* Contextual filter: User: Uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
