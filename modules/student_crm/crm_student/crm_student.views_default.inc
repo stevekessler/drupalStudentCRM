@@ -97,7 +97,10 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['contact_name']['empty_zero'] = 0;
   $handler->display->display_options['fields']['contact_name']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['contact_name']['click_sort_column'] = 'title';
-  $handler->display->display_options['fields']['contact_name']['type'] = 'name_default_short_full';
+  $handler->display->display_options['fields']['contact_name']['type'] = 'name_default_full';
+  $handler->display->display_options['fields']['contact_name']['settings'] = array(
+    'markup' => 0,
+  );
   $handler->display->display_options['fields']['contact_name']['field_api_classes'] = 0;
   /* Field: Contact: Class level */
   $handler->display->display_options['fields']['field_student_level']['id'] = 'field_student_level';
