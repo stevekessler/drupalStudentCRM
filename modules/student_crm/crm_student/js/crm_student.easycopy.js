@@ -5,7 +5,7 @@
     attach : function() {
       $('.easy-copy').click(function() {
         var size = $(this).innerWidth();
-        var content = $(this).html();
+        var content = $(this).text();
         var $input = $('<input>').attr('value', content)
                                .addClass('easy-copy')
                                .css('width', (size + 15) + 'px');
