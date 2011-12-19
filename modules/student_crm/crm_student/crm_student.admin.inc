@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Admin form for the CRM Student module.
+ */
 function crm_student_admin_form() {
   $form = array();
   
@@ -15,6 +18,9 @@ function crm_student_admin_form() {
   return system_settings_form($form);
 }
 
+/**
+ * Page callback for the general admin settings page.
+ */
 function crm_student_admin_page() {
 	drupal_add_css(drupal_get_path('module', 'crm_student') .'/css/crm_student.css');
 	drupal_add_css(drupal_get_path('module', 'system') .'system.admin.css');

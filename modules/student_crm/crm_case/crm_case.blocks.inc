@@ -5,6 +5,9 @@
  * Functions to handle block callbacks.
  */
 
+/**
+ * Block render callback for the create case form.
+ */
 function crm_case_blocks_crm_create_case() {
   foreach (crm_case_get_types() as $type) {
     $type_name = check_plain($type->type);
@@ -15,6 +18,9 @@ function crm_case_blocks_crm_create_case() {
   }
 }
 
+/**
+ * Form callback for generating the new case form.
+ */
 function _crm_case_blocks_crm_create_case_form() {
   $form = array();
   
@@ -49,6 +55,9 @@ function _crm_case_blocks_crm_create_case_form() {
   return $form;
 }
 
+/**
+ * Submit callback for the new case form.
+ */
 function _crm_case_blocks_crm_create_case_form_submit($form, $form_state) {
   drupal_goto('crm/case/add/' . 
         $form_state['values']['case_type'] . '/' . 

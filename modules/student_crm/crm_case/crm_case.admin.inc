@@ -10,8 +10,6 @@
  */
 
 
-
-
 /**
  * Form callback wrapper: create or edit a crm_case.
  *
@@ -133,7 +131,6 @@ function crm_case_edit_form($form, &$form_state, $crm_case) {
   return $form;
 }
 
-
 /**
  * Form API validate callback for the crm_case form
  */
@@ -206,7 +203,6 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
 function crm_case_form_submit_delete(&$form, &$form_state) {
   $form_state['redirect'] = 'crm/case/' . $form_state['crm_case']->cid . '/delete';
 }
-
 
 /**
  * Form callback: confirmation form for deleting a crm_case.
@@ -287,10 +283,6 @@ function theme_crm_case_add_list($variables) {
 
   return $output;
 }
-
-
-
-
 
 /**
  * Sets the breadcrumb for administrative crm_case pages.
