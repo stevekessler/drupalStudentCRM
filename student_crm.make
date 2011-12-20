@@ -116,6 +116,9 @@ projects[views_bulk_operations][version] = "3.0-beta3"
 projects[webform][subdir] = "contrib"
 projects[webform][version] = "3.13"
 
+projects[webform_submission_entity][subdir] = "contrib"
+projects[webform_submission_entity][version] = "1.x-dev"
+
 ; Themes
 
 projects[rubik][subdir] = "contrib"
@@ -157,14 +160,6 @@ projects[name][version] = "1.x-dev"
 projects[name][download][type] = "git"
 projects[name][download][url] = "http://git.drupal.org/project/name.git"
 projects[name][download][branch] = "7.x-1.x"
-
-; Webform submission entity module
-projects[webform_submission_entity][type] = module
-projects[webform_submission_entity][subdir] = "contrib"
-projects[webform_submission_entity][version] = "1.x-dev"
-projects[webform_submission_entity][download][type] = "git"
-projects[webform_submission_entity][download][url] = "http://git.drupal.org/project/webform_submission_entity.git"
-projects[webform_submission_entity][download][branch] = "master"
 
 ; Libraries
 
