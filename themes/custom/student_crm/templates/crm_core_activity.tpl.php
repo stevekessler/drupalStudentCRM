@@ -34,6 +34,9 @@
     <div class="activity-type">
       <?php print $contact_type; ?>
     </div>
+    <?php if($status_change): ?>
+    	<?php print render($status_change); ?>
+    <?php endif; ?>
   </div>
   
   <div class="content"<?php print $content_attributes; ?>>

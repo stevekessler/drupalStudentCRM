@@ -28,6 +28,12 @@ function student_crm_preprocess_entity(&$variables) {
     $activity = $variables['crm_core_activity'];
     $variables['content']['field_activity_participants'] = $variables['field_activity_participants'] = null;
     $variables['content']['field_activity_date'] = $variables['field_activity_date'] = null;
+    
+    if(isset($variables['content']['status_change'])) {
+      $variables['status_change'] = $variables['content']['status_change'];
+      unset($variables['content']['status_change']);
+    }
+    
     $author = user_load($activity->uid);
     $variables['date'] = format_date($activity->created, 'short');
     $variables['name'] = theme('username', array('account' => $author));

@@ -731,8 +731,9 @@ h3.ui-accordion-header.ui-state-active {
   border-top: 1px solid #d9d9d9;
 }
 .activity .meta {
-  width: 30px;
+  width: 40px;
   float: left;
+  font-size: 90%;
 }
 .activity .meta img {
   padding: 2px;
@@ -743,7 +744,7 @@ h3.ui-accordion-header.ui-state-active {
   font-size: 90%;
 }
 .activity .content {
-  margin-left: 60px;
+  margin-left: 70px;
 }
 .activity .submitted {
   font-size: 90%;
@@ -757,4 +758,16 @@ h3.ui-accordion-header.ui-state-active {
 }
 .activity .field-name-field-activity-note .field-label {
   display: none;
+}
+.activity .status-change {
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background: #34b0ff;
+  padding: 3px 4px;
+}
+.activity .status-change.closed {
+  background: #f75342;
 }

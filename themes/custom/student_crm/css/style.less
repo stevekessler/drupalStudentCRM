@@ -290,11 +290,13 @@ ul.pager { margin: 15px 0; }
 /** ACTIVITIES **/
 .activity { border-bottom: 1px solid darken(@content-background, 15%); padding: 8px 6px; min-height: 90px; }
   .views-row-first .activity { border-top: 1px solid darken(@content-background, 15%); }
-  .activity .meta { width: 30px; float: left; }
+  .activity .meta { width: 40px; float: left; font-size: 90%; }
     .activity .meta img { padding: 2px; border: 1px solid darken(@content-background, 15%); }
     .activity .meta .activity-type { margin: 5px 0px; font-size: 90%; }
-  .activity .content { margin-left: 60px; }
+  .activity .content { margin-left: 70px; }
   .activity .submitted { font-size: 90%; margin: 0px 0px 10px -10px; }
     .activity .submitted, .activity .submitted a { color: lighten(@text-color, 45%);} 
     .activity .submitted.read-more { margin-top: 10px; }
   .activity .field-name-field-activity-note .field-label { display: none; }
+.activity .status-change { color: @content-background; font-weight: bold; .round-box(4px); background: @blue-button; padding: 3px 4px; }
+	.activity .status-change.closed { background: @red-button; }
