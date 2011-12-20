@@ -156,7 +156,7 @@ function _crm_student_search_form() {
  */
 function _crm_student_search_form_submit($form, &$form_state) {
   $search_keys = array('name', 'student_id');
-  foreach(module_invoke('crm_student_search_keys') as $keys) {
+  foreach(module_invoke_all('crm_student_search_keys') as $keys) {
   	$search_keys = array_merge($search_keys, $keys);
   }
   $query = array();

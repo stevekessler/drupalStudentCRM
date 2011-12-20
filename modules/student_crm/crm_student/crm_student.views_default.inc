@@ -395,7 +395,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No contact records found.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: Entity Reference: Referenced Entity */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['field_user_contact_target_id']['id'] = 'field_user_contact_target_id';
   $handler->display->display_options['relationships']['field_user_contact_target_id']['table'] = 'field_data_field_user_contact';
   $handler->display->display_options['relationships']['field_user_contact_target_id']['field'] = 'field_user_contact_target_id';
@@ -493,7 +493,7 @@ function crm_student_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('No contact records found.'),
-    t('Contact entity referenced from field_user_contact'),
+    t('field_user_contact_target_id'),
     t('crm/contact/[contact_id]'),
     t('All'),
     t('Block'),
@@ -782,15 +782,21 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_degrees']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_student_degrees']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_student_degrees']['field_api_classes'] = 0;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    0 => 'AND',
+    1 => 'OR',
+  );
   /* Filter criterion: CRM Contact: Contact Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'crm_core_contact';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = 'Student';
+  $handler->display->display_options['filters']['type']['group'] = 0;
   /* Filter criterion: Contact: Degrees (field_student_degrees) */
   $handler->display->display_options['filters']['field_student_degrees_tid']['id'] = 'field_student_degrees_tid';
   $handler->display->display_options['filters']['field_student_degrees_tid']['table'] = 'field_data_field_student_degrees';
   $handler->display->display_options['filters']['field_student_degrees_tid']['field'] = 'field_student_degrees_tid';
+  $handler->display->display_options['filters']['field_student_degrees_tid']['group'] = 0;
   $handler->display->display_options['filters']['field_student_degrees_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_student_degrees_tid']['expose']['operator_id'] = 'field_student_degrees_tid_op';
   $handler->display->display_options['filters']['field_student_degrees_tid']['expose']['label'] = 'Degree';
@@ -807,6 +813,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['filters']['field_student_status_tid']['id'] = 'field_student_status_tid';
   $handler->display->display_options['filters']['field_student_status_tid']['table'] = 'field_data_field_student_status';
   $handler->display->display_options['filters']['field_student_status_tid']['field'] = 'field_student_status_tid';
+  $handler->display->display_options['filters']['field_student_status_tid']['group'] = 0;
   $handler->display->display_options['filters']['field_student_status_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_student_status_tid']['expose']['operator_id'] = 'field_student_status_tid_op';
   $handler->display->display_options['filters']['field_student_status_tid']['expose']['label'] = 'Status';
@@ -823,12 +830,26 @@ function crm_student_views_default_views() {
   $handler->display->display_options['filters']['contact_name']['id'] = 'contact_name';
   $handler->display->display_options['filters']['contact_name']['table'] = 'field_data_contact_name';
   $handler->display->display_options['filters']['contact_name']['field'] = 'contact_name';
+  $handler->display->display_options['filters']['contact_name']['group'] = 1;
   $handler->display->display_options['filters']['contact_name']['exposed'] = TRUE;
   $handler->display->display_options['filters']['contact_name']['expose']['operator_id'] = 'contact_name_op';
   $handler->display->display_options['filters']['contact_name']['expose']['label'] = 'Name';
   $handler->display->display_options['filters']['contact_name']['expose']['operator'] = 'contact_name_op';
   $handler->display->display_options['filters']['contact_name']['expose']['identifier'] = 'name';
   $handler->display->display_options['filters']['contact_name']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Contact: Student ID (field_student_id) */
+  $handler->display->display_options['filters']['field_student_id_value']['id'] = 'field_student_id_value';
+  $handler->display->display_options['filters']['field_student_id_value']['table'] = 'field_data_field_student_id';
+  $handler->display->display_options['filters']['field_student_id_value']['field'] = 'field_student_id_value';
+  $handler->display->display_options['filters']['field_student_id_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_student_id_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_student_id_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_student_id_value']['expose']['operator_id'] = 'field_student_id_value_op';
+  $handler->display->display_options['filters']['field_student_id_value']['expose']['label'] = 'Student ID';
+  $handler->display->display_options['filters']['field_student_id_value']['expose']['operator'] = 'field_student_id_value_op';
+  $handler->display->display_options['filters']['field_student_id_value']['expose']['identifier'] = 'student_id';
+  $handler->display->display_options['filters']['field_student_id_value']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['field_student_id_value']['expose']['multiple'] = FALSE;
 
   /* Display: Search page */
   $handler = $view->new_display('page', 'Search page', 'page');

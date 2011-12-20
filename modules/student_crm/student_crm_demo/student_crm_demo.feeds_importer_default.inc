@@ -360,7 +360,7 @@ function student_crm_demo_feeds_importer_default() {
       'plugin_key' => 'FeedsFileFetcher',
       'config' => array(
         'allowed_extensions' => 'txt csv tsv xml opml',
-        'direct' => 1,
+        'direct' => 0,
       ),
     ),
     'parser' => array(
@@ -669,7 +669,7 @@ function student_crm_demo_feeds_importer_default() {
       'plugin_key' => 'FeedsFileFetcher',
       'config' => array(
         'allowed_extensions' => 'txt csv tsv xml opml',
-        'direct' => 1,
+        'direct' => 0,
       ),
     ),
     'parser' => array(

@@ -91,12 +91,6 @@ function crm_student_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: clear students feeds
-  $permissions['clear students feeds'] = array(
-    'name' => 'clear students feeds',
-    'roles' => array(),
-  );
-
   // Exported permission: complete crm webforms
   $permissions['complete crm webforms'] = array(
     'name' => 'complete crm webforms',
@@ -185,12 +179,6 @@ function crm_student_user_default_permissions() {
   // Exported permission: export relation types
   $permissions['export relation types'] = array(
     'name' => 'export relation types',
-    'roles' => array(),
-  );
-
-  // Exported permission: import students feeds
-  $permissions['import students feeds'] = array(
-    'name' => 'import students feeds',
     'roles' => array(),
   );
 
