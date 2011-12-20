@@ -164,7 +164,7 @@ projects[webform_submission_entity][type] = module
 projects[webform_submission_entity][subdir] = "contrib"
 projects[webform_submission_entity][version] = "1.x-dev"
 projects[webform_submission_entity][download][type] = "git"
-projects[webform_submission_entity][download][url] = "http://git.drupal.org/sandbox/kevee/1324794.git"
+projects[webform_submission_entity][download][url] = "http://git.drupal.org/project/webform_submission_entity.git"
 projects[webform_submission_entity][download][branch] = "master"
 
 ; Libraries
