@@ -65,6 +65,7 @@ dependencies[] = name
 dependencies[] = options_element
 dependencies[] = views
 dependencies[] = views_ui
+dependencies[] = views_json
 dependencies[] = views_bulk_operations
 dependencies[] = webform
 dependencies[] = webform_submission_entity

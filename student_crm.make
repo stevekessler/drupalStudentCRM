@@ -113,6 +113,9 @@ projects[views][version] = "3.x-dev"
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.0-beta3"
 
+projects[views_datasource][subdir] = "contrib"
+projects[views_datasource][version] = "1.x-dev"
+
 projects[webform][subdir] = "contrib"
 projects[webform][version] = "3.13"
 
