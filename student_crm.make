@@ -126,8 +126,7 @@ projects[tao][version] = "3.0-beta4"
 
 ; Modules in development
 
-; Trellon CRM
-
+; Core CRM
 projects[crm_core][type] = module
 projects[crm_core][subdir] = "contrib"
 projects[crm_core][version] = "1.x-dev"
@@ -168,6 +167,13 @@ projects[webform_submission_entity][download][url] = "http://git.drupal.org/proj
 projects[webform_submission_entity][download][branch] = "master"
 
 ; Libraries
+
+; Download the chosen library
+
+libraries[chosen][download][type] = "get"
+libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/zipball/master"
+libraries[chosen][directory_name] = "chosen"
+libraries[chosen][destination] = "libraries"
 
 ; Download fancybox library
 libraries[fancybox][download][type] = "get"
