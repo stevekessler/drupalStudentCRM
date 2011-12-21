@@ -378,12 +378,12 @@ function student_crm_demo_feeds_importer_default() {
           0 => array(
             'source' => 'title',
             'target' => 'name',
-            'unique' => FALSE,
+            'unique' => 0,
           ),
           1 => array(
             'source' => 'title',
             'target' => 'guid',
-            'unique' => FALSE,
+            'unique' => 1,
           ),
           2 => array(
             'source' => 'type',
@@ -642,7 +642,7 @@ function student_crm_demo_feeds_importer_default() {
           1 => array(
             'source' => 'name',
             'target' => 'guid',
-            'unique' => 0,
+            'unique' => 1,
           ),
         ),
         'update_existing' => '0',
@@ -692,7 +692,7 @@ function student_crm_demo_feeds_importer_default() {
           1 => array(
             'source' => 'title',
             'target' => 'guid',
-            'unique' => 0,
+            'unique' => 1,
           ),
           2 => array(
             'source' => 'alert',
@@ -885,7 +885,7 @@ function student_crm_demo_feeds_importer_default() {
           0 => array(
             'source' => 'term',
             'target' => 'guid',
-            'unique' => 0,
+            'unique' => 1,
           ),
           1 => array(
             'source' => 'start',
