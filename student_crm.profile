@@ -9,8 +9,9 @@ profiler_v2('student_crm');
 /**
  * Implements hook_install_tasks().
  */
-function student_crm_install_tasks() {
-  return array('student_crm_final_setup' => array(),
+function student_crm_install_tasks_alter(&$tasks, $install_state) {
+  return array('profiler_install_profile_complete' => array(),
+  			   'student_crm_final_setup' => array(),
     );
 }
 
