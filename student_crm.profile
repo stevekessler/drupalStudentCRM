@@ -18,8 +18,6 @@ function student_crm_install_tasks_alter(&$tasks, $install_state) {
  * Final site setup for the install profile.
  */
 function student_crm_final_setup(&$install_state) {
-  //Call the profiler profile complete function first
-  profiler_install_profile_complete(&$install_state);
   //Give the super admin user the "advisor" role to make contexts happy.
   $user = user_load(1);
   foreach (user_roles() as $rid => $role) {
@@ -28,4 +26,6 @@ function student_crm_final_setup(&$install_state) {
     }
   }
   user_save($user);
+  //Call the profiler profile complete function first
+  profiler_install_profile_complete(&$install_state);
 }
