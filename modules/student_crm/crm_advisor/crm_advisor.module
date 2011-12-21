@@ -206,8 +206,8 @@ function crm_advisor_add_advisor($entity, $context) {
              );
   $fields = field_info_instances('relation', 'advisor');
   unset($fields['endpoints']);
-  foreach($fields as $key => $field) {
-    if(isset($context['values'][$key])) {
+  foreach ($fields as $key => $field) {
+    if (isset($context['values'][$key])) {
       $relation->{$key} = $context['values'][$key];
     }
   }
@@ -218,14 +218,14 @@ function crm_advisor_add_advisor($entity, $context) {
  * Implements hook_crm_student_admin_links().
  */
 function crm_advisor_crm_student_admin_links() {
-	return array(
-		'crm_advisor' => array(
-			'group' => t('Students'),
-			'title' => t('Manage fields for advisor relationships'),
-			'description' => t('Add and remove fields for tracking advisors.'),
-			'href' => 'admin/structure/relation/manage/advisor/fields',
-		),
-	);
+  return array(
+    'crm_advisor' => array(
+      'group' => t('Students'),
+      'title' => t('Manage fields for advisor relationships'),
+      'description' => t('Add and remove fields for tracking advisors.'),
+      'href' => 'admin/structure/relation/manage/advisor/fields',
+    ),
+  );
 }
 
 /**

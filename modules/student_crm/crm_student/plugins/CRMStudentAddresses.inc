@@ -44,10 +44,10 @@ class CRMStudentAddresses extends FeedsProcessor {
     $mappings = $this->config['mappings'];
     while ($item = $parser_result->shiftItem()) {
       $address = array();
-      foreach($mappings as $mapping) {
+      foreach ($mappings as $mapping) {
         $address[$mapping['target']] = $item[$mapping['source']];
       }
-      if(!$address['country']) {
+      if (!$address['country']) {
         $address['country'] = $this->config['default_country'];
       }
       $address['contact_entity'] = $this->getTargetEntity($item['student_id'], 'crm_core_contact');

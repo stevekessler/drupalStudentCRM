@@ -31,13 +31,13 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
   public function newCase(FeedsSource $source, $item) {
       $crm_case = crm_case_create(array('type' => $this->config['case_type'], 'name' => $item['name']));
       $crm_case->crm_contact_id = $item['student_entity'];
-      if($item['author_name']) {
+      if ($item['author_name']) {
         $author = db_select('users', 'u')
                   ->fields('u', array('uid'))
                   ->condition('u.name', $item['author_name'])
                   ->execute()
                   ->fetchField();
-        if($author) {
+        if ($author) {
           $crm_case->uid = $author;
         }
       }
@@ -61,14 +61,14 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
   public function process(FeedsSource $source, FeedsParserResult $parser_result) {
     $state = $source->state(FEEDS_PROCESS);
     $mappings = $this->config['mappings'];
-    foreach($mappings as $map) {
-      if($map['target'] == 'student_id') {
+    foreach ($mappings as $map) {
+      if ($map['target'] == 'student_id') {
         $student_id_key = $map['source'];
       }
-      if($map['target'] == 'author_name') {
+      if ($map['target'] == 'author_name') {
         $author_name_key = $map['source'];
       }
-      if($map['target'] == 'name') {
+      if ($map['target'] == 'name') {
         $name_key = $map['source'];
       }
     }
@@ -293,7 +293,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
     
     $case_types = crm_case_get_types();
     $types = array();
-    foreach($case_types as $type) {
+    foreach ($case_types as $type) {
       $types[$type->type] = $type->label;
     }
     $form['case_type'] = array(

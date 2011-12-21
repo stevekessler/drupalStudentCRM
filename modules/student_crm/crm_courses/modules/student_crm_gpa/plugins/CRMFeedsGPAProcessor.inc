@@ -66,11 +66,11 @@ class CRMFeedsGPAProcessor extends FeedsProcessor {
   public function process(FeedsSource $source, FeedsParserResult $parser_result) {
     $state = $source->state(FEEDS_PROCESS);
     $mappings = $this->config['mappings'];
-    foreach($mappings as $map) {
-      if($map['target'] == 'student_id') {
+    foreach ($mappings as $map) {
+      if ($map['target'] == 'student_id') {
         $student_id_key = $map['source'];
       }
-      if($map['target'] == 'term_id') {
+      if ($map['target'] == 'term_id') {
         $term_id_key = $map['source'];
       }
     }

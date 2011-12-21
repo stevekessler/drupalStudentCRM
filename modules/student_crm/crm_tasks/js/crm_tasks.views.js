@@ -6,7 +6,7 @@
                .addClass('completed');
       });
       $('input.crm-task-mark').change(function() {
-        if($(this).is(':checked')) {
+        if ($(this).is(':checked')) {
           var mark = 'mark';
         }
         else {
@@ -14,7 +14,7 @@
         }
         var $checkbox = $(this);
         $.getJSON(Drupal.settings.basePath + 'crm/tasks/mark/' + $(this).attr('data-rid') + '/' + mark, function(data) {
-          if(data.mark) {
+          if (data.mark) {
             $checkbox.parents('tr:first, li:first')
                      .addClass('completed');
           }

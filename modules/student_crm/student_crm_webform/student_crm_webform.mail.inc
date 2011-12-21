@@ -28,7 +28,7 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
   }
   $tokens['webform'] = $field['settings']['webform'];
   $tokens['entity_type'] = $entity_type;
-  if($entity_type == 'crm_case') {
+  if ($entity_type == 'crm_case') {
     $tokens['crm_core_contact'] = crm_case_get_contact($entity);
   }
   $message['body'] = token_replace($body, $tokens);
@@ -108,7 +108,7 @@ function student_crm_webform_send_email_form() {
   $fields = $fields['crm_case'][$case->type];
   $form_fields = array();
   $field_settings = array();
-  if(!$fields) {
+  if (!$fields) {
     return null;
   }
   foreach ($fields as $field_name => $field) {

@@ -31,13 +31,13 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
   public function newActivity(FeedsSource $source, $item) {
       $crm_activity = crm_core_activity_create(array('type' => $this->config['activity_type']));
       $crm_activity->crm_contact_id = $item['student_entity'];
-      if($item['author_name']) {
+      if ($item['author_name']) {
         $author = db_select('users', 'u')
                   ->fields('u', array('uid'))
                   ->condition('u.name', $item['author_name'])
                   ->execute()
                   ->fetchField();
-        if($author) {
+        if ($author) {
           $crm_activity->uid = $author;
         }
       }
@@ -61,11 +61,11 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
   public function process(FeedsSource $source, FeedsParserResult $parser_result) {
     $state = $source->state(FEEDS_PROCESS);
     $mappings = $this->config['mappings'];
-    foreach($mappings as $map) {
-      if($map['target'] == 'student_id') {
+    foreach ($mappings as $map) {
+      if ($map['target'] == 'student_id') {
         $student_id_key = $map['source'];
       }
-      if($map['target'] == 'author_name') {
+      if ($map['target'] == 'author_name') {
         $author_name_key = $map['source'];
       }
     }
@@ -289,7 +289,7 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
     
     $activity_types = crm_core_activity_types();
     $types = array();
-    foreach($activity_types as $type) {
+    foreach ($activity_types as $type) {
       $types[$type->type] = $type->label;
     }
     $form['activity_type'] = array(

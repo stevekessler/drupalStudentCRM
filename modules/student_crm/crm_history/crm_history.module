@@ -71,29 +71,29 @@ function crm_history_permission() {
  * Implements hook_exit().
  */
 function crm_history_exit() {
-  if(!user_access('track user history')) {
+  if (!user_access('track user history')) {
     return;
   }
   if (!isset($_SESSION['crm_history'])) {
     $_SESSION['crm_history'] = array();
   }
-  $key = false;
-  $image = false;
-  if($contact = menu_get_object('crm_core_contact', 2)) {
+  $key = FALSE;
+  $image = FALSE;
+  if ($contact = menu_get_object('crm_core_contact', 2)) {
     $key = 'contact:' . $contact->contact_id;
     $image = field_get_items('crm_core_contact', $contact, 'contact_image');
     $name = field_get_items('crm_core_contact', $contact, 'contact_name');
     $title = name_format($name[0], 'g+if');
   }
-  if($case = menu_get_object('crm_case', 2)) {
+  if ($case = menu_get_object('crm_case', 2)) {
     $key = 'case:' . $case->cid;
     $title = $case->name;
   }
-  if($node = menu_get_object('node')) {
+  if ($node = menu_get_object('node')) {
     $key = 'node:' . $node->nid;
     $title = $node->title;
   }
-  if(!$key) {
+  if (!$key) {
     return;
   }
   foreach ($_SESSION['crm_history'] as $item) {

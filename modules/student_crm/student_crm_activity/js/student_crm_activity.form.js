@@ -4,7 +4,7 @@
     
     attach : function() {
       if (Drupal.ajax && $('.ajax-loaded-view').hasClass('ajax-ready')) {
-        if(!$('.ajax-loaded-view').hasClass('ajax-loading')) {
+        if (!$('.ajax-loaded-view').hasClass('ajax-loading')) {
           $('.ajax-loaded-view').addClass('ajax-loading');
           $.get(window.location.href, function(data) {
             $('.ajax-loaded-view').first()

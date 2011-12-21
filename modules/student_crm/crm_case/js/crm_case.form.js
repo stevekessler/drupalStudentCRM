@@ -1,17 +1,17 @@
 (function($) {
-	Drupal.behaviors.CRMCaseForm = {
+  Drupal.behaviors.CRMCaseForm = {
     attach: function() {
       $('.field-group-accordion').bind( "accordioncreate", function(event, ui) {
         $('.ui-accordion-content:not(.ui-accordion-content:last)').each(function() {
-        	$(this).append('<input type="button" value="Continue" class="continue" />');
+          $(this).append('<input type="button" value="Continue" class="continue" />');
         });
         $('.ui-accordion-content .continue').click(function() {
-        	$(this).parent('.ui-accordion-content').next('h3').trigger('click');
-        	var position = $(this).parent('.ui-accordion-content').position();
-        	window.scrollTo(0, position.top);
+          $(this).parent('.ui-accordion-content').next('h3').trigger('click');
+          var position = $(this).parent('.ui-accordion-content').position();
+          window.scrollTo(0, position.top);
         });
         $('.ui-accordion-header').each(function(index, element) {
-        	$(this).prepend('<span class="number">' + (index + 1) +'.</span>');
+          $(this).prepend('<span class="number">' + (index + 1) +'.</span>');
         });
       });
     }

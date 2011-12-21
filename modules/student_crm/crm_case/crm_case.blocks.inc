@@ -40,7 +40,7 @@ function _crm_case_blocks_crm_create_case_form() {
   );
   
   $contact = menu_get_object('crm_core_contact', 2);
-  if($contact) {
+  if ($contact) {
     $form['contact'] = array(
       '#type' => 'hidden',
       '#value' => $contact->contact_id

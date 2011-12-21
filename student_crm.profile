@@ -21,8 +21,8 @@ function student_crm_install_tasks_alter(&$tasks, $install_state) {
 function student_crm_final_setup() {
   //Give the super admin user the "advisor" role to make contexts happy.
   $user = user_load(1);
-  foreach(user_roles() as $rid => $role) {
-    if($role == 'advisor') {
+  foreach (user_roles() as $rid => $role) {
+    if ($role == 'advisor') {
       $user->roles[$rid] = $role;
     }
   }

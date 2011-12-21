@@ -22,7 +22,7 @@ class StudentCRMBaseTests extends DrupalWebTestCase {
            ->execute()
            ->fetchField();
     $this->assertTrue(($rid && $rid > 0), t('Role %role found', array('%role' => $role)));
-    if(!$rid) {
+    if (!$rid) {
       return FALSE;
     }
 

@@ -214,15 +214,15 @@ function crm_case_access($op, $crm_case = NULL, $account = NULL) {
     if (user_access("$op any $type_name crm_case", $account)) {
       return TRUE;
     }
-    if($op == 'delete') {
+    if ($op == 'delete') {
       return user_access("$op any $type_name crm_case", $account); 
     }
   }
   $type = crm_case_get_types($crm_case->type);
-  if($type->data['contact_edit']) {
+  if ($type->data['contact_edit']) {
     return TRUE;
     $contact = crm_case_get_contact($crm_case);
-    if($account->crm_contact_records[$contact->contact_id]) {
+    if ($account->crm_contact_records[$contact->contact_id]) {
       return TRUE;
     }
   }
@@ -811,14 +811,14 @@ function crm_case_mail($key, &$message, $params) {
  * Implements hook_crm_student_admin_links().
  */
 function crm_case_crm_student_admin_links() {
-	return array(
-		'crm_cases' => array(
-			'group' => t('Cases'),
-			'title' => t('Manage case types'),
-			'description' => t('Manage the types of cases that can be opened on contacts.'),
-			'href' => 'admin/structure/crm/case-types',
-		),
-	);
+  return array(
+    'crm_cases' => array(
+      'group' => t('Cases'),
+      'title' => t('Manage case types'),
+      'description' => t('Manage the types of cases that can be opened on contacts.'),
+      'href' => 'admin/structure/crm/case-types',
+    ),
+  );
 }
 
 /**
@@ -837,11 +837,11 @@ function crm_case_form_field_ui_field_edit_form_alter(&$form, $form_state) {
  * We're removing case types from the case search view which the user does not have access to.
  */
 function crm_case_form_views_exposed_form_alter(&$form, $form_state) {
-  if($form_state['view']->name != 'crm_cases') {
+  if ($form_state['view']->name != 'crm_cases') {
     return;
   }
-  foreach($form['type']['#options'] as $key => $title) {
-    if(!user_access("view any $key crm_case")) {
+  foreach ($form['type']['#options'] as $key => $title) {
+    if (!user_access("view any $key crm_case")) {
       unset($form['type']['#options'][$key]);
     }
   }

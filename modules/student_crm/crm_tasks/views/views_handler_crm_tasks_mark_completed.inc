@@ -8,7 +8,7 @@ class views_handler_crm_tasks_mark_completed extends views_handler_field {
     $checkbox = array('data-rid' => $values->relation_users_rid,
                       'class'    => array('crm-task-mark'),
                      );
-    if($values->field_field_task_complete[0]['raw']['value']) {
+    if ($values->field_field_task_complete[0]['raw']['value']) {
       $checkbox['checked'] = 'checked';
     }
     return theme('checkbox', array('element' => array('#attributes' => $checkbox)));

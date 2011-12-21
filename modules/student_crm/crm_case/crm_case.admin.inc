@@ -51,14 +51,14 @@ function crm_case_edit_form($form, &$form_state, $crm_case) {
   drupal_set_title(t('Edit @name', array('@name' => $crm_case->name)));
   drupal_add_js(drupal_get_path('module', 'crm_case') .'/js/crm_case.form.js');
   $type = crm_case_type_load($crm_case->type);
-  if(isset($type->data['instructions']) && $message = check_markup($type->data['instructions']['value'], $type->data['instructions']['format'])) {
+  if (isset($type->data['instructions']) && $message = check_markup($type->data['instructions']['value'], $type->data['instructions']['format'])) {
     $form['form_instructions'] = array(
       '#markup' => $message,
     );
   }
   
   // Add the default field elements.
-  if(!isset($crm_case->name)) {
+  if (!isset($crm_case->name)) {
     $form['name'] = array(
       '#type' => 'textfield',
       '#title' => t('Case name'),
@@ -177,9 +177,9 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
     relation_save($relation);
     $rid = $relation->rid;
     $case_type = crm_case_type_load($crm_case->type);
-    if($case_type->data['email_contact']) {
+    if ($case_type->data['email_contact']) {
       $email = field_get_items('crm_core_contact', $contact, 'field_contact_email');
-      if(valid_email_address($email[0]['email'])) {
+      if (valid_email_address($email[0]['email'])) {
         $email_body = token_replace($case_type->data['email_body']['value'], array(
                           'crm_core_contact' => $contact,
                           'crm_case' => $crm_case,

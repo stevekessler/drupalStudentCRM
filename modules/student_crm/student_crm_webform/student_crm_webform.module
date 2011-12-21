@@ -4,7 +4,7 @@
  * Code for the Student CRM Webform feature.
  */
 
-if(module_exists('relation_endpoint')) {
+if (module_exists('relation_endpoint')) {
   include_once('student_crm_webform.features.inc');
 }
 
@@ -64,7 +64,7 @@ function student_crm_webform_block_info() {
  *  Implements hook_block_view().
  */
 function student_crm_webform_block_view($delta) {
-  if(!user_access('manage crm webforms')) {
+  if (!user_access('manage crm webforms')) {
     return;
   }
   if ($delta == 'student_crm_webform_send_form') {
@@ -402,18 +402,18 @@ function student_crm_webform_tokens($type, $tokens, $data = array(), $options = 
  * Implements hook_crm_student_admin_links().
  */
 function student_crm_webform_crm_student_admin_links() {
-	return array(
-		'webform_create' => array(
-			'group' => t('Web Forms'),
-			'title' => t('Add a new web form template'),
-			'description' => t('Create a new web form template.'),
-			'href' => 'node/add/webform',
-		),
-		'webform_manage' => array(
-			'group' => t('Web Forms'),
-			'title' => t('Manage web forms'),
-			'description' => t('View, edit, and delete existing webforms.'),
-			'href' => 'admin/content/webform',
-		),
-	);
+  return array(
+    'webform_create' => array(
+      'group' => t('Web Forms'),
+      'title' => t('Add a new web form template'),
+      'description' => t('Create a new web form template.'),
+      'href' => 'node/add/webform',
+    ),
+    'webform_manage' => array(
+      'group' => t('Web Forms'),
+      'title' => t('Manage web forms'),
+      'description' => t('View, edit, and delete existing webforms.'),
+      'href' => 'admin/content/webform',
+    ),
+  );
 }

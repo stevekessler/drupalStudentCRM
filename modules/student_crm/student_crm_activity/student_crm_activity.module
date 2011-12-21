@@ -21,7 +21,7 @@ function student_crm_activity_block_info() {
  * Implements hook_block_view().
  */
 function student_crm_activity_block_view($delta) {
-  if($delta == 'student_crm_activity_create') {
+  if ($delta == 'student_crm_activity_create') {
     return array('subject' => 'Add a note',
                  'content' => drupal_get_form('student_crm_activity_create'));
   }
@@ -52,17 +52,17 @@ function student_crm_activity_create($form, $form_state) {
   
   $entity = array();
   
-  if(isset($form_state['values']['entity'])) {
+  if (isset($form_state['values']['entity'])) {
     $entity = $form_state['values']['entity'];
   }
   else {
-    if($case = menu_get_object('crm_case', 2)) {
+    if ($case = menu_get_object('crm_case', 2)) {
       $entity['type'] = 'crm_case';
       $entity['bundle'] = $case->type;
       $entity['id'] = $case->cid;
       $crm_contact = crm_case_get_contact($case);
     }
-    if($contact = menu_get_object('crm_core_contact', 2)) {
+    if ($contact = menu_get_object('crm_core_contact', 2)) {
       $entity['type'] = 'crm_core_contact';
       $entity['bundle'] = $contact->type;
       $entity['id'] = $contact->contact_id;
@@ -76,9 +76,9 @@ function student_crm_activity_create($form, $form_state) {
   
   $types = crm_core_activity_types();
   $options = array();
-  foreach($types as $type) {
+  foreach ($types as $type) {
     $restrict = variable_get('student_crm_activity_restrict_'. $type->type, FALSE);
-    if((user_access('administer crm activities') 
+    if ((user_access('administer crm activities') 
        || user_access("edit any $type->type crm_activity")) && (
         !$restrict || 
         $restrict[$entity['type'] .':'. $entity['bundle']] || 
@@ -87,7 +87,7 @@ function student_crm_activity_create($form, $form_state) {
       $options[$type->type] = $type->label;
     }
   }
-  if(!count($options)) {
+  if (!count($options)) {
     $form = array();
     $form['message'] = array(
       '#markup' => '<h3 class="empty">'. t('You cannot create a note on this page.') .'</h3>',
@@ -101,14 +101,14 @@ function student_crm_activity_create($form, $form_state) {
     '#options' => $options,
     '#default_value' => STUDENT_CRM_DEFAULT_TYPE,
     '#ajax' => array(
-			'callback' => 'student_crm_activity_activity_form',
-			'wrapper' => 'activity-sub-form',
-			'progress' => array(
-				'type' => 'throbber',
-				'message' => 'Getting form',
-			),
-		),
-		'#weight' => -20,
+      'callback' => 'student_crm_activity_activity_form',
+      'wrapper' => 'activity-sub-form',
+      'progress' => array(
+        'type' => 'throbber',
+        'message' => 'Getting form',
+      ),
+    ),
+    '#weight' => -20,
   );
   
   $activity_type = (isset($form_state['values']['activity_type'])) 
@@ -149,7 +149,7 @@ function student_crm_activity_create($form, $form_state) {
  * Ajax callback to redraw form when the note type changes.
  */
 function student_crm_activity_activity_form(&$form, $form_state) {
-	return $form;
+  return $form;
 }
 
 /**
@@ -222,9 +222,9 @@ function student_crm_activity_form_crm_activity_type_form_alter(&$form, $form_st
  * Form submit callback for editing activity types.
  */
 function student_crm_activity_form_crm_activity_type_form_alter_submit($form, $form_state) {
-  $save = false;
-  foreach($form_state['values']['entity_types'] as $type) {
-    if($type) {
+  $save = FALSE;
+  foreach ($form_state['values']['entity_types'] as $type) {
+    if ($type) {
       $save = $form_state['values']['entity_types'];
       break;
     }

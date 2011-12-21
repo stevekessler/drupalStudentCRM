@@ -52,16 +52,16 @@ class StudentCRMActivityEmailFeedsProcessor extends FeedsProcessor {
   public function process(FeedsSource $source, FeedsParserResult $parser_result) {
     $state = $source->state(FEEDS_PROCESS);
     $mappings = $this->config['mappings'];
-    foreach($mappings as $map) {
-      if($map['target'] == 'contact_email') {
+    foreach ($mappings as $map) {
+      if ($map['target'] == 'contact_email') {
         $email_keys[] = $map['source'];
       }
-      if($map['target'] == 'author_email') {
+      if ($map['target'] == 'author_email') {
         $author_email_key = $map['source'];
       }
     }
     while ($item = $parser_result->shiftItem()) {
-     if($item[$author_email_key]) {
+     if ($item[$author_email_key]) {
         $email = explode('<', $item[$author_email_key]);
         $email = trim(rtrim($email[1], '>'));
         $author = db_select('users', 'u')
@@ -69,15 +69,15 @@ class StudentCRMActivityEmailFeedsProcessor extends FeedsProcessor {
                   ->condition('u.mail', $email)
                   ->execute()
                   ->fetchField();
-        if($author) {
+        if ($author) {
           $item['author_uid'] = $author;
           $author = user_load($author);
         }
       }
-      if($author && user_access('edit any email_activity crm_activity', $author)) {
+      if ($author && user_access('edit any email_activity crm_activity', $author)) {
         $contact_emails = array();
-        foreach($email_keys as $key) {
-          if($item[$key]) {
+        foreach ($email_keys as $key) {
+          if ($item[$key]) {
             $contact_emails = array_merge($contact_emails, explode(',', $item[$key]));
           }
         }
@@ -195,8 +195,8 @@ class StudentCRMActivityEmailFeedsProcessor extends FeedsProcessor {
    */
   public function entitySave($entity) {
     crm_core_activity_save($entity);
-    foreach($entity->crm_contacts as $contact) {
-      if($contact) {
+    foreach ($entity->crm_contacts as $contact) {
+      if ($contact) {
         $contact = crm_core_contact_load($contact);
               
         $relation = relation_create('crm_core_activity', array(
@@ -287,7 +287,7 @@ class StudentCRMActivityEmailFeedsProcessor extends FeedsProcessor {
     
     $activity_types = crm_core_activity_types();
     $types = array();
-    foreach($activity_types as $type) {
+    foreach ($activity_types as $type) {
       $types[$type->type] = $type->label;
     }
     $period = drupal_map_assoc(array(FEEDS_EXPIRE_NEVER, 3600, 10800, 21600, 43200, 86400, 259200, 604800, 2592000, 2592000 * 3, 2592000 * 6, 31536000), 'feeds_format_expire');

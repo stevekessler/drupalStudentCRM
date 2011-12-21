@@ -37,7 +37,7 @@ function crm_tasks_username_autocomplete($string = '') {
   if ($string) {
     $result = db_select('users')->fields('users', array('uid', 'name'))->condition('name', db_like($string) . '%', 'LIKE')->range(0, 100)->execute();
     foreach ($result as $user) {
-      if(user_access('maintain own task list', user_load($user->uid))) {
+      if (user_access('maintain own task list', user_load($user->uid))) {
         $matches[$user->name] = check_plain($user->name);
       }
     }
@@ -55,7 +55,7 @@ function crm_tasks_username_autocomplete($string = '') {
 function crm_tasks_mark_task_access($task) {
   $relation = relation_load($task);
   global $user;
-  if($relation) {
+  if ($relation) {
     return ($relation->uid == $user->uid);
   }
   return FALSE;
@@ -85,7 +85,7 @@ function crm_tasks_block_info() {
  * Implements hook_block_view().
  */
 function crm_tasks_block_view($delta) {
-  if($delta == 'crm_tasks_new_task' && user_access('maintain own task list')) {
+  if ($delta == 'crm_tasks_new_task' && user_access('maintain own task list')) {
     $modal_link = l('Add to tasks', null, array('fragment' => 'edit-task-modal', 'external' => TRUE, 'attributes' => array('id' => 'show-add-tasks')));
     return array('content' => $modal_link . drupal_render(drupal_get_form('crm_tasks_create_task_form')));
   }
@@ -113,23 +113,23 @@ function crm_tasks_create_task_form() {
     '#type' => 'hidden'
   );
   
-  if($contact = menu_get_object('crm_core_contact', 2)) {
+  if ($contact = menu_get_object('crm_core_contact', 2)) {
     $form['target_id']['#value'] = $contact->contact_id;
     $form['target_bundle']['#value'] = $contact->type;
     $form['target_entity']['#value'] = 'crm_core_contact';
   }
-  if($case = menu_get_object('crm_case', 2)) {
+  if ($case = menu_get_object('crm_case', 2)) {
     $form['target_id']['#value'] = $case->cid;
     $form['target_bundle']['#value'] = $case->type;
     $form['target_entity']['#value'] = 'crm_case';
   }
-  if($node = menu_get_object('node')) {
+  if ($node = menu_get_object('node')) {
     $form['target_id']['#value'] = $node->nid;
     $form['target_bundle']['#value'] = $node->type;
     $form['target_entity']['#value'] = 'node';
   }
   
-  if(user_access('create tasks for other users')) {
+  if (user_access('create tasks for other users')) {
     global $user;
     $form['assigned_user'] = array(
       '#type' => 'textfield',
@@ -166,7 +166,7 @@ function crm_tasks_create_task_form() {
  * Create task form submit
  */
 function crm_tasks_create_task_form_submit($form, $form_state) {
-  if($form_state['values']['assigned_user']) {
+  if ($form_state['values']['assigned_user']) {
     $uid = db_select('users')->fields('users', array('uid'))->condition('name', $form_state['values']['assigned_user'])->execute()->fetchField();
     $target_user = user_load($uid);
   }

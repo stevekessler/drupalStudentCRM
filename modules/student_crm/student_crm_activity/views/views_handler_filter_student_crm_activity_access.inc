@@ -6,9 +6,9 @@ class views_handler_filter_student_crm_activity_access extends views_handler_fil
       global $user;
       $permissions = user_role_permissions($user->roles);
       $types = array();
-      foreach($permissions as $rid => $perms) {
-        foreach($perms as $name => $access) {
-          if($access && preg_match('/view any [^ ]+ crm_activity/', $name)) {
+      foreach ($permissions as $rid => $perms) {
+        foreach ($perms as $name => $access) {
+          if ($access && preg_match('/view any [^ ]+ crm_activity/', $name)) {
             $types[] = preg_replace('/view any ([^ ]+) crm_activity/', '\\1', $name);
           }
         }

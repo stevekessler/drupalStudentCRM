@@ -5,7 +5,7 @@
  * via the use of activities.
  */
 function student_crm_activity_case_alter_form_field_ui_field_edit_form_alter(&$form, $form_state, $form_id) {
-  if($form['instance']['entity_type']['#value'] != 'crm_case') {
+  if ($form['instance']['entity_type']['#value'] != 'crm_case') {
     return;
   }
   $form['instance']['crm_case_alter'] = array(
@@ -23,21 +23,21 @@ function student_crm_activity_case_alter_form_field_ui_field_edit_form_alter(&$f
  */
 function student_crm_activity_case_alter_form_student_crm_activity_create_alter(&$form, $form_state) {
   $case = menu_get_object('crm_case', 2);
-  if(!$case && $form_state['values']['entity']['type'] == 'crm_case') {
+  if (!$case && $form_state['values']['entity']['type'] == 'crm_case') {
     $case = crm_case_load($form_state['values']['entity']['id']);
   }
-  if(!$case || !user_access('open and close cases')) {
+  if (!$case || !user_access('open and close cases')) {
     return;
   }
   drupal_add_css(drupal_get_path('module', 'student_crm_activity_case_alter') .'/css/student_crm_activity_case_alter.css');
   $fields = field_info_instances('crm_case', $case->type);
   $alterable_fields = array();
-  foreach($fields as $field_name => $field) {
-    if($field['crm_case_alter']) {
+  foreach ($fields as $field_name => $field) {
+    if ($field['crm_case_alter']) {
       $alterable_fields[$field_name] = $field;
     }
   }
-  if(count($alterable_fields)) {
+  if (count($alterable_fields)) {
     $form['case_fields'] = array(
       '#type' => 'fieldset',
       '#title' => t('Update case fields'),
@@ -46,8 +46,8 @@ function student_crm_activity_case_alter_form_student_crm_activity_create_alter(
       '#weight' => 10,
     );
     field_attach_form('crm_case', $case, $form['case_fields'], $form_state, $case->language);
-    foreach($fields as $field_name => $field) {
-      if(!$alterable_fields[$field_name]) {
+    foreach ($fields as $field_name => $field) {
+      if (!$alterable_fields[$field_name]) {
         unset($form['case_fields'][$field_name]);
       }
     }
@@ -77,21 +77,21 @@ function student_crm_activity_case_alter_form_student_crm_activity_create_alter_
   $language = ($case->language) ? $case->language : LANGUAGE_NONE;
   $activity = crm_core_activity_load($form_state['activity_id']);
   $data = array();
-  if($form_state['values']['case_status_change']) {
+  if ($form_state['values']['case_status_change']) {
     $case->case_status[$language][0]['value'] = ($case->case_status[$language][0]['value']) ? 0 : 1;
     $data['display_extra']['status']['label'] = t('Case status changed');
     $data['display_extra']['status']['message'] = ($case->case_status[$language][0]['value'])
                                     ? t('Opened')
                                     : t('Closed');
-  	$data['display_extra']['status']['class'] = ($case->case_status[$language][0]['value'])
+    $data['display_extra']['status']['class'] = ($case->case_status[$language][0]['value'])
                                     ? 'opened'
                                     : 'closed';
   }
   
   $fields = field_info_instances('crm_case', $case->type);
   $alterable_fields = array();
-  foreach($fields as $field_name => $field) {
-    if($field['crm_case_alter'] && md5(serialize($form_state['values'][$field_name])) != md5(serialize($case->{$field_name}))) {
+  foreach ($fields as $field_name => $field) {
+    if ($field['crm_case_alter'] && md5(serialize($form_state['values'][$field_name])) != md5(serialize($case->{$field_name}))) {
       $rendered = field_attach_view('crm_case', $case, 'page');
       $rendered[$field_name]['#label_display'] = 'hidden';
       $data['display_extra'][$field_name]['old'] = drupal_render($rendered[$field_name]);
@@ -115,13 +115,13 @@ function student_crm_activity_case_alter_form_student_crm_activity_create_alter_
  * Implements hook_crm_core_activity_load().
  */
 function student_crm_activity_case_alter_crm_core_activity_load($activities) {
-  foreach($activities as $id => $activity) {
+  foreach ($activities as $id => $activity) {
     $data = db_select('student_crm_activity_case_alter', 'a')
             ->condition('a.activity_id', $id)
             ->fields('a', array('data'))
             ->execute()
             ->fetchField();
-    if($data = unserialize($data)) {
+    if ($data = unserialize($data)) {
       $activities[$id]->data = $data;
     }
   }
@@ -129,17 +129,17 @@ function student_crm_activity_case_alter_crm_core_activity_load($activities) {
 }
 
 function student_crm_activity_case_alter_crm_core_activity_view($activity, $view_mode, $langcode) {
-  if($activity->data['display_extra']['status']) {
+  if ($activity->data['display_extra']['status']) {
     $activity->content['status_change'] = array(
     
       '#markup' => '<span class="status-change '. $activity->data['display_extra']['status']['class'] .'">'. $activity->data['display_extra']['status']['message'] .'</span>',
     );
-	unset($activity->data['display_extra']['status']);
+  unset($activity->data['display_extra']['status']);
   }
-  if(is_array($activity->data['display_extra']) && count($activity->data['display_extra'])) {
+  if (is_array($activity->data['display_extra']) && count($activity->data['display_extra'])) {
     $headers = array('Field', 'Old value', 'New value');
     $rows = array();
-    foreach($activity->data['display_extra'] as $changed) {
+    foreach ($activity->data['display_extra'] as $changed) {
       $rows[] = array($changed['label'], $changed['old'], $changed['message']);
     }
     $activity->content['changed'] = array(
