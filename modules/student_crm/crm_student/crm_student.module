@@ -377,3 +377,11 @@ function crm_student_mail($key, &$message, $params) {
       break;
   }
 }
+
+/**
+ * Helper function to draw Google charts.
+ */
+function crm_student_draw_chart($chart) {
+  module_load_include('inc', 'crm_student', 'crm_student.charts');
+  return _crm_student_draw_chart($chart);
+}

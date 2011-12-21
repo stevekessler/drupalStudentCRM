@@ -9,6 +9,10 @@
  */
 function student_crm_gpa_ctools_plugin_api() {
   list($module, $api) = func_get_args();
+  if ($module == "context" && $api == "context") {
+    return array("version" => "3");
+  }
+  list($module, $api) = func_get_args();
   if ($module == "relation" && $api == "relation_type_default") {
     return array("version" => "1");
   }

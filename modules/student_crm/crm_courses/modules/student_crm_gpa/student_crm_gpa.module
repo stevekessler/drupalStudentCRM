@@ -42,3 +42,24 @@ function student_crm_gpa_permission() {
             ),
           );
 }
+
+/**
+ * Implements hook_block_info().
+ */
+function student_crm_gpa_block_info() {
+  $blocks['student_crm_gpa_graph'] = array('info' => 'Student GPA History Graph');
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function student_crm_gpa_block_view($delta) {
+  switch($delta) {
+    case 'student_crm_gpa_graph':
+      drupal_add_js(array('contact_id' => arg(2)), 'setting');
+      drupal_add_js(drupal_get_path('module', 'student_crm_gpa') .'/js/student_crm_gpa.chart.js');
+      return array('title' => 'GPA History', 'content' => crm_student_draw_chart(array('id' => 'gpa-chart')));
+      break;
+  }
+}

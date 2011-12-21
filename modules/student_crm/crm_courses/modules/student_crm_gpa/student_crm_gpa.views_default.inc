@@ -171,6 +171,112 @@ function student_crm_gpa_views_default_views() {
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'GPA';
   $handler->display->display_options['menu']['weight'] = '0';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'views_json';
+  $handler->display->display_options['style_options']['root_object'] = 'items';
+  $handler->display->display_options['style_options']['top_child_object'] = 'item';
+  $handler->display->display_options['style_options']['plaintext_output'] = 1;
+  $handler->display->display_options['style_options']['jsonp_prefix'] = '';
+  $handler->display->display_options['style_options']['using_views_api_mode'] = 0;
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'relation_base_term_gpa_right_taxonomy_term';
+  $handler->display->display_options['fields']['name']['label'] = 'term';
+  $handler->display->display_options['fields']['name']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['name']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['name']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['name']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['name']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['name']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['name']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['name']['link_to_taxonomy'] = 0;
+  $handler->display->display_options['fields']['name']['convert_spaces'] = 0;
+  /* Field: Relation: Term GPA */
+  $handler->display->display_options['fields']['field_gpa_term']['id'] = 'field_gpa_term';
+  $handler->display->display_options['fields']['field_gpa_term']['table'] = 'field_data_field_gpa_term';
+  $handler->display->display_options['fields']['field_gpa_term']['field'] = 'field_gpa_term';
+  $handler->display->display_options['fields']['field_gpa_term']['relationship'] = 'relation_base_left_term_gpa';
+  $handler->display->display_options['fields']['field_gpa_term']['label'] = 'term_gpa';
+  $handler->display->display_options['fields']['field_gpa_term']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_gpa_term']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_gpa_term']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_gpa_term']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_gpa_term']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_gpa_term']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_gpa_term']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_gpa_term']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_gpa_term']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_gpa_term']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_gpa_term']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_gpa_term']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_gpa_term']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_gpa_term']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_gpa_term']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_gpa_term']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_gpa_term']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_gpa_term']['settings'] = array(
+    'thousand_separator' => ' ',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['fields']['field_gpa_term']['field_api_classes'] = 0;
+  /* Field: Relation: Cumulative GPA */
+  $handler->display->display_options['fields']['field_gpa_cumulative']['id'] = 'field_gpa_cumulative';
+  $handler->display->display_options['fields']['field_gpa_cumulative']['table'] = 'field_data_field_gpa_cumulative';
+  $handler->display->display_options['fields']['field_gpa_cumulative']['field'] = 'field_gpa_cumulative';
+  $handler->display->display_options['fields']['field_gpa_cumulative']['relationship'] = 'relation_base_left_term_gpa';
+  $handler->display->display_options['fields']['field_gpa_cumulative']['label'] = 'gpa';
+  $handler->display->display_options['fields']['field_gpa_cumulative']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_gpa_cumulative']['settings'] = array(
+    'thousand_separator' => ' ',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['fields']['field_gpa_cumulative']['field_api_classes'] = 0;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Taxonomy term: Start date (field_term_start) */
+  $handler->display->display_options['sorts']['field_term_start_value']['id'] = 'field_term_start_value';
+  $handler->display->display_options['sorts']['field_term_start_value']['table'] = 'field_data_field_term_start';
+  $handler->display->display_options['sorts']['field_term_start_value']['field'] = 'field_term_start_value';
+  $handler->display->display_options['sorts']['field_term_start_value']['relationship'] = 'relation_base_term_gpa_right_taxonomy_term';
+  $handler->display->display_options['path'] = 'crm/contact/%/gpa/json';
   $translatables['student_crm_gpa'] = array(
     t('Master'),
     t('GPA History'),
@@ -187,6 +293,9 @@ function student_crm_gpa_views_default_views() {
     t('Cumulative GPA'),
     t('All'),
     t('Page'),
+    t('term'),
+    t('term_gpa'),
+    t('gpa'),
   );
   $export['student_crm_gpa'] = $view;
 
