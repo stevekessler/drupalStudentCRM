@@ -14,6 +14,7 @@ function crm_student_init() {
   drupal_add_js(drupal_get_path('module', 'crm_student') . '/js/crm_student.easycopy.js');
   drupal_add_js(drupal_get_path('module', 'crm_student') . '/js/crm_student.quicksearch.js');
   drupal_add_js(drupal_get_path('module', 'crm_student') . '/js/jquery.quicksearch.js');
+  drupal_add_js(drupal_get_path('module', 'crm_student') . '/js/crm_student.tableclick.js');
 }
 
 /**

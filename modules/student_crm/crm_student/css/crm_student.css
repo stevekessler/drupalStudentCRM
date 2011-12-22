@@ -13,3 +13,5 @@ form.site-search-form .form-item { margin: 0px; }
 input.easy-copy { border: 1px solid #e5e5e5; }
 
 .page-crm-admin-student .admin-panel h3 { padding: 5px; }
+
+.tableclick tr:hover { background: #f5f5e1; cursor: pointer;}

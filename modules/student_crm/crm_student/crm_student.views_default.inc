@@ -514,6 +514,7 @@ function crm_student_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Search Students';
+  $handler->display->display_options['css_class'] = 'tableclick';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -621,6 +622,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['contact_name']['alter']['external'] = 0;
   $handler->display->display_options['fields']['contact_name']['alter']['replace_spaces'] = 0;
   $handler->display->display_options['fields']['contact_name']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['contact_name']['alter']['link_class'] = 'tableclick-link';
   $handler->display->display_options['fields']['contact_name']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['contact_name']['alter']['word_boundary'] = 1;
   $handler->display->display_options['fields']['contact_name']['alter']['ellipsis'] = 1;
@@ -634,6 +636,9 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['contact_name']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['contact_name']['click_sort_column'] = 'title';
   $handler->display->display_options['fields']['contact_name']['type'] = 'name_default_family';
+  $handler->display->display_options['fields']['contact_name']['settings'] = array(
+    'markup' => 0,
+  );
   $handler->display->display_options['fields']['contact_name']['field_api_classes'] = 0;
   /* Field: Contact: Name */
   $handler->display->display_options['fields']['contact_name_1']['id'] = 'contact_name_1';
@@ -733,6 +738,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_status']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_student_status']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_student_status']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_student_status']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_student_status']['field_api_classes'] = 0;
   /* Field: Contact: Class level */
   $handler->display->display_options['fields']['field_student_level']['id'] = 'field_student_level';
@@ -756,6 +762,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_level']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_student_level']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_student_level']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_student_level']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_student_level']['field_api_classes'] = 0;
   /* Field: Contact: Degrees */
   $handler->display->display_options['fields']['field_student_degrees']['id'] = 'field_student_degrees';
@@ -778,9 +785,11 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_degrees']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_student_degrees']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_student_degrees']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_student_degrees']['group_rows'] = 1;
   $handler->display->display_options['fields']['field_student_degrees']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_student_degrees']['delta_reversed'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['delta_first_last'] = 0;
   $handler->display->display_options['fields']['field_student_degrees']['field_api_classes'] = 0;
   $handler->display->display_options['filter_groups']['groups'] = array(
     0 => 'AND',
