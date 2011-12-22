@@ -1,3 +1,7 @@
 
 
 modules/student_crm/webform_submission_entity/*
+libraries/chosen/*
+libraries/fancybox/*
+libraries/formalize/*
+libraries/guiders/*

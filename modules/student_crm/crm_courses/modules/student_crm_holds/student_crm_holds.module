@@ -31,3 +31,14 @@ function student_crm_holds_enable() {
   //clear the cache to display in Feeds as available plugin.
   cache_clear_all('plugins:feeds:plugins', 'cache');
 }
+
+/**
+ * Implements hook_permission().
+ */
+function student_crm_holds_permission() {
+  return array('view hold data' => array(
+          'title' => t('View Holds'),
+          'description' => t('User is able to view hold data on students.'),
+        ),
+      );
+}
