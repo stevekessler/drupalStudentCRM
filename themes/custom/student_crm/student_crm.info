@@ -7,6 +7,7 @@ core=7.x
 stylesheets[all][] = css/style.css
 
 scripts[] = js/placeholder.js
+scripts[] = js/student_crm.js
 
 regions[header_left]		    = Header Left
 regions[header_middle]		  = Header Middle

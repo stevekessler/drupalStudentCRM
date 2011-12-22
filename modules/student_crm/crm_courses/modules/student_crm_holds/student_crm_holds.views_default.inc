@@ -22,8 +22,10 @@ function student_crm_holds_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'CRM Student holds';
-  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['title'] = 'Holds';
+  $handler->display->display_options['css_class'] = 'alert holds';
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'view hold data';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
@@ -260,9 +262,173 @@ function student_crm_holds_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'crm/contact/%/holds';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'Holds';
+  $handler->display->display_options['menu']['weight'] = '0';
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['group_rendered'] = 1;
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: CRM Contact: Relation: Hold (crm_core_contact -> relation) */
+  $handler->display->display_options['relationships']['relation_base_left_hold']['id'] = 'relation_base_left_hold';
+  $handler->display->display_options['relationships']['relation_base_left_hold']['table'] = 'crm_core_contact';
+  $handler->display->display_options['relationships']['relation_base_left_hold']['field'] = 'relation_base_left_hold';
+  $handler->display->display_options['relationships']['relation_base_left_hold']['required'] = 1;
+  /* Relationship: Relation: Relation: Hold (relation -> node) */
+  $handler->display->display_options['relationships']['relation_base_hold_right_node']['id'] = 'relation_base_hold_right_node';
+  $handler->display->display_options['relationships']['relation_base_hold_right_node']['table'] = 'relation';
+  $handler->display->display_options['relationships']['relation_base_hold_right_node']['field'] = 'relation_base_hold_right_node';
+  $handler->display->display_options['relationships']['relation_base_hold_right_node']['relationship'] = 'relation_base_left_hold';
+  $handler->display->display_options['relationships']['relation_base_hold_right_node']['label'] = 'Hold - hold type';
+  $handler->display->display_options['relationships']['relation_base_hold_right_node']['required'] = 1;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Relation: Created date */
+  $handler->display->display_options['fields']['field_hold_date_created']['id'] = 'field_hold_date_created';
+  $handler->display->display_options['fields']['field_hold_date_created']['table'] = 'field_data_field_hold_date_created';
+  $handler->display->display_options['fields']['field_hold_date_created']['field'] = 'field_hold_date_created';
+  $handler->display->display_options['fields']['field_hold_date_created']['relationship'] = 'relation_base_left_hold';
+  $handler->display->display_options['fields']['field_hold_date_created']['label'] = '';
+  $handler->display->display_options['fields']['field_hold_date_created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_hold_date_created']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_hold_date_created']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_hold_date_created']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_hold_date_created']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_hold_date_created']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_hold_date_created']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_hold_date_created']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_hold_date_created']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_hold_date_created']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_hold_date_created']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_hold_date_created']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_hold_date_created']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_hold_date_created']['element_type'] = 'div';
+  $handler->display->display_options['fields']['field_hold_date_created']['element_class'] = 'date';
+  $handler->display->display_options['fields']['field_hold_date_created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_hold_date_created']['element_default_classes'] = 0;
+  $handler->display->display_options['fields']['field_hold_date_created']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_hold_date_created']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_hold_date_created']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_hold_date_created']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_repeat_rule' => 'show',
+  );
+  $handler->display->display_options['fields']['field_hold_date_created']['field_api_classes'] = 0;
+  /* Field: Content: Code */
+  $handler->display->display_options['fields']['field_hold_code']['id'] = 'field_hold_code';
+  $handler->display->display_options['fields']['field_hold_code']['table'] = 'field_data_field_hold_code';
+  $handler->display->display_options['fields']['field_hold_code']['field'] = 'field_hold_code';
+  $handler->display->display_options['fields']['field_hold_code']['relationship'] = 'relation_base_hold_right_node';
+  $handler->display->display_options['fields']['field_hold_code']['label'] = '';
+  $handler->display->display_options['fields']['field_hold_code']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_hold_code']['alter']['text'] = '[field_hold_date_created] - [field_hold_code-value]';
+  $handler->display->display_options['fields']['field_hold_code']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_hold_code']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_hold_code']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_hold_code']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_hold_code']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_hold_code']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_hold_code']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_hold_code']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_hold_code']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_hold_code']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_hold_code']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_hold_code']['element_type'] = 'div';
+  $handler->display->display_options['fields']['field_hold_code']['element_class'] = 'hold-code';
+  $handler->display->display_options['fields']['field_hold_code']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_hold_code']['element_default_classes'] = 0;
+  $handler->display->display_options['fields']['field_hold_code']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_hold_code']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_hold_code']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_hold_code']['field_api_classes'] = 0;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'relation_base_hold_right_node';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['element_type'] = 'h3';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = 0;
+  $handler->display->display_options['fields']['title']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['title']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 0;
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['relationship'] = 'relation_base_hold_right_node';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['body']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['body']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['body']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['body']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['body']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['body']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['body']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['body']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['body']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['body']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['body']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['body']['element_type'] = 'div';
+  $handler->display->display_options['fields']['body']['element_class'] = 'body';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['element_default_classes'] = 0;
+  $handler->display->display_options['fields']['body']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['body']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['body']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['body']['field_api_classes'] = 0;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Severity (field_hold_severity) */
+  $handler->display->display_options['filters']['field_hold_severity_value']['id'] = 'field_hold_severity_value';
+  $handler->display->display_options['filters']['field_hold_severity_value']['table'] = 'field_data_field_hold_severity';
+  $handler->display->display_options['filters']['field_hold_severity_value']['field'] = 'field_hold_severity_value';
+  $handler->display->display_options['filters']['field_hold_severity_value']['relationship'] = 'relation_base_hold_right_node';
+  $handler->display->display_options['filters']['field_hold_severity_value']['value'] = array(
+    'bad' => 'bad',
+  );
+  /* Filter criterion: Relation: Closed date (field_hold_date_closed) */
+  $handler->display->display_options['filters']['field_hold_date_closed_value']['id'] = 'field_hold_date_closed_value';
+  $handler->display->display_options['filters']['field_hold_date_closed_value']['table'] = 'field_data_field_hold_date_closed';
+  $handler->display->display_options['filters']['field_hold_date_closed_value']['field'] = 'field_hold_date_closed_value';
+  $handler->display->display_options['filters']['field_hold_date_closed_value']['relationship'] = 'relation_base_left_hold';
+  $handler->display->display_options['filters']['field_hold_date_closed_value']['operator'] = 'empty';
+  /* Filter criterion: Relation: Created date (field_hold_date_created) */
+  $handler->display->display_options['filters']['field_hold_date_created_value']['id'] = 'field_hold_date_created_value';
+  $handler->display->display_options['filters']['field_hold_date_created_value']['table'] = 'field_data_field_hold_date_created';
+  $handler->display->display_options['filters']['field_hold_date_created_value']['field'] = 'field_hold_date_created_value';
+  $handler->display->display_options['filters']['field_hold_date_created_value']['relationship'] = 'relation_base_left_hold';
+  $handler->display->display_options['filters']['field_hold_date_created_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_hold_date_created_value']['default_date'] = 'now';
+  $handler->display->display_options['block_description'] = 'Holds - bad holds';
   $translatables['crm_student_holds'] = array(
     t('Master'),
-    t('CRM Student holds'),
+    t('Holds'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -283,6 +449,9 @@ function student_crm_holds_views_default_views() {
     t('Term'),
     t('All'),
     t('Page'),
+    t('Block'),
+    t('[field_hold_date_created] - [field_hold_code-value]'),
+    t('Holds - bad holds'),
   );
   $export['crm_student_holds'] = $view;
 

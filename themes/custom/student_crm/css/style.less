@@ -300,3 +300,11 @@ ul.pager { margin: 15px 0; }
   .activity .field-name-field-activity-note .field-label { display: none; }
 .activity .status-change { color: @content-background; font-weight: bold; .round-box(4px); background: @blue-button; padding: 3px 4px; }
 	.activity .status-change.closed { background: @red-button; }
+
+/** HOLDS **/
+  .alert.holds .views-row { background: @red-button url(../images/hold.png) no-repeat 7px 8px; color: @content-background; font-weight: bold; .round-box(5px); padding: 5px 5px 5px 30px; }
+    .alert.holds .hold-code { background: darken(@red-button, 20%); color: lighten(@red-button, 20%); float: right; font-size: 80%; padding: 5px; .round-box(4px); font-variant: small-caps;}
+      .alert.holds .hold-code:hover { color: @content-background; }
+    .alert.holds h3 { margin: 0; padding: 0; }
+    .alert.holds .body { margin: 5px 5px 5px 10px;}
+      .alert.holds h3 .show-body { font-size: 14px; color: @content-background; margin-left: 15px; }

@@ -771,3 +771,39 @@ h3.ui-accordion-header.ui-state-active {
 .activity .status-change.closed {
   background: #f75342;
 }
+/** HOLDS **/
+.alert.holds .views-row {
+  background: #f75342 url(../images/hold.png) no-repeat 7px 8px;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  padding: 5px 5px 5px 30px;
+}
+.alert.holds .hold-code {
+  background: #ca1b09;
+  color: #fbaca4;
+  float: right;
+  font-size: 80%;
+  padding: 5px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  font-variant: small-caps;
+}
+.alert.holds .hold-code:hover {
+  color: #ffffff;
+}
+.alert.holds h3 {
+  margin: 0;
+  padding: 0;
+}
+.alert.holds .body {
+  margin: 5px 5px 5px 10px;
+}
+.alert.holds h3 .show-body {
+  font-size: 14px;
+  color: #ffffff;
+  margin-left: 15px;
+}
