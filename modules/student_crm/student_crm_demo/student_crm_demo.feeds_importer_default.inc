@@ -760,6 +760,11 @@ function student_crm_demo_feeds_importer_default() {
             'target' => 'field_hold_term',
             'unique' => FALSE,
           ),
+          4 => array(
+            'source' => 'date',
+            'target' => 'field_hold_date_created:start',
+            'unique' => FALSE,
+          ),
         ),
         'update_existing' => 0,
         'input_format' => NULL,
