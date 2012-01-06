@@ -395,7 +395,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No contact records found.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: Broken/missing handler */
+  /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_user_contact_target_id']['id'] = 'field_user_contact_target_id';
   $handler->display->display_options['relationships']['field_user_contact_target_id']['table'] = 'field_data_field_user_contact';
   $handler->display->display_options['relationships']['field_user_contact_target_id']['field'] = 'field_user_contact_target_id';
@@ -493,7 +493,7 @@ function crm_student_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('No contact records found.'),
-    t('field_user_contact_target_id'),
+    t('Contact entity referenced from field_user_contact'),
     t('crm/contact/[contact_id]'),
     t('All'),
     t('Block'),

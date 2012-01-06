@@ -843,6 +843,77 @@ function crm_student_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_user_contact'
+  $fields['user-user-field_user_contact'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_user_contact',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'target_entity' => array(
+          0 => 'target_type',
+          1 => 'target_id',
+        ),
+      ),
+      'module' => 'entityreference',
+      'settings' => array(
+        'handler' => 'base',
+        'handler_settings' => array(
+          'sort' => array(
+            'direction' => 'ASC',
+            'field' => 'contact_name:title',
+            'property' => 'contact_id',
+            'type' => 'none',
+          ),
+          'target_bundles' => array(),
+        ),
+        'handler_submit' => 'Change handler',
+        'target_type' => 'crm_core_contact',
+      ),
+      'translatable' => '0',
+      'type' => 'entityreference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'crm_case_contact_editable' => 0,
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'entityreference',
+          'settings' => array(
+            'link' => FALSE,
+          ),
+          'type' => 'entityreference_label',
+          'weight' => 4,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_user_contact',
+      'label' => 'Contact record',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => 0,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'entityreference',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'path' => '',
+          'size' => '60',
+        ),
+        'type' => 'entityreference_autocomplete',
+        'weight' => '11',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_user_name_first'
   $fields['user-user-field_user_name_first'] = array(
     'field_config' => array(
@@ -1106,6 +1177,7 @@ function crm_student_field_default_fields() {
   t('Addresses');
   t('Alert level');
   t('Class level');
+  t('Contact record');
   t('Degree type');
   t('Degrees');
   t('Email address');
