@@ -127,6 +127,9 @@ function student_crm_webform_permission() {
  * Implements hook_webform_submission_entity_insert().
  */
 function student_crm_webform_webform_submission_entity_insert($entity) {
+  if(!isset($_SESSION['student_crm_webform_form'][$entity->nid])) {
+    return;
+  }
   $submission = $_SESSION['student_crm_webform_form'][$entity->nid];
   if ($submission['entity_type'] == 'crm_core_contact') {
     $target = crm_core_contact_load($submission['entity_id']);
