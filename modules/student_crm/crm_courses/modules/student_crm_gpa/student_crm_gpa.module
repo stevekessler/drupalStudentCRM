@@ -7,6 +7,13 @@
 include_once('student_crm_gpa.features.inc');
 
 /**
+ * Implements hook_init().
+ */
+function student_crm_gpa_init() {
+  drupal_add_css(drupal_get_path('module', 'student_crm_gpa') .'/css/student_crm_gpa.css');
+}
+
+/**
  * Implements hook_feeds_plugins().
  */
 function student_crm_gpa_feeds_plugins() {
