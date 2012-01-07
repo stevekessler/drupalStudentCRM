@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function student_crm_webform_case_form_crm_case_type_form_alter(&$form, $form_state) {
+  
+  $webforms = db_select('node', 'n')
+                    ->condition('type', 'webform')
+                    ->condition('status', 1)
+                    ->fields('n', array('nid', 'title'))
+                    ->execute()
+                    ->fetchAllKeyed();
+  
+  $webforms = array('none' => t('--None--')) + $webforms;
+  $case_forms = variable_get('student_crm_webform_case_form', array());
+  $form['student_crm_webform_case_form'] = array(
+    '#type' => 'select',
+    '#title' => t('Create when a user submits this form'),
+    '#description' => t('If a form is selected, when a user submits the form a case of this type will be created.'),
+    '#options' => $webforms,
+    '#default_value' => $case_forms[$form['type']['#default_value']],
+  );
+  
+  $form['#submit'][] = 'student_crm_webform_case_form_crm_case_type_form_alter_submit';
+}
+
+/**
+ * Submit callback to save preference for webform case relationship.
+ */
+function student_crm_webform_case_form_crm_case_type_form_alter_submit($form, $form_state) {
+  $case_forms = variable_get('student_crm_webform_case_form', array());
+  $case_forms[$form_state['values']['type']] = $form_state['values']['student_crm_webform_case_form'];
+  variable_set('student_crm_webform_case_form', $case_forms);
+}
+
+/**
+ * Implements hook_webform_submission_entity_insert().
+ */
+function student_crm_webform_case_webform_submission_entity_insert($entity) {
+  $node = node_load($entity->nid);
+  $case_forms = variable_get('student_crm_webform_case_form', array());
+  foreach($case_forms as $case => $form) {
+    if($form == $node->nid) {
+      $case_type = $case;
+    }
+  }
+  if(!isset($case_type)) {
+    return;
+  }
+  module_load_include('inc', 'webform', 'includes/webform.submissions');
+  $submission = webform_get_submission($entity->nid, $entity->sid);
+  $account = user_load($submission->uid);
+  $contact = field_get_items('user', $account, 'field_user_contact');
+  $contact = crm_core_contact_load($contact[0]['target_id']);
+  
+  $crm_case = crm_case_create(array('type' => $case_type,
+                                    'name' => $node->title));
+  $crm_case->is_new;
+  $crm_case->created = time();
+  $crm_case->changed = time();
+  
+  $crm_case->save();
+  $relation = relation_create('crm_contact_case', array(
+                  array('entity_type' => 'crm_case',
+                         'entity_bundle' => $crm_case->type,
+                         'entity_id' => $crm_case->cid,
+                         'r_index' => 0,
+                         ),
+                    array('entity_type' => 'crm_core_contact',
+                           'entity_bundle' => $contact->type, 
+                           'entity_id' => $contact->contact_id,
+                           'r_index' => 1, 
+                        )
+               ));
+  relation_save($relation);
+  $relation = relation_create('webform_submission_to_entities', array(
+                    array('entity_type' => 'webform_submission_entity',
+                         'entity_id' => $entity->wsid,
+                         'r_index' => 0,
+                         ),
+                    array('entity_type' => 'crm_case',
+                           'entity_bundle' => $crm_case->type, 
+                           'entity_id' => $crm_case->cid,
+                           'r_index' => 1,
+                         ),
+                    )
+               );
+  relation_save($relation);
+  drupal_set_message(t('A new case has been opened.'));
+  drupal_goto('<front>');
+}

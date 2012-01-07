@@ -1,0 +1,4 @@
+name=Student CRM Webform Cases
+package=Student CRM
+description=Create cases from webform submissions
+core=7.x
