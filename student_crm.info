@@ -118,7 +118,7 @@ dependencies[] = student_crm_holds
 dependencies[] = student_crm_gpa
 
 ; variables
-variables[chosen_jquery_selector] = "select:visible:not(.tao select, .container-inline-date select)"
+variables[chosen_jquery_selector] = "select[multiple]:visible:not(.tao select, .container-inline-date select)"
 variables[chosen_minimum] = 0
 variables[site_frontpage] = crm/home
 variables[site_name] = Student CRM
