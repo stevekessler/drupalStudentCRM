@@ -175,6 +175,24 @@ function _crm_student_search_form_submit($form, &$form_state) {
   drupal_goto('crm/search', array('query' => $query));
 }
 
+/** 
+ * Implements hook_crm_student_search_query().
+ */
+function crm_student_crm_student_search_destination($query) {
+  if(is_numeric($query)) {
+    $contact_id = db_select('field_data_field_student_id', 's')
+                   ->condition('field_student_id_value', intval($query))
+                   ->condition('entity_type', 'crm_core_contact')
+                   ->fields('s', array('entity_id'))
+                   ->execute()
+                   ->fetchField();
+    if($contact_id) {
+      return array('url' => 'crm/contact/'. $contact_id);
+    }
+  }
+}
+
+
 /**
  * Implements hook_user_login().
  */

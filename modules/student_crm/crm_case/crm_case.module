@@ -813,6 +813,14 @@ function crm_case_mail($key, &$message, $params) {
 function crm_case_crm_student_search_destination($query) {
   $query = explode(' ', $query);
   if(strtolower($query[0]) == t('case') && $query[1]) {
+    $cid = db_select('crm_case', 'c')
+             ->condition('cid', intval($query[1]))
+             ->fields('c', array('cid'))
+             ->execute()
+             ->fetchField();
+    if($cid) {
+      return array('url' => 'crm/case/'. $cid);
+    }
     return array('url' => 'crm/cases/all',
                  'query' => array('cid' => intval($query[1])));
   }

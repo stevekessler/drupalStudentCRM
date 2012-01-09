@@ -113,6 +113,14 @@ function crm_case_views_default_views() {
   $handler->display->display_options['style_options']['override'] = 1;
   $handler->display->display_options['style_options']['sticky'] = 0;
   $handler->display->display_options['style_options']['empty_table'] = 0;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'No cases found.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
+  $handler->display->display_options['empty']['area']['tokenize'] = 0;
   /* Relationship: Case: Relation: CRM Contact Case (crm_case <-> crm_core_contact) */
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['id'] = 'relation_crm_contact_case_crm_core_contact';
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['table'] = 'crm_case';
@@ -557,6 +565,7 @@ function crm_case_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
+    t('No cases found.'),
     t('CRM Contact Case'),
     t('Case ID'),
     t('.'),
