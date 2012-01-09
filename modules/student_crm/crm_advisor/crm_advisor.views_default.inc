@@ -188,29 +188,6 @@ function crm_advisor_views_default_views() {
   $handler->display->display_options['fields']['contact_name_1']['click_sort_column'] = 'title';
   $handler->display->display_options['fields']['contact_name_1']['type'] = 'name_default_family';
   $handler->display->display_options['fields']['contact_name_1']['field_api_classes'] = 0;
-  /* Field: Relation: Advisor type */
-  $handler->display->display_options['fields']['field_advisor_type']['id'] = 'field_advisor_type';
-  $handler->display->display_options['fields']['field_advisor_type']['table'] = 'field_data_field_advisor_type';
-  $handler->display->display_options['fields']['field_advisor_type']['field'] = 'field_advisor_type';
-  $handler->display->display_options['fields']['field_advisor_type']['relationship'] = 'relation_base_left_advisor';
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['field_advisor_type']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_advisor_type']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_advisor_type']['field_api_classes'] = 0;
   /* Field: Contact: Class level */
   $handler->display->display_options['fields']['field_student_level']['id'] = 'field_student_level';
   $handler->display->display_options['fields']['field_student_level']['table'] = 'field_data_field_student_level';
@@ -339,32 +316,6 @@ function crm_advisor_views_default_views() {
   $handler->display->display_options['fields']['contact_id']['empty_zero'] = 0;
   $handler->display->display_options['fields']['contact_id']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['contact_id']['link_to_contact'] = 0;
-  /* Field: Relation: Advisor type */
-  $handler->display->display_options['fields']['field_advisor_type']['id'] = 'field_advisor_type';
-  $handler->display->display_options['fields']['field_advisor_type']['table'] = 'field_data_field_advisor_type';
-  $handler->display->display_options['fields']['field_advisor_type']['field'] = 'field_advisor_type';
-  $handler->display->display_options['fields']['field_advisor_type']['relationship'] = 'relation_base_left_advisor';
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['field_advisor_type']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_advisor_type']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['hide_alter_empty'] = 0;
-  $handler->display->display_options['fields']['field_advisor_type']['click_sort_column'] = array(
-    0 => 'tid',
-  );
-  $handler->display->display_options['fields']['field_advisor_type']['field_api_classes'] = 0;
   /* Field: Contact: Name */
   $handler->display->display_options['fields']['contact_name']['id'] = 'contact_name';
   $handler->display->display_options['fields']['contact_name']['table'] = 'field_data_contact_name';
@@ -391,6 +342,34 @@ function crm_advisor_views_default_views() {
   $handler->display->display_options['fields']['contact_name']['click_sort_column'] = 'title';
   $handler->display->display_options['fields']['contact_name']['type'] = 'name_default_short_full';
   $handler->display->display_options['fields']['contact_name']['field_api_classes'] = 0;
+  /* Field: Contact: Degrees */
+  $handler->display->display_options['fields']['field_student_degrees']['id'] = 'field_student_degrees';
+  $handler->display->display_options['fields']['field_student_degrees']['table'] = 'field_data_field_student_degrees';
+  $handler->display->display_options['fields']['field_student_degrees']['field'] = 'field_student_degrees';
+  $handler->display->display_options['fields']['field_student_degrees']['relationship'] = 'relation_base_advisor_right_crm_core_contact';
+  $handler->display->display_options['fields']['field_student_degrees']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_student_degrees']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_student_degrees']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_student_degrees']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_student_degrees']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_student_degrees']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_student_degrees']['group_rows'] = 1;
+  $handler->display->display_options['fields']['field_student_degrees']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_student_degrees']['delta_reversed'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['delta_first_last'] = 0;
+  $handler->display->display_options['fields']['field_student_degrees']['field_api_classes'] = 0;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   $handler->display->display_options['block_description'] = 'Advisee list';
   $translatables['advisee_list'] = array(
@@ -410,7 +389,6 @@ function crm_advisor_views_default_views() {
     t('First Name'),
     t('crm/contact/[contact_id]'),
     t('Last Name'),
-    t('Advisor type'),
     t('Class level'),
     t('Degrees'),
     t('All'),
