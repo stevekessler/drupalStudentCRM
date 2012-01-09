@@ -15,6 +15,8 @@ function crm_student_user_default_permissions() {
     'name' => 'access content',
     'roles' => array(
       0 => 'advisor',
+      1 => 'anonymous user',
+      2 => 'authenticated user',
     ),
     'module' => 'node',
   );
