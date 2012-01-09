@@ -48,7 +48,7 @@ projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.0-beta11"
 
 projects[entityreference][subdir] = "contrib"
-projects[entityreference][version] = "1.0-beta2"
+projects[entityreference][version] = "1.0-beta3"
 
 projects[fancybox][subdir] = "contrib"
 projects[fancybox][version] = "1.x-dev"
@@ -65,8 +65,8 @@ projects[feeds_tamper][version] = "1.0-beta3"
 projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.1"
 
-;projects[Guiders-JS][subdir] = "contrib"
-;projects[Guiders-JS][version] = "1.x-dev"
+projects[Guiders-JS][subdir] = "contrib"
+projects[Guiders-JS][version] = "1.x-dev"
 
 projects[homebox][subdir] = "contrib"
 projects[homebox][version] = "2.0-beta6"
@@ -199,6 +199,7 @@ projects[cck_phone][patch][] = "http://drupal.org/files/cck_phone_feeds-1160186-
 projects[email][patch][] = "http://drupal.org/files/email_feeds_target-718414-36.patch"
 projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_folder.patch"
 projects[name][patch][] = "http://drupal.org/files/name_fullname_search-1369618-3.patch"
+projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_js_features-1355470-3.patch"
 
 ; Hosted modules
 projects[views_savedsearches][type] = module
