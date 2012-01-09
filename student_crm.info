@@ -110,10 +110,12 @@ dependencies[] = crm_advisor
 dependencies[] = crm_history
 dependencies[] = crm_courses
 dependencies[] = crm_case
+dependencies[] = crm_tasks
 dependencies[] = student_crm_activity
 dependencies[] = student_crm_webform
 dependencies[] = student_crm_activity_case_alter
-;dependencies[] = student_crm_blocks
+dependencies[] = student_crm_holds
+dependencies[] = student_crm_gpa
 
 ; variables
 variables[chosen_jquery_selector] = "select:visible:not(.tao select, .container-inline-date select)"
