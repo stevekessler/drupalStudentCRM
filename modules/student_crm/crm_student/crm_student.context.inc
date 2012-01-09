@@ -174,12 +174,6 @@ function crm_student_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'guiders_js-guiders_js_link' => array(
-          'module' => 'guiders_js',
-          'delta' => 'guiders_js_link',
-          'region' => 'header_right',
-          'weight' => '-1',
-        ),
         'system-help' => array(
           'module' => 'system',
           'delta' => 'help',

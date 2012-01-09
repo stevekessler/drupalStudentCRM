@@ -57,7 +57,6 @@ dependencies[] = feeds_tamper
 dependencies[] = feeds_tamper_ui
 dependencies[] = entity
 dependencies[] = field_group
-dependencies[] = guiders_js
 ;dependencies[] = interface
 dependencies[] = job_scheduler
 dependencies[] = link
