@@ -31,3 +31,15 @@ function crm_courses_enable() {
   //clear the cache to display in Feeds as available plugin.
   cache_clear_all('plugins:feeds:plugins', 'cache');
 }
+
+/**
+ * Implements hook_permission().
+ */
+function crm_courses_permission() {
+  return array(
+    'access course enrollment information' => array(
+      'title' => t('Access course enrollment information'),
+      'description' => t('User can view information about courses.'),
+    ),
+  );
+}
