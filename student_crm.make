@@ -148,14 +148,6 @@ projects[formalize][download][type] = "git"
 projects[formalize][download][url] = "http://git.drupal.org/project/formalize.git"
 projects[formalize][download][branch] = "7.x-1.x"
 
-; Fixed Guiders-JS module module
-projects[guiders_js_fixed][type] = module
-projects[guiders_js_fixed][subdir] = "contrib"
-projects[guiders_js_fixed][version] = "1.x-dev"
-projects[guiders_js_fixed][download][type] = "git"
-projects[guiders_js_fixed][download][url] = "http://git.drupal.org/sandbox/kevee/1355900.git"
-projects[guiders_js_fixed][download][branch] = "master"
-
 ; Name module
 projects[name][type] = module
 projects[name][subdir] = "contrib"
@@ -188,7 +180,7 @@ libraries[formalize][destination] = "libraries"
 ; Download the guidersJS library
 libraries[guiders][download][type] = "get"
 libraries[guiders][download][url] = "https://github.com/jeff-optimizely/Guiders-JS/tarball/master"
-libraries[guiders][directory_name] = "guiders"
+libraries[guiders][directory_name] = "guiders-js"
 libraries[guiders][destination] = "libraries"
 
 ; Patches
@@ -201,6 +193,7 @@ projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_fold
 projects[name][patch][] = "http://drupal.org/files/name_fullname_search-1369618-3.patch"
 projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_js_features-1355470-3.patch"
 projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_block_visibility-1398846-1.patch"
+projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_library_version_suffix.patch"
 
 ; Hosted modules
 projects[views_savedsearches][type] = module
