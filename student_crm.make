@@ -200,6 +200,7 @@ projects[email][patch][] = "http://drupal.org/files/email_feeds_target-718414-36
 projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_folder.patch"
 projects[name][patch][] = "http://drupal.org/files/name_fullname_search-1369618-3.patch"
 projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_js_features-1355470-3.patch"
+projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_block_visibility-1398846-1.patch"
 
 ; Hosted modules
 projects[views_savedsearches][type] = module

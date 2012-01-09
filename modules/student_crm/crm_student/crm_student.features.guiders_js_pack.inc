@@ -12,8 +12,8 @@ function crm_student_guiders_js_pack_features_default() {
     'homebox' => array(
       'name' => 'homebox',
       'title' => 'homebox',
-      'path' => '<front>',
-      'data' => 'a:13:{s:5:"title";s:7:"homebox";s:12:"machine_name";s:7:"homebox";s:4:"path";s:7:"<front>";s:6:"active";i:1;s:5:"start";s:1:"3";s:10:"delay_time";s:4:"2000";s:10:"event_type";s:7:"onclick";s:12:"event_attach";s:11:"#content h2";s:6:"submit";s:9:"Save Pack";s:13:"form_build_id";s:48:"form-SZXrG9ylJUkTsPCgGF6kD2Q96FTYj9XGYB_pvcRAWf0";s:10:"form_token";s:43:"eMS4R3L9Q0FoXoXZnTt2udGIZPdIADwCbqDEB-L4EWc";s:7:"form_id";s:25:"guiders_js_packs_add_form";s:2:"op";s:9:"Save Pack";}',
+      'path' => 'dashboard',
+      'data' => 'a:13:{s:5:"title";s:7:"homebox";s:12:"machine_name";s:7:"homebox";s:4:"path";s:9:"dashboard";s:6:"active";i:1;s:5:"start";s:1:"3";s:10:"delay_time";s:4:"2000";s:10:"event_type";s:7:"onclick";s:12:"event_attach";s:11:"#content h2";s:6:"submit";s:9:"Save Pack";s:13:"form_build_id";s:48:"form-w30UyMMbUpv4OUYfZyoC6XJ--QzuMKDCKnLkP1XH6Bc";s:10:"form_token";s:43:"eMS4R3L9Q0FoXoXZnTt2udGIZPdIADwCbqDEB-L4EWc";s:7:"form_id";s:25:"guiders_js_packs_add_form";s:2:"op";s:9:"Save Pack";}',
       'guiders' => array(
         'your-dashboard' => array(
                              'name' => 'your-dashboard',

@@ -21,15 +21,6 @@ function crm_student_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: access guiders
-  $permissions['access guiders'] = array(
-    'name' => 'access guiders',
-    'roles' => array(
-      0 => 'advisor',
-    ),
-    'module' => 'guiders_js',
-  );
-
   // Exported permission: access student_crm dashboard
   $permissions['access student_crm dashboard'] = array(
     'name' => 'access student_crm dashboard',
