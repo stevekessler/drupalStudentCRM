@@ -807,6 +807,17 @@ function crm_case_mail($key, &$message, $params) {
   }
 }
 
+/** 
+ * Implements hook_crm_student_search_query().
+ */
+function crm_case_crm_student_search_destination($query) {
+  $query = explode(' ', $query);
+  if(strtolower($query[0]) == t('case') && $query[1]) {
+    return array('url' => 'crm/cases/all',
+                 'query' => array('cid' => intval($query[1])));
+  }
+}
+
 /**
  * Implements hook_crm_student_admin_links().
  */
