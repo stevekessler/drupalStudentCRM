@@ -29,6 +29,8 @@ function crm_case_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
+  $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '40';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -310,10 +312,27 @@ function crm_case_views_default_views() {
   $handler->display->display_options['fields']['edit_crm_case']['hide_empty'] = 0;
   $handler->display->display_options['fields']['edit_crm_case']['empty_zero'] = 0;
   $handler->display->display_options['fields']['edit_crm_case']['hide_alter_empty'] = 1;
+  $handler->display->display_options['filter_groups']['operator'] = 'OR';
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    0 => 'AND',
+    1 => 'AND',
+  );
+  /* Filter criterion: Case: Case ID */
+  $handler->display->display_options['filters']['cid']['id'] = 'cid';
+  $handler->display->display_options['filters']['cid']['table'] = 'crm_case';
+  $handler->display->display_options['filters']['cid']['field'] = 'cid';
+  $handler->display->display_options['filters']['cid']['group'] = 0;
+  $handler->display->display_options['filters']['cid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['cid']['expose']['operator_id'] = 'cid_op';
+  $handler->display->display_options['filters']['cid']['expose']['label'] = 'Case ID';
+  $handler->display->display_options['filters']['cid']['expose']['operator'] = 'cid_op';
+  $handler->display->display_options['filters']['cid']['expose']['identifier'] = 'cid';
+  $handler->display->display_options['filters']['cid']['expose']['multiple'] = FALSE;
   /* Filter criterion: Case: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'crm_case';
   $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['label'] = 'Case type';
@@ -328,6 +347,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['filters']['contact_name_family']['field'] = 'contact_name_family';
   $handler->display->display_options['filters']['contact_name_family']['relationship'] = 'relation_crm_contact_case_crm_core_contact';
   $handler->display->display_options['filters']['contact_name_family']['operator'] = 'starts';
+  $handler->display->display_options['filters']['contact_name_family']['group'] = 1;
   $handler->display->display_options['filters']['contact_name_family']['exposed'] = TRUE;
   $handler->display->display_options['filters']['contact_name_family']['expose']['operator_id'] = 'contact_name_family_op';
   $handler->display->display_options['filters']['contact_name_family']['expose']['label'] = 'Last name';
@@ -342,6 +362,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['filters']['contact_name_given']['field'] = 'contact_name_given';
   $handler->display->display_options['filters']['contact_name_given']['relationship'] = 'relation_crm_contact_case_crm_core_contact';
   $handler->display->display_options['filters']['contact_name_given']['operator'] = 'starts';
+  $handler->display->display_options['filters']['contact_name_given']['group'] = 1;
   $handler->display->display_options['filters']['contact_name_given']['exposed'] = TRUE;
   $handler->display->display_options['filters']['contact_name_given']['expose']['operator_id'] = 'contact_name_given_op';
   $handler->display->display_options['filters']['contact_name_given']['expose']['label'] = 'First name';
@@ -357,12 +378,14 @@ function crm_case_views_default_views() {
   $handler->display->display_options['filters']['case_status_value']['value'] = array(
     1 => '1',
   );
+  $handler->display->display_options['filters']['case_status_value']['group'] = 1;
   /* Filter criterion: Contact: Student ID (field_student_id) */
   $handler->display->display_options['filters']['field_student_id_value']['id'] = 'field_student_id_value';
   $handler->display->display_options['filters']['field_student_id_value']['table'] = 'field_data_field_student_id';
   $handler->display->display_options['filters']['field_student_id_value']['field'] = 'field_student_id_value';
   $handler->display->display_options['filters']['field_student_id_value']['relationship'] = 'relation_crm_contact_case_crm_core_contact';
   $handler->display->display_options['filters']['field_student_id_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_student_id_value']['group'] = 1;
   $handler->display->display_options['filters']['field_student_id_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_student_id_value']['expose']['operator_id'] = 'field_student_id_value_op';
   $handler->display->display_options['filters']['field_student_id_value']['expose']['label'] = 'Student ID';

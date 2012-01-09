@@ -67,6 +67,7 @@ dependencies[] = views
 dependencies[] = views_ui
 dependencies[] = views_json
 dependencies[] = views_bulk_operations
+dependencies[] = views_exposed_groups
 dependencies[] = webform
 dependencies[] = webform_submission_entity
 
