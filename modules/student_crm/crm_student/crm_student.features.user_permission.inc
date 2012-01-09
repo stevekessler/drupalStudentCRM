@@ -94,6 +94,12 @@ function crm_student_user_default_permissions() {
     'module' => 'student_crm_webform',
   );
 
+  // Exported permission: create crm_core_contact entities of bundle student
+  $permissions['create crm_core_contact entities of bundle student'] = array(
+    'name' => 'create crm_core_contact entities of bundle student',
+    'roles' => array(),
+  );
+
   // Exported permission: create relations
   $permissions['create relations'] = array(
     'name' => 'create relations',
@@ -143,6 +149,12 @@ function crm_student_user_default_permissions() {
       0 => 'advisor',
     ),
     'module' => 'relation',
+  );
+
+  // Exported permission: edit any crm_core_contact entity of bundle student
+  $permissions['edit any crm_core_contact entity of bundle student'] = array(
+    'name' => 'edit any crm_core_contact entity of bundle student',
+    'roles' => array(),
   );
 
   // Exported permission: edit any webform content
@@ -225,6 +237,15 @@ function crm_student_user_default_permissions() {
   $permissions['use text format full_html'] = array(
     'name' => 'use text format full_html',
     'roles' => array(),
+  );
+
+  // Exported permission: view any crm_core_contact entity of bundle student
+  $permissions['view any crm_core_contact entity of bundle student'] = array(
+    'name' => 'view any crm_core_contact entity of bundle student',
+    'roles' => array(
+      0 => 'advisor',
+    ),
+    'module' => 'crm_core_contact',
   );
 
   return $permissions;
