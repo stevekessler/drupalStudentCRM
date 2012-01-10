@@ -28,4 +28,23 @@ function student_crm_final_setup(&$install_state) {
     }
   }
   user_save($user);
+  
+  $advisor = db_select('role', 'r')
+             ->fields('r', array('rid'))
+             ->condition('name', 'advisor')
+             ->execute()
+             ->fetchField();
+  
+  $unchecked_permissions = array('view any crm_core_contact entity of bundle student',
+                                 'maintain own task list');
+  if($advisor) {
+    foreach($unchecked_permissions as $permission) {
+      $fields = array('rid' => $advisor, 
+                       'permission' => $permission,
+                       'module' => 'crm_student');
+      db_insert('role_permission')
+        ->fields($fields)
+        ->execute();
+    }
+  }
 }
