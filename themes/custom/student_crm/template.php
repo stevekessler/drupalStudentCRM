@@ -40,12 +40,11 @@ function student_crm_preprocess_entity(&$variables) {
     $variables['submitted'] = t('By !username <span class="date">on !datetime</span>', array('!username' => $variables['name'], '!datetime' => $variables['date']));
     
     $picture = field_get_items('user', $author, 'field_user_picture');
-    $image_path = ($picture[0]['uri'])
-             ? $picture[0]['uri']
-             : 'public://default_images/generic_person.png';
-    $variables['picture'] = theme('image_style', array('style_name' => 'history_small',
-                                                       'path' => $image_path,
+    if ($picture[0]['uri']) {
+      $variables['picture'] = theme('image_style', array('style_name' => 'history_small',
+                                                       'path' => $picture[0]['uri'],
                                                        'alt' => strip_tags($variables['name'])));
+    }
     $variables['contact_type'] = $variables['content']['field_activity_contact_method'][0]['#title'];
     unset($variables['content']['field_activity_contact_method']);
     $variables['content']['field_activity_notes']['#label_display'] = 'hidden';
