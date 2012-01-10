@@ -52,9 +52,13 @@ function student_crm_setup_permissions(&$install_state) {
                                'open and close cases',
                                'track user history',
                                'use text format filtered_html',
+                               'view any crm_core_activity entity of bundle note',
                                'view any crm_core_contact entity of bundle student',
+                               'view crm dashboard',
+                               'view date repeats',
                                'view gpa data',
                                'view hold data');
+
   if($advisor) {
     foreach($advisor_permissions as $permission) {
       $fields = array('rid' => $advisor, 
