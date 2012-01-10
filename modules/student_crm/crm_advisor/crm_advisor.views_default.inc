@@ -430,8 +430,16 @@ function crm_advisor_views_default_views() {
     'field_advisor_type' => 'field_advisor_type',
   );
   $handler->display->display_options['row_options']['separator'] = ' ';
-  $handler->display->display_options['row_options']['hide_empty'] = 0;
-  $handler->display->display_options['row_options']['default_field_elements'] = 1;
+  $handler->display->display_options['row_options']['hide_empty'] = 1;
+  $handler->display->display_options['row_options']['default_field_elements'] = 0;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'No advisors found.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
+  $handler->display->display_options['empty']['area']['tokenize'] = 0;
   /* Relationship: User: Relation: Advisor (user -> relation) */
   $handler->display->display_options['relationships']['relation_base_left_advisor']['id'] = 'relation_base_left_advisor';
   $handler->display->display_options['relationships']['relation_base_left_advisor']['table'] = 'users';
@@ -576,6 +584,7 @@ function crm_advisor_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
+    t('No advisors found.'),
     t('Advisor'),
     t('user/[uid]'),
     t('All'),
