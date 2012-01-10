@@ -198,7 +198,7 @@ function crm_student_crm_student_search_destination($query) {
  */
 function crm_student_user_login(&$edit, $account) {
   $sis_id = field_get_items('user', $account, 'field_user_sis_id');
-  if (!$sis_id = $sis_id[0]['value']) {
+  if (!isset($sis_id[0]) && !$sis_id = $sis_id[0]['value']) {
     return;
   }
   $ids = db_select('field_data_field_student_id', 'i')

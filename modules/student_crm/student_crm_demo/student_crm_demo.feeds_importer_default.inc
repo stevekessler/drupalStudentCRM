@@ -59,7 +59,7 @@ function student_crm_demo_feeds_importer_default() {
           ),
           4 => array(
             'source' => 'note',
-            'target' => 'field_activity_note',
+            'target' => 'field_activity_notes',
             'unique' => FALSE,
           ),
           5 => array(
