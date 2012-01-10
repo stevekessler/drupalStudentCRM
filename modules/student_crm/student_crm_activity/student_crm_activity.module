@@ -79,7 +79,7 @@ function student_crm_activity_create($form, $form_state) {
   foreach ($types as $type) {
     $restrict = variable_get('student_crm_activity_restrict_'. $type->type, FALSE);
     if ((user_access('administer crm activities') 
-       || user_access("edit any $type->type crm_activity")) && (
+       || user_access("create crm_core_activity entities of bundle $type->type")) && (
         !$restrict || 
         $restrict[$entity['type'] .':'. $entity['bundle']] || 
         $restrict[$entity['type'] .':*'])

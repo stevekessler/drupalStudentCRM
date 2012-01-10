@@ -38,6 +38,9 @@ projects[chosen][version] = "1.0"
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.x-dev"
 
+projects[crm_core][subdir] = "contrib"
+projects[crm_core][version] = "1.x-dev"
+
 projects[date][subdir] = "contrib"
 projects[date][version] = "2.0-alpha4"
 
@@ -132,14 +135,6 @@ projects[tao][version] = "3.0-beta4"
 
 ; Modules in development
 
-; Core CRM
-projects[crm_core][type] = module
-projects[crm_core][subdir] = "contrib"
-projects[crm_core][version] = "1.x-dev"
-projects[crm_core][download][type] = "git"
-projects[crm_core][download][url] = "http://git.drupal.org/project/crm_core.git"
-projects[crm_core][download][branch] = "master"
-
 ; Formalize module
 projects[formalize][type] = module
 projects[formalize][subdir] = "contrib"
@@ -182,6 +177,7 @@ libraries[formalize][destination] = "libraries"
 projects[chosen][patch][] = http://drupal.org/files/issues/chosen-7.x-1.x-install_profile.patch
 projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"
 projects[cck_phone][patch][] = "http://drupal.org/files/cck_phone_feeds-1160186-2.patch"
+projects[crm_core][patch][] = "http://drupal.org/files/crm_core_activity_access.patch"
 projects[email][patch][] = "http://drupal.org/files/email_feeds_target-718414-36.patch"
 projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_folder.patch"
 projects[name][patch][] = "http://drupal.org/files/name_fullname_search-1369618-3.patch"
