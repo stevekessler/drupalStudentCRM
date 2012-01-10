@@ -1,7 +1,7 @@
 .contact-fields .contact-image { float: left; margin: 0 10px 0 0; }
-  .contact-fields .contact-image { -webkit-border-radius: 5px; border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; overflow: hidden; width: 150px; height: 150px;  }
+  .contact-fields .contact-image { -webkit-border-radius: 5px; border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; overflow: hidden; width: 75px; height: 75px;  }
   .contact-fields h1.contact-name { margin: 0; }
-  .contact-fields.contact-header { height: 160px; }
+  .contact-fields.contact-header { height: 85px; }
 .page-crm-contact #page-title { display: none; }
 
 .student-status { font-size: 130%; font-weight: bold; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; padding: 6px; margin-bottom: 10px; }
