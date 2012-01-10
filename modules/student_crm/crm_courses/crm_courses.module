@@ -43,3 +43,17 @@ function crm_courses_permission() {
     ),
   );
 }
+
+/**
+ * Implements hook_crm_student_admin_links().
+ */
+function crm_courses_crm_student_admin_links() {
+  return array(
+    'crm_courses_terms' => array(
+      'group' => t('Courses'),
+      'title' => t('Manage terms'),
+      'description' => t('View and manage the list of terms.'),
+      'href' => 'admin/structure/taxonomy/term',
+    ),
+  );
+}
