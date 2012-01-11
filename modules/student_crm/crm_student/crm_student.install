@@ -61,7 +61,7 @@ function crm_student_install() {
   variable_set('fancybox_settings', $fancybox_settings);
   
   $interface_fields = array(
-    'entity' => 'crm_core_contact2', 
+    'entity' => 'crm_core_contact', 
     'bundle' => 'student',
     'view_mode' => 'full',
     'plugin' => 'interface_tabs',
