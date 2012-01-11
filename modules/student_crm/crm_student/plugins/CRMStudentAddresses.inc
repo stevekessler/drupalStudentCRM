@@ -42,6 +42,11 @@ class CRMStudentAddresses extends FeedsProcessor {
   public function process(FeedsSource $source, FeedsParserResult $parser_result) {
     $state = $source->state(FEEDS_PROCESS);
     $mappings = $this->config['mappings'];
+    foreach ($mappings as $map) {
+      if ($map['target'] == 'student_id') {
+        $student_id_key = $map['source'];
+      }
+    }
     while ($item = $parser_result->shiftItem()) {
       $address = array();
       foreach ($mappings as $mapping) {
@@ -50,7 +55,7 @@ class CRMStudentAddresses extends FeedsProcessor {
       if (!$address['country']) {
         $address['country'] = $this->config['default_country'];
       }
-      $address['contact_entity'] = $this->getTargetEntity($item['student_id'], 'crm_core_contact');
+      $address['contact_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_core_contact');
       if ($address['thoroughfare'] && $address['contact_entity']) {
 
         // Only proceed if item has actually changed.
@@ -63,7 +68,7 @@ class CRMStudentAddresses extends FeedsProcessor {
           $entity = crm_core_contact_load($address['contact_entity']);
           $language = ($entity->language) ? $entity->language : LANGUAGE_NONE;
           $entity->field_contact_address[$language][] = $address;
-          crm_core_contact_save($contact);
+          crm_core_contact_save($entity);
           $feed_item = (object)array(
                           'feeds_item' => array(
                             'entity_id' => $address['guid'],
