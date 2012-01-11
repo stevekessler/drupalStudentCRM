@@ -282,6 +282,15 @@ ul.pager { margin: 15px 0; }
     #page-tools .block a:hover { color: #fff; .text-shadow(1px, 1px, 1px, @tag-background); .gradient(@tag-background, darken(@tag-background, 5%)); border-color: darken(@tag-background, 10%); }
     #page-tools .contextual-links-wrapper { display: none; }
 
+/** FIXING CLEAR IN CONTENT **/
+#content .interface_tab_content { clear: none; border: none; }
+  #content .addressfield-container-inline::after { clear: none; }
+#content .interface_tabs li { background: none; border: none; float: none; display: inline; }
+  #content .interface_tabs li .active { background: none; border: none; font-weight: bold;}
+  
+/** ADDRESSES **/
+.field-type-addressfield .field-item { margin: 5px 0; }
+
 /** HOMEBOX **/
 .portlet-icon.portlet-maximize { display: none; }
 #page #homebox .homebox-portlet { border: none; }

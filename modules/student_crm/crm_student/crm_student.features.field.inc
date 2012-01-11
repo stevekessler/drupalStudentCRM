@@ -43,9 +43,15 @@ function crm_student_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '3',
+          'module' => 'addressfield',
+          'settings' => array(
+            'format_handlers' => array(
+              'address' => 'address',
+            ),
+            'use_widget_handlers' => 1,
+          ),
+          'type' => 'addressfield_default',
+          'weight' => '0',
         ),
       ),
       'entity_type' => 'crm_core_contact',
@@ -144,9 +150,10 @@ function crm_student_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
+          'module' => 'cck_phone',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '2',
+          'type' => 'global_phone_number',
+          'weight' => '1',
         ),
       ),
       'entity_type' => 'crm_core_contact',

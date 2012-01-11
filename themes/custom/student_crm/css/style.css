@@ -711,6 +711,29 @@ h3.ui-accordion-header.ui-state-active {
 #page-tools .contextual-links-wrapper {
   display: none;
 }
+/** FIXING CLEAR IN CONTENT **/
+#content .interface_tab_content {
+  clear: none;
+  border: none;
+}
+#content .addressfield-container-inline::after {
+  clear: none;
+}
+#content .interface_tabs li {
+  background: none;
+  border: none;
+  float: none;
+  display: inline;
+}
+#content .interface_tabs li .active {
+  background: none;
+  border: none;
+  font-weight: bold;
+}
+/** ADDRESSES **/
+.field-type-addressfield .field-item {
+  margin: 5px 0;
+}
 /** HOMEBOX **/
 .portlet-icon.portlet-maximize {
   display: none;

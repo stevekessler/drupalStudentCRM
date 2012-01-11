@@ -71,8 +71,8 @@ projects[field_group][version] = "1.1"
 projects[homebox][subdir] = "contrib"
 projects[homebox][version] = "2.0-beta6"
 
-;projects[interface][subdir] = "contrib"
-;projects[interface][version] = "1.x-dev"
+projects[interface][subdir] = "contrib"
+projects[interface][version] = "1.x-dev"
 
 projects[job_scheduler][subdir] = "contrib"
 projects[job_scheduler][version] = "2.0-alpha2"

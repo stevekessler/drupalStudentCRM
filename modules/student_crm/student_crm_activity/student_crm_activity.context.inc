@@ -38,7 +38,7 @@ function student_crm_activity_context_default_contexts() {
         'student_crm_activity-student_crm_activity_create' => array(
           'module' => 'student_crm_activity',
           'delta' => 'student_crm_activity_create',
-          'region' => 'content',
+          'region' => 'content_bottom',
           'weight' => '-10',
         ),
       ),
