@@ -80,7 +80,7 @@ function student_crm_activity_context_default_contexts() {
           'module' => 'views',
           'delta' => 'crm_activities-block',
           'region' => 'content_bottom',
-          'weight' => '-10',
+          'weight' => '10',
         ),
       ),
     ),
