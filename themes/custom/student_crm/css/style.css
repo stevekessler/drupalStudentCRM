@@ -669,14 +669,12 @@ h3.ui-accordion-header.ui-state-active {
 }
 /** PAGE TOOLS **/
 #page-tools {
-  min-height: 20px;
+  float: right;
 }
 #page-tools .block {
-  float: right;
+  display: inline;
 }
 #page-tools .block a {
-  display: block;
-  float: right;
   font-size: 11px;
   font-weight: bold;
   color: #000;

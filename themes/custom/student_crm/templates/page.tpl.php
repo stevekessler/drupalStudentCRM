@@ -51,6 +51,11 @@
 			<?php endif; ?>
 			<div class="fluid" id="content">
 			<?php if(!$is_front && $title): ?>
+				<?php if($page['page_tools']): ?>
+    			<div id="page-tools">
+    				<?php print render($page['page_tools']); ?>
+  		    </div>
+  		  <?php endif; ?>
 					<h2 id="page-title"><?php print $title; ?></h2>
 				<?php endif; ?>
 				
@@ -78,11 +83,7 @@
 				<?php if ($tabs = render($tabs)): ?>
        		<div class="tabs"><?php print $tabs; ?></div>
       	<?php endif; ?>
-				<?php if($page['page_tools']): ?>
-    			<div id="page-tools">
-    				<?php print render($page['page_tools']); ?>
-  		    </div>
-  		  <?php endif; ?>
+				
 				<?php print render($page['content']); ?>
 				
 				<?php if($page['content_bottom']): ?>
