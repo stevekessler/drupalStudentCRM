@@ -180,7 +180,7 @@ function crm_case_permission() {
         'title' => t('%type_name: View any crm_case', array('%type_name' => $type->label)),
       ),
       "delete any $type_name crm_case" => array(
-        'title' => t('%type_name: View any crm_case', array('%type_name' => $type->label)),
+        'title' => t('%type_name: Delete any crm_case', array('%type_name' => $type->label)),
       ),
     );
   }
