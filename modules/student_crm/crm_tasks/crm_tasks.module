@@ -26,6 +26,14 @@ function crm_tasks_menu() {
     'access arguments' => array('access user profiles'),
   );
   
+  $items['admin/config/crm/tasks'] = array(
+    'title' => 'CRM Task settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('crm_tasks_admin_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'crm_tasks.admin.inc',
+  );
+  
   return $items;
 }
 
@@ -209,4 +217,93 @@ function crm_tasks_permission() {
       'description' => t('User can add tasks to the lists of other users.'),
     ),
   );
+}
+
+
+
+/**
+ * Implementation of hook_cron().
+ */
+function crm_tasks_cron() {
+  $task_cron = variable_get('crm_tasks_cron_date', date('Y-m-d', 0));
+  if(!variable_get('crm_tasks_enable_mail', 0) || strtotime($task_cron) >= strtotime(date('Y-m-d')) || date('G') < variable_get('crm_tasks_cron_time', 8)) {
+    return;
+  }
+  $query = db_select('field_data_field_task_due', 'd')
+             ->condition('d.field_task_due_value', $task_cron)
+             ->condition('d.bundle', 'crm_task')
+             ->condition('d.entity_type', 'relation')
+             ->fields('d', array('entity_id'));
+  $query->leftJoin('relation', 'r', 'r.relation_type = d.bundle AND r.rid = d.entity_id');
+  $query->fields('r', array('uid', 'rid'));
+  $query->leftJoin('field_data_field_task_complete', 'c', 'c.entity_id = d.entity_id AND c.bundle = d.bundle');
+  $query->condition('c.field_task_complete_value', 0);
+  $query->fields('u', array('mail'));
+  $query->leftJoin('users', 'u', 'u.uid = r.uid');
+  $query->fields('u', array('mail'));
+  $query->leftJoin('field_data_endpoints', 'e', 'r.rid = e.entity_id AND e.entity_type = :relation AND e.endpoints_entity_type != :user', array(':relation' => 'relation', ':user' => 'user'));
+  $query->fields('e', array('endpoints_entity_type', 'endpoints_entity_id'));
+  $query->leftJoin('field_data_field_task_note', 'n', 'n.entity_id = r.rid AND n.bundle = :crm_task', array(':crm_task' => 'crm_task'));
+  $query->fields('n', array('field_task_note_value', 'field_task_note_format'));
+  $results = $query->execute()
+             ->fetchAll();
+  $task_notifications = array();
+  foreach($results as $task) {
+    $task_notifications[$task->uid][$task->rid] = $task;
+    $task_notifications[$task->uid]['mail'] = $task->mail;
+  }
+  crm_tasks_send_notifications($task_notifications);
+  variable_set('crm_tasks_cron_date', date('Y-m-d'));
+}
+
+/**
+ * Sends task notifications to users.
+ */
+function crm_tasks_send_notifications($task_notifications) {
+  foreach($task_notifications as $uid => $tasks) {
+    $mail = $tasks['mail'];
+    unset($tasks['mail']);
+    drupal_mail('crm_tasks', 'task_notifications', $mail, language_default(), array('tasks' => $tasks));
+  }
+}
+
+/**
+ * Implmenets hook_mail().
+ */
+function crm_tasks_mail($key, &$message, $params) {
+  if($key == 'task_notifications') {
+    $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+    $message['headers']['MIME-Version'] = '1.0';
+    $message['headers']['Content-Transfer-Encoding'] = '8Bit';
+    $message['subject'] = t('@site_name: Today\'s tasks', array('@site_name' => variable_get('site_name', '')));
+    $message['body'][] = t('The following tasks are marked as due today.');
+    $items = array();
+    foreach($params['tasks'] as $task) {
+      if($task->endpoints_entity_type == 'crm_core_contact') {
+        $target_name = db_select('field_data_contact_name', 'n')
+                         ->fields('n')
+                         ->condition('n.entity_type', 'crm_core_contact')
+                         ->condition('n.entity_id', $task->endpoints_entity_id)
+                         ->execute()
+                         ->fetchAll();
+        $name = array();
+        foreach((array)$target_name[0] as $k => $n) {
+          $name[str_replace('contact_name_', '', $k)] = $n;
+        }
+        $target_name = name_format($name, 'g+if');
+      }
+      if($task->endpoints_entity_type == 'crm_case') {
+        $target_name = db_select('crm_case', 'c')
+                         ->fields('c', array('name'))
+                         ->condition('c.cid', $task->endpoints_entity_id)
+                         ->execute()
+                         ->fetchField();
+      }
+      $format = ($task->field_task_note_format) ? $task->field_task_note_format : filter_default_format();
+      $items[] = t('%title: !note', array('%title' => check_plain($target_name),
+                      '!note' => check_markup($task->field_task_note_value, $format)));
+    }
+    $message['body'][] = theme('item_list', array('items' => $items));
+    $message['body'][] = l('View all pending tasks', 'crm/tasks', array('absolute' => TRUE));
+  }
 }
