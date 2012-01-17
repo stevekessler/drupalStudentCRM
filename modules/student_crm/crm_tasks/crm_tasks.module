@@ -108,6 +108,7 @@ function crm_tasks_create_task_form() {
   $form = array();
   
   $form['#attributes']['id'] = 'edit-task-modal';
+  $form['#attributes']['class'][] = 'element-invisible';
   
   $form['target_id'] = array(
     '#type' => 'hidden'
