@@ -245,6 +245,44 @@ function crm_student_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'crm_student_edit';
+  $context->description = 'User is editing a student record';
+  $context->tag = 'student';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'crm/contact/*/edit' => 'crm/contact/*/edit',
+      ),
+    ),
+    'user' => array(
+      'values' => array(
+        'advisor' => 'advisor',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-crm_contact_fields-block' => array(
+          'module' => 'views',
+          'delta' => 'crm_contact_fields-block',
+          'region' => 'content_top_wide',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is editing a student record');
+  t('student');
+  $export['crm_student_edit'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'crm_student_view';
   $context->description = 'Viewing a student CRM contact';
   $context->tag = 'crm student';

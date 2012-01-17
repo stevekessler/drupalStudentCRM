@@ -29,6 +29,7 @@ function crm_tasks_context_default_contexts() {
       'values' => array(
         'crm/case/*' => 'crm/case/*',
         'crm/contact/*' => 'crm/contact/*',
+        '~crm/contact/*/*' => '~crm/contact/*/*',
         'crm/activity/*' => 'crm/activity/*',
       ),
     ),

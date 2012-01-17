@@ -22,7 +22,7 @@ function crm_courses_context_default_contexts() {
         'student' => 'student',
       ),
       'options' => array(
-        'contact_form' => '1',
+        'contact_form' => '0',
       ),
     ),
     'user' => array(
