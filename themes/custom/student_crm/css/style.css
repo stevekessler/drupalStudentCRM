@@ -255,6 +255,9 @@ input.search-box {
   margin: 0;
   font-weight: bold;
 }
+#header .left {
+  padding: 0px;
+}
 #header .right {
   width: 600px;
   position: absolute;
