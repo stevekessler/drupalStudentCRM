@@ -67,6 +67,19 @@ class CRMStudentAddresses extends FeedsProcessor {
         try {
           $entity = crm_core_contact_load($address['contact_entity']);
           $language = ($entity->language) ? $entity->language : LANGUAGE_NONE;
+          foreach($entity->field_contact_address[$language] as $k => $address) {
+            unset($address['country']);
+            $delete = true;
+            foreach($address as $type => $value) {
+              if($value) {
+                $delete = false;
+                continue;
+              }
+            }
+            if($delete) {
+              unset($entity->field_contact_address[$language][$k]);
+            }
+          }
           $entity->field_contact_address[$language][] = $address;
           crm_core_contact_save($entity);
           $feed_item = (object)array(
