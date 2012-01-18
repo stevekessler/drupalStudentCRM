@@ -270,20 +270,43 @@ function student_crm_webform_field_instance_settings_form($field, $instance) {
     '#type' => 'select',
     '#prefix' => '<div id="email-field-source-select">',
     '#suffix' => '</div>',
-    '#title' => 'Email field',
+    '#title' => t('Email field'),
     '#default_value' => (isset($settings['email_field'])) ? $settings['email_field'] : 0,
     '#options' => $email_field_options,
+  );
+  
+   $form['email_reminder'] = array(
+    '#type' => 'select',
+    '#title' => t('Email reminders'),
+    '#default_value' => (isset($settings['email_reminder'])) ? $settings['email_reminder'] : 0,
+    '#options' => array(0 => t('-- No reminders --'),
+                        (7 * 24 * 60 * 60) => t('7 days'),
+                        (14 * 24 * 60 * 60) => t('14 days'),
+                        (30 * 24 * 60 * 60) => t('30 days'),
+                        ),
+  );
+  
+  $form['email_reminder_count'] = array(
+    '#type' => 'select',
+    '#title' => t('Number of reminders to send'),
+    '#default_value' => (isset($settings['email_reminder_count'])) ? $settings['email_reminder_count'] : 0,
+    '#options' => array(0 => t('-- No reminders --'),
+                        1 => 1,
+                        2 => 2,
+                        3 => 3,
+                        4 => 4,
+                        ),
   );
 
   $form['email_subject'] = array(
     '#type' => 'textfield',
-    '#title' => 'Email subject',
+    '#title' => t('Email subject'),
     '#default_value' => (isset($settings['email_subject'])) ? $settings['email_subject'] : '',
   );
   
   $form['email_body'] = array(
     '#type' => 'text_format',
-    '#title' => 'Email body',
+    '#title' => t('Email body'),
     '#default_value' => (isset($settings['email_body']['value'])) ? $settings['email_body']['value'] : '',
     '#format' => (isset($settings['email_body']['format'])) ? $settings['email_body']['format'] : NULL,
   );
@@ -418,4 +441,49 @@ function student_crm_webform_crm_student_admin_links() {
       'href' => 'admin/content/webform',
     ),
   );
+}
+
+/**
+ * Implements hook_cron().
+ */
+function student_crm_webform_cron() {
+  $last_date = variable_get('student_crm_webform_cron_date', 0);
+  $result = db_select('student_crm_webform', 'w')
+              ->condition('send_date', $last_date, '>=')
+              ->condition('send_date', time(), '<=')
+              ->fields('w')
+              ->execute()
+              ->fetchAll();
+  $settings = array();
+  $fields = field_info_instances();
+  $load_functions = array('crm_case' => 'crm_case_load',
+                          'crm_core_contact' => 'crm_core_contact_load');
+  module_load_include('inc', 'student_crm_webform', 'student_crm_webform.mail');
+  foreach($result as $row) {
+    $entity_load_function = $load_functions[$row->entity_type];
+    $entity = $entity_load_function($row->entity_id);
+    $settings = $fields[$row->entity_type][$entity->type][$row->entity_field]['settings'];
+    dpm($row);
+    student_crm_webform_send_email($row->entity_type, $entity, $row->entity_field, array($row->email), FALSE);
+    if($settings['email_reminder_count'] < $row->reminders_sent + 1) {
+      db_delete('student_crm_webform')
+        ->condition('entity_type', $row->entity_type)
+        ->condition('entity_id', $row->entity_id)
+        ->condition('entity_field', $row->entity_field)
+        ->condition('email', $row->email)
+        ->execute();
+    }
+    else {
+      db_update('student_crm_webform')
+        ->fields(array('send_date' => time() + $settings['email_reminder'],
+                       'reminders_sent' => $row->reminders_sent + 1))
+        ->condition('entity_type', $row->entity_type)
+        ->condition('entity_id', $row->entity_id)
+        ->condition('entity_field', $row->entity_field)
+        ->condition('email', $row->email)
+        ->execute();
+    }
+  }
+
+  variable_set('student_crm_webform_cron_date', time());
 }

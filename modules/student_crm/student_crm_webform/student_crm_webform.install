@@ -42,10 +42,16 @@ function student_crm_webform_schema() {
         'not null' => TRUE,
         'default' => '',
       ),
-      'last_sent' => array(
-        'description' => 'The Unix timestamp when the crm_case was created.',
+      'send_date' => array(
+        'description' => 'The Unix timestamp when the next reminder should be sent.',
         'type' => 'int',
         'not null' => TRUE,
+        'default' => 0,
+      ),
+      'reminders_sent' => array(
+        'description' => 'The number of reminders that have been sent.',
+        'type' => 'int',
+        'not null' => FALSE,
         'default' => 0,
       ),
     ),

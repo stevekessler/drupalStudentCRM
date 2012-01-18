@@ -8,7 +8,7 @@
 /**
  * Sends an email with a link to complete a form.
  */
-function student_crm_webform_send_email($entity_type, $entity, $field, $emails = FALSE) {
+function student_crm_webform_send_email($entity_type, $entity, $field, $emails = FALSE, $insert = TRUE) {
   $fields = field_info_instances();
   $field = $fields[$entity_type][$entity->type][$field];
   if (!$field || !isset($field['settings']['webform'])) {
@@ -35,16 +35,23 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
   }
   $message['body'] = token_replace($body, $tokens);
   $message['subject'] = token_replace(check_plain($field['settings']['email_subject']), $tokens);
+  if(!$insert) {
+    $message['subject'] = t('Reminder: @subject', array('@subject' => $message['subject']));
+  }
   foreach ($emails as $email) {
     drupal_mail('student_crm_webform', 'form_prompt', $email, language_default(), $message);
-    $fields = array('entity_type' => $entity_type,
-                    'entity_id' => $entity_id,
-                    'entity_field' => $field['field_name'],
-                    'email' => $email,
-                    'last_sent' => time());
-    db_insert('student_crm_webform')
-      ->fields($fields)
-      ->execute();
+    if ($field['settings']['email_reminder'] && $insert) {
+     $fields = array('entity_type' => $entity_type,
+                  'entity_id' => $entity_id,
+                  'entity_field' => $field['field_name'],
+                  'email' => $email,
+                  'send_date' => time() + $field['settings']['email_reminder'],
+                  'reminders_sent' => 0,
+                  );
+      db_insert('student_crm_webform')
+        ->fields($fields)
+        ->execute();
+    }
   }
   return $emails;
 }
