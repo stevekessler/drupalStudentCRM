@@ -33,12 +33,14 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
   if ($entity_type == 'crm_case') {
     $tokens['crm_core_contact'] = crm_case_get_contact($entity);
   }
-  $message['body'] = token_replace($body, $tokens);
-  $message['subject'] = token_replace(check_plain($field['settings']['email_subject']), $tokens);
-  if(!$insert) {
-    $message['subject'] = t('Reminder: @subject', array('@subject' => $message['subject']));
-  }
+  
   foreach ($emails as $email) {
+    $tokens['email'] = $email;
+    $message['body'] = token_replace($body, $tokens);
+    $message['subject'] = token_replace(check_plain($field['settings']['email_subject']), $tokens);
+    if(!$insert) {
+      $message['subject'] = t('Reminder: @subject', array('@subject' => $message['subject']));
+    }
     drupal_mail('student_crm_webform', 'form_prompt', $email, language_default(), $message);
     if ($field['settings']['email_reminder'] && $insert) {
      $fields = array('entity_type' => $entity_type,

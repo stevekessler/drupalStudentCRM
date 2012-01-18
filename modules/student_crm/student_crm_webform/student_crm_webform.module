@@ -21,9 +21,9 @@ function student_crm_webform_init() {
 function student_crm_webform_menu() {
   $items = array();
   
-  $items['crm/webform/%/%/%node/%'] = array(
+  $items['crm/webform/%/%/%node/%/%'] = array(
     'page callback' => 'student_crm_webform_complete_form',
-    'page arguments' => array(2, 3, 4),
+    'page arguments' => array(2, 3, 4, 6),
     'access arguments' => array(2, 3, 4, 5),
     'access callback' => 'student_crm_webform_complete_form_access',
   );
@@ -95,9 +95,11 @@ function student_crm_webform_complete_form_access($entity_type, $entity_id, $web
 /**
  * Page callback - sets a session key for reusing later when the user submits a form.
  */
-function student_crm_webform_complete_form($entity_type, $entity_id, $webform) {
+function student_crm_webform_complete_form($entity_type, $entity_id, $webform, $email) {
   $_SESSION['student_crm_webform_form'][$webform->nid] = array('entity_type' => $entity_type,
-                                                               'entity_id' => $entity_id);
+                                                               'entity_id' => $entity_id,
+                                                               'email' => $email,
+                                                               );
   return drupal_render(node_view($webform, 'page'));
 }
 
@@ -149,6 +151,12 @@ function student_crm_webform_webform_submission_entity_insert($entity) {
                     )
                );
   relation_save($relation);
+  db_delete('student_crm_webform')
+        ->condition('entity_type', $submission['entity_type'])
+        ->condition('entity_id', $submission['entity_id'])
+        ->condition('email', $submission['email'])
+        ->execute();
+
   drupal_set_message(t('Thank you for your submission.'));
   drupal_goto('<front>');
 }
@@ -408,8 +416,6 @@ function student_crm_webform_token_info() {
  * Implements hook_tokens().
  */
 function student_crm_webform_tokens($type, $tokens, $data = array(), $options = array()) {
-  //$entity_type, $entity_id, $webform, $key
-  //crm/webform/%/%/%node/%
   if (!in_array($type, array('crm_case', 'crm_core_contact'))) {
     return;
   }
@@ -419,7 +425,7 @@ function student_crm_webform_tokens($type, $tokens, $data = array(), $options = 
   if ($data['entity_type'] == 'crm_core_contact') {
     $id = $data['crm_core_contact']->contact_id;
   }
-  return array('[crm_case:student_crm_webform_link]' => url('crm/webform/' . $data['entity_type'] . '/' . $id . '/' . $data['webform'] . '/' . _student_crm_webform_generate_key($data['entity_type'], $id, $data['webform']), array('absolute' => TRUE))
+  return array('[crm_case:student_crm_webform_link]' => url('crm/webform/' . $data['entity_type'] . '/' . $id . '/' . $data['webform'] . '/' . _student_crm_webform_generate_key($data['entity_type'], $id, $data['webform']) .'/'. $data['email'], array('absolute' => TRUE))
               );
 }
 
