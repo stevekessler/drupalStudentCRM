@@ -120,7 +120,7 @@ function student_crm_activity_context_default_contexts() {
           'module' => 'views',
           'delta' => 'crm_activities-block_1',
           'region' => 'content_bottom',
-          'weight' => '-10',
+          'weight' => '0',
         ),
       ),
     ),
