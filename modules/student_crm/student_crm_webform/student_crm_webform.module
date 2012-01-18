@@ -463,7 +463,6 @@ function student_crm_webform_cron() {
     $entity_load_function = $load_functions[$row->entity_type];
     $entity = $entity_load_function($row->entity_id);
     $settings = $fields[$row->entity_type][$entity->type][$row->entity_field]['settings'];
-    dpm($row);
     student_crm_webform_send_email($row->entity_type, $entity, $row->entity_field, array($row->email), FALSE);
     if($settings['email_reminder_count'] < $row->reminders_sent + 1) {
       db_delete('student_crm_webform')
