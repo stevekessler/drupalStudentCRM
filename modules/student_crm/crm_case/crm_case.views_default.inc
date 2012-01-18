@@ -299,6 +299,28 @@ function crm_case_views_default_views() {
   $handler->display->display_options['fields']['field_student_id']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_student_id']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_student_id']['field_api_classes'] = 0;
+  /* Field: Case: Activity count */
+  $handler->display->display_options['fields']['crm_case_activity_count']['id'] = 'crm_case_activity_count';
+  $handler->display->display_options['fields']['crm_case_activity_count']['table'] = 'crm_case';
+  $handler->display->display_options['fields']['crm_case_activity_count']['field'] = 'crm_case_activity_count';
+  $handler->display->display_options['fields']['crm_case_activity_count']['label'] = 'Notes';
+  $handler->display->display_options['fields']['crm_case_activity_count']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['crm_case_activity_count']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['crm_case_activity_count']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['crm_case_activity_count']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['crm_case_activity_count']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['crm_case_activity_count']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['crm_case_activity_count']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['crm_case_activity_count']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['crm_case_activity_count']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['crm_case_activity_count']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['crm_case_activity_count']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['crm_case_activity_count']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['crm_case_activity_count']['element_label_colon'] = 0;
+  $handler->display->display_options['fields']['crm_case_activity_count']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['crm_case_activity_count']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['crm_case_activity_count']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['crm_case_activity_count']['hide_alter_empty'] = 1;
   /* Field: Case: Edit Link */
   $handler->display->display_options['fields']['edit_crm_case']['id'] = 'edit_crm_case';
   $handler->display->display_options['fields']['edit_crm_case']['table'] = 'crm_case';
@@ -578,6 +600,7 @@ function crm_case_views_default_views() {
     t('Last name'),
     t('Open date'),
     t('Student ID'),
+    t('Notes'),
     t('Edit Link'),
     t('Case type'),
     t('First name'),
