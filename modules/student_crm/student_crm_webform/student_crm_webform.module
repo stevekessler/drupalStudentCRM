@@ -220,7 +220,6 @@ function hook_field_widget_form(&$form, &$form_state, $field, $instance, $langco
  * Implements hook_field_instance_settings_form().
  */
 function student_crm_webform_field_instance_settings_form($field, $instance) {
-  drupal_add_js(drupal_get_path('module', 'student_crm_webform') . '/js/student_crm_webform.field_instance.js');
   $defaults   = field_info_instance_settings($field['type']);
   $settings   = array_merge($defaults, $instance['settings']);
 

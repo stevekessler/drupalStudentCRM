@@ -28,6 +28,17 @@ function student_crm_activity_block_view($delta) {
 }
 
 /**
+ * Implements hook_permission().
+ */
+function student_crm_permission() {
+  return array('send email to contact via activities' => array(
+                'title' => t('Allowed to send an email when an activity is created'),
+                'description' => t('Users will be able to check an "Email contact" option when posting activities.'),
+                ),
+              );
+}
+
+/**
  * Implements hook_theme_registry_alter().
  */
 function student_crm_activity_theme($existing, $type, $theme, $path) {
@@ -44,6 +55,8 @@ function student_crm_activity_theme($existing, $type, $theme, $path) {
 function student_crm_activity_create($form, $form_state) {
   drupal_add_js(drupal_get_path('module', 'student_crm_activity') .'/js/jquery.color.js');
   drupal_add_js(drupal_get_path('module', 'student_crm_activity') .'/js/student_crm_activity.form.js');
+  drupal_add_css(drupal_get_path('module', 'student_crm_activity') .'/css/student_crm_activity.css');
+  
   global $user;
   $form = array();
   
@@ -134,13 +147,20 @@ function student_crm_activity_create($form, $form_state) {
   
   $form['form-actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => 'Save note',
+    '#value' => t('Save note'),
     '#ajax' => array(
       'callback' => 'student_crm_activity_activity_form',
       'wrapper' => 'activity-sub-form',
       'name' => 'submit1',
     ),
   );
+  
+  if (user_access('send email to contact via activities')) {
+    $form['form-actions']['email_contact'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Email this note'),
+    );
+  }
   
   return $form;
 }
@@ -180,6 +200,35 @@ function student_crm_activity_create_submit($form, &$form_state) {
                          ))
              );
   relation_save($relation);
+  if($form_state['values']['email_contact']) {
+    if ($form_state['values']['entity']['type'] == 'crm_core_contact') {
+      $contact = crm_core_contact_load($form_state['values']['entity']['id']);
+      $subject = t('your record');
+    }
+    elseif ($form_state['values']['entity']['type'] == 'crm_case') {
+      $case = crm_case_load($form_state['values']['entity']['id']);
+      $contact = crm_case_get_contact($case);
+      $subject = $case->name;
+    }
+    $email = field_get_items('crm_core_contact', $contact, 'field_contact_email');
+    $params = array('activity' => $crm_activity,
+                    'subject' => $subject);
+    drupal_mail('student_crm_activity', 'activity', $email[0]['email'], $contact->language, $params);
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function student_crm_activity_mail($key, &$message, $params) {
+  if($key == 'activity') {
+    $message['subject'] = t('A note has been left on @record', array('@record' => $params['subject']));
+    
+    module_load_include('inc', 'crm_core_activity_ui', 'crm_core_activity_ui.pages');
+    $message['body'][] = drupal_render(crm_core_activity_view($params['activity']));
+    
+    $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+  }
 }
 
 /**

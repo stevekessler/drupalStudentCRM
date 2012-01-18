@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Sets up the table to track contacts via webforms.
+ */
+
+
+/**
+ * Implements hook_schema().
+ */
+function student_crm_webform_schema() {
+  $schema = array();
+
+  $schema['student_crm_webform'] = array(
+    'description' => 'The table to log the sending of emails.',
+    'fields' => array(
+      'entity_type' => array(
+        'description' => 'The type of entity which applies to this webform.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'entity_id' => array(
+        'description' => 'The ID of the entity.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'entity_field' => array(
+        'description' => 'The field used to attach this webform to the entity.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'email' => array(
+        'description' => 'The email address that should be sent the webform.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'last_sent' => array(
+        'description' => 'The Unix timestamp when the crm_case was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+  );
+
+  return $schema;
+}

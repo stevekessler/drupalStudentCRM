@@ -19,12 +19,14 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
     $emails = _student_crm_webform_get_field_email_addresses($field, $entity, 'crm_case');
   }
   $body = check_markup($field['settings']['email_body']['value'], $field['settings']['email_body']['format']);
-  if ($entity_type == 'case') {
+  if ($entity_type == 'crm_case') {
     $tokens = array('crm_core_contact' => crm_case_get_contact($entity),
                     'crm_case' => $entity);
+    $entity_id = $entity->cid;
   }
   else {
     $tokens = array($entity_type => $entity);
+    $entity_id = $entity->contact_id;
   }
   $tokens['webform'] = $field['settings']['webform'];
   $tokens['entity_type'] = $entity_type;
@@ -35,6 +37,14 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
   $message['subject'] = token_replace(check_plain($field['settings']['email_subject']), $tokens);
   foreach ($emails as $email) {
     drupal_mail('student_crm_webform', 'form_prompt', $email, language_default(), $message);
+    $fields = array('entity_type' => $entity_type,
+                    'entity_id' => $entity_id,
+                    'entity_field' => $field['field_name'],
+                    'email' => $email,
+                    'last_sent' => time());
+    db_insert('student_crm_webform')
+      ->fields($fields)
+      ->execute();
   }
   return $emails;
 }
@@ -164,7 +174,7 @@ function student_crm_webform_send_email_form_validate($form, $form_state) {
  */
 function student_crm_webform_send_email_form_submit($form, $form_state) {
   $case = crm_case_load($form_state['values']['case']);
-  $email_addresses = student_crm_webform_send_email('crm_case', $case, $form_state['values']['field'], $form_state['values']['manual-email']);
+  $email_addresses = student_crm_webform_send_email('crm_case', $case, $form_state['values']['field'], array($form_state['values']['manual-email']));
   
   $case = crm_case_load($form_state['values']['case']);
   $fields = field_info_instances();
