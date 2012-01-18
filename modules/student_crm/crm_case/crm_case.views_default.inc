@@ -1040,13 +1040,17 @@ function crm_case_views_default_views() {
   $handler->display->display_options['fields']['contact_name']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['contact_name']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['contact_name']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['contact_name']['element_type'] = 'h2';
   $handler->display->display_options['fields']['contact_name']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['contact_name']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['contact_name']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['contact_name']['hide_empty'] = 0;
   $handler->display->display_options['fields']['contact_name']['empty_zero'] = 0;
   $handler->display->display_options['fields']['contact_name']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['contact_name']['click_sort_column'] = 'title';
   $handler->display->display_options['fields']['contact_name']['type'] = 'name_default_full';
+  $handler->display->display_options['fields']['contact_name']['settings'] = array(
+    'markup' => 0,
+  );
   $handler->display->display_options['fields']['contact_name']['field_api_classes'] = 0;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Case: Case ID */
