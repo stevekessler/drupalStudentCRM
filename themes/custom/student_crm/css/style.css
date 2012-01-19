@@ -526,6 +526,10 @@ input.form-submit:active {
   color: #999999;
   text-align: center;
 }
+#sidebar-right .view .view-empty, .empty {
+  font-size: 1em;
+  font-style: italic;
+}
 body .views-exposed-form .views-exposed-widget {
   float: none;
 }
