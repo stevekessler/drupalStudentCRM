@@ -234,6 +234,9 @@ input.search-box {
   width: 266.6666666666667px;
   padding: 4px;
 }
+#autocomplete {
+  background: #ffffff;
+}
 /** HEADER **/
 #header {
   background-color: #87c4e0;

@@ -150,6 +150,7 @@ body { width: 100%; background: @body-background; }
 /** FORMS **/
 fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; margin: 10px 0; }
   input.search-box { border: darken(@header-gradient, 10%) 1px solid; .round-box(7px); font-size: 1.2em; width: (@min-width / 3); padding: 4px; }
+  #autocomplete { background: @content-background; }
 
 /** HEADER **/
 #header { .gradient(@header-gradient, darken(@header-gradient, 10%)); padding: 15px 30px; border-bottom: 1px solid darken(@header-gradient, 20%); }
@@ -256,6 +257,7 @@ ul.tabs { margin: 0px -10px 15px -10px; }
 /** CHOSEN **/
 .chzn-container { min-width: 100px !important; }
   .left .chzn-container { max-width: (@min-width / 4) - @sidebar-padding !important; }
+  
 /** PAGER **/
 ul.pager { margin: 15px 0; }
 	ul.pager li { padding: 0; margin: .25em 0; }
