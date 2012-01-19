@@ -237,6 +237,9 @@ input.search-box {
 #autocomplete {
   background: #ffffff;
 }
+#sidebar-left select {
+  max-width: 190px;
+}
 /** HEADER **/
 #header {
   background-color: #87c4e0;

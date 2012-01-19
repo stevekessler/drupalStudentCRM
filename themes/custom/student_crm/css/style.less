@@ -151,6 +151,7 @@ body { width: 100%; background: @body-background; }
 fieldset { border: 1px solid darken(@content-background, 30%); padding: 10px; margin: 10px 0; }
   input.search-box { border: darken(@header-gradient, 10%) 1px solid; .round-box(7px); font-size: 1.2em; width: (@min-width / 3); padding: 4px; }
   #autocomplete { background: @content-background; }
+  #sidebar-left select { max-width: (@min-width / 4) - @sidebar-padding; }
 
 /** HEADER **/
 #header { .gradient(@header-gradient, darken(@header-gradient, 10%)); padding: 15px 30px; border-bottom: 1px solid darken(@header-gradient, 20%); }
