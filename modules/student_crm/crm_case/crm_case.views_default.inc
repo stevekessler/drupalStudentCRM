@@ -420,6 +420,11 @@ function crm_case_views_default_views() {
   $handler->display->display_options['filters']['field_student_id_value']['expose']['required'] = 0;
   $handler->display->display_options['filters']['field_student_id_value']['expose']['remember'] = 1;
   $handler->display->display_options['filters']['field_student_id_value']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Case: User has access to view case */
+  $handler->display->display_options['filters']['case_access']['id'] = 'case_access';
+  $handler->display->display_options['filters']['case_access']['table'] = 'crm_case';
+  $handler->display->display_options['filters']['case_access']['field'] = 'case_access';
+  $handler->display->display_options['filters']['case_access']['value'] = '1';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -752,6 +757,11 @@ function crm_case_views_default_views() {
   $handler->display->display_options['arguments']['contact_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['contact_id']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['contact_id']['not'] = 0;
+  /* Filter criterion: Case: User has access to view case */
+  $handler->display->display_options['filters']['case_access']['id'] = 'case_access';
+  $handler->display->display_options['filters']['case_access']['table'] = 'crm_case';
+  $handler->display->display_options['filters']['case_access']['field'] = 'case_access';
+  $handler->display->display_options['filters']['case_access']['value'] = '1';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -942,6 +952,11 @@ function crm_case_views_default_views() {
   $handler->display->display_options['filters']['case_status_value']['value'] = array(
     0 => '0',
   );
+  /* Filter criterion: Case: User has access to view case */
+  $handler->display->display_options['filters']['case_access']['id'] = 'case_access';
+  $handler->display->display_options['filters']['case_access']['table'] = 'crm_case';
+  $handler->display->display_options['filters']['case_access']['field'] = 'case_access';
+  $handler->display->display_options['filters']['case_access']['value'] = '1';
 
   /* Display: Case contact list */
   $handler = $view->new_display('block', 'Case contact list', 'block_1');
