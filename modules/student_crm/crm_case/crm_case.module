@@ -32,6 +32,12 @@ function crm_case_entity_info() {
     'bundle keys' => array(
       'bundle' => 'type',
     ),
+    'view modes' => array(
+      'full' => array(
+        'label' => t('Case'),
+        'custom settings' => FALSE,
+      ),
+    ),
     'label callback' => 'entity_class_label',
     'uri callback' => 'entity_class_uri',
     'creation callback' => 'crm_case_create',
