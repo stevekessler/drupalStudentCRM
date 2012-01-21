@@ -474,7 +474,7 @@ input.form-submit:active {
   height: 35px;
   padding: 2px 0;
   margin-right: 6px;
-  overflow: none;
+  overflow: hidden;
   text-overflow: clip;
 }
 #sidebar-left .history li a:hover {
