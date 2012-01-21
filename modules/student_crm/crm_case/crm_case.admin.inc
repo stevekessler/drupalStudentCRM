@@ -160,37 +160,6 @@ function crm_case_edit_form_submit(&$form, &$form_state) {
   $crm_case->changed = time();
   
   $crm_case->save();
-  if ($crm_case->crm_core_contact) {
-    $contact = crm_core_contact_load($crm_case->crm_core_contact);
-    $relation = relation_create('crm_contact_case', array(
-                    array('entity_type' => 'crm_case',
-                           'entity_bundle' => $crm_case->type,
-                           'entity_id' => $crm_case->cid,
-                           'r_index' => 0,
-                           ),
-                      array('entity_type' => 'crm_core_contact',
-                             'entity_bundle' => $contact->type, 
-                             'entity_id' => $contact->contact_id,
-                             'r_index' => 1, 
-                          )
-                 ));
-    relation_save($relation);
-    $rid = $relation->rid;
-    $case_type = crm_case_type_load($crm_case->type);
-    if ($case_type->data['email_contact']) {
-      $email = field_get_items('crm_core_contact', $contact, 'field_contact_email');
-      if (valid_email_address($email[0]['email'])) {
-        $email_body = token_replace($case_type->data['email_body']['value'], array(
-                          'crm_core_contact' => $contact,
-                          'crm_case' => $crm_case,
-                        ));
-        $email_body = check_markup($email_body, $case_type->data['email_body']['format']);
-        $email_options = array('body' => $email_body,
-                               'subject' => check_plain($case_type->data['email_subject']));
-        drupal_mail('crm_case', 'crm_case_create', $email[0]['email'], language_default(), $email_options);
-      }
-    }
-  }
   
   $form_state['redirect'] = 'crm/case/' . $crm_case->cid;
 }
