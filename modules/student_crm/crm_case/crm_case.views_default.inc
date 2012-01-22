@@ -1272,6 +1272,11 @@ function crm_case_views_default_views() {
   $handler->display->display_options['filters']['case_status_value']['value'] = array(
     1 => '1',
   );
+  /* Filter criterion: Case: Contact has access to case */
+  $handler->display->display_options['filters']['case_contact_access']['id'] = 'case_contact_access';
+  $handler->display->display_options['filters']['case_contact_access']['table'] = 'crm_case';
+  $handler->display->display_options['filters']['case_contact_access']['field'] = 'case_contact_access';
+  $handler->display->display_options['filters']['case_contact_access']['value'] = '1';
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');

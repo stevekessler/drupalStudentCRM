@@ -59,4 +59,11 @@ function crm_case_views_data_alter(&$data) {
       'handler' => 'crm_case_handler_access',
     ),
   );
+  $data['crm_case']['case_contact_access'] = array(
+    'title' => t('Contact has access to case'),
+    'help' => t('Hides cases that a contact cannot edit.'),
+    'filter' => array(
+      'handler' => 'crm_case_handler_contact_access',
+    ),
+  );
 }
