@@ -17,20 +17,11 @@ function crm_tasks_context_default_contexts() {
   $context->description = 'User is on a CRM page where a user can create a task.';
   $context->tag = 'crm_tasks';
   $context->conditions = array(
-    'node' => array(
-      'values' => array(
-        'course' => 'course',
-      ),
-      'options' => array(
-        'node_form' => '0',
-      ),
-    ),
     'path' => array(
       'values' => array(
         'crm/case/*' => 'crm/case/*',
         'crm/contact/*' => 'crm/contact/*',
         '~crm/contact/*/*' => '~crm/contact/*/*',
-        'crm/activity/*' => 'crm/activity/*',
       ),
     ),
   );
