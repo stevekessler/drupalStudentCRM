@@ -135,7 +135,7 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['relationships']['relation_base_crm_task_right_crm_case']['relationship'] = 'relation_base_left_crm_task';
   $handler->display->display_options['relationships']['relation_base_crm_task_right_crm_case']['label'] = 'CRM Task - case';
   $handler->display->display_options['relationships']['relation_base_crm_task_right_crm_case']['required'] = 0;
-  /* Relationship: Relation: Relation: CRM Task (relation -> node) */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['relation_base_crm_task_right_node']['id'] = 'relation_base_crm_task_right_node';
   $handler->display->display_options['relationships']['relation_base_crm_task_right_node']['table'] = 'relation';
   $handler->display->display_options['relationships']['relation_base_crm_task_right_node']['field'] = 'relation_base_crm_task_right_node';
@@ -195,31 +195,6 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['fields']['name']['hide_empty'] = 0;
   $handler->display->display_options['fields']['name']['empty_zero'] = 0;
   $handler->display->display_options['fields']['name']['hide_alter_empty'] = 0;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
-  $handler->display->display_options['fields']['title_1']['table'] = 'node';
-  $handler->display->display_options['fields']['title_1']['field'] = 'title';
-  $handler->display->display_options['fields']['title_1']['relationship'] = 'relation_base_crm_task_right_node';
-  $handler->display->display_options['fields']['title_1']['label'] = '';
-  $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['title_1']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['title_1']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title_1']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['title_1']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['title_1']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['title_1']['hide_alter_empty'] = 0;
-  $handler->display->display_options['fields']['title_1']['link_to_node'] = 1;
   /* Field: Contact: Name */
   $handler->display->display_options['fields']['contact_name']['id'] = 'contact_name';
   $handler->display->display_options['fields']['contact_name']['table'] = 'field_data_contact_name';
@@ -302,7 +277,7 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Name';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = ' [name] [title_1] [contact_name]';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = ' [name] [contact_name]';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['nothing']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['nothing']['alter']['external'] = 0;
@@ -554,31 +529,6 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 0;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
-  $handler->display->display_options['fields']['title_1']['table'] = 'node';
-  $handler->display->display_options['fields']['title_1']['field'] = 'title';
-  $handler->display->display_options['fields']['title_1']['relationship'] = 'relation_base_crm_task_right_node';
-  $handler->display->display_options['fields']['title_1']['label'] = '';
-  $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['title_1']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['title_1']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['title_1']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title_1']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['title_1']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['title_1']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['title_1']['hide_alter_empty'] = 0;
-  $handler->display->display_options['fields']['title_1']['link_to_node'] = 1;
   /* Field: Contact: Name */
   $handler->display->display_options['fields']['contact_name']['id'] = 'contact_name';
   $handler->display->display_options['fields']['contact_name']['table'] = 'field_data_contact_name';
@@ -685,7 +635,7 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Name';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[contact_name][title][name][title_1]';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[contact_name][title][name]';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['nothing']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['nothing']['alter']['external'] = 0;
@@ -754,7 +704,7 @@ function crm_tasks_views_default_views() {
     t('.'),
     t(','),
     t('Name'),
-    t(' [name] [title_1] [contact_name]'),
+    t(' [name] [contact_name]'),
     t('Due date'),
     t('Note'),
     t('All'),
@@ -765,7 +715,7 @@ function crm_tasks_views_default_views() {
     t('Block'),
     t('Your Tasks'),
     t('Title'),
-    t('[contact_name][title][name][title_1]'),
+    t('[contact_name][title][name]'),
     t('Due'),
   );
   $export['crm_tasks'] = $view;
