@@ -75,7 +75,7 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
    * Delete a series of contacts.
    */
   protected function entityDeleteMultiple($contact_ids) {
-    crm_contact_delete_multiple($contact_ids);
+    crm_core_contact_delete_multiple($contact_ids);
   }
 
   /**
