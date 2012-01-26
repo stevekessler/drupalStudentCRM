@@ -134,6 +134,9 @@ function crm_student_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_contact_phone',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
       'foreign keys' => array(),
       'indexes' => array(),
       'module' => 'cck_phone',
@@ -145,6 +148,7 @@ function crm_student_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'student',
+      'crm_case_contact_editable' => 0,
       'deleted' => '0',
       'description' => '',
       'display' => array(
@@ -152,7 +156,7 @@ function crm_student_field_default_fields() {
           'label' => 'above',
           'module' => 'cck_phone',
           'settings' => array(),
-          'type' => 'global_phone_number',
+          'type' => 'local_phone_number',
           'weight' => '1',
         ),
       ),
@@ -161,7 +165,7 @@ function crm_student_field_default_fields() {
       'label' => 'Phone numbers',
       'required' => 0,
       'settings' => array(
-        'all_country_codes' => 1,
+        'all_country_codes' => 0,
         'country_codes' => array(
           'country_selection' => array(
             'ad' => 0,
@@ -378,7 +382,7 @@ function crm_student_field_default_fields() {
             'tz' => 0,
             'ua' => 0,
             'ug' => 0,
-            'us' => 0,
+            'us' => 'us',
             'uy' => 0,
             'uz' => 0,
             'va' => 0,
@@ -396,6 +400,7 @@ function crm_student_field_default_fields() {
             'zm' => 0,
             'zw' => 0,
           ),
+          'hide_single_cc' => 1,
         ),
         'default_country' => 'us',
         'enable_country_level_validation' => 0,
@@ -533,7 +538,7 @@ function crm_student_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
@@ -725,7 +730,7 @@ function crm_student_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
