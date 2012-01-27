@@ -30,7 +30,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
    */
   public function newCase(FeedsSource $source, $item) {
       $crm_case = crm_case_create(array('type' => $this->config['case_type'], 'name' => $item['name']));
-      $crm_case->crm_contact_id = $item['student_entity'];
+      $crm_case->crm_core_contact = $item['student_entity'];
       if ($item['author_name']) {
         $author = db_select('users', 'u')
                   ->fields('u', array('uid'))
@@ -209,7 +209,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
    * Save a crm_case crm_case.
    */
   public function entitySave($entity) {
-    $contact = crm_core_contact_load($entity->crm_contact_id);
+    $contact = crm_core_contact_load($entity->crm_core_contact);
     crm_case_save($entity);
     
     $relation = relation_create('crm_contact_case', array(

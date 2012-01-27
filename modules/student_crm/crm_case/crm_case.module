@@ -528,8 +528,8 @@ class CRMCase extends Entity {
   
   public function save() {
     parent::save();
-    if ($this->crm_contact_id) {
-      $contact = crm_core_contact_load($this->crm_contact_id);
+    if ($this->crm_core_contact) {
+      $contact = crm_core_contact_load($this->crm_core_contact);
       $relation = relation_create('crm_contact_case', array(
                       array('entity_type' => 'crm_case',
                              'entity_bundle' => $this->type,
