@@ -65,10 +65,18 @@ class CRMFeedsCourseEnrollmentProcessor extends FeedsProcessor {
   
   public function process(FeedsSource $source, FeedsParserResult $parser_result) {
     $state = $source->state(FEEDS_PROCESS);
-
+    $mappings = $this->config['mappings'];
+    foreach ($mappings as $map) {
+      if ($map['target'] == 'student_id') {
+        $student_id_key = $map['source'];
+      }
+      if ($map['target'] == 'course_id') {
+        $course_id_key = $map['source'];
+      }
+    }
     while ($item = $parser_result->shiftItem()) {
-      $item['course_entity'] = $this->getTargetEntity($item['course_id'], 'node');
-      $item['student_entity'] = $this->getTargetEntity($item['student_id'], 'crm_core_contact');
+      $item['course_entity'] = $this->getTargetEntity($item[$course_id_key], 'node');
+      $item['student_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_core_contact');
       if ($item['course_entity'] && $item['student_entity'] && !($entity_id = $this->existingEntityId($source, $parser_result)) ||
            ($this->config['update_existing'] != FEEDS_SKIP_EXISTING)) {
 

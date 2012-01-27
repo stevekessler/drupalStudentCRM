@@ -81,8 +81,8 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
         $item['name'] = $name->label;
       }
       $item['student_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_core_contact');
-      if (!($entity_id = $this->existingEntityId($source, $parser_result)) ||
-           ($this->config['update_existing'] != FEEDS_SKIP_EXISTING)) {
+      if ($item['student_entity'] && (!($entity_id = $this->existingEntityId($source, $parser_result)) ||
+           ($this->config['update_existing'] != FEEDS_SKIP_EXISTING))) {
 
         // Only proceed if item has actually changed.
         $hash = $this->hash($item);

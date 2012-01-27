@@ -550,7 +550,7 @@ class CRMCase extends Entity {
         if (valid_email_address($email[0]['email'])) {
           $email_body = token_replace($case_type->data['email_body']['value'], array(
                             'crm_core_contact' => $contact,
-                            'crm_case' => $this,
+                            'crm_case' => crm_case_load($this->cid),
                           ));
           $email_body = check_markup($email_body, $case_type->data['email_body']['format']);
           $email_options = array('body' => $email_body,
