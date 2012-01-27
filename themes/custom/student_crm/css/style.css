@@ -541,6 +541,19 @@ body .views-exposed-form .views-exposed-widget {
 body .view-content::after {
   clear: none;
 }
+.field-label-inline .field-label {
+  float: none;
+  display: inline;
+}
+.field-label-inline .field-items {
+  float: none;
+  display: inline;
+  margin: 0 0 0 10px;
+}
+.field-label-inline .field-items .field-item {
+  float: none;
+  display: inline;
+}
 /** TAGS **/
 .tags {
   margin: 5px 5px;
