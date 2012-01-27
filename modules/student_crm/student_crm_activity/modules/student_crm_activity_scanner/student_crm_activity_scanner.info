@@ -1,0 +1,7 @@
+name=Student CRM Scanner
+description=Handles routing scanned documents emailed from multifunction copiers.
+package=Student CRM
+core=7.x
+
+dependencies[]=feeds
+dependencies[]=student_crm_activity_mailer

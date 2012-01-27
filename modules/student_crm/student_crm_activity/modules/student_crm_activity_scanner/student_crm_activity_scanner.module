@@ -1,0 +1,20 @@
+<?php
+
+
+/**
+ * Implements hook_feeds_plugins().
+ */
+function student_crm_activity_scanner_feeds_plugins() {
+  $info['StudentCRMActivityScannerFeedsProcessor'] = array(
+    'name' => 'CRM Emailed scans processor',
+    'description' => 'Create scanned activities.',
+    'help' => 'Only useful for scans emailed from a multi-function copier, this will convert an email to a special activity type.',
+    'handler' => array(
+      'parent' => 'FeedsProcessor',
+      'class' => 'StudentCRMActivityScannerFeedsProcessor',
+      'file' => 'StudentCRMActivityScannerFeedsProcessor.inc',
+      'path' => drupal_get_path('module', 'student_crm_activity_scanner') . '/plugins',
+    ),
+  );
+  return $info;
+}
