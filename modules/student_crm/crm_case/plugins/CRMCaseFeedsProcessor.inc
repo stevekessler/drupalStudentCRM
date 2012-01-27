@@ -21,7 +21,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
    */
   protected function entityInfo() {
     $info = parent::entityInfo();
-    $info['label plural'] = t('Activity records');
+    $info['label plural'] = t('Cases');
     return $info;
   }
 
@@ -72,9 +72,14 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
         $name_key = $map['source'];
       }
     }
+    $case_types = crm_case_get_types();
+    $name = $case_types[$this->config['case_type']];
     while ($item = $parser_result->shiftItem()) {
       $item['author_name'] = $item[$author_name_key];
       $item['name'] = $item[$name_key];
+      if(!$item['name']) {
+        $item['name'] = $name->label;
+      }
       $item['student_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_core_contact');
       if (!($entity_id = $this->existingEntityId($source, $parser_result)) ||
            ($this->config['update_existing'] != FEEDS_SKIP_EXISTING)) {
