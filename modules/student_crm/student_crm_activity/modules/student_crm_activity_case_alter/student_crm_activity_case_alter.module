@@ -73,9 +73,9 @@ function student_crm_activity_case_alter_form_student_crm_activity_create_alter(
  * fields on the related case.
  */
 function student_crm_activity_case_alter_form_student_crm_activity_create_alter_submit($form, $form_state) {
-  $case = crm_case_load($form_state['values']['entity']['id']);
+  
+  $case = crm_case_load($form['entity']['#value']['id']);
   $language = ($case->language) ? $case->language : LANGUAGE_NONE;
-  $activity = crm_core_activity_load($form_state['activity_id']);
   $data = array();
   if ($form_state['values']['case_status_change']) {
     $case->case_status[$language][0]['value'] = ($case->case_status[$language][0]['value']) ? 0 : 1;
@@ -90,25 +90,28 @@ function student_crm_activity_case_alter_form_student_crm_activity_create_alter_
   
   $fields = field_info_instances('crm_case', $case->type);
   $alterable_fields = array();
+  
   foreach ($fields as $field_name => $field) {
-    if ($field['crm_case_alter'] && md5(serialize($form_state['values'][$field_name])) != md5(serialize($case->{$field_name}))) {
-      $rendered = field_attach_view('crm_case', $case, 'page');
-      $rendered[$field_name]['#label_display'] = 'hidden';
-      $data['display_extra'][$field_name]['old'] = drupal_render($rendered[$field_name]);
-      $case->{$field_name} = $form_state['values'][$field_name];
-      $rendered = field_attach_view('crm_case', $case, 'page');
-      $rendered[$field_name]['#label_display'] = 'hidden';
-      $data['display_extra'][$field_name]['label'] = $field['label'];
-      $data['display_extra'][$field_name]['message'] = drupal_render($rendered[$field_name]);
+    $rendered_before = field_attach_view('crm_case', $case, 'page');
+    if ($field['crm_case_alter']) {
+      if(md5(serialize($form_state['values'][$field_name])) != md5(serialize($case->{$field_name}))) {
+        $rendered_before[$field_name]['#label_display'] = 'hidden';
+        $data['display_extra'][$field_name]['old'] = drupal_render($rendered_before[$field_name]);
+        $case->{$field_name} = $form_state['values'][$field_name];
+        $rendered = field_attach_view('crm_case', $case, 'page');
+        $rendered[$field_name]['#label_display'] = 'hidden';
+        $data['display_extra'][$field_name]['label'] = $field['label'];
+        $data['display_extra'][$field_name]['message'] = drupal_render($rendered[$field_name]);
+      }
     }
   }
-  crm_case_save($case);
   db_insert('student_crm_activity_case_alter')
     ->fields(array(
-      'activity_id' => $activity->activity_id,
+      'activity_id' => $form_state['activity_id'],
       'data' => serialize($data),
     ))
     ->execute();
+  crm_case_save($case);
 }
 
 /**
