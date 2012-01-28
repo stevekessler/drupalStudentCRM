@@ -49,14 +49,7 @@ function student_crm_preprocess_entity(&$variables) {
     unset($variables['content']['field_activity_contact_method']);
     $variables['content']['field_activity_notes']['#label_display'] = 'hidden';
     $variables['permalink'] = l(t('permalink'), 'crm/activity/'. $activity->activity_id);
-    if(!$variables['page']) {
-      $rendered_content = render($variables['content']);
-      $trimmed_content = text_summary($rendered_content, 'full_html', 1000);
-      if(strlen($trimmed_content) < strlen($rendered_content)) {
-        $variables['show_trimmed'] = TRUE;
-        $variables['read_more_link'] = l(t('Read more...'), 'crm/activity/'. $activity->activity_id);
-      }
-    }
+    
   }
 }
 

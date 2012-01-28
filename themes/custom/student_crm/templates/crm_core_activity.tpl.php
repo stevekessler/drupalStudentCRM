@@ -42,18 +42,9 @@
   <div class="content"<?php print $content_attributes; ?>>
   <div class="submitted"><?php print $submitted; ?> - <?php print $permalink; ?></div>  
     <div class="note">
-      <?php if($show_trimmed): ?>
-        <?php
-          print text_summary(render($content), 'full_html', 1000);
-        ?>
-      <?php else: ?>
-        <?php
+       <?php
           print render($content);
         ?>
-      <?php endif; ?>
     </div>
-    <?php if($show_trimmed): ?>
-      <div class="submitted read-more"><?php print $read_more_link; ?></div>
-    <?php endif; ?>
   </div>
 </div>
