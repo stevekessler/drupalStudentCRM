@@ -18,6 +18,9 @@ function crm_courses_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_course_number',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
       'foreign keys' => array(
         'format' => array(
           'columns' => array(
@@ -285,6 +288,9 @@ function crm_courses_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_course_title',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
       'foreign keys' => array(
         'format' => array(
           'columns' => array(

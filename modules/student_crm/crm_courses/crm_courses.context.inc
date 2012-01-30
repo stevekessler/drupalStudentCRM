@@ -10,7 +10,7 @@
 function crm_courses_context_default_contexts() {
   $export = array();
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'crm_courses_contact';
@@ -51,7 +51,7 @@ function crm_courses_context_default_contexts() {
   t('crm_coures');
   $export['crm_courses_contact'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'crm_courses_course';
