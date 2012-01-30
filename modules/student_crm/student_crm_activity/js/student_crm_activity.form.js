@@ -19,6 +19,10 @@
             });
           });
         }
+        $('.horizontal-tab-button strong').each(function() {
+          $(this).text($(this).text().replace(Drupal.t('Show'), '')
+                                     .replace(Drupal.t('Hide'), ''));
+        });
       }
       $('.ajax-loaded-view').addClass('ajax-ready');
     }
