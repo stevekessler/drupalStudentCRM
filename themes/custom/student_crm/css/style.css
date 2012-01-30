@@ -544,6 +544,9 @@ body .views-exposed-form .views-exposed-widget {
 body .view-content::after {
   clear: none;
 }
+.views-scroll .view-content {
+  overflow-x: scroll;
+}
 .field-label-inline .field-label {
   float: none;
   display: inline;
