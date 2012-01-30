@@ -76,13 +76,13 @@ function student_crm_activity_create($form, &$form_state) {
       $entity['type'] = 'crm_case';
       $entity['bundle'] = $case->type;
       $entity['id'] = $case->cid;
-      $crm_contact = crm_case_get_contact($case);
+      $entity['crm_contact'] = crm_case_get_contact($case);
     }
     if ($contact = menu_get_object('crm_core_contact', 2)) {
       $entity['type'] = 'crm_core_contact';
       $entity['bundle'] = $contact->type;
       $entity['id'] = $contact->contact_id;
-      $crm_contact = $contact;
+      $entity['crm_contact'] = $contact;
     }
   }    
   $form['entity'] = array(
@@ -129,7 +129,7 @@ function student_crm_activity_create($form, &$form_state) {
   $crm_activity = crm_core_activity_create(array('type' => $activity_type,
                                                  'field_activity_participants' => array(
                                                   LANGUAGE_NONE => array(array(
-                                                      'target_id' => $crm_contact->contact_id,
+                                                      'target_id' => $entity['crm_contact']->contact_id,
                                                       'target_type' => 'crm_core_contact',
                                                     ),
                                                   )),
