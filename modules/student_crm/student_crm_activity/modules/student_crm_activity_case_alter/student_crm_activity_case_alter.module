@@ -22,7 +22,10 @@ function student_crm_activity_case_alter_form_field_ui_field_edit_form_alter(&$f
  * form elements for these fields.
  */
 function student_crm_activity_case_alter_form_student_crm_activity_create_alter(&$form, $form_state) {
-  $case = menu_get_object('crm_case', 2);
+  if($form['entity']['#value']['type'] != 'crm_case') {
+    return;
+  }
+  $case = crm_case_load($form['entity']['#value']['id']);
   if (!$case && isset($form_state['values']['entity']) && $form_state['values']['entity']['type'] == 'crm_case') {
     $case = crm_case_load($form_state['values']['entity']['id']);
   }
@@ -104,14 +107,15 @@ function student_crm_activity_case_alter_form_student_crm_activity_create_alter_
       }
     }
   }
-  db_insert('student_crm_activity_case_alter')
-    ->fields(array(
-      'activity_id' => $form_state['activity_id'],
-      'data' => serialize($data),
-    ))
-    ->execute();
-  crm_case_save($case);
-  
+  if(count($data)) {
+    db_insert('student_crm_activity_case_alter')
+      ->fields(array(
+        'activity_id' => $form_state['activity_id'],
+        'data' => serialize($data),
+      ))
+      ->execute();
+    crm_case_save($case);
+  }  
   $form_state['rebuild'] = TRUE;
 }
 
