@@ -104,6 +104,9 @@ function student_crm_activity_case_alter_form_student_crm_activity_create_alter_
         $rendered[$field_name]['#label_display'] = 'hidden';
         $data['display_extra'][$field_name]['label'] = $field['label'];
         $data['display_extra'][$field_name]['message'] = drupal_render($rendered[$field_name]);
+        if($data['display_extra'][$field_name]['message'] == $data['display_extra'][$field_name]['old']) {
+          unset($data['display_extra'][$field_name]);
+        }
       }
     }
   }
