@@ -200,14 +200,13 @@ function student_crm_activity_create_submit($form, &$form_state) {
   relation_save($relation);
   if($form_state['values']['email_contact']) {
     if ($form_state['values']['entity']['type'] == 'crm_core_contact') {
-      $contact = crm_core_contact_load($form_state['values']['entity']['id']);
-      $subject = t('your record');
+      $subject = t('Your record');
     }
     elseif ($form_state['values']['entity']['type'] == 'crm_case') {
       $case = crm_case_load($form_state['values']['entity']['id']);
-      $contact = crm_case_get_contact($case);
       $subject = $case->name;
     }
+    $contact = $form_state['values']['entity']['crm_contact'];
     $email = field_get_items('crm_core_contact', $contact, 'field_contact_email');
     $params = array('activity' => $crm_activity,
                     'subject' => $subject);
