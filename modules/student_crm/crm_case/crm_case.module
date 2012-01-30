@@ -902,7 +902,7 @@ function crm_case_form_field_ui_field_edit_form_alter(&$form, $form_state) {
  * We're removing case types from the case search view which the user does not have access to.
  */
 function crm_case_form_views_exposed_form_alter(&$form, $form_state) {
-  if ($form_state['view']->name != 'crm_cases') {
+  if ($form_state['view']->name != 'crm_cases' || !is_array($form['type']['#options'])) {
     return;
   }
   foreach ($form['type']['#options'] as $key => $title) {
