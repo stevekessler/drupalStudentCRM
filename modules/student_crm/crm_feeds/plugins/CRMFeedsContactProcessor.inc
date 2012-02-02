@@ -21,7 +21,7 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
    */
   protected function entityInfo() {
     $info = parent::entityInfo();
-    $info['label plural'] = t('Nodes');
+    $info['label plural'] = t('Contacts');
     return $info;
   }
 
@@ -128,6 +128,7 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
       'contact_type' => $type,
       'expire' => FEEDS_EXPIRE_NEVER,
       'author' => 0,
+      'guid_global' => 0,
     ) + parent::configDefaults();
   }
 
@@ -165,6 +166,12 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
       FEEDS_SKIP_EXISTING => 'Do not update existing contacts',
       FEEDS_REPLACE_EXISTING => 'Replace existing contacts',
       FEEDS_UPDATE_EXISTING => 'Update existing contacts (slower than replacing them)',
+    );
+    $form['guid_global'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Treat GUIDs as global'),
+      '#description' => t('Useful to import contacts from multiple locations but to prevent duplicates, this will cause the GUID to span any importer.'),
+      '#default_value' => $this->config['guid_global'],
     );
     return $form;
   }
@@ -265,6 +272,19 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
    * Get contact_id of an existing feed item contact if available.
    */
   protected function existingEntityId(FeedsSource $source, FeedsParserResult $result) {
+    if ($this->config['guid_global']) {
+      foreach($this->uniqueTargets($source, $result) as $target => $value) {
+        $contact_id = db_select('feeds_item', 'i')
+               ->condition('i.entity_type', 'crm_core_contact')
+               ->condition('i.guid', $value)
+               ->fields('i', array('entity_id'))
+               ->execute()
+               ->fetchField();
+        if($contact_id) {
+          return $contact_id;
+        }
+      }
+    }
     if ($contact_id = parent::existingEntityId($source, $result)) {
       return $contact_id;
     }
