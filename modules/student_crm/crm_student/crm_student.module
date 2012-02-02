@@ -211,11 +211,13 @@ function crm_student_user_login(&$edit, $account) {
   $language = ($account->language) ? $account->language : LANGUAGE_NONE;
   $existing = field_get_items('user', $account, 'field_user_contact');
   $existing_contacts = array();
-  foreach ($existing as $k => $e) {
-    $existing_contacts[$e['target_id']] = $e['target_id'];
-    if (!$ids[$e['target_id']]) {
-      unset($account->field_user_contact[$language][$k]);
-      $changed = TRUE;
+  if(is_array($existing)) {
+    foreach ($existing as $k => $e) {
+      $existing_contacts[$e['target_id']] = $e['target_id'];
+      if (!$ids[$e['target_id']]) {
+        unset($account->field_user_contact[$language][$k]);
+        $changed = TRUE;
+      }
     }
   }
   foreach ($ids as $id) {
