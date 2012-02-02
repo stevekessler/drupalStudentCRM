@@ -108,10 +108,10 @@ function crm_case_edit_form($form, &$form_state, $crm_case) {
   if (!empty($form['#submit'])) {
     $submit += $form['#submit'];
   }
-
+  
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Save case'),
+    '#value' => t('Save @type', array('@type' => $type->label)),
     '#submit' => $submit + array('crm_case_edit_form_submit'),
   );
   
