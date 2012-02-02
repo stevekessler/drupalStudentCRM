@@ -6,6 +6,12 @@
   -moz-box-shadow:    @val;
 }
 
+.no-box-shadow() {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
 .box-shadow-color (@x: 0, @y: 0, @blur: 1px, @color ) {
   @val: @x @y @blur @color;
 
@@ -195,11 +201,11 @@ a.add { margin: 10px 0; }
 
 /** MULTIPAGE **/
 .multipage-controls-list .multipage-button { float: none !important; }
-  .multipage-controls-list .multipage-button input.form-submit, .multipage-controls-list .multipage-button .multipage-link-previous { font-family: @font-family; }
-  .multipage-controls-list .multipage-button input.form-submit { background: @green-button; color: @content-background !important; text-shadow: none; border: none; }
-  .multipage-controls-list .multipage-button input.form-submit:hover { background: darken(@green-button, 20%); }
-  .multipage-controls-list .multipage-button .multipage-link-previous { background: @blue-button; color: @content-background !important; .round-box(2px); text-decoration: none; padding: 7px 12px; .box-shadow(0px, 1px, 1px, 0.1); margin: 0 20px 0 0; }
-  .multipage-controls-list .multipage-button .multipage-link-previous:hover { background: darken(@blue-button, 20%); }
+  .multipage-controls-list .multipage-button input.form-submit, .multipage-controls-list .multipage-button .multipage-link-previous { font-family: @font-family; height: 29px; }
+  .multipage-controls-list .multipage-button input.form-submit { background: @green-button url(../images/arrow-right.png) no-repeat right 0px; color: @content-background !important; text-shadow: none; border: none; .no-box-shadow(); padding-right: 20px;}
+  .multipage-controls-list .multipage-button input.form-submit:hover { background-color: darken(@green-button, 20%); }
+  .multipage-controls-list .multipage-button .multipage-link-previous { background: @blue-button  url(../images/arrow-left.png) no-repeat 0px 0px; color: @content-background !important; .round-box(2px); text-decoration: none; padding: 7px 12px; margin: 0 20px 0 0;padding-left: 20px; }
+  .multipage-controls-list .multipage-button .multipage-link-previous:hover { background-color: darken(@blue-button, 20%); }
 
 /** MESSAGES **/
 #messages .messages { border: none; background-image: none; margin: 0;}
