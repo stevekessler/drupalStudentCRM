@@ -237,7 +237,7 @@ input.search-box {
 #autocomplete {
   background: #ffffff;
 }
-#sidebar-left select {
+#sidebar-left select, #sidebar-right select {
   max-width: 190px;
 }
 /** HEADER **/
