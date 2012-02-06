@@ -19,7 +19,7 @@ class crm_case_handler_edit_link_field extends crm_case_handler_link_field {
     
     //Creating a dummy crm_case to check access against
     $dummy_crm_case = (object) array('type' => $type);
-    if (!crm_case_access('edit', $dummy_crm_case)) {
+    if (!crm_case_access('edit', crm_case_load($values->cid))) {
       return;
     }
     
