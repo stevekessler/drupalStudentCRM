@@ -206,7 +206,7 @@ function crm_case_delete_form_submit($form, &$form_state) {
 
   crm_case_delete($crm_case);
 
-  drupal_set_message(t('The crm_case %name has been deleted.', array('%name' => $crm_case->name)));
+  drupal_set_message(t('The case %name has been deleted.', array('%name' => $crm_case->name)));
   watchdog('crm_case', 'Deleted case %name.', array('%name' => $crm_case->name));
 
   $form_state['redirect'] = 'crm/case';

@@ -215,6 +215,55 @@ function student_crm_activity_create_submit($form, &$form_state) {
 }
 
 /**
+ * Implements hook_crm_case_delete().
+ */
+function student_crm_activity_crm_case_delete($case) {
+  $activities_relations = db_select('field_data_endpoints', 'e')
+                            ->condition('entity_type', 'relation')
+                            ->condition('bundle', 'crm_core_activity')
+                            ->condition('endpoints_entity_type', 'crm_case')
+                            ->condition('endpoints_entity_id', $case->cid)
+                            ->fields('e', array('entity_id'))
+                            ->execute()
+                            ->fetchAllKeyed(0,0);
+  student_crm_activity_delete_from_relation($activities_relations);
+}
+
+/**
+ * Implements hook_crm_core_contact_delete().
+ */
+function student_crm_activity_crm_core_contact_delete($contact) {
+  $activities_relations = db_select('field_data_endpoints', 'e')
+                            ->condition('entity_type', 'relation')
+                            ->condition('bundle', 'crm_core_activity')
+                            ->condition('endpoints_entity_type', 'crm_core_contact')
+                            ->condition('endpoints_entity_id', $contact->contact_id)
+                            ->fields('e', array('entity_id'))
+                            ->execute()
+                            ->fetchAllKeyed(0,0);
+  student_crm_activity_delete_from_relation($activities_relations);
+}
+
+/**
+ * Helper function to delete all activities attached to a list of relation IDs.
+ */
+function student_crm_activity_delete_from_relation($activities_relations) {
+  foreach($activities_relations as $rid) {
+    $activity_id = db_select('field_data_endpoints', 'e')
+                         ->condition('entity_type', 'relation')
+                         ->condition('bundle', 'crm_core_activity')
+                         ->condition('endpoints_entity_type', 'crm_core_activity')
+                         ->condition('entity_id', $rid)
+                         ->fields('e', array('endpoints_entity_id'))
+                         ->execute()
+                         ->fetchField();
+    $activity = crm_core_activity_load($activity_id);
+    crm_core_activity_delete($activity);
+    relation_delete($rid);
+  }
+}
+
+/**
  * Implements hook_mail().
  */
 function student_crm_activity_mail($key, &$message, $params) {
