@@ -56,7 +56,7 @@ class CRMStudentAddresses extends FeedsProcessor {
         $address['country'] = $this->config['default_country'];
       }
       $address['contact_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_core_contact');
-      if ($address['thoroughfare'] && $address['contact_entity']) {
+      if (!$address_id = $this->existingEntityId($source, $parser_result) && $address['thoroughfare'] && $address['contact_entity']) {
 
         // Only proceed if item has actually changed.
         $hash = md5($address['guid']);
@@ -67,10 +67,10 @@ class CRMStudentAddresses extends FeedsProcessor {
         try {
           $entity = crm_core_contact_load($address['contact_entity']);
           $language = ($entity->language) ? $entity->language : LANGUAGE_NONE;
-          foreach($entity->field_contact_address[$language] as $k => $address) {
-            unset($address['country']);
+          foreach($entity->field_contact_address[$language] as $k => $existing_address) {
+            unset($existing_address['country']);
             $delete = true;
-            foreach($address as $type => $value) {
+            foreach($existing_address as $type => $value) {
               if($value) {
                 $delete = false;
                 continue;
@@ -84,7 +84,7 @@ class CRMStudentAddresses extends FeedsProcessor {
           crm_core_contact_save($entity);
           $feed_item = (object)array(
                           'feeds_item' => array(
-                            'entity_id' => $address['guid'],
+                            'entity_id' => $entity->contact_id,
                             'guid' => $address['guid'],
                             'entity_type' => 'crm_core_contact_address',
                             'feed_nid' => 0,
@@ -368,7 +368,17 @@ class CRMStudentAddresses extends FeedsProcessor {
     if ($relation_id = parent::existingEntityId($source, $result)) {
       return $relation_id;
     }
-
+    foreach($this->uniqueTargets($source, $result) as $target => $value) {
+      $address_id = db_select('feeds_item', 'i')
+             ->condition('i.entity_type', 'crm_core_contact_address')
+             ->condition('i.guid', $value)
+             ->fields('i', array('entity_id'))
+             ->execute()
+             ->fetchField();
+      if($address_id) {
+        return $address_id;
+      }
+    }
     // Iterate through all unique targets and test whether they do already
     // exist in the database.
     foreach ($this->uniqueTargets($source, $result) as $target => $value) {
