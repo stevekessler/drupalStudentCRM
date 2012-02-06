@@ -226,10 +226,16 @@ function crm_case_access($op, $crm_case = NULL, $account = NULL) {
   }
   $type = crm_case_get_types($crm_case->type);
   if ($type->data['contact_edit']) {
-    return TRUE;
     $contact = crm_case_get_contact($crm_case);
-    if ($account->crm_contact_records[$contact->contact_id]) {
-      return TRUE;
+    $account = user_load($account->uid);
+    $contact_records = field_get_items('user', $account, 'field_user_contact');
+    if(!is_array($contact_records)) {
+      return FALSE;
+    }
+    foreach($contact_records as $contact_record) {
+      if ($contact_record['target_id'] == $contact->contact_id) {
+        return TRUE;
+      }
     }
   }
   return FALSE;
