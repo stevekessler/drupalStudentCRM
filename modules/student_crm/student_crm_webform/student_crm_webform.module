@@ -33,7 +33,19 @@ function student_crm_webform_menu() {
     'access arguments' => array('access content'),
   );
   
+  $items['thank-you/%node'] = array(
+    'title' => 'Thank you',
+    'page callback' => 'student_crm_webform_thank_you_page',
+    'page arguments' => array(1),
+    'access arguments' => array('complete crm webforms'),
+  );
+  
   return $items;
+}
+
+function student_crm_webform_thank_you_page($node) {
+  
+  return $node->webform['confirmation'];
 }
 
 /**
@@ -100,8 +112,7 @@ function student_crm_webform_complete_form($entity_type, $entity_id, $webform, $
                                                                'entity_id' => $entity_id,
                                                                'email' => $email,
                                                                );
-  drupal_set_title($webform->title);
-  return drupal_render(node_view($webform));
+  drupal_goto('node/'. $webform->nid);
 }
 
 /**
@@ -111,14 +122,15 @@ function student_crm_webform_complete_form($entity_type, $entity_id, $webform, $
 function student_crm_webform_node_view($node, $view_mode, $langcode) {
   if($node->type == 'webform' && $view_mode == 'full' && isset($_SESSION['student_crm_webform_form'][$node->nid])) {
     $node->title = null;
-    if(arg(2) == 'crm_case') {
-      $case = crm_case_load(arg(3));
+    if($_SESSION['student_crm_webform_form'][$node->nid]['entity_type'] == 'crm_case') {
+      $case = crm_case_load($_SESSION['student_crm_webform_form'][$node->nid]['entity_id']);
       $contact = crm_case_get_contact($case);
     }
-    if(arg(2) == 'crm_core_contact') {
+    if($_SESSION['student_crm_webform_form'][$node->nid]['entity_type'] == 'crm_core_contact') {
       $case = FALSE;
-      $contact = crm_case_get_contact($case);
+      $contact = crm_core_contact_load($_SESSION['student_crm_webform_form'][$node->nid]['entity_id']);
     }
+    
     $name = field_get_items('crm_core_contact', $contact, 'contact_name');
     $name = name_format($name[0], 'g+if');
     $items[] = t('<strong>Name:</strong> @name', array('@name' => $name));
@@ -184,7 +196,7 @@ function student_crm_webform_webform_submission_entity_insert($entity) {
         ->execute();
 
   drupal_set_message(t('Thank you for your submission.'));
-  drupal_goto('<front>');
+  drupal_goto('thank-you/'. $entity->nid);
 }
 
 /**
