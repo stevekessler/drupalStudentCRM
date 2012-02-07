@@ -21,6 +21,14 @@
     }
   };
   
+  Drupal.behaviors.scrollMultipage = {
+    attach : function() {
+      $('.multipage-button a, .multipage-button input').click(function() { 
+        window.scrollTo(0, 0);
+      });
+    }
+  };
+  
   Drupal.theme.prototype.multipage = function (settings) {
     var controls = {};
     controls.item = $('<span class="multipage-button"></span>');
