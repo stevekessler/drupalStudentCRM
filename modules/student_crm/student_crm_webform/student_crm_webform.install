@@ -54,10 +54,10 @@ function student_crm_webform_schema() {
         'not null' => FALSE,
         'default' => 0,
       ),
-      'key' => array(
-        'description' => 'The number of reminders that have been sent.',
+      'submission_id' => array(
+        'description' => 'The ID of the submission.',
         'type' => 'int',
-        'not null' => FALSE,
+        'not null' => TRUE,
         'default' => 0,
       ),
     ),
