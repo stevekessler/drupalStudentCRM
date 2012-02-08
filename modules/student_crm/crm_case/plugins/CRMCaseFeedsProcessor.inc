@@ -83,12 +83,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
       $item['student_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_core_contact');
       if ($item['student_entity'] && (!($entity_id = $this->existingEntityId($source, $parser_result)) ||
            ($this->config['update_existing'] != FEEDS_SKIP_EXISTING))) {
-
-        // Only proceed if item has actually changed.
-        $hash = $this->hash($item);
-        if (!empty($entity_id) && $hash == $this->getHash($entity_id)) {
-          continue;
-        }
+        
         
         try {
           // Assemble crm_case, map item to it, save.
@@ -188,7 +183,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
    */
   protected function entityLoad(FeedsSource $source, $cid) {
     if ($this->config['update_existing'] == FEEDS_UPDATE_EXISTING) {
-      $crm_case = crm_case_load($cid, NULL, TRUE);
+      $crm_case = crm_case_load($cid);
     }
     else {
       // We're replacing the existing crm_case crm_case. Only save the absolutely necessary.
@@ -209,33 +204,36 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
    * Save a crm_case crm_case.
    */
   public function entitySave($entity) {
-    $contact = crm_core_contact_load($entity->crm_core_contact);
+    $contact = ($entity->crm_core_contact)
+                 ? crm_core_contact_load($entity->crm_core_contact)
+                 : false;
     crm_case_save($entity);
-    
-    $relation = relation_create('crm_contact_case', array(
-                    array('entity_type' => 'crm_case',
-                          'entity_bundle' => $entity->type,
-                          'entity_id' => $entity->cid,
-                          'r_index' => 0,
-                          ),
-                    array('entity_type' => 'crm_core_contact',
-                          'entity_bundle' => $contact->type, 
-                          'entity_id' => $contact->contact_id,
-                          'r_index' => 1,
-                          )
-                          )
-               );
-    $relation->changed = REQUEST_TIME;
-    $relation->created = REQUEST_TIME;
-    $relation->language = LANGUAGE_NONE;
-    relation_save($relation);
+    if($contact) {
+      $relation = relation_create('crm_contact_case', array(
+                      array('entity_type' => 'crm_case',
+                            'entity_bundle' => $entity->type,
+                            'entity_id' => $entity->cid,
+                            'r_index' => 0,
+                            ),
+                      array('entity_type' => 'crm_core_contact',
+                            'entity_bundle' => $contact->type, 
+                            'entity_id' => $contact->contact_id,
+                            'r_index' => 1,
+                            )
+                            )
+                 );
+      $relation->changed = REQUEST_TIME;
+      $relation->created = REQUEST_TIME;
+      $relation->language = LANGUAGE_NONE;
+      relation_save($relation);
+    }
   }
 
   /**
    * Delete a series of activities.
    */
   protected function entityDeleteMultiple($cids) {
-    crm_case_multiple_delete($cids);
+    crm_case_delete_multiple($cids);
   }
 
   /**
