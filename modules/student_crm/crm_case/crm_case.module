@@ -946,7 +946,16 @@ function crm_case_send_email_action_form($context) {
   if (!isset($context['message'])) {
     $context['message'] = '';
   }
-
+  
+  global $user;
+  
+  $form['sender'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Reply-to address'),
+    '#default_value' => ($context['sender']) ? $context['sender'] : $user->mail,
+    '#description' => t('The reply-to email address for the email.'),
+  );
+  
   $form['subject'] = array(
     '#type' => 'textfield',
     '#title' => t('Subject'),
@@ -974,11 +983,18 @@ function crm_case_send_email_action_form($context) {
   return $form;
 }
 
+function crm_case_send_email_action_validate($form, $form_state) {
+  if (!valid_email_address($form_state['values']['sender'])) {
+    form_set_error('sender', t('The email address is not valid.'));
+  }
+}
+
 /**
  * Process crm_student_send_email_action form submissions.
  */
 function crm_case_send_email_action_submit($form, $form_state) {
   $params = array(
+    'sender'    => $form_state['values']['sender'],
     'subject'   => $form_state['values']['subject'],
     'message'   => $form_state['values']['message'],
   );
@@ -1003,5 +1019,5 @@ function crm_case_send_email_action($entity, $context) {
                           'crm_core_contact' => $contact,
                           'crm_case' => $entity,
                         ));
-  drupal_mail('crm_case', 'action_send_email', $email[0]['email'], language_default(), $context);
+  drupal_mail('crm_case', 'action_send_email', $email[0]['email'], language_default(), $context, $context['sender']);
 }
