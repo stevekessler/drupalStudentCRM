@@ -50,7 +50,13 @@ function crm_case_views_data_alter(&$data) {
   );
   
   $data['crm_case']['created']['field']['handler'] = 'views_handler_field_date';
-  $data['crm_case']['changed']['field']['handler'] = 'views_handler_field_date';
+  $data['crm_case']['changed'] = array(
+    'field' => array(
+      'title' => t('Update date'),
+      'help' => t('Displays the last date the case was updated.'),
+      'handler' => 'views_handler_field_date',
+    ),
+  );
   
   $data['crm_case']['case_access'] = array(
     'title' => t('User has access to view case'),
