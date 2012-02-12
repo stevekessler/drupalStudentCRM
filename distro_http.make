@@ -16,5 +16,5 @@ projects[drupal][version] = "7"
 projects[student_crm][type] = profile
 projects[student_crm][version] = 1.x-dev
 projects[student_crm][download][type] = git
-projects[student_crm][download][url] = http://github.com/csumb/drupalStudentCRM.git
+projects[student_crm][download][url] = https://github.com/csumb/drupalStudentCRM.git
 projects[student_crm][download][branch] = master
