@@ -65,6 +65,15 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
     '#default_value' => $crm_case_type->data['email_contact'],
   );
   
+  $form['email']['email_address'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email subject'),
+    '#description' => t('Subject of email to send to the contact. Leave blank to use the site\'s email address.'),
+    '#default_value' => ($crm_case_type->data['email_address']) 
+                          ? $crm_case_type->data['email_address']
+                          : '',
+  );
+  
   $form['email']['email_subject'] = array(
     '#type' => 'textfield',
     '#title' => t('Email subject'),
@@ -101,6 +110,18 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
   return $form;
 }
 
+
+/**
+ * Form API validation callback for the type form.
+ */
+function crm_case_type_form_validate(&$form, &$form_state) {
+  if($form_state['values']['email_contact'] 
+      && $form_state['values']['email_address'] 
+      && !valid_email_address($form_state['values']['email_address'])) {
+    form_set_error('email_address', t('The email address is not valid.'));
+  }
+}
+
 /**
  * Form API submit callback for the type form.
  */
@@ -113,6 +134,7 @@ function crm_case_type_form_submit(&$form, &$form_state) {
   $crm_case_type->data['email_contact'] = $crm_case_type->email_contact;
   $crm_case_type->data['email_subject'] = $crm_case_type->email_subject;
   $crm_case_type->data['email_body'] = $crm_case_type->email_body;
+  $crm_case_type->data['email_address'] = $crm_case_type->email_address;
   $crm_case_type->data['contact_edit'] = $crm_case_type->contact_edit;
   $crm_case_type->save();
   $form_state['redirect'] = 'admin/structure/crm/case-types';

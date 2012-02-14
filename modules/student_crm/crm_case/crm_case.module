@@ -561,7 +561,10 @@ class CRMCase extends Entity {
           $email_body = check_markup($email_body, $case_type->data['email_body']['format']);
           $email_options = array('body' => $email_body,
                                  'subject' => check_plain($case_type->data['email_subject']));
-          drupal_mail('crm_case', 'crm_case_create', $email[0]['email'], language_default(), $email_options);
+          $email_address = ($case_type->data['email_address'])
+                             ? $case_type->data['email_address']
+                             : variable_get('site_mail', '');
+          drupal_mail('crm_case', 'crm_case_create', $email[0]['email'], language_default(), $email_options, $email_address);
         }
       }
     }
