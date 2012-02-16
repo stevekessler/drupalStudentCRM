@@ -67,7 +67,7 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
   
   $form['email']['email_address'] = array(
     '#type' => 'textfield',
-    '#title' => t('Email subject'),
+    '#title' => t('Email address'),
     '#description' => t('Subject of email to send to the contact. Leave blank to use the site\'s email address.'),
     '#default_value' => ($crm_case_type->data['email_address']) 
                           ? $crm_case_type->data['email_address']
