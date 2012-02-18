@@ -92,8 +92,8 @@ projects[mailhandler][version] = "2.0-rc1"
 projects[messaging][subdir] = "contrib"
 projects[messaging][version] = "1.0-alpha1"
 
-;projects[name][subdir] = "contrib"
-;projects[name][version] = "1.x-dev"
+projects[name][subdir] = "contrib"
+projects[name][version] = "1.x-dev"
 
 projects[options_element][subdir] = "contrib"
 projects[options_element][version] = "1.4"
@@ -143,14 +143,6 @@ projects[formalize][download][type] = "git"
 projects[formalize][download][url] = "http://git.drupal.org/project/formalize.git"
 projects[formalize][download][branch] = "7.x-1.x"
 
-; Name module
-projects[name][type] = module
-projects[name][subdir] = "contrib"
-projects[name][version] = "1.x-dev"
-projects[name][download][type] = "git"
-projects[name][download][url] = "http://git.drupal.org/project/name.git"
-projects[name][download][branch] = "7.x-1.x"
-
 ; Libraries
 
 ; Download the chosen library
@@ -179,7 +171,6 @@ projects[cck_phone][patch][] = "http://drupal.org/files/cck_phone_feeds-1160186-
 projects[crm_core][patch][] = "http://drupal.org/files/crm_core_activity_access-1399920-1.patch"
 projects[email][patch][] = "http://drupal.org/files/email_feeds_target-718414-36.patch"
 projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_folder.patch"
-projects[name][patch][] = "http://drupal.org/files/name_fullname_search-1369618-3.patch"
 
 ; Hosted modules
 projects[views_savedsearches][type] = module
