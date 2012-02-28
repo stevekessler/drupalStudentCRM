@@ -67,9 +67,11 @@ function student_crm_activity_create($form, &$form_state) {
   $form['#suffix'] = '</div>';
   
   $entity = array();
-  
   if (isset($form_state['values']['entity'])) {
     $entity = $form_state['values']['entity'];
+  }
+  elseif (isset($form_state['complete form']['entity'])) {
+    $entity = $form_state['complete form']['entity']['#value'];
   }
   else {
     if ($case = menu_get_object('crm_case', 2)) {
@@ -84,7 +86,7 @@ function student_crm_activity_create($form, &$form_state) {
       $entity['id'] = $contact->contact_id;
       $entity['crm_contact'] = $contact;
     }
-  }    
+  }
   $form['entity'] = array(
     '#type' => 'value',
     '#value' => $entity,
