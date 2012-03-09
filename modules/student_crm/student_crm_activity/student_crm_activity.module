@@ -53,8 +53,6 @@ function student_crm_activity_theme($existing, $type, $theme, $path) {
  * Create activity form.
  */
 function student_crm_activity_create($form, &$form_state) {
-  drupal_add_js(drupal_get_path('module', 'student_crm_activity') .'/js/jquery.color.js');
-  drupal_add_js(drupal_get_path('module', 'student_crm_activity') .'/js/student_crm_activity.form.js');
   drupal_add_css(drupal_get_path('module', 'student_crm_activity') .'/css/student_crm_activity.css');
   
   $activity_type = (isset($form_state['values']['activity_type'])) 
@@ -148,11 +146,6 @@ function student_crm_activity_create($form, &$form_state) {
   $form['form-actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save note'),
-    '#ajax' => array(
-      'callback' => 'student_crm_activity_activity_form',
-      'wrapper' => 'activity-sub-form',
-      'name' => 'submit1',
-    ),
   );
   
   if (user_access('send email to contact via activities')) {
