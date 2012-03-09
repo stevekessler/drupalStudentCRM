@@ -3,3 +3,4 @@ description=Allows activities to change the values of fields on a case
 core=7.x
 
 dependencies[]=crm_case
+dependencies[]=diff

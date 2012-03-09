@@ -104,7 +104,7 @@ function student_crm_activity_case_alter_form_student_crm_activity_create_alter_
         $rendered[$field_name]['#label_display'] = 'hidden';
         $data['display_extra'][$field_name]['label'] = $field['label'];
         $data['display_extra'][$field_name]['message'] = drupal_render($rendered[$field_name]);
-        if($data['display_extra'][$field_name]['message'] == $data['display_extra'][$field_name]['old']) {
+        if(strip_tags($data['display_extra'][$field_name]['message']) == strip_tags($data['display_extra'][$field_name]['old'])) {
           unset($data['display_extra'][$field_name]);
         }
       }
@@ -147,10 +147,16 @@ function student_crm_activity_case_alter_crm_core_activity_view($activity, $view
   unset($activity->data['display_extra']['status']);
   }
   if (is_array($activity->data['display_extra']) && count($activity->data['display_extra'])) {
+    drupal_add_css(drupal_get_path('module', 'student_crm_activity_case_alter') .'/css/student_crm_activity_case_alter.css');
     $headers = array('Field', 'Old value', 'New value');
     $rows = array();
     foreach ($activity->data['display_extra'] as $changed) {
-      $rows[] = array($changed['label'], $changed['old'], $changed['message']);
+      if(strlen(trim(strip_tags($changed['old']))) || strlen(trim(strip_tags($changed['message'])))) {
+        $rows[] = array($changed['label'], $changed['old'], diff_get_inline($changed['old'], $changed['message']));
+      }
+    }
+    if(!count($rows)) {
+      return;
     }
     $activity->content['changed'] = array(
       '#type' => 'fieldset',

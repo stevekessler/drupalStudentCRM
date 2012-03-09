@@ -1,2 +1,5 @@
 .case-status-change { float: right; }
   .case-status-change .form-item { margin: 0px; }
+
+.diff-deleted { text-decoration: line-through; background: #ffa8a7; }
+.diff-added { background: #CFC; }

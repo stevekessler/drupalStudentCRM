@@ -44,6 +44,9 @@ projects[crm_core][version] = "1.x-dev"
 projects[date][subdir] = "contrib"
 projects[date][version] = "2.0-alpha4"
 
+projects[diff][subdir] = "contrib"
+projects[diff][version] = "2.0"
+
 projects[email][subdir] = "contrib"
 projects[email][version] = "1.x-dev"
 
