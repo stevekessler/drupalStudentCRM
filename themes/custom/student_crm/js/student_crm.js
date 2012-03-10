@@ -24,7 +24,7 @@
   Drupal.behaviors.scrollMultipage = {
     attach : function() {
       $('.multipage-button a, .multipage-button input').click(function() { 
-        window.scrollTo(0, 0);
+        $('html, body').scrollTop($("#page").offset().top);
       });
     }
   };
