@@ -1024,3 +1024,65 @@ function crm_case_send_email_action($entity, $context) {
                         ));
   drupal_mail('crm_case', 'action_send_email', $email[0]['email'], language_default(), $context, $context['sender']);
 }
+
+
+/**
+ * Implements hook_theme_registry_alter().
+ * Here we're overriding VBO's confirmation screen to show the email address that would be sent the email if 
+ * the user is on a send case contact email action.
+ */
+function crm_case_theme_registry_alter(&$theme_registry) {
+  $theme_registry['views_bulk_operations_confirmation']['function'] = 'crm_case_views_bulk_operations_confirmation';
+}
+
+/**
+ * Theme callback that previews the message to be sent.
+ */
+function crm_case_views_bulk_operations_confirmation($variables) {
+  $vbo = $variables['vbo'];
+  $operations = $vbo->get_selected_operations();
+  
+  if($vbo->get_entity_type() != 'crm_case' || !isset($operations['crm_case_send_email_action'])) {
+    return theme_views_bulk_operations_confirmation($variables);
+  }
+  $entity_type = $vbo->get_entity_type();
+  $rows = $variables['rows'];
+  $result_count = count($vbo->view->result);
+  $row_count = count($rows);
+  $items = array();
+  // All rows on all pages have been selected.
+  if ($result_count < $row_count) {
+    $entity_ids = array_slice(array_values($rows), 0, $result_count);
+    $entities = _views_bulk_operations_entity_load($entity_type, $entity_ids, $vbo->revision);
+    foreach ($entities as $entity) {
+      $contact = crm_case_get_contact($entity);
+      if($contact) {
+        $email = field_get_items('crm_core_contact', $contact, 'field_contact_email');
+        $items[] = check_plain($email[0]['email']);
+      }
+    }
+    $items[] = t('...and <strong>!count</strong> more.', array('!count' => $row_count - $result_count));
+  }
+  else {
+    $entities = _views_bulk_operations_entity_load($entity_type, array_values($rows), $vbo->revision);
+    foreach ($entities as $entity) {
+      $contact = crm_case_get_contact($entity);
+      if($contact) {
+        $email = field_get_items('crm_core_contact', $contact, 'field_contact_email');
+        $items[] = check_plain($email[0]['email']);
+      }
+    }
+  }
+  $preview['subject'] = token_replace(check_plain($_POST['subject']), array(
+                          'crm_core_contact' => $contact,
+                          'crm_case' => $entity,
+                        ));
+  $preview['message'] = token_replace(check_plain($_POST['message']['value']), array(
+                          'crm_core_contact' => $contact,
+                          'crm_case' => $entity,
+                        ));
+  $output = theme('item_list', array('items' => $preview, 'title' => t('Message preview')));
+  $count = format_plural(count($entities), 'item', 'items');
+  $output .= theme('item_list', array('items' => $items, 'title' => t('You selected the following <strong>!count</strong>:', array('!count' => $count))));
+  return $output;
+}
