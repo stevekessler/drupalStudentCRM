@@ -155,7 +155,7 @@ function student_crm_activity_case_alter_crm_core_activity_view($activity, $view
         $message = (module_exists('diff'))
                     ? diff_get_inline($changed['old'], $changed['message'])
                     : $changed['message'];
-        $rows[] = array($changed['label'], $changed['old'], );
+        $rows[] = array($changed['label'], $changed['old'], $message);
       }
     }
     if(!count($rows)) {
