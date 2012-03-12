@@ -32,10 +32,13 @@ function student_crm_webform_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_options']['grouping'] = 'webform_submission_entity_form_name';
+  $handler->display->display_options['style_options']['group_rendered'] = 1;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['inline'] = array(
-    'link_webform_submission_entity' => 'link_webform_submission_entity',
     'webform_submission_entity_form_name' => 'webform_submission_entity_form_name',
+    'counter' => 'counter',
+    'link_webform_submission_entity' => 'link_webform_submission_entity',
   );
   $handler->display->display_options['row_options']['separator'] = ' - ';
   $handler->display->display_options['row_options']['hide_empty'] = 0;
@@ -51,7 +54,48 @@ function student_crm_webform_views_default_views() {
   $handler->display->display_options['fields']['webform_submission_entity_form_name']['table'] = 'webform_submission_entity';
   $handler->display->display_options['fields']['webform_submission_entity_form_name']['field'] = 'webform_submission_entity_form_name';
   $handler->display->display_options['fields']['webform_submission_entity_form_name']['label'] = '';
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['alter']['html'] = 0;
   $handler->display->display_options['fields']['webform_submission_entity_form_name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['webform_submission_entity_form_name']['hide_alter_empty'] = 1;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = '';
+  $handler->display->display_options['fields']['counter']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['counter']['alter']['text'] = 'Submission #[counter]';
+  $handler->display->display_options['fields']['counter']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['counter']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['counter']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['counter']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['counter']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['counter']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['counter']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['counter']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['counter']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['counter']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['counter']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['counter']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['counter']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['counter']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['counter']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['counter']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   /* Field: Webform Submission: Link */
   $handler->display->display_options['fields']['link_webform_submission_entity']['id'] = 'link_webform_submission_entity';
   $handler->display->display_options['fields']['link_webform_submission_entity']['table'] = 'webform_submission_entity';
@@ -105,6 +149,7 @@ function student_crm_webform_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('Webform submission to entities'),
+    t('Submission #[counter]'),
     t('All'),
     t('Block'),
     t('Case form submissions'),
