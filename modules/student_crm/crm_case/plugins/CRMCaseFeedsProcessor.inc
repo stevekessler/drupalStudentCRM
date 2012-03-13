@@ -208,25 +208,6 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
                  ? crm_core_contact_load($entity->crm_core_contact)
                  : false;
     crm_case_save($entity);
-    if($contact) {
-      $relation = relation_create('crm_contact_case', array(
-                      array('entity_type' => 'crm_case',
-                            'entity_bundle' => $entity->type,
-                            'entity_id' => $entity->cid,
-                            'r_index' => 0,
-                            ),
-                      array('entity_type' => 'crm_core_contact',
-                            'entity_bundle' => $contact->type, 
-                            'entity_id' => $contact->contact_id,
-                            'r_index' => 1,
-                            )
-                            )
-                 );
-      $relation->changed = REQUEST_TIME;
-      $relation->created = REQUEST_TIME;
-      $relation->language = LANGUAGE_NONE;
-      relation_save($relation);
-    }
   }
 
   /**
