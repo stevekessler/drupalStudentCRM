@@ -3,3 +3,5 @@
 
 .diff-deleted { text-decoration: line-through; background: #ffa8a7; }
 .diff-added { background: #CFC; }
+.diff-changed { background: #c8dce2; }
+.diff-deleted, .diff-added, .diff-changed { padding: 2px 4px; }
