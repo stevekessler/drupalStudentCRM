@@ -59,21 +59,8 @@ function student_crm_webform_case_webform_submission_entity_insert($entity) {
   $crm_case->is_new;
   $crm_case->created = time();
   $crm_case->changed = time();
-  
+  $crm_case->crm_core_contact = $contact->contact_id;
   $crm_case->save();
-  $relation = relation_create('crm_contact_case', array(
-                  array('entity_type' => 'crm_case',
-                         'entity_bundle' => $crm_case->type,
-                         'entity_id' => $crm_case->cid,
-                         'r_index' => 0,
-                         ),
-                    array('entity_type' => 'crm_core_contact',
-                           'entity_bundle' => $contact->type, 
-                           'entity_id' => $contact->contact_id,
-                           'r_index' => 1, 
-                        )
-               ));
-  relation_save($relation);
   $relation = relation_create('webform_submission_to_entities', array(
                     array('entity_type' => 'webform_submission_entity',
                          'entity_id' => $entity->wsid,
