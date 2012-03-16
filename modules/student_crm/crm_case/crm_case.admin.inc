@@ -87,12 +87,14 @@ function crm_case_edit_form($form, &$form_state, $crm_case) {
   if (!user_access('open and close cases')) {
     $form['case_status']['#access'] = FALSE;
   }
-  
-  if (arg(4) && $contact = crm_core_contact_load(arg(4))) {
-    $form['crm_core_contact'] = array(
-      '#type' => 'hidden',
-      '#value' => $contact->contact_id,
-    );
+  if (arg(4) && !$crm_case->cid) {
+    $contact = crm_core_contact_load(arg(4));
+    if($contact) {
+      $form['crm_core_contact'] = array(
+        '#type' => 'hidden',
+        '#value' => $contact->contact_id,
+      );
+    }
   }
   
   $form['actions'] = array(
