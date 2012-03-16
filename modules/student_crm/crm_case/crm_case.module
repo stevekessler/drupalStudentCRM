@@ -857,7 +857,6 @@ function crm_case_mail($key, &$message, $params) {
     case 'crm_case_create':
       $message['subject'] = $params['subject'];
       $message['body'][] = $params['body'];
-      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
       break;
   }
 }
