@@ -172,7 +172,6 @@ libraries[formalize][destination] = "libraries"
 projects[chosen][patch][] = http://drupal.org/files/issues/chosen-7.x-1.x-install_profile.patch
 projects[cck_phone][patch][] = "http://drupal.org/files/cck_phone_feeds-1160186-2.patch"
 projects[email][patch][] = "http://drupal.org/files/email_feeds_target-718414-36.patch"
-projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_folder-1378104-3.patch"
 
 ; Hosted modules
 projects[views_savedsearches][type] = module
