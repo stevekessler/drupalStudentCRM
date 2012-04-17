@@ -437,18 +437,32 @@ function student_crm_webform_field_presave($entity_type, $entity, $field, $insta
   }
   module_load_include('inc', 'student_crm_webform', 'student_crm_webform.mail');
   $entity_id = ($entity_type == 'crm_case') ? $entity->cid : $entity->contact_id;
+  $old_entity = ($entity_type == 'crm_case') ? crm_case_load($entity_id) : crm_core_contact_load($entity_id);
   $reminders = field_get_items($entity_type, $entity, $instance['settings']['email_field']);
+  $old_email = field_get_items($entity_type, $old_entity, $instance['settings']['email_field']);
   foreach($reminders as $email) {
+    $emails[$email['email']] = $email;
     $existing = db_select('student_crm_webform', 'w')
                   ->condition('entity_type', $entity_type)
                   ->condition('entity_id', $entity_id)
                   ->condition('entity_field', $field['field_name'])
-                  ->condition('email', $email)
+                  ->condition('email', $email['email'])
                   ->fields('w', array('email'))
                   ->execute()
                   ->fetchField();
     if(!$existing) {
       student_crm_webform_send_email($entity_type, $entity, $field['field_name'], array($email['email']), TRUE); 
+    }
+  }
+  foreach($old_email as $old) {
+    if(!$emails[$old['email']]) {
+      dpm('delete');
+      db_delete('student_crm_webform')
+        ->condition('entity_type', $entity_type)
+        ->condition('entity_id', $entity_id)
+        ->condition('entity_field', $field['field_name'])
+        ->condition('email', $old['email'])
+        ->execute();
     }
   }
 }
