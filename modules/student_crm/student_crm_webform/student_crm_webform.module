@@ -456,7 +456,6 @@ function student_crm_webform_field_presave($entity_type, $entity, $field, $insta
   }
   foreach($old_email as $old) {
     if(!$emails[$old['email']]) {
-      dpm('delete');
       db_delete('student_crm_webform')
         ->condition('entity_type', $entity_type)
         ->condition('entity_id', $entity_id)
