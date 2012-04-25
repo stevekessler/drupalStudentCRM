@@ -179,9 +179,3 @@ projects[views_savedsearches][subdir] = "contrib"
 projects[views_savedsearches][version] = "7.x-dev"
 projects[views_savedsearches][download][type] = "file"
 projects[views_savedsearches][download][url] = "http://s4.csumb.edu/hosted_modules/views_savedsearches.tar.gz"
-
-projects[relation][type] = module
-projects[relation][subdir] = "contrib"
-projects[relation][version] = "7.x-dev"
-projects[relation][download][type] = "file"
-projects[relation][download][url] = "http://webprojects.csumb.edu/crm/downloads/relation.tar.gz"
