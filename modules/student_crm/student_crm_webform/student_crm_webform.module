@@ -38,6 +38,26 @@ function student_crm_webform_menu() {
     'page arguments' => array('student_crm_webform_get_email_link_form', 2, 4, 5),
     'access arguments' => array('retrieve webform links'),
   );
+
+  $items['crm/case/%/reminders'] = array(
+    'title' => 'Email reminders',
+    'page callback' => 'student_crm_webform_reminder_manage',
+    'page arguments' => array(2),
+    'access callback' => 'student_crm_webform_reminder_manage_access',
+    'access arguments' => array(2),
+    'file' => 'student_crm_webform.mail.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 10,
+  );
+
+  $items['crm/case/%/reminders/delete/%/%'] = array(
+    'title' => 'Delete email reminder',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('student_crm_webform_reminder_manage_delete', 2, 5, 6),
+    'access callback' => 'student_crm_webform_reminder_manage_access',
+    'access arguments' => array(2),
+    'file' => 'student_crm_webform.mail.inc',
+  );
   
   $items['thank-you/%node'] = array(
     'title' => 'Thank you',
@@ -47,6 +67,19 @@ function student_crm_webform_menu() {
   );
   
   return $items;
+}
+
+function student_crm_webform_reminder_manage_access($case_id) {
+  if(!user_access('manage crm webforms')) {
+    return false;
+  }
+  $reminders = db_select('student_crm_webform', 'w')
+                ->condition('entity_type', 'crm_case')
+                ->condition('entity_id', $case_id)
+                ->fields('w', array('email'))
+                ->execute()
+                ->fetchField();
+  return ($reminders) ? TRUE : FALSE;
 }
 
 function student_crm_webform_thank_you_page($node) {

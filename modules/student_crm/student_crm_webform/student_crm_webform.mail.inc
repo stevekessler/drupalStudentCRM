@@ -223,3 +223,57 @@ function _student_crm_webform_get_field_email_addresses($field, $entity, $entity
   }
   return $emails;
 }
+
+/**
+ * Page to manage reminders for a case.
+ */
+function student_crm_webform_reminder_manage($case_id) {
+  $case = crm_case_load($case_id);
+  $rows = array();
+  $reminders = db_select('student_crm_webform', 'w')
+                ->condition('entity_type', 'crm_case')
+                ->condition('entity_id', $case_id)
+                ->fields('w')
+                ->execute()
+                ->fetchAll();
+  $fields = field_info_instances();
+  $header = array(t('Email address'), t('Field'), t('Reminders sent'), t('Last sent'), t('Delete'));
+  foreach($reminders as $reminder) {
+    $rows[] = array($reminder->email,
+                    $fields['crm_case'][$case->type][$reminder->entity_field]['label'],
+                    $reminder->reminders_sent,
+                    format_date($reminder->send_date),
+                    l(t('Delete'), 'crm/case/' . $case->cid . '/reminders/delete/' . $reminder->email . '/' . $reminder->entity_field));
+  }
+  return theme('table', array('header' => $header, 'rows' => $rows));
+}
+
+function student_crm_webform_reminder_manage_delete($form, &$form_state, $case_id, $email, $field) {
+  $form_state['case_id'] = $case_id;
+  $form_state['field'] = $field;
+  $form_state['email'] = $email;
+  $fields = field_info_instances();
+  $case = crm_case_load($case_id);
+  $field = $fields['crm_case'][$case->type][$field]['label'];
+  $form = confirm_form($form,
+    t('Are you sure you want to delete the reminder for %field to !email?', array('%field' => $field, '!email' => $email)),
+    'crm/case/'. $case->cid .'/reminders',
+    '<p>' . t('This action cannot be undone.') . '</p>',
+    t('Delete'),
+    t('Cancel'),
+    'confirm'
+  );
+  
+  return $form;
+}
+
+function student_crm_webform_reminder_manage_delete_submit($form, &$form_state) {
+  db_delete('student_crm_webform')
+        ->condition('entity_type', 'crm_case')
+        ->condition('entity_id', $form_state['case_id'])
+        ->condition('entity_field', $form_state['field'])
+        ->condition('email', $form_state['email'])
+        ->execute();
+  drupal_set_message(t('The email reminder has been deleted'));
+  drupal_goto('crm/case/'. $form_state['case_id']);
+}
