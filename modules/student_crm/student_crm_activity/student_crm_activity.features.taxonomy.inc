@@ -13,7 +13,7 @@ function student_crm_activity_taxonomy_default_vocabularies() {
       'name' => 'Activity types',
       'machine_name' => 'activity_types',
       'description' => 'Categorizes activity types.',
-      'hierarchy' => '0',
+      'hierarchy' => '1',
       'module' => 'taxonomy',
       'weight' => '0',
       'rdf_mapping' => array(

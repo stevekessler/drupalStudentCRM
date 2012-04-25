@@ -271,7 +271,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_contact_email']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_contact_email']['type'] = 'email_plain';
   $handler->display->display_options['fields']['field_contact_email']['field_api_classes'] = 0;
-  /* Field: Contact: OtterID */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_csumb_otterid']['id'] = 'field_csumb_otterid';
   $handler->display->display_options['fields']['field_csumb_otterid']['table'] = 'field_data_field_csumb_otterid';
   $handler->display->display_options['fields']['field_csumb_otterid']['field'] = 'field_csumb_otterid';
@@ -295,7 +295,6 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_csumb_otterid']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_csumb_otterid']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_csumb_otterid']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_csumb_otterid']['field_api_classes'] = 0;
 
   /* Display: Student status */
   $handler = $view->new_display('block', 'Student status', 'block_2');
@@ -372,7 +371,7 @@ function crm_student_views_default_views() {
     t('Basic information'),
     t('Student ID'),
     t('Email'),
-    t('OtterID'),
+    t('Broken handler field_data_field_csumb_otterid.field_csumb_otterid'),
     t('Student status'),
     t('term from field_student_status'),
     t('<div class="student-status student-status-[field_status_alert]">[field_student_status]</div>'),
@@ -835,6 +834,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_degrees']['delta_first_last'] = 0;
   $handler->display->display_options['fields']['field_student_degrees']['field_api_classes'] = 0;
   $handler->display->display_options['filter_groups']['groups'] = array(
+    0 => 'AND',
     1 => 'AND',
     2 => 'OR',
   );

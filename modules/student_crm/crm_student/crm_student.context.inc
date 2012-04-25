@@ -10,7 +10,7 @@
 function crm_student_context_default_contexts() {
   $export = array();
 
-  $context = new stdClass();
+  $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'crm_anonymous_home';
@@ -55,7 +55,7 @@ function crm_student_context_default_contexts() {
   t('crm_home');
   $export['crm_anonymous_home'] = $context;
 
-  $context = new stdClass();
+  $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'crm_authenticated_home';
@@ -93,7 +93,7 @@ function crm_student_context_default_contexts() {
   t('crm_home');
   $export['crm_authenticated_home'] = $context;
 
-  $context = new stdClass();
+  $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'crm_search';
@@ -131,7 +131,7 @@ function crm_student_context_default_contexts() {
   t('crm');
   $export['crm_search'] = $context;
 
-  $context = new stdClass();
+  $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'crm_search_page';
@@ -153,7 +153,7 @@ function crm_student_context_default_contexts() {
   t('crm');
   $export['crm_search_page'] = $context;
 
-  $context = new stdClass();
+  $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'crm_sitewide';
@@ -203,7 +203,7 @@ function crm_student_context_default_contexts() {
   t('crm');
   $export['crm_sitewide'] = $context;
 
-  $context = new stdClass();
+  $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'crm_sitewide_authenticated';
@@ -242,7 +242,7 @@ function crm_student_context_default_contexts() {
   t('crm');
   $export['crm_sitewide_authenticated'] = $context;
 
-  $context = new stdClass();
+  $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'crm_student_edit';
@@ -280,7 +280,7 @@ function crm_student_context_default_contexts() {
   t('student');
   $export['crm_student_edit'] = $context;
 
-  $context = new stdClass();
+  $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'crm_student_view';
@@ -345,7 +345,7 @@ function crm_student_context_default_contexts() {
   t('crm student');
   $export['crm_student_view'] = $context;
 
-  $context = new stdClass();
+  $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'crm_user_page';
