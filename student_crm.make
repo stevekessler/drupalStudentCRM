@@ -102,7 +102,7 @@ projects[options_element][subdir] = "contrib"
 projects[options_element][version] = "1.4"
 
 projects[relation][subdir] = "contrib"
-projects[relation][version] = "1.x-dev"
+projects[relation][version] = "1.0-rc2"
 
 projects[rules][subdir] = "contrib"
 projects[rules][version] = "2.0"
