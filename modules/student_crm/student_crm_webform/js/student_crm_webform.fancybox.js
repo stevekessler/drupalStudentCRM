@@ -3,7 +3,7 @@
   Drupal.behaviors.studentCRMWebformFancybox = {
     
     attach : function() {
-      $('.webform-entity-modal li a').each(function() {
+      $('.webform-entity-modal li a, a.open-webform-modal').each(function() {
         if (typeof $(this).fancybox !== 'undefined') {
           var $link = $(this);
           $(this).fancybox({
@@ -11,7 +11,7 @@
             width  : '80%',
             height : '80%',
             autoDimensions: false,
-            ajax : { 
+            ajax : {
                      type       : "GET",
                      url        : $link.attr('href'),
                      dataFilter : function(data) {

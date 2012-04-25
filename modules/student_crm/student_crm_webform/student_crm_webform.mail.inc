@@ -228,6 +228,7 @@ function _student_crm_webform_get_field_email_addresses($field, $entity, $entity
  * Page to manage reminders for a case.
  */
 function student_crm_webform_reminder_manage($case_id) {
+  drupal_add_js(drupal_get_path('module', 'student_crm_webform') .'/js/student_crm_webform.fancybox.js');
   $case = crm_case_load($case_id);
   $rows = array();
   $reminders = db_select('student_crm_webform', 'w')
@@ -237,13 +238,16 @@ function student_crm_webform_reminder_manage($case_id) {
                 ->execute()
                 ->fetchAll();
   $fields = field_info_instances();
-  $header = array(t('Email address'), t('Field'), t('Reminders sent'), t('Last sent'), t('Delete'));
+  $header = array(t('Email address'), t('Field'), t('Reminders'), t('Last sent'), t('Delete'), t('View link'));
   foreach($reminders as $reminder) {
     $rows[] = array($reminder->email,
                     $fields['crm_case'][$case->type][$reminder->entity_field]['label'],
                     $reminder->reminders_sent,
                     format_date($reminder->send_date),
-                    l(t('Delete'), 'crm/case/' . $case->cid . '/reminders/delete/' . $reminder->email . '/' . $reminder->entity_field));
+                    l(t('Delete'), 'crm/case/' . $case->cid . '/reminders/delete/' . $reminder->email . '/' . $reminder->entity_field),
+                    l(t('View'), 'crm/case/' . $case->cid . '/email_link/' . $fields['crm_case'][$case->type][$reminder->entity_field]['settings']['webform'] . '/' . $reminder->email,
+                      array('attributes' => array('class' => array('open-webform-modal')))),
+                    );
   }
   return theme('table', array('header' => $header, 'rows' => $rows));
 }
