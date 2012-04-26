@@ -29,7 +29,8 @@ class StudentCRMActivityFeedsProcessor extends FeedsProcessor {
    * Creates a new crm_activity crm_activity in memory and returns it.
    */
   public function newActivity(FeedsSource $source, $item) {
-      $crm_activity = crm_core_activity_create(array('type' => $this->config['activity_type']));
+      $crm_activity = entity_create('crm_core_activity', array(
+                      'type' => $this->config['activity_type']));
       $crm_activity->crm_contact_id = $item['student_entity'];
       if ($item['author_name']) {
         $author = db_select('users', 'u')
