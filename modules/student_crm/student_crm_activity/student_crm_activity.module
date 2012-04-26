@@ -126,7 +126,7 @@ function student_crm_activity_create($form, &$form_state) {
     ),
     '#weight' => -20,
   );
-  $crm_acitivity = entity_create('crm_core_activity', array('type' => $activity_type,
+  $crm_activity = entity_create('crm_core_activity', array('type' => $activity_type,
                                                  'field_activity_participants' => array(
                                                   LANGUAGE_NONE => array(array(
                                                     'target_id' => $entity['crm_contact']->contact_id,
