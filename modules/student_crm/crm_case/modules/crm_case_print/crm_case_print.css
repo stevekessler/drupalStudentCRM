@@ -1,0 +1,7 @@
+#print-contact {
+	float: right;
+	width: 45%;
+	margin: 0 0 0 10pt;
+	padding: 0 0 0 10pt;
+	border-left: 1px solid #222;
+}

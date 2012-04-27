@@ -1,0 +1,25 @@
+.page-crm-case-print {
+	background: #F8F8F8;
+	padding: 100px 0;
+}
+
+.page-crm-case-print #header, .page-crm-case-print #sidebar-left, .page-crm-case-print #page-tools,
+.page-crm-case-print #sidebar-left, .page-crm-case-print #sidebar-right, 
+.page-crm-case-print #block-student-crm-activity-student-crm-activity-create {
+	display: none;
+}
+
+.page-crm-case-print #content { 
+	box-shadow: none; 
+	background: #fff;
+	width: 7in;
+	padding: .5in;
+	border: 5pt solid #eee;
+	margin: 0px auto !important;
+}
+.page-crm-case-print #content-wrapper { 
+	box-shadow: none;
+	border: none;
+	background: none;
+	margin: 0px auto;
+}

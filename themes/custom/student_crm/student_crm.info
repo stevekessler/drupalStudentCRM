@@ -5,6 +5,8 @@ core=7.x
 
 
 stylesheets[all][] = css/style.css
+stylesheets[all][] = css/print-preview.css
+stylesheets[print][] = css/print.css
 
 scripts[] = js/placeholder.js
 scripts[] = js/student_crm.js

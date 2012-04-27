@@ -1,0 +1,143 @@
+<?php
+
+
+include_once('crm_case_print.features.inc');
+
+/**
+ * Implements hook_menu().
+ */
+function crm_case_print_menu() {
+	$items = array();
+
+	$items['crm/case/%crm_case/print'] = array(
+		'title callback' => 'crm_case_print_title',
+		'title arguments' => array(2),
+		'page callback' => 'crm_case_print_page',
+		'page arguments' => array(2),
+		'access callback' => 'crm_case_access',
+		'access arguments' => array('view', 2),
+	);
+
+	return $items;
+}
+
+/**
+ * Title callback for printing a case.
+ */
+function crm_case_print_title($case) {
+	return $case->name;
+}
+
+/**
+ * Implements hook_interface_build_pre_render_alter().
+ */
+function crm_case_print_interface_build_pre_render_alter(&$element) {
+	if(!$element['#disable_interface']) {
+		return;
+	}
+	foreach($element['#pre_render'] as $id => $callback) {
+		if($callback == 'interface_build_pre_render') {
+			unset($element['#pre_render'][$id]);
+		}
+	}
+	foreach(array('#interface_data', '#interface_plugin', '#prefix', '#suffix') as $item) {
+		unset($element[$item]);
+	}
+	foreach($element as $k => $item) {
+		if(strpos($k, 'interface') === 0) {
+			foreach($item as $item_key => $field) {
+				if(substr($item_key, 0, 1) != '#') {
+					$element[$item_key] = $field;
+				}
+			}
+			unset($element[$k]);
+		}
+	}
+	return $element;
+}
+
+/**
+ * Page callback for printing a case.
+ */
+function crm_case_print_page($case) {
+	drupal_add_css(drupal_get_path('module', 'crm_case_print') .'/crm_case_print.css');
+	$contact = crm_case_get_contact($case);
+	$contact_title = field_get_items('crm_core_contact', $contact, 'contact_name');
+	$contact_title = name_format($contact_title[0], '((((t+ig)+im)+if)+is)+jc');
+  return theme('crm_case_print', 
+  				array('contact' => crm_case_print_render_contact($contact),
+  							'contact_title' => $contact_title,
+  							'case' => crm_case_print_render_case($case)
+  					));
+}
+
+/**
+ * Implements hook_theme().
+ */
+function crm_case_print_theme($existing, $type, $theme, $path) {
+	return array(
+		'crm_case_print' => array(
+			'variables' => array('contact' => NULL, 'contact_title' => NULL, 'case' => NULL),
+			'template' => 'crm_case_print',
+			),
+	);
+}
+
+/**
+ * Renders a contact for printing.
+ */
+function crm_case_print_render_contact($contact) {
+	$contact->content = array();
+	$view_mode = 'print';
+	$langcode = LANGUAGE_NONE;
+	field_attach_prepare_view('crm_core_contact', array($contact->contact_id => $contact), $view_mode);
+	// Add content added by fields.
+	$contact->content += field_attach_view('crm_core_contact', $contact, $view_mode);
+	module_invoke_all('entity_view', $contact, 'crm_core_contact', $view_mode, $langcode);
+	$build = $contact->content;
+	unset($contact->content);
+	$build += array('#disable_interface' => TRUE);
+	return drupal_render($build);
+}
+
+/**
+ * Renders a case for printing.
+ */
+function crm_case_print_render_case($case) {
+	$entities = array($case->cid => $case);
+  field_attach_prepare_view('crm_case', $entities, 'full');
+  entity_prepare_view('crm_case', $entities);
+  $case = $entities[$case->cid];
+  $langcode = isset($case->language) ? $case->language : LANGUAGE_NONE;
+  $build = entity_build_content('crm_case', $case, 'full', $langcode);
+  $build += array(
+    // If the entity type provides an implementation, use this instead the
+    // generic one.
+    // @see template_preprocess_entity()
+    '#theme' => 'entity',
+    '#entity_type' => 'crm_case',
+    '#entity' => $case,
+    '#view_mode' => 'full',
+    '#language' => $langcode,
+    '#page' => NULL,
+    '#disable_interface' => TRUE,
+  );
+  return drupal_render($build);
+}
+/**
+ * Implements hook_block_info().
+ */
+function crm_case_print_block_info() {
+  $blocks['crm_case_print_link'] = array('info' => t('Print case link'));
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function crm_case_print_block_view($delta) {
+	$case = menu_get_object('crm_case', 2);
+  if ($delta == 'crm_case_print_link' && $case && crm_case_access('view', $case)) {
+    return array('content' => l(t('Print case'), 'crm/case/'. $case->cid .'/print'));
+  }
+}

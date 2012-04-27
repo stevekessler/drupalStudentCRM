@@ -1,0 +1,11 @@
+name = "CRM Case Print"
+description = "Gives users the ability to print a case"
+core = "7.x"
+package = "Student CRM"
+php = "5.2.4"
+dependencies[] = crm_case
+dependencies[] = "context"
+dependencies[] = "crm_case_print"
+dependencies[] = "ctools"
+features[context][] = "student_crm_case_print_block"
+features[ctools][] = "context:context:3"
