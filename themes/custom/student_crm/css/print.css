@@ -3,7 +3,7 @@ body {
 	padding: 0 !important;
 }
 
-#header, #sidebar-left, #page-tools, #sidebar-left, #sidebar-right, #block-student-crm-activity-student-crm-activity-create {
+#header, #sidebar-left, #messages, #page-tools, #sidebar-left, #sidebar-right, #block-student-crm-activity-student-crm-activity-create {
 	display: none;
 }
 
