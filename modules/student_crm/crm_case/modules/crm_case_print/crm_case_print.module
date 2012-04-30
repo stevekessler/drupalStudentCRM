@@ -85,7 +85,7 @@ function crm_case_print_get_forms($case) {
 		$form = webform_submission_entity_load($form->wsid);
 		$webform = node_load($form->nid);
 		$submission = webform_get_submission($webform->nid, $form->sid);
-		$forms[$webform]['form'] = $webform->title;
+		$forms[$webform->nid]['form'] = $webform->title;
 		$forms[$webform->nid]['submissions'][] = webform_submission_render($webform, $submission, NULL, 'html');
 	}
 	return $forms;
