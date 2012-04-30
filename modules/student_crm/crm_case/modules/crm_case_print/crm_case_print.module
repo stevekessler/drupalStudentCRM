@@ -25,7 +25,7 @@ function crm_case_print_menu() {
  * Access callback for printing a case.
  */
 function crm_case_print_access($case) {
-	return (user_access('print a case') && crm_case_access('view', 2));
+	return (user_access('print a case') && crm_case_access('view', $case));
 }
 /**
  * Title callback for printing a case.
@@ -173,8 +173,8 @@ function crm_case_print_block_info() {
  * Implements hook_block_view().
  */
 function crm_case_print_block_view($delta) {
-	$case = menu_get_object('crm_case', 2);
-  if ($delta == 'crm_case_print_link' && $case && crm_case_access('view', $case)) {
+  $case = menu_get_object('crm_case', 2);
+  if ($delta == 'crm_case_print_link' && $case && crm_case_print_access($case)) {
     return array('content' => l(t('Print case'), 'crm/case/'. $case->cid .'/print'));
   }
 }
