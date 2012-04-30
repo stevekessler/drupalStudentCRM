@@ -14,18 +14,35 @@ function crm_case_print_menu() {
 		'title arguments' => array(2),
 		'page callback' => 'crm_case_print_page',
 		'page arguments' => array(2),
-		'access callback' => 'crm_case_access',
-		'access arguments' => array('view', 2),
+		'access callback' => 'crm_case_print_access',
+		'access arguments' => array(2),
 	);
 
 	return $items;
 }
 
 /**
+ * Access callback for printing a case.
+ */
+function crm_case_print_access($case) {
+	return (user_access('print a case') && crm_case_access('view', 2));
+}
+/**
  * Title callback for printing a case.
  */
 function crm_case_print_title($case) {
 	return $case->name;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function crm_case_print_permission() {
+	return array(
+		'print a case' => array(
+			'title' => t('View a printable version of a case'),
+			'description' => t('User is allowed to print all the information about a case.')),
+		);
 }
 
 /**
