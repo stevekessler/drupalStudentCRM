@@ -1,6 +1,5 @@
 <?php
 
-
 include_once('crm_case_print.features.inc');
 
 /**
@@ -43,6 +42,10 @@ function crm_case_print_permission() {
 			'title' => t('View a printable version of a case'),
 			'description' => t('User is allowed to print all the information about a case.')),
 		);
+}
+
+function crm_case_print_field_widget_properties_alter(&$widget, $context) {
+	dpm($context['entity']);
 }
 
 /**
@@ -125,15 +128,14 @@ function crm_case_print_theme($existing, $type, $theme, $path) {
  */
 function crm_case_print_render_contact($contact) {
 	$contact->content = array();
-	$view_mode = 'print';
-	$langcode = LANGUAGE_NONE;
-	field_attach_prepare_view('crm_core_contact', array($contact->contact_id => $contact), $view_mode);
+	field_attach_prepare_view('crm_core_contact', array($contact->contact_id => $contact), 'full');
 	// Add content added by fields.
-	$contact->content += field_attach_view('crm_core_contact', $contact, $view_mode);
-	module_invoke_all('entity_view', $contact, 'crm_core_contact', $view_mode, $langcode);
+	$contact->content += field_attach_view('crm_core_contact', $contact, 'full');
+	module_invoke_all('entity_view', $contact, 'crm_core_contact', 'full', LANGUAGE_NONE);
 	$build = $contact->content;
 	unset($contact->content);
 	$build += array('#disable_interface' => TRUE);
+	$contact->disable_display = TRUE;
 	return drupal_render($build);
 }
 
