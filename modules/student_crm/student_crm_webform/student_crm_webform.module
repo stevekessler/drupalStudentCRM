@@ -470,6 +470,9 @@ function student_crm_webform_field_presave($entity_type, $entity, $field, $insta
   }
   module_load_include('inc', 'student_crm_webform', 'student_crm_webform.mail');
   $entity_id = ($entity_type == 'crm_case') ? $entity->cid : $entity->contact_id;
+  if(!$entity_id) {
+    return;
+  }
   $old_entity = ($entity_type == 'crm_case') ? crm_case_load($entity_id) : crm_core_contact_load($entity_id);
   $reminders = field_get_items($entity_type, $entity, $instance['settings']['email_field']);
   $old_email = field_get_items($entity_type, $old_entity, $instance['settings']['email_field']);
