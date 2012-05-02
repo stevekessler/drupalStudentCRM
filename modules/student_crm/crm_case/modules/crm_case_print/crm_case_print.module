@@ -45,7 +45,6 @@ function crm_case_print_permission() {
 }
 
 function crm_case_print_field_widget_properties_alter(&$widget, $context) {
-	dpm($context['entity']);
 }
 
 /**
@@ -127,16 +126,11 @@ function crm_case_print_theme($existing, $type, $theme, $path) {
  * Renders a contact for printing.
  */
 function crm_case_print_render_contact($contact) {
-	$contact->content = array();
-	field_attach_prepare_view('crm_core_contact', array($contact->contact_id => $contact), 'full');
-	// Add content added by fields.
-	$contact->content += field_attach_view('crm_core_contact', $contact, 'full');
+	$content = array('#disable_interface' => TRUE);
+	$contact->disable_interface = TRUE;
+	$content += field_attach_view('crm_core_contact', $contact, 'full');
 	module_invoke_all('entity_view', $contact, 'crm_core_contact', 'full', LANGUAGE_NONE);
-	$build = $contact->content;
-	unset($contact->content);
-	$build += array('#disable_interface' => TRUE);
-	$contact->disable_display = TRUE;
-	return drupal_render($build);
+	return drupal_render($content);
 }
 
 /**
