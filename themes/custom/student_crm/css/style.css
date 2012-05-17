@@ -55,7 +55,9 @@ button {
   font-family: inherit;
   margin: 0;
 }
-input[type=button], input[type=submit], button {
+input[type=button],
+input[type=submit],
+button {
   overflow: visible;
 }
 input[disabled],
@@ -98,7 +100,8 @@ a {
 li {
   margin-bottom: 0.5em;
 }
-ul, ol {
+ul,
+ol {
   margin-left: 1em;
   margin-bottom: 0.5em;
 }
@@ -158,7 +161,8 @@ table thead th {
   -moz-text-shadow: 0px 1px 0px #ffffff;
   white-space: nowrap;
 }
-table th, table td {
+table th,
+table td {
   padding: 6px 8px;
 }
 table th a {
@@ -237,7 +241,8 @@ input.search-box {
 #autocomplete {
   background: #ffffff;
 }
-#sidebar-left select, #sidebar-right select {
+#sidebar-left select,
+#sidebar-right select {
   max-width: 190px;
 }
 /** HEADER **/
@@ -272,11 +277,14 @@ input.search-box {
 #header .right .block {
   float: right;
 }
-#header .right .views-exposed-widgets, #header .right .views-exposed-widget {
+#header .right .views-exposed-widgets,
+#header .right .views-exposed-widget {
   margin: 0;
   padding: 0;
 }
-#header #guiders-help, #user-manage, #site-manage {
+#header #guiders-help,
+#user-manage,
+#site-manage {
   display: block;
   margin: 4px 10px 0 0;
   background: #e47531;
@@ -291,11 +299,13 @@ input.search-box {
 #header #guiders-help:hover {
   background: #c85c1a;
 }
-#header #user-manage, #header #site-manage {
+#header #user-manage,
+#header #site-manage {
   background: #369ccb;
   color: #fff;
 }
-#header #user-manage:hover, #header #site-manage:hover {
+#header #user-manage:hover,
+#header #site-manage:hover {
   background: #2a7ea4;
   color: #fff;
 }
@@ -381,18 +391,22 @@ input.form-submit:hover {
   -moz-box-shadow: 0px 0px 5px #75b2ce;
   border-color: #75b2ce;
 }
-input.button-yes, #edit-submit {
+input.button-yes,
+#edit-submit {
   background-position: -2401px 50%;
   padding-left: 25px;
 }
-input.button-yes:active, #edit-submit:active {
+input.button-yes:active,
+#edit-submit:active {
   background-position: -2801px 50%;
 }
-input.button-no, #edit-delete {
+input.button-no,
+#edit-delete {
   background-position: -3201px 50%;
   padding-left: 25px;
 }
-input.button-no:active, #edit-delete:active {
+input.button-no:active,
+#edit-delete:active {
   background-position: -3601px 50%;
 }
 input.form-submit:active {
@@ -404,7 +418,8 @@ input.form-submit:active {
 .multipage-controls-list .multipage-button {
   float: none !important;
 }
-.multipage-controls-list .multipage-button input.form-submit, .multipage-controls-list .multipage-button .multipage-link-previous {
+.multipage-controls-list .multipage-button input.form-submit,
+.multipage-controls-list .multipage-button .multipage-link-previous {
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   height: 29px;
 }
@@ -469,7 +484,8 @@ input.form-submit:active {
   background-position: 2px -42px;
 }
 /** MAIN NAVIGATION SIDEBAR **/
-#sidebar-left li, #sidebar-left ul {
+#sidebar-left li,
+#sidebar-left ul {
   list-style-type: none;
   list-style-image: none;
 }
@@ -537,7 +553,8 @@ input.form-submit:active {
   font-size: 1.1em;
   font-weight: bold;
 }
-.sidebar.right ul, .sidebar.right li {
+.sidebar.right ul,
+.sidebar.right li {
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -545,7 +562,8 @@ input.form-submit:active {
 .sidebar.right li {
   border-bottom: 1px solid #87c4e0;
 }
-.sidebar.right .block-title, .sidebar.right .views-label {
+.sidebar.right .block-title,
+.sidebar.right .views-label {
   color: #999999;
 }
 .sidebar.right label {
@@ -561,12 +579,14 @@ input.form-submit:active {
   max-width: 180px;
 }
 /** VIEWS **/
-.view .view-empty, .empty {
+.view .view-empty,
+.empty {
   font-size: 1.7em;
   color: #999999;
   text-align: center;
 }
-#sidebar-right .view .view-empty, .empty {
+#sidebar-right .view .view-empty,
+.empty {
   font-size: 1em;
   font-style: italic;
 }
@@ -606,7 +626,8 @@ body .view-content::after {
   float: left;
   margin: 0 10px 0 0;
 }
-.tags ul, .tags li {
+.tags ul,
+.tags li {
   list-style-type: none;
   margin: 0px;
   padding: 0px;
@@ -630,7 +651,8 @@ ul.tabs {
 ul.tabs {
   border-color: #dddddd;
 }
-ul.tabs li a, ul.tabs li a.active {
+ul.tabs li a,
+ul.tabs li a.active {
   color: #000000;
   border-radius: 3px 3px 0px 0px;
   -moz-border-radius: 3px 3px 0px 0px;
@@ -690,7 +712,8 @@ ul.pager li.pager-current {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
 }
-ul.pager li.pager-current, ul.pager a {
+ul.pager li.pager-current,
+ul.pager a {
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
@@ -698,7 +721,8 @@ ul.pager li.pager-current, ul.pager a {
 ul.pager a:hover {
   background: #e6f1f6;
 }
-ul.pager .pager-next a, ul.pager .pager-last a {
+ul.pager .pager-next a,
+ul.pager .pager-last a {
   width: 70px;
 }
 /** ACCORDIONS **/
@@ -873,7 +897,8 @@ h3.ui-accordion-header.ui-state-active {
   font-size: 90%;
   margin: 0px 0px 10px -10px;
 }
-.activity .submitted, .activity .submitted a {
+.activity .submitted,
+.activity .submitted a {
   color: #737373;
 }
 .activity .submitted.read-more {

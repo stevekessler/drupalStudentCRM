@@ -62,6 +62,8 @@ function crm_case_views_data_alter(&$data) {
       'click sortable' => TRUE,
     ),
     'sort' => array(
+      'title' => t('Update date'),
+      'help' => t('Sort by the case update date'),
       'handler' => 'views_handler_sort_date',
     ),
   );
