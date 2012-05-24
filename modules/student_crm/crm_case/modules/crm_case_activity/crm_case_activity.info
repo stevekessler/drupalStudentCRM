@@ -1,0 +1,6 @@
+name=CRM Case Activity Stream
+description=Integrates heartbeat with cases
+core=7.x
+
+package = "Student CRM"
+php = "5.2.4"

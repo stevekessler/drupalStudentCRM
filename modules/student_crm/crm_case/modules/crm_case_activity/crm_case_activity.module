@@ -1,0 +1,90 @@
+<?php
+
+function crm_case_activity_block_info() {
+	return array('activity_stream' => array('info' => t('Case activity stream')));
+}
+
+function crm_case_activity_block_view($delta) {
+	if($delta == 'activity_stream') {
+		return array('content' => _crm_case_activity_stream(),
+					 'subject' => 'Recent activity');
+	}
+}
+
+function _crm_case_activity_stream() {
+	$case_condition = '';
+	$activity_condition = '';
+	if (!user_access('administer crm_cases')) {
+      global $user;
+      $permissions = user_role_permissions($user->roles);
+      $types = array();
+      foreach ($permissions as $rid => $perms) {
+        foreach ($perms as $name => $access) {
+          if ($access && preg_match('/view any [^ ]+ crm_case/', $name)) {
+            $types[] = preg_replace('/view any ([^ ]+) crm_case/', '\\1', $name);
+          }
+        }
+      }
+      $case_condition = 'WHERE type IN ("' . implode('","', $types) .'")';
+      $activity_condition = 'WHERE c.type IN ("'. implode('","', $types) .'")';
+  }
+	$activities = db_query('(select cid as entity_id,
+								name as entity_name,
+								:case as entity_type,
+								created as created,
+								changed as changed
+								FROM
+								crm_case 
+								'. $caes_condition .'
+								order by created DESC)
+								UNION
+								(select a.activity_id as entity_id, 
+									a.title as entity_name,
+									:activity as entity_type,
+									a.created as created,
+									a.changed as changed
+									FROM 
+									crm_core_activity a LEFT JOIN field_data_endpoints e
+									ON e.endpoints_entity_type = :crm_core_activity
+									AND e.endpoints_entity_id = a.activity_id
+									AND e.bundle = :crm_core_activity
+									LEFT JOIN field_data_endpoints e2
+									ON e2.entity_id = e.entity_id
+									AND e2.endpoints_entity_type = :crm_case
+									LEFT JOIN crm_case c
+									ON c.cid = e2.endpoints_entity_id
+									'. $activity_condition .'
+									order by created DESC)
+								order by created DESC LIMIT 10',
+								array(':case' => 'case',
+											':activity' => 'activity',
+											':crm_core_activity' => 'crm_core_activity',
+											':crm_case' => 'crm_case'
+											));
+	foreach($activities as $row) {
+		if($row->entity_type == 'activity') {
+			$activity = crm_core_activity_load($row->entity_id);
+			$items[] = array('type' => 'activity',
+											 'item' => $activity);
+		}
+		elseif($row->entity_type == 'case') {
+			$case = crm_case_load($row->entity_id);
+			$items[] = array('type' => 'case',
+											 'item' => $case);
+		}
+	}
+	return theme('crm_case_activity_stream', array('items' => $items));
+}
+
+function crm_case_activity_theme() {
+	return array(
+			'crm_case_activity_stream' => array(
+				'variables' => array('items' => array()),
+				'template' => 'crm_case_activity_stream',
+			),
+		);
+}
+
+function theme_crm_case_activity_stream() {
+
+}
