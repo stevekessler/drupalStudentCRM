@@ -718,8 +718,7 @@ class CRMCaseUIController extends EntityDefaultUIController {
         'title' => 'Add ' . $type->label,
         'page callback' => 'crm_case_form_wrapper',
         'page arguments' => array(crm_case_create(array('type' => $type->type))),
-        'access callback' => 'crm_case_access',
-        'access arguments' => array('edit', 'edit ' . $type->type),
+        'access arguments' => array('edit any '. $type->type .' crm_case'),
         'file' => 'crm_case.admin.inc',
         'file path' => drupal_get_path('module', $this->entityInfo['module'])
       );
