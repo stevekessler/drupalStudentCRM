@@ -1,0 +1,68 @@
+<?php
+/**
+ * @file
+ * Code for the Student CRM Activity mail log feature.
+ */
+
+include_once('student_crm_activity_mail_log.features.inc');
+
+/** 
+ * Implements hook_mail_alter().
+ */
+function student_crm_activity_mail_log_mail_alter(&$message) {
+  if($message['params']['do_not_log']) {
+    return;
+  }
+  $contact_id = db_select('field_data_field_contact_email', 'e')
+             ->condition('e.entity_type', 'crm_core_contact')
+             ->condition('e.field_contact_email_email', $message['to'])
+             ->fields('e', array('entity_id'))
+             ->execute()
+             ->fetchField();
+  if(!$contact_id) {
+    return;
+  }
+  $contact = crm_core_contact_load($contact_id);
+  $crm_activity = entity_create('crm_core_activity', array('type' => 'email_log',
+                                                 'field_activity_participants' => array(
+                                                  LANGUAGE_NONE => array(array(
+                                                    'target_id' => $contact->contact_id,
+                                                    'target_type' => 'crm_core_contact',
+                                                  ),
+                                                  )),
+                                                  'field_activity_email_sender' => array(
+                                                    LANGUAGE_NONE => array(
+                                                      array('email' => $message['from']),
+                                                    ),
+                                                  ),
+                                                  'field_activity_email_subject' => array(
+                                                    LANGUAGE_NONE => array(
+                                                      array('value' => $message['subject']),
+                                                    ),
+                                                  ),
+                                                  'field_activity_email_body' => array(
+                                                    LANGUAGE_NONE => array(
+                                                      array('value' => $message['body'],
+                                                            'format' => 'full_html')
+                                                    ),
+                                                  ),
+                                                 )
+  );
+  $crm_activity->created = time();
+  $crm_activity->changed = time();
+  $crm_activity->uid = $user->uid;
+  $activity_id = crm_core_activity_save($crm_activity);
+  $relation = relation_create('crm_core_activity', array(
+                array('entity_type' => 'crm_core_activity',
+                       'entity_bundle' => $crm_activity->type,
+                       'entity_id' => $crm_activity->activity_id,
+                       'r_index' => 0,
+                       ),
+                  array('entity_type' => 'crm_core_contact',
+                         'entity_bundle' => $contact->type, 
+                         'entity_id' => $contact->contact_id,
+                         'r_index' => 1,
+                         ))
+             );
+  relation_save($relation);
+}

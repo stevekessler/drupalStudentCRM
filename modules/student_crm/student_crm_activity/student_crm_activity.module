@@ -205,7 +205,8 @@ function student_crm_activity_create_submit($form, &$form_state) {
     $contact = $form_state['values']['entity']['crm_contact'];
     $email = field_get_items('crm_core_contact', $contact, 'field_contact_email');
     $params = array('activity' => $crm_activity,
-                    'subject' => $subject);
+                    'subject' => $subject,
+                    'do_not_log' => TRUE,);
     drupal_mail('student_crm_activity', 'activity', $email[0]['email'], $contact->language, $params);
   }
 }
