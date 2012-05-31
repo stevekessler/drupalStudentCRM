@@ -89,6 +89,67 @@ function student_crm_activity_mail_log_field_default_fields() {
     ),
   );
 
+  // Exported field: 'crm_core_activity-email_log-field_activity_email_body'
+  $fields['crm_core_activity-email_log-field_activity_email_body'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_activity_email_body',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'email_log',
+      'crm_case_contact_editable' => 0,
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 5,
+        ),
+      ),
+      'entity_type' => 'crm_core_activity',
+      'field_name' => 'field_activity_email_body',
+      'label' => 'Email body',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '1',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '5',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '5',
+      ),
+    ),
+  );
+
   // Exported field: 'crm_core_activity-email_log-field_activity_email_sender'
   $fields['crm_core_activity-email_log-field_activity_email_sender'] = array(
     'field_config' => array(
@@ -332,6 +393,7 @@ function student_crm_activity_mail_log_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Date');
+  t('Email body');
   t('Email sender');
   t('Email subject');
   t('Notes');
