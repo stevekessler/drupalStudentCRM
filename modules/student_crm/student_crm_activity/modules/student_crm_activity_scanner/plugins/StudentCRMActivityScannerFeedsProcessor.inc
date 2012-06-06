@@ -37,7 +37,7 @@ class StudentCRMActivityScannerFeedsProcessor extends FeedsProcessor {
   
   protected function newEntity(FeedsSource $source) {
   
-    return null;
+    return NULL;
   }
   
   private function getTargetContact($email) {
@@ -69,7 +69,7 @@ class StudentCRMActivityScannerFeedsProcessor extends FeedsProcessor {
                   ->fields('u', array('uid'))
                   ->execute()
                   ->fetchField();
-          if($uid) {
+          if ($uid) {
             $author = user_load($uid);
           }
         }

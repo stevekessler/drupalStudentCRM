@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ * Access callback to tell if a user can edit their own case.
+ */
 class crm_case_handler_contact_access extends views_handler_filter_boolean_operator {
   function query() {
     $types = array();

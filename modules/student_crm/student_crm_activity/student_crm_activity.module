@@ -44,7 +44,7 @@ function student_crm_activity_permission() {
 function student_crm_activity_theme($existing, $type, $theme, $path) {
   return array(
     'crm_core_activity' => array(
-      'variables' => array('element' => null),
+      'variables' => array('element' => NULL),
       'template' => 'crm_core_activity'
     ),
   );
@@ -53,7 +53,7 @@ function student_crm_activity_theme($existing, $type, $theme, $path) {
  * Create activity form.
  */
 function student_crm_activity_create($form, &$form_state) {
-  drupal_add_css(drupal_get_path('module', 'student_crm_activity') .'/css/student_crm_activity.css');
+  drupal_add_css(drupal_get_path('module', 'student_crm_activity') . '/css/student_crm_activity.css');
   
   $activity_type = (isset($form_state['values']['activity_type'])) 
                    ? $form_state['values']['activity_type'] 
@@ -93,12 +93,12 @@ function student_crm_activity_create($form, &$form_state) {
   $types = crm_core_activity_types();
   $options = array();
   foreach ($types as $type) {
-    $restrict = variable_get('student_crm_activity_restrict_'. $type->type, FALSE);
+    $restrict = variable_get('student_crm_activity_restrict_' . $type->type, FALSE);
     if ((user_access('administer crm activities') 
        || user_access("create crm_core_activity entities of bundle $type->type")) && (
         !$restrict || 
-        $restrict[$entity['type'] .':'. $entity['bundle']] || 
-        $restrict[$entity['type'] .':*'])
+        $restrict[$entity['type'] . ':' . $entity['bundle']] || 
+        $restrict[$entity['type'] . ':*'])
         ) {
       $options[$type->type] = $type->label;
     }
@@ -106,7 +106,7 @@ function student_crm_activity_create($form, &$form_state) {
   if (!count($options)) {
     $form = array();
     $form['message'] = array(
-      '#markup' => '<h3 class="empty">'. t('You cannot create a note on this page.') .'</h3>',
+      '#markup' => '<h3 class="empty">' . t('You cannot create a note on this page.') . '</h3>',
     );
     return $form;
   }
@@ -194,7 +194,7 @@ function student_crm_activity_create_submit($form, &$form_state) {
                          ))
              );
   relation_save($relation);
-  if($form_state['values']['email_contact']) {
+  if ($form_state['values']['email_contact']) {
     if ($form_state['values']['entity']['type'] == 'crm_core_contact') {
       $subject = t('Your record');
     }
@@ -206,7 +206,8 @@ function student_crm_activity_create_submit($form, &$form_state) {
     $email = field_get_items('crm_core_contact', $contact, 'field_contact_email');
     $params = array('activity' => $crm_activity,
                     'subject' => $subject,
-                    'do_not_log' => TRUE,);
+                    'do_not_log' => TRUE
+                    );
     drupal_mail('student_crm_activity', 'activity', $email[0]['email'], $contact->language, $params);
   }
 }
@@ -222,7 +223,7 @@ function student_crm_activity_crm_case_delete($case) {
                             ->condition('endpoints_entity_id', $case->cid)
                             ->fields('e', array('entity_id'))
                             ->execute()
-                            ->fetchAllKeyed(0,0);
+                            ->fetchAllKeyed(0, 0);
   student_crm_activity_delete_from_relation($activities_relations);
 }
 
@@ -237,7 +238,7 @@ function student_crm_activity_crm_core_contact_delete($contact) {
                             ->condition('endpoints_entity_id', $contact->contact_id)
                             ->fields('e', array('entity_id'))
                             ->execute()
-                            ->fetchAllKeyed(0,0);
+                            ->fetchAllKeyed(0, 0);
   student_crm_activity_delete_from_relation($activities_relations);
 }
 
@@ -245,7 +246,7 @@ function student_crm_activity_crm_core_contact_delete($contact) {
  * Helper function to delete all activities attached to a list of relation IDs.
  */
 function student_crm_activity_delete_from_relation($activities_relations) {
-  foreach($activities_relations as $rid) {
+  foreach ($activities_relations as $rid) {
     $activity_id = db_select('field_data_endpoints', 'e')
                          ->condition('entity_type', 'relation')
                          ->condition('bundle', 'crm_core_activity')
@@ -264,7 +265,7 @@ function student_crm_activity_delete_from_relation($activities_relations) {
  * Implements hook_mail().
  */
 function student_crm_activity_mail($key, &$message, $params) {
-  if($key == 'activity') {
+  if ($key == 'activity') {
     $message['subject'] = t('A note has been left on @record', array('@record' => $params['subject']));
     
     module_load_include('inc', 'crm_core_activity_ui', 'crm_core_activity_ui.pages');
@@ -303,7 +304,7 @@ function student_crm_activity_form_crm_activity_type_form_alter(&$form, $form_st
     '#type' => 'select',
     '#title' => 'Restrict to only entity types',
     '#options' => $bundles,
-    '#default_value' => variable_get('student_crm_activity_restrict_'. $form['type']['#default_value'], array()),
+    '#default_value' => variable_get('student_crm_activity_restrict_' . $form['type']['#default_value'], array()),
     '#multiple' => TRUE,
   );
   
@@ -321,7 +322,7 @@ function student_crm_activity_form_crm_activity_type_form_alter_submit($form, $f
       break;
     }
   }
-  variable_set('student_crm_activity_restrict_'. $form['type']['#default_value'], $save);
+  variable_set('student_crm_activity_restrict_' . $form['type']['#default_value'], $save);
 }
 
 /**

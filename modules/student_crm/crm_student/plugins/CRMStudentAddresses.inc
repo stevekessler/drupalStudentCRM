@@ -27,7 +27,7 @@ class CRMStudentAddresses extends FeedsProcessor {
   
   protected function newEntity(FeedsSource $source) {
   
-    return null;
+    return NULL;
   }
   
   private function getTargetEntity($id, $type) {
@@ -67,16 +67,16 @@ class CRMStudentAddresses extends FeedsProcessor {
         try {
           $entity = crm_core_contact_load($address['contact_entity']);
           $language = ($entity->language) ? $entity->language : LANGUAGE_NONE;
-          foreach($entity->field_contact_address[$language] as $k => $existing_address) {
+          foreach ($entity->field_contact_address[$language] as $k => $existing_address) {
             unset($existing_address['country']);
-            $delete = true;
-            foreach($existing_address as $type => $value) {
-              if($value) {
-                $delete = false;
+            $delete = TRUE;
+            foreach ($existing_address as $type => $value) {
+              if ($value) {
+                $delete = FALSE;
                 continue;
               }
             }
-            if($delete) {
+            if ($delete) {
               unset($entity->field_contact_address[$language][$k]);
             }
           }
@@ -368,14 +368,14 @@ class CRMStudentAddresses extends FeedsProcessor {
     if ($relation_id = parent::existingEntityId($source, $result)) {
       return $relation_id;
     }
-    foreach($this->uniqueTargets($source, $result) as $target => $value) {
+    foreach ($this->uniqueTargets($source, $result) as $target => $value) {
       $address_id = db_select('feeds_item', 'i')
              ->condition('i.entity_type', 'crm_core_contact_address')
              ->condition('i.guid', $value)
              ->fields('i', array('entity_id'))
              ->execute()
              ->fetchField();
-      if($address_id) {
+      if ($address_id) {
         return $address_id;
       }
     }

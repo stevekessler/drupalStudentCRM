@@ -46,7 +46,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
   
   protected function newEntity(FeedsSource $source) {
   
-    return null;
+    return NULL;
   }
   
   private function getTargetEntity($id, $type) {
@@ -77,7 +77,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
     while ($item = $parser_result->shiftItem()) {
       $item['author_name'] = $item[$author_name_key];
       $item['name'] = $item[$name_key];
-      if(!$item['name']) {
+      if (!$item['name']) {
         $item['name'] = $name->label;
       }
       $item['student_entity'] = $this->getTargetEntity($item[$student_id_key], 'crm_core_contact');
@@ -206,7 +206,7 @@ class CRMCaseFeedsProcessor extends FeedsProcessor {
   public function entitySave($entity) {
     $contact = ($entity->crm_core_contact)
                  ? crm_core_contact_load($entity->crm_core_contact)
-                 : false;
+                 : FALSE;
     crm_case_save($entity);
   }
 

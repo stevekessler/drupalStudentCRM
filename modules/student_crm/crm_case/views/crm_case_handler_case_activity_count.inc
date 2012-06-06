@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @file
  * This field handler shows the number of activities on a case
  */
 class crm_case_handler_case_activity_count extends crm_case_handler_link_field {

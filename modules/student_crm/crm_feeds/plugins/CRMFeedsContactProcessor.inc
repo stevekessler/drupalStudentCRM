@@ -273,14 +273,14 @@ class CRMFeedsContactProcessor extends FeedsProcessor {
    */
   protected function existingEntityId(FeedsSource $source, FeedsParserResult $result) {
     if ($this->config['guid_global']) {
-      foreach($this->uniqueTargets($source, $result) as $target => $value) {
+      foreach ($this->uniqueTargets($source, $result) as $target => $value) {
         $contact_id = db_select('feeds_item', 'i')
                ->condition('i.entity_type', 'crm_core_contact')
                ->condition('i.guid', $value)
                ->fields('i', array('entity_id'))
                ->execute()
                ->fetchField();
-        if($contact_id) {
+        if ($contact_id) {
           return $contact_id;
         }
       }

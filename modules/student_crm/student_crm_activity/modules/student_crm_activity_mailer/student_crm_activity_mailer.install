@@ -1,10 +1,18 @@
 <?php 
 
+/**
+ * @file
+ * Install for Student CRM Activity Mailer. Here we create a new activity type to track direct-email conversations.
+ */
+
+/**
+ * Implements hook_install().
+ */
 function student_crm_activity_mailer_install() {
   $email = crm_core_activity_type_new();
   $email->type = 'email_activity';
-  $email->label = t('Email');
-  $email->description = t('An activity posted via email.');
+  $email->label = st('Email');
+  $email->description = st('An activity posted via email.');
   $email->is_new = TRUE;
   crm_core_activity_type_save($email);
 }

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ * Views access plugin to make sure that a user can view an activity attached to a case or contact.
+ */
 class views_handler_filter_student_crm_activity_access extends views_handler_filter_boolean_operator {
   function query() {
     if (!user_access('administer crm activities') && !user_access('view any crm_core_activity entity')) {

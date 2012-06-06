@@ -1,7 +1,9 @@
 <?php
 
-//module_load_include('test', 'crm_student', 'tests/crm_student_base_test');
-
+/**
+ * @file
+ * Base test class for Student CRM.
+ */
 class StudentCRMBaseTests extends DrupalWebTestCase {
   
   var $profile = 'student_crm';

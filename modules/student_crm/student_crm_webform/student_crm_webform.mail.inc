@@ -38,7 +38,7 @@ function student_crm_webform_send_email($entity_type, $entity, $field, $emails =
     $tokens['email'] = $email;
     $message['body'] = token_replace($body, $tokens);
     $message['subject'] = token_replace(check_plain($field['settings']['email_subject']), $tokens);
-    if(!$insert) {
+    if (!$insert) {
       $message['subject'] = t('Reminder: @subject', array('@subject' => $message['subject']));
     }
     drupal_mail('student_crm_webform', 'form_prompt', $email, language_default(), $message);
@@ -128,7 +128,7 @@ function student_crm_webform_send_email_form() {
   $form_fields = array();
   $field_settings = array();
   if (!$fields) {
-    return null;
+    return NULL;
   }
   foreach ($fields as $field_name => $field) {
     if ($field['settings']['webform']) {
@@ -228,7 +228,7 @@ function _student_crm_webform_get_field_email_addresses($field, $entity, $entity
  * Page to manage reminders for a case.
  */
 function student_crm_webform_reminder_manage($case_id) {
-  drupal_add_js(drupal_get_path('module', 'student_crm_webform') .'/js/student_crm_webform.fancybox.js');
+  drupal_add_js(drupal_get_path('module', 'student_crm_webform') . '/js/student_crm_webform.fancybox.js');
   $case = crm_case_load($case_id);
   $rows = array();
   $reminders = db_select('student_crm_webform', 'w')
@@ -239,7 +239,7 @@ function student_crm_webform_reminder_manage($case_id) {
                 ->fetchAll();
   $fields = field_info_instances();
   $header = array(t('Email address'), t('Field'), t('Reminders'), t('Last sent'), t('Delete'), t('View link'));
-  foreach($reminders as $reminder) {
+  foreach ($reminders as $reminder) {
     $rows[] = array($reminder->email,
                     $fields['crm_case'][$case->type][$reminder->entity_field]['label'],
                     $reminder->reminders_sent,
@@ -261,7 +261,7 @@ function student_crm_webform_reminder_manage_delete($form, &$form_state, $case_i
   $field = $fields['crm_case'][$case->type][$field]['label'];
   $form = confirm_form($form,
     t('Are you sure you want to delete the reminder for %field to !email?', array('%field' => $field, '!email' => $email)),
-    'crm/case/'. $case->cid .'/reminders',
+    'crm/case/' . $case->cid . '/reminders',
     '<p>' . t('This action cannot be undone.') . '</p>',
     t('Delete'),
     t('Cancel'),
@@ -279,5 +279,5 @@ function student_crm_webform_reminder_manage_delete_submit($form, &$form_state) 
         ->condition('email', $form_state['email'])
         ->execute();
   drupal_set_message(t('The email reminder has been deleted'));
-  drupal_goto('crm/case/'. $form_state['case_id']);
+  drupal_goto('crm/case/' . $form_state['case_id']);
 }

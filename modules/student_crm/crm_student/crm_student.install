@@ -1,13 +1,18 @@
 <?php
 
 /**
+ * @file Install process for Student CRM. Here we create new contact types as well as set some variables without strongarm's help.
+ *
+ */
+ 
+/**
  * Implements hook_install().
  */
 function crm_student_install() {
   $student = crm_core_contact_type_new();
   $student->type = 'student';
-  $student->name = t('Student');
-  $student->description = t('A student contact record.');
+  $student->name = st('Student');
+  $student->description = st('A student contact record.');
   $student->locked = 1;
   $student->is_new = TRUE;
   crm_core_contact_type_save($student);

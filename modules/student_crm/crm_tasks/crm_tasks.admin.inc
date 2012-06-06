@@ -1,12 +1,20 @@
 <?php
 
+/**
+ * @file
+ * Admin form for CRM tasks.
+ */
+
+/**
+ * Administrative form for CRM Tasks
+ */
 function crm_tasks_admin_form() {
   $form = array();
   
   $options = array();
   
   for ($i = 1; $i < 25; $i++) {
-    $options[$i] = format_date(strtotime($i .':00'), 'custom', 'g:i a');
+    $options[$i] = format_date(strtotime($i . ':00'), 'custom', 'g:i a');
   }
   
   $form['crm_tasks_enable_mail'] = array(

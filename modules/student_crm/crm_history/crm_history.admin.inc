@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * @file
+ * Admin form for CRM history
+ */
+/**
  * Form callback for the admin settings form.
  */
 function crm_history_admin_form() {

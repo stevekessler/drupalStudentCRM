@@ -78,7 +78,7 @@ function crm_tasks_mark_task($task, $status) {
   $language = ($relation->language) ? $relation->language : LANGUAGE_NONE;
   $relation->field_task_complete[$language][0]['value'] = $mark;
   relation_save($relation);
-  drupal_json_output(array('success' => true, 'mark' => $mark, 'relation' => $relation->rid));
+  drupal_json_output(array('success' => TRUE, 'mark' => $mark, 'relation' => $relation->rid));
 }
 
 /**
@@ -94,7 +94,7 @@ function crm_tasks_block_info() {
  */
 function crm_tasks_block_view($delta) {
   if ($delta == 'crm_tasks_new_task' && user_access('maintain own task list')) {
-    $modal_link = l('Add to tasks', null, array('fragment' => 'edit-task-modal', 'external' => TRUE, 'attributes' => array('id' => 'show-add-tasks')));
+    $modal_link = l('Add to tasks', NULL, array('fragment' => 'edit-task-modal', 'external' => TRUE, 'attributes' => array('id' => 'show-add-tasks')));
     return array('content' => $modal_link . drupal_render(drupal_get_form('crm_tasks_create_task_form')));
   }
 }
@@ -103,8 +103,8 @@ function crm_tasks_block_view($delta) {
  * Create task form
  */
 function crm_tasks_create_task_form() {
-  drupal_add_js(drupal_get_path('module', 'crm_tasks') .'/js/crm_tasks.js');
-  drupal_add_css(drupal_get_path('module', 'crm_tasks') .'/css/crm_tasks.css');
+  drupal_add_js(drupal_get_path('module', 'crm_tasks') . '/js/crm_tasks.js');
+  drupal_add_css(drupal_get_path('module', 'crm_tasks') . '/css/crm_tasks.css');
   $form = array();
   
   $form['#attributes']['id'] = 'edit-task-modal';
@@ -227,7 +227,7 @@ function crm_tasks_permission() {
  */
 function crm_tasks_cron() {
   $task_cron = variable_get('crm_tasks_cron_date', date('Y-m-d', 0));
-  if(!variable_get('crm_tasks_enable_mail', 0) || strtotime($task_cron) >= strtotime(date('Y-m-d')) || date('G') < variable_get('crm_tasks_cron_time', 8)) {
+  if (!variable_get('crm_tasks_enable_mail', 0) || strtotime($task_cron) >= strtotime(date('Y-m-d')) || date('G') < variable_get('crm_tasks_cron_time', 8)) {
     return;
   }
   $query = db_select('field_data_field_task_due', 'd')
@@ -249,7 +249,7 @@ function crm_tasks_cron() {
   $results = $query->execute()
              ->fetchAll();
   $task_notifications = array();
-  foreach($results as $task) {
+  foreach ($results as $task) {
     $task_notifications[$task->uid][$task->rid] = $task;
     $task_notifications[$task->uid]['mail'] = $task->mail;
   }
@@ -261,7 +261,7 @@ function crm_tasks_cron() {
  * Sends task notifications to users.
  */
 function crm_tasks_send_notifications($task_notifications) {
-  foreach($task_notifications as $uid => $tasks) {
+  foreach ($task_notifications as $uid => $tasks) {
     $mail = $tasks['mail'];
     unset($tasks['mail']);
     drupal_mail('crm_tasks', 'task_notifications', $mail, language_default(), array('tasks' => $tasks));
@@ -272,15 +272,15 @@ function crm_tasks_send_notifications($task_notifications) {
  * Implmenets hook_mail().
  */
 function crm_tasks_mail($key, &$message, $params) {
-  if($key == 'task_notifications') {
+  if ($key == 'task_notifications') {
     $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
     $message['headers']['MIME-Version'] = '1.0';
     $message['headers']['Content-Transfer-Encoding'] = '8Bit';
     $message['subject'] = t('@site_name: Today\'s tasks', array('@site_name' => variable_get('site_name', '')));
     $message['body'][] = t('The following tasks are marked as due today.');
     $items = array();
-    foreach($params['tasks'] as $task) {
-      if($task->endpoints_entity_type == 'crm_core_contact') {
+    foreach ($params['tasks'] as $task) {
+      if ($task->endpoints_entity_type == 'crm_core_contact') {
         $target_name = db_select('field_data_contact_name', 'n')
                          ->fields('n')
                          ->condition('n.entity_type', 'crm_core_contact')
@@ -288,12 +288,12 @@ function crm_tasks_mail($key, &$message, $params) {
                          ->execute()
                          ->fetchAll();
         $name = array();
-        foreach((array)$target_name[0] as $k => $n) {
+        foreach ((array)$target_name[0] as $k => $n) {
           $name[str_replace('contact_name_', '', $k)] = $n;
         }
         $target_name = name_format($name, 'g+if');
       }
-      if($task->endpoints_entity_type == 'crm_case') {
+      if ($task->endpoints_entity_type == 'crm_case') {
         $target_name = db_select('crm_case', 'c')
                          ->fields('c', array('name'))
                          ->condition('c.cid', $task->endpoints_entity_id)

@@ -1,10 +1,17 @@
 <?php
 
+/**
+ * @file
+ * Installer for Student CRM Activity - we create a new, generic activity type called a "note."
+ */
+/**
+ * Implements hook_install().
+ */
 function student_crm_activity_install() {
   $note = entity_create('crm_core_activity_type', array(
     'type' => 'note',
-    'label' => t('Note'),
-    'description' => t('A simple actiity type that stores a note'), 
+    'label' => st('Note'),
+    'description' => st('A simple actiity type that stores a note'), 
   ));
   crm_core_activity_type_save($note);
   

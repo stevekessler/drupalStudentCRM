@@ -51,7 +51,7 @@ class CRMFeedsHoldsProcessor extends FeedsProcessor {
   
   protected function newEntity(FeedsSource $source) {
   
-    return null;
+    return NULL;
   }
   
   private function getTargetEntity($id, $type) {

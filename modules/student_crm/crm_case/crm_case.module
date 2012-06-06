@@ -111,7 +111,7 @@ function crm_case_block_info() {
  */
 function crm_case_block_view($delta) {
    module_load_include('inc', 'crm_case', 'crm_case.blocks');
-   $function_name = 'crm_case_blocks_'. $delta;
+   $function_name = 'crm_case_blocks_' . $delta;
    if (function_exists($function_name)) {
      return $function_name();
    }
@@ -229,10 +229,10 @@ function crm_case_access($op, $crm_case = NULL, $account = NULL) {
     $contact = crm_case_get_contact($crm_case);
     $account = user_load($account->uid);
     $contact_records = field_get_items('user', $account, 'field_user_contact');
-    if(!is_array($contact_records)) {
+    if (!is_array($contact_records)) {
       return FALSE;
     }
-    foreach($contact_records as $contact_record) {
+    foreach ($contact_records as $contact_record) {
       if ($contact_record['target_id'] == $contact->contact_id) {
         return TRUE;
       }
@@ -374,7 +374,7 @@ function crm_case_type_delete(CRMCaseType $type) {
 /**
  * URI callback for crm_cases
  */
-function crm_case_uri(CRMCase $crm_case){
+function crm_case_uri(CRMCase $crm_case) {
   return array(
     'path' => 'crm/case/' . $crm_case->cid,
   );
@@ -384,7 +384,7 @@ function crm_case_uri(CRMCase $crm_case){
 /**
  * Menu title callback for showing individual entities
  */
-function crm_case_page_title(CRMCase $crm_case){
+function crm_case_page_title(CRMCase $crm_case) {
   return $crm_case->name;
 }
 
@@ -718,7 +718,7 @@ class CRMCaseUIController extends EntityDefaultUIController {
         'title' => 'Add ' . $type->label,
         'page callback' => 'crm_case_form_wrapper',
         'page arguments' => array(crm_case_create(array('type' => $type->type))),
-        'access arguments' => array('edit any '. $type->type .' crm_case'),
+        'access arguments' => array('edit any ' . $type->type . ' crm_case'),
         'file' => 'crm_case.admin.inc',
         'file path' => drupal_get_path('module', $this->entityInfo['module'])
       );
@@ -774,7 +774,7 @@ class CRMCaseUIController extends EntityDefaultUIController {
       'type' => MENU_NORMAL_ITEM,
     );
     
-    $items['crm/case/' . $wildcard .'/view'] = array(
+    $items['crm/case/' . $wildcard . '/view'] = array(
     'title' => 'View',
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'weight' => 0,
@@ -852,6 +852,9 @@ function crm_case_mail($key, &$message, $params) {
     case 'action_send_email': 
       $message['subject'] = $params['subject'];
       $message['body'][] = check_markup($params['message']['value'], $params['message']['format']);
+      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+      $message['headers']['MIME-Version'] = '1.0';
+      $message['headers']['Content-Transfer-Encoding'] = '8Bit';
       break;
     case 'crm_case_create':
       $message['subject'] = $params['subject'];
@@ -865,14 +868,14 @@ function crm_case_mail($key, &$message, $params) {
  */
 function crm_case_crm_student_search_destination($query) {
   $query = explode(' ', $query);
-  if(strtolower($query[0]) == t('case') && $query[1]) {
+  if (strtolower($query[0]) == t('case') && $query[1]) {
     $cid = db_select('crm_case', 'c')
              ->condition('cid', intval($query[1]))
              ->fields('c', array('cid'))
              ->execute()
              ->fetchField();
-    if($cid) {
-      return array('url' => 'crm/case/'. $cid);
+    if ($cid) {
+      return array('url' => 'crm/case/' . $cid);
     }
     return array('url' => 'crm/cases/all',
                  'query' => array('cid' => intval($query[1])));
@@ -1040,7 +1043,7 @@ function crm_case_views_bulk_operations_confirmation($variables) {
   $vbo = $variables['vbo'];
   $operations = $vbo->get_selected_operations();
   
-  if($vbo->get_entity_type() != 'crm_case' || !isset($operations['crm_case_send_email_action'])) {
+  if ($vbo->get_entity_type() != 'crm_case' || !isset($operations['crm_case_send_email_action'])) {
     return theme_views_bulk_operations_confirmation($variables);
   }
   $entity_type = $vbo->get_entity_type();
@@ -1054,7 +1057,7 @@ function crm_case_views_bulk_operations_confirmation($variables) {
     $entities = _views_bulk_operations_entity_load($entity_type, $entity_ids, $vbo->revision);
     foreach ($entities as $entity) {
       $contact = crm_case_get_contact($entity);
-      if($contact) {
+      if ($contact) {
         $email = field_get_items('crm_core_contact', $contact, 'field_contact_email');
         $items[] = check_plain($email[0]['email']);
       }
@@ -1065,7 +1068,7 @@ function crm_case_views_bulk_operations_confirmation($variables) {
     $entities = _views_bulk_operations_entity_load($entity_type, array_values($rows), $vbo->revision);
     foreach ($entities as $entity) {
       $contact = crm_case_get_contact($entity);
-      if($contact) {
+      if ($contact) {
         $email = field_get_items('crm_core_contact', $contact, 'field_contact_email');
         $items[] = check_plain($email[0]['email']);
       }

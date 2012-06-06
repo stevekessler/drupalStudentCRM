@@ -38,12 +38,12 @@ function crm_student_views_api() {
 function crm_student_homebox() {
   $homeboxes = array();
 
-  $homeboxes['dashboard'] = array (
+  $homeboxes['dashboard'] = array(
     'regions' => 2,
     'cache' => 0,
     'color' => 0,
     'colors' => 
-    array (
+    array(
       0 => '#E4F0F8',
       1 => '#E4F0F8',
       2 => '#E4F0F8',
@@ -52,9 +52,9 @@ function crm_student_homebox() {
       5 => '#E4F0F8',
     ),
     'blocks' => 
-    array (
+    array(
       'views_advisee_list-block_1' => 
-      array (
+      array(
         'module' => 'views',
         'delta' => 'advisee_list-block_1',
         'region' => 1,
@@ -66,7 +66,7 @@ function crm_student_homebox() {
         'weight' => -25,
       ),
       'views_crm_tasks-block_1' => 
-      array (
+      array(
         'module' => 'views',
         'delta' => 'crm_tasks-block_1',
         'region' => 2,
@@ -79,7 +79,7 @@ function crm_student_homebox() {
       ),
     ),
     'widths' => 
-    array (
+    array(
     ),
     'title' => 'Dashboard',
     'path' => 'dashboard',
@@ -88,7 +88,7 @@ function crm_student_homebox() {
     'auto_save' => 1,
     'full' => 0,
     'roles' => 
-    array (
+    array(
       0 => 'authenticated user',
     ),
   );

@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Administrative forms for CRM Student.
+ */
+
+/**
  * Admin form for the CRM Student module.
  */
 function crm_student_admin_form() {
@@ -22,12 +27,12 @@ function crm_student_admin_form() {
  * Page callback for the general admin settings page.
  */
 function crm_student_admin_page() {
-  drupal_add_css(drupal_get_path('module', 'crm_student') .'/css/crm_student.css');
-  drupal_add_css(drupal_get_path('module', 'system') .'system.admin.css');
+  drupal_add_css(drupal_get_path('module', 'crm_student') . '/css/crm_student.css');
+  drupal_add_css(drupal_get_path('module', 'system') . 'system.admin.css');
   $links = module_invoke_all('crm_student_admin_links');
   $result = array();
   foreach ($links as $k => $link) {
-    $result[$link['group']][$k] = l($link['title'], $link['href']) . '<div class="description">'. $link['description'];
+    $result[$link['group']][$k] = l($link['title'], $link['href']) . '<div class="description">' . $link['description'];
   }
   foreach ($result as $k => $r) {
     $result[$k] = array('title' => $k,

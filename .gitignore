@@ -1,5 +1,4 @@
-
-
+modules/student_crm/crm_case/modules/crm_case_activity/*
 modules/student_crm/webform_submission_entity/*
 libraries/chosen/*
 libraries/fancybox/*

@@ -101,7 +101,7 @@ function crm_student_block_info() {
  * Implements hook_block_view().
  */
 function crm_student_block_view($delta) {
-  switch($delta) {
+  switch ($delta) {
     case 'crm_student_search':
       return array('content' => drupal_get_form('_crm_student_search_form'));
     case 'crm_student_welcome':
@@ -160,7 +160,7 @@ function _crm_student_search_form_submit($form, &$form_state) {
   foreach (module_implements('crm_student_search_destination', $form_state['values']['search']) as $module) {
     $function = $module . '_crm_student_search_destination';
     $destination = $function($form_state['values']['search']);
-    if($destination['url']) {
+    if ($destination['url']) {
       drupal_goto($destination['url'], array('query' => $destination['query']));
     }
   }
@@ -179,15 +179,15 @@ function _crm_student_search_form_submit($form, &$form_state) {
  * Implements hook_crm_student_search_query().
  */
 function crm_student_crm_student_search_destination($query) {
-  if(is_numeric($query)) {
+  if (is_numeric($query)) {
     $contact_id = db_select('field_data_field_student_id', 's')
                    ->where('cast(field_student_id_value as signed) = :query', array('query' => intval($query)))
                    ->condition('entity_type', 'crm_core_contact')
                    ->fields('s', array('entity_id'))
                    ->execute()
                    ->fetchField();
-    if($contact_id) {
-      return array('url' => 'crm/contact/'. $contact_id);
+    if ($contact_id) {
+      return array('url' => 'crm/contact/' . $contact_id);
     }
   }
 }
@@ -211,7 +211,7 @@ function crm_student_user_login(&$edit, $account) {
   $language = ($account->language) ? $account->language : LANGUAGE_NONE;
   $existing = field_get_items('user', $account, 'field_user_contact');
   $existing_contacts = array();
-  if(is_array($existing)) {
+  if (is_array($existing)) {
     foreach ($existing as $k => $e) {
       $existing_contacts[$e['target_id']] = $e['target_id'];
       if (!$ids[$e['target_id']]) {

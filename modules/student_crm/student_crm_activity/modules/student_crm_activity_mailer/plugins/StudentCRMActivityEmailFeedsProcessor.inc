@@ -37,7 +37,7 @@ class StudentCRMActivityEmailFeedsProcessor extends FeedsProcessor {
   
   protected function newEntity(FeedsSource $source) {
   
-    return null;
+    return NULL;
   }
   
   private function getTargetContact($email) {

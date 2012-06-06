@@ -10,7 +10,7 @@ include_once('student_crm_activity_mail_log.features.inc');
  * Implements hook_mail_alter().
  */
 function student_crm_activity_mail_log_mail_alter(&$message) {
-  if($message['params']['do_not_log']) {
+  if ($message['params']['do_not_log']) {
     return;
   }
   $contact_id = db_select('field_data_field_contact_email', 'e')
@@ -19,7 +19,7 @@ function student_crm_activity_mail_log_mail_alter(&$message) {
              ->fields('e', array('entity_id'))
              ->execute()
              ->fetchField();
-  if(!$contact_id) {
+  if (!$contact_id) {
     return;
   }
   $contact = crm_core_contact_load($contact_id);

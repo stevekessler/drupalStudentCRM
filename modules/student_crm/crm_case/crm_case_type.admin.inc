@@ -115,7 +115,7 @@ function crm_case_type_form($form, &$form_state, $crm_case_type, $op = 'edit') {
  * Form API validation callback for the type form.
  */
 function crm_case_type_form_validate(&$form, &$form_state) {
-  if($form_state['values']['email_contact'] 
+  if ($form_state['values']['email_contact'] 
       && $form_state['values']['email_address'] 
       && !valid_email_address($form_state['values']['email_address'])) {
     form_set_error('email_address', t('The email address is not valid.'));

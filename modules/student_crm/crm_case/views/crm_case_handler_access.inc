@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ * Access callback to tell if a user can view the current case in a view.
+ */
 class crm_case_handler_access extends views_handler_filter_boolean_operator {
   function query() {
     if (!user_access('administer crm_cases')) {

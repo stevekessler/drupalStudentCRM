@@ -1,3 +1,3 @@
 <div id="case-activity-stream">
-	woo
+  woo
 </div>

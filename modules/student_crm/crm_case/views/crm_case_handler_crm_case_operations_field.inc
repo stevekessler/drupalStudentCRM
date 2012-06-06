@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @file 
  * This field handler aggregates operations that can be done on a crm_case
  * under a single field providing a more flexible way to present them in a view
  */
