@@ -41,6 +41,6 @@ function crm_context_context_page_condition() {
            ? 'form'
            : 'view';
       $plugin->execute($contact, $op);
-  }
+    }
   }
 }
