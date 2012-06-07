@@ -157,7 +157,7 @@ function _crm_student_search_form() {
  */
 function _crm_student_search_form_submit($form, &$form_state) {
   
-  foreach (module_implements('crm_student_search_destination', $form_state['values']['search']) as $module) {
+  foreach (module_implements('crm_student_search_destination', check_plain($form_state['values']['search'])) as $module) {
     $function = $module . '_crm_student_search_destination';
     $destination = $function($form_state['values']['search']);
     if ($destination['url']) {
@@ -170,7 +170,7 @@ function _crm_student_search_form_submit($form, &$form_state) {
   }
   $query = array();
   foreach ($search_keys as $key) {
-    $query[$key] = $form_state['values']['search'];
+    $query[$key] = check_plain($form_state['values']['search']);
   }
   drupal_goto('crm/search', array('query' => $query));
 }

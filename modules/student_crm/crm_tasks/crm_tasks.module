@@ -176,7 +176,7 @@ function crm_tasks_create_task_form() {
  */
 function crm_tasks_create_task_form_submit($form, $form_state) {
   if ($form_state['values']['assigned_user']) {
-    $uid = db_select('users')->fields('users', array('uid'))->condition('name', $form_state['values']['assigned_user'])->execute()->fetchField();
+    $uid = db_select('users')->fields('users', array('uid'))->condition('name', check_plain($form_state['values']['assigned_user']))->execute()->fetchField();
     $target_user = user_load($uid);
   }
   else {
@@ -198,7 +198,7 @@ function crm_tasks_create_task_form_submit($form, $form_state) {
   $rid = relation_save($relation);
   $relation = relation_load($rid);
   $language = ($relation->language) ? $relation->language : LANGUAGE_NONE;
-  $relation->field_task_due[$language][0]['value'] = $form_state['values']['date'];
+  $relation->field_task_due[$language][0]['value'] = check_plain($form_state['values']['date']);
   $relation->field_task_note[$language][0]['value'] = check_plain($form_state['values']['note']);
   relation_save($relation);
   drupal_set_message(t('Your task has been created.'));

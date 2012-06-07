@@ -60,6 +60,6 @@ function _crm_case_blocks_crm_create_case_form() {
  */
 function _crm_case_blocks_crm_create_case_form_submit($form, $form_state) {
   drupal_goto('crm/case/add/' . 
-        $form_state['values']['case_type'] . '/' . 
-        $form_state['values']['contact']);
+        check_plain($form_state['values']['case_type']) . '/' . 
+        check_plain($form_state['values']['contact']));
 }

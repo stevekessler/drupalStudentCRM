@@ -998,8 +998,8 @@ function crm_case_send_email_action_validate($form, $form_state) {
  */
 function crm_case_send_email_action_submit($form, $form_state) {
   $params = array(
-    'sender'    => $form_state['values']['sender'],
-    'subject'   => $form_state['values']['subject'],
+    'sender'    => check_plain($form_state['values']['sender']),
+    'subject'   => check_plain($form_state['values']['subject']),
     'message'   => $form_state['values']['message'],
   );
   return $params;
@@ -1019,7 +1019,7 @@ function crm_case_send_email_action($entity, $context) {
                           'crm_core_contact' => $contact,
                           'crm_case' => $entity,
                         ));
-  $context['message']['value'] = token_replace($context['message']['value'], array(
+  $context['message']['value'] = token_replace(check_markup($context['message']['value'], $context['message']['format']), array(
                           'crm_core_contact' => $contact,
                           'crm_case' => $entity,
                         ));

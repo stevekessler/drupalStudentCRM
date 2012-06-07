@@ -108,7 +108,7 @@ function student_crm_webform_send_contact_email_form_validate($form, $form_state
  */
 function student_crm_webform_send_contact_email_form_submit($form, $form_state) {
   $contact = crm_core_contact_load($form_state['values']['contact']);
-  $email_addresses = student_crm_webform_send_email('crm_core_contact', $contact, $form_state['values']['field'], $form_state['values']['manual-email']);
+  $email_addresses = student_crm_webform_send_email('crm_core_contact', $contact, $form_state['values']['field'], check_plain($form_state['values']['manual-email']));
   
   $case = crm_case_load($form_state['values']['case']);
   $fields = field_info_instances();
@@ -184,9 +184,9 @@ function student_crm_webform_send_email_form_validate($form, $form_state) {
 function student_crm_webform_send_email_form_submit($form, $form_state) {
   $case = crm_case_load($form_state['values']['case']);
   $emails = ($form_state['values']['manual-email'])
-            ? array($form_state['values']['manual-email'])
+            ? array(check_plain($form_state['values']['manual-email']))
             : FALSE;
-  $email_addresses = student_crm_webform_send_email('crm_case', $case, $form_state['values']['field'], $emails);
+  $email_addresses = student_crm_webform_send_email('crm_case', $case, check_plain($form_state['values']['field']), $emails);
   
   $case = crm_case_load($form_state['values']['case']);
   $fields = field_info_instances();
