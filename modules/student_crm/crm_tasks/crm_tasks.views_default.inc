@@ -128,14 +128,14 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['relationships']['relation_base_left_crm_task']['field'] = 'relation_base_left_crm_task';
   $handler->display->display_options['relationships']['relation_base_left_crm_task']['label'] = 'CRM Task - relation';
   $handler->display->display_options['relationships']['relation_base_left_crm_task']['required'] = 1;
-  /* Relationship: Relation: Relation: CRM Task (relation -> crm_case) */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['relation_base_crm_task_right_crm_case']['id'] = 'relation_base_crm_task_right_crm_case';
   $handler->display->display_options['relationships']['relation_base_crm_task_right_crm_case']['table'] = 'relation';
   $handler->display->display_options['relationships']['relation_base_crm_task_right_crm_case']['field'] = 'relation_base_crm_task_right_crm_case';
   $handler->display->display_options['relationships']['relation_base_crm_task_right_crm_case']['relationship'] = 'relation_base_left_crm_task';
   $handler->display->display_options['relationships']['relation_base_crm_task_right_crm_case']['label'] = 'CRM Task - case';
   $handler->display->display_options['relationships']['relation_base_crm_task_right_crm_case']['required'] = 0;
-  /* Relationship: Relation: Relation: CRM Task (relation -> crm_core_contact) */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['relation_base_crm_task_right_crm_core_contact']['id'] = 'relation_base_crm_task_right_crm_core_contact';
   $handler->display->display_options['relationships']['relation_base_crm_task_right_crm_core_contact']['table'] = 'relation';
   $handler->display->display_options['relationships']['relation_base_crm_task_right_crm_core_contact']['field'] = 'relation_base_crm_task_right_crm_core_contact';
@@ -240,7 +240,7 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['fields']['contact_id']['empty_zero'] = 0;
   $handler->display->display_options['fields']['contact_id']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['contact_id']['link_to_contact'] = 0;
-  /* Field: Contact: Name */
+  /* Field: CRM Contact: Name */
   $handler->display->display_options['fields']['contact_name']['id'] = 'contact_name';
   $handler->display->display_options['fields']['contact_name']['table'] = 'field_data_contact_name';
   $handler->display->display_options['fields']['contact_name']['field'] = 'contact_name';
@@ -606,7 +606,7 @@ function crm_tasks_views_default_views() {
   $handler->display->display_options['fields']['contact_id']['empty_zero'] = 0;
   $handler->display->display_options['fields']['contact_id']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['contact_id']['link_to_contact'] = 0;
-  /* Field: Contact: Name */
+  /* Field: CRM Contact: Name */
   $handler->display->display_options['fields']['contact_name']['id'] = 'contact_name';
   $handler->display->display_options['fields']['contact_name']['table'] = 'field_data_contact_name';
   $handler->display->display_options['fields']['contact_name']['field'] = 'contact_name';

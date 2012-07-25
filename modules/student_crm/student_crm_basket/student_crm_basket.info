@@ -17,5 +17,4 @@ features[field][] = "node-basket-field_basket_users"
 features[menu_links][] = "menu-crm-navigation:crm/baskets"
 features[node][] = "basket"
 features[views_view][] = "baskets"
-
 files[] = "views/views_handler_student_crm_basket_remove.inc"

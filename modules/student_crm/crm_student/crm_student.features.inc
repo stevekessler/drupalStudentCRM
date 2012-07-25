@@ -77,6 +77,18 @@ function crm_student_homebox() {
         'title' => '',
         'weight' => -32,
       ),
+      'crm_case_activity_activity_stream' => 
+      array (
+        'module' => 'crm_case_activity',
+        'delta' => 'activity_stream',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -32,
+      ),
     ),
     'widths' => 
     array (
