@@ -15,7 +15,7 @@ function student_crm_webform_relation_default_relation_types() {
   $relation_type->api_version = 1;
   $relation_type->relation_type = 'webform_submission_to_entities';
   $relation_type->label = 'Webform submission to entities';
-  $relation_type->reverse_label = '';
+  $relation_type->reverse_label = 'Webform submission to entities';
   $relation_type->directional = 1;
   $relation_type->transitive = 0;
   $relation_type->r_unique = 0;
@@ -25,8 +25,8 @@ function student_crm_webform_relation_default_relation_types() {
     0 => 'webform_submission_entity:*',
   );
   $relation_type->target_bundles = array(
-    0 => 'crm_core_contact:*',
-    1 => 'crm_case:*',
+    0 => 'crm_case:*',
+    1 => 'crm_core_contact:*',
   );
   $export['webform_submission_to_entities'] = $relation_type;
 
