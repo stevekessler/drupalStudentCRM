@@ -107,7 +107,6 @@ dependencies[] = crm_context
 dependencies[] = crm_features
 dependencies[] = crm_feeds
 dependencies[] = crm_student
-dependencies[] = crm_advisor
 dependencies[] = crm_history
 dependencies[] = crm_courses
 dependencies[] = crm_case
