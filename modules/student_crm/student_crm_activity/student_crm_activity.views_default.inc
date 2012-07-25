@@ -47,13 +47,13 @@ function student_crm_activity_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No notes yet! Use the above form to create a new note about this person.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: Array: Relation: CRM Activity (crm_core_activity <-> crm_core_contact) */
+  /* Relationship: CRM Activity: Relation: CRM Activity (crm_core_activity <-> crm_core_contact) */
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_core_contact']['id'] = 'relation_crm_core_activity_crm_core_contact';
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_core_contact']['table'] = 'crm_core_activity';
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_core_contact']['field'] = 'relation_crm_core_activity_crm_core_contact';
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_core_contact']['required'] = 1;
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_core_contact']['r_index'] = '-1';
-  /* Sort criterion: Array: Date created */
+  /* Sort criterion: CRM Activity: Date created */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'crm_core_activity';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
@@ -72,7 +72,7 @@ function student_crm_activity_views_default_views() {
   $handler->display->display_options['arguments']['contact_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['contact_id']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['contact_id']['not'] = 0;
-  /* Filter criterion: Array: User has access to view activity */
+  /* Filter criterion: CRM Activity: User has access to view activity */
   $handler->display->display_options['filters']['activity_access']['id'] = 'activity_access';
   $handler->display->display_options['filters']['activity_access']['table'] = 'crm_core_activity';
   $handler->display->display_options['filters']['activity_access']['field'] = 'activity_access';
@@ -93,7 +93,7 @@ function student_crm_activity_views_default_views() {
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Array: Relation: CRM Activity (crm_core_activity <-> crm_case) */
+  /* Relationship: CRM Activity: Relation: CRM Activity (crm_core_activity <-> crm_case) */
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_case']['id'] = 'relation_crm_core_activity_crm_case';
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_case']['table'] = 'crm_core_activity';
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_case']['field'] = 'relation_crm_core_activity_crm_case';

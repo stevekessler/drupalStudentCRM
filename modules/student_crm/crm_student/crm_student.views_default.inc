@@ -41,7 +41,7 @@ function crm_student_views_default_views() {
   );
   $handler->display->display_options['row_options']['hide_empty'] = 0;
   $handler->display->display_options['row_options']['default_field_elements'] = 1;
-  /* Field: Contact: Image */
+  /* Field: CRM Contact: Image */
   $handler->display->display_options['fields']['contact_image']['id'] = 'contact_image';
   $handler->display->display_options['fields']['contact_image']['table'] = 'field_data_contact_image';
   $handler->display->display_options['fields']['contact_image']['field'] = 'contact_image';
@@ -73,7 +73,7 @@ function crm_student_views_default_views() {
     'image_link' => '',
   );
   $handler->display->display_options['fields']['contact_image']['field_api_classes'] = 0;
-  /* Field: Contact: Name */
+  /* Field: CRM Contact: Name */
   $handler->display->display_options['fields']['contact_name']['id'] = 'contact_name';
   $handler->display->display_options['fields']['contact_name']['table'] = 'field_data_contact_name';
   $handler->display->display_options['fields']['contact_name']['field'] = 'contact_name';
@@ -103,7 +103,7 @@ function crm_student_views_default_views() {
     'markup' => 0,
   );
   $handler->display->display_options['fields']['contact_name']['field_api_classes'] = 0;
-  /* Field: Contact: Class level */
+  /* Field: CRM Contact: Class level */
   $handler->display->display_options['fields']['field_student_level']['id'] = 'field_student_level';
   $handler->display->display_options['fields']['field_student_level']['table'] = 'field_data_field_student_level';
   $handler->display->display_options['fields']['field_student_level']['field'] = 'field_student_level';
@@ -127,7 +127,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_level']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_student_level']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_student_level']['field_api_classes'] = 0;
-  /* Field: Contact: Degrees */
+  /* Field: CRM Contact: Degrees */
   $handler->display->display_options['fields']['field_student_degrees']['id'] = 'field_student_degrees';
   $handler->display->display_options['fields']['field_student_degrees']['table'] = 'field_data_field_student_degrees';
   $handler->display->display_options['fields']['field_student_degrees']['field'] = 'field_student_degrees';
@@ -153,7 +153,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_degrees']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_student_degrees']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_student_degrees']['field_api_classes'] = 0;
-  /* Field: Contact: Tags */
+  /* Field: CRM Contact: Tags */
   $handler->display->display_options['fields']['field_student_tags']['id'] = 'field_student_tags';
   $handler->display->display_options['fields']['field_student_tags']['table'] = 'field_data_field_student_tags';
   $handler->display->display_options['fields']['field_student_tags']['field'] = 'field_student_tags';
@@ -219,7 +219,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['row_options']['default_field_elements'] = 1;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Contact: Student ID */
+  /* Field: CRM Contact: Student ID */
   $handler->display->display_options['fields']['field_student_id']['id'] = 'field_student_id';
   $handler->display->display_options['fields']['field_student_id']['table'] = 'field_data_field_student_id';
   $handler->display->display_options['fields']['field_student_id']['field'] = 'field_student_id';
@@ -244,7 +244,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_id']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_student_id']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_student_id']['field_api_classes'] = 0;
-  /* Field: Contact: Email address */
+  /* Field: CRM Contact: Email address */
   $handler->display->display_options['fields']['field_contact_email']['id'] = 'field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['table'] = 'field_data_field_contact_email';
   $handler->display->display_options['fields']['field_contact_email']['field'] = 'field_contact_email';
@@ -299,7 +299,7 @@ function crm_student_views_default_views() {
   /* Display: Student status */
   $handler = $view->new_display('block', 'Student status', 'block_2');
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Contact: Status (field_student_status) */
+  /* Relationship: CRM Contact: Status (field_student_status) */
   $handler->display->display_options['relationships']['field_student_status_tid']['id'] = 'field_student_status_tid';
   $handler->display->display_options['relationships']['field_student_status_tid']['table'] = 'field_data_field_student_status';
   $handler->display->display_options['relationships']['field_student_status_tid']['field'] = 'field_student_status_tid';
@@ -331,7 +331,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_status_alert']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_status_alert']['type'] = 'list_key';
   $handler->display->display_options['fields']['field_status_alert']['field_api_classes'] = 0;
-  /* Field: Contact: Status */
+  /* Field: CRM Contact: Status */
   $handler->display->display_options['fields']['field_student_status']['id'] = 'field_student_status';
   $handler->display->display_options['fields']['field_student_status']['table'] = 'field_data_field_student_status';
   $handler->display->display_options['fields']['field_student_status']['field'] = 'field_student_status';
@@ -451,7 +451,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['contact_id']['empty_zero'] = 0;
   $handler->display->display_options['fields']['contact_id']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['contact_id']['link_to_contact'] = 0;
-  /* Field: Contact: Name */
+  /* Field: CRM Contact: Name */
   $handler->display->display_options['fields']['contact_name']['id'] = 'contact_name';
   $handler->display->display_options['fields']['contact_name']['table'] = 'field_data_contact_name';
   $handler->display->display_options['fields']['contact_name']['field'] = 'contact_name';
@@ -519,7 +519,7 @@ function crm_student_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('No contact records found.'),
-    t('Contact entity referenced from field_user_contact'),
+    t('CRM Contact entity referenced from field_user_contact'),
     t('crm/contact/[contact_id]'),
     t('All'),
     t('Block'),
@@ -652,7 +652,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['contact_id']['empty_zero'] = 0;
   $handler->display->display_options['fields']['contact_id']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['contact_id']['link_to_contact'] = 0;
-  /* Field: Contact: Name */
+  /* Field: CRM Contact: Name */
   $handler->display->display_options['fields']['contact_name']['id'] = 'contact_name';
   $handler->display->display_options['fields']['contact_name']['table'] = 'field_data_contact_name';
   $handler->display->display_options['fields']['contact_name']['field'] = 'contact_name';
@@ -682,7 +682,7 @@ function crm_student_views_default_views() {
     'markup' => 0,
   );
   $handler->display->display_options['fields']['contact_name']['field_api_classes'] = 0;
-  /* Field: Contact: Name */
+  /* Field: CRM Contact: Name */
   $handler->display->display_options['fields']['contact_name_1']['id'] = 'contact_name_1';
   $handler->display->display_options['fields']['contact_name_1']['table'] = 'field_data_contact_name';
   $handler->display->display_options['fields']['contact_name_1']['field'] = 'contact_name';
@@ -708,7 +708,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['contact_name_1']['click_sort_column'] = 'title';
   $handler->display->display_options['fields']['contact_name_1']['type'] = 'name_default_given';
   $handler->display->display_options['fields']['contact_name_1']['field_api_classes'] = 0;
-  /* Field: Contact: Image */
+  /* Field: CRM Contact: Image */
   $handler->display->display_options['fields']['contact_image']['id'] = 'contact_image';
   $handler->display->display_options['fields']['contact_image']['table'] = 'field_data_contact_image';
   $handler->display->display_options['fields']['contact_image']['field'] = 'contact_image';
@@ -737,7 +737,7 @@ function crm_student_views_default_views() {
     'image_link' => '',
   );
   $handler->display->display_options['fields']['contact_image']['field_api_classes'] = 0;
-  /* Field: Contact: Student ID */
+  /* Field: CRM Contact: Student ID */
   $handler->display->display_options['fields']['field_student_id']['id'] = 'field_student_id';
   $handler->display->display_options['fields']['field_student_id']['table'] = 'field_data_field_student_id';
   $handler->display->display_options['fields']['field_student_id']['field'] = 'field_student_id';
@@ -759,7 +759,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_id']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_student_id']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_student_id']['field_api_classes'] = 0;
-  /* Field: Contact: Status */
+  /* Field: CRM Contact: Status */
   $handler->display->display_options['fields']['field_student_status']['id'] = 'field_student_status';
   $handler->display->display_options['fields']['field_student_status']['table'] = 'field_data_field_student_status';
   $handler->display->display_options['fields']['field_student_status']['field'] = 'field_student_status';
@@ -782,7 +782,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_status']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_student_status']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_student_status']['field_api_classes'] = 0;
-  /* Field: Contact: Class level */
+  /* Field: CRM Contact: Class level */
   $handler->display->display_options['fields']['field_student_level']['id'] = 'field_student_level';
   $handler->display->display_options['fields']['field_student_level']['table'] = 'field_data_field_student_level';
   $handler->display->display_options['fields']['field_student_level']['field'] = 'field_student_level';
@@ -806,7 +806,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['fields']['field_student_level']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_student_level']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_student_level']['field_api_classes'] = 0;
-  /* Field: Contact: Degrees */
+  /* Field: CRM Contact: Degrees */
   $handler->display->display_options['fields']['field_student_degrees']['id'] = 'field_student_degrees';
   $handler->display->display_options['fields']['field_student_degrees']['table'] = 'field_data_field_student_degrees';
   $handler->display->display_options['fields']['field_student_degrees']['field'] = 'field_student_degrees';
@@ -844,7 +844,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = 'Student';
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Contact: Degrees (field_student_degrees) */
+  /* Filter criterion: CRM Contact: Degrees (field_student_degrees) */
   $handler->display->display_options['filters']['field_student_degrees_tid']['id'] = 'field_student_degrees_tid';
   $handler->display->display_options['filters']['field_student_degrees_tid']['table'] = 'field_data_field_student_degrees';
   $handler->display->display_options['filters']['field_student_degrees_tid']['field'] = 'field_student_degrees_tid';
@@ -861,7 +861,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['filters']['field_student_degrees_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_student_degrees_tid']['vocabulary'] = 'degrees';
   $handler->display->display_options['filters']['field_student_degrees_tid']['error_message'] = 1;
-  /* Filter criterion: Contact: Status (field_student_status) */
+  /* Filter criterion: CRM Contact: Status (field_student_status) */
   $handler->display->display_options['filters']['field_student_status_tid']['id'] = 'field_student_status_tid';
   $handler->display->display_options['filters']['field_student_status_tid']['table'] = 'field_data_field_student_status';
   $handler->display->display_options['filters']['field_student_status_tid']['field'] = 'field_student_status_tid';
@@ -878,7 +878,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['filters']['field_student_status_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_student_status_tid']['vocabulary'] = 'student_status';
   $handler->display->display_options['filters']['field_student_status_tid']['error_message'] = 1;
-  /* Filter criterion: Contact: Name */
+  /* Filter criterion: CRM Contact: Name */
   $handler->display->display_options['filters']['contact_name']['id'] = 'contact_name';
   $handler->display->display_options['filters']['contact_name']['table'] = 'field_data_contact_name';
   $handler->display->display_options['filters']['contact_name']['field'] = 'contact_name';
@@ -889,7 +889,7 @@ function crm_student_views_default_views() {
   $handler->display->display_options['filters']['contact_name']['expose']['operator'] = 'contact_name_op';
   $handler->display->display_options['filters']['contact_name']['expose']['identifier'] = 'name';
   $handler->display->display_options['filters']['contact_name']['expose']['multiple'] = FALSE;
-  /* Filter criterion: Contact: Student ID (field_student_id) */
+  /* Filter criterion: CRM Contact: Student ID (field_student_id) */
   $handler->display->display_options['filters']['field_student_id_value']['id'] = 'field_student_id_value';
   $handler->display->display_options['filters']['field_student_id_value']['table'] = 'field_data_field_student_id';
   $handler->display->display_options['filters']['field_student_id_value']['field'] = 'field_student_id_value';
