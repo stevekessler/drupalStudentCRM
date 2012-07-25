@@ -17,7 +17,7 @@ function crm_courses_context_default_contexts() {
   $context->description = 'User is viewing a student with course enrollments';
   $context->tag = 'crm_coures';
   $context->conditions = array(
-    'crm_context_condition_contact_type' => array(
+    'crm_core_contact_context_condition_contact_type' => array(
       'values' => array(
         'student' => 'student',
       ),

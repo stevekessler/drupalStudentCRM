@@ -78,7 +78,7 @@ function student_crm_gpa_views_default_views() {
   $handler->display->display_options['relationships']['relation_base_left_term_gpa']['table'] = 'crm_core_contact';
   $handler->display->display_options['relationships']['relation_base_left_term_gpa']['field'] = 'relation_base_left_term_gpa';
   $handler->display->display_options['relationships']['relation_base_left_term_gpa']['required'] = 1;
-  /* Relationship: Relation: Relation: Term GPA (relation -> taxonomy_term) */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['relation_base_term_gpa_right_taxonomy_term']['id'] = 'relation_base_term_gpa_right_taxonomy_term';
   $handler->display->display_options['relationships']['relation_base_term_gpa_right_taxonomy_term']['table'] = 'relation';
   $handler->display->display_options['relationships']['relation_base_term_gpa_right_taxonomy_term']['field'] = 'relation_base_term_gpa_right_taxonomy_term';

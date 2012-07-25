@@ -17,7 +17,7 @@ function student_crm_gpa_context_default_contexts() {
   $context->description = 'Display most recent GPA data on a student\'s page';
   $context->tag = 'student';
   $context->conditions = array(
-    'crm_context_condition_contact_type' => array(
+    'crm_core_contact_context_condition_contact_type' => array(
       'values' => array(
         'student' => 'student',
       ),

@@ -103,7 +103,6 @@ dependencies[] = crm_core_contact_ui
 dependencies[] = crm_core_activity_ui
 
 ;student crm
-dependencies[] = crm_context
 dependencies[] = crm_features
 dependencies[] = crm_feeds
 dependencies[] = crm_student
