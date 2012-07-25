@@ -25,8 +25,8 @@ function student_crm_activity_relation_default_relation_types() {
     0 => 'crm_core_activity:*',
   );
   $relation_type->target_bundles = array(
-    0 => 'crm_core_contact:*',
-    1 => 'crm_case:*',
+    0 => 'crm_case:*',
+    1 => 'crm_core_contact:*',
   );
   $export['crm_core_activity'] = $relation_type;
 
