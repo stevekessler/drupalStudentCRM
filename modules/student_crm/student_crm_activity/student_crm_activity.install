@@ -11,9 +11,25 @@ function student_crm_activity_install() {
   $note = entity_create('crm_core_activity_type', array(
     'type' => 'note',
     'label' => st('Note'),
-    'description' => st('A simple actiity type that stores a note'), 
+    'description' => st('A simple activity type that stores a note'), 
   ));
   crm_core_activity_type_save($note);
+  
+  $relation_types_info = array(
+    array(
+      'relation_type' => 'crm_core_activity',
+      'label' => t('CRM Activity'),
+      'reverse_label' => t('CRM Activity'),
+      'directional' => true,
+      'r_unique' => false,
+      'source_bundles' => array('crm_core_activity:*'),
+      'target_bundles' => array('crm_case:*', 'crm_core_contact:*'),
+    ),
+  );
+  foreach ($relation_types_info as $relation_type_info) {
+    $relation_type = relation_type_create($relation_type_info);
+    relation_type_save($relation_type);
+  }
   
   //Delete the standard activity types.
   db_delete('crm_core_activity_type')

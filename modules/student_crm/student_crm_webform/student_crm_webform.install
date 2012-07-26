@@ -4,7 +4,23 @@
  * @file
  * Sets up the table to track contacts via webforms.
  */
-
+function student_crm_webform_install() {
+  $relation_types_info = array(
+    array(
+      'relation_type' => 'webform_submission_to_entities',
+      'label' => t('Webform submission to entities'),
+      'reverse_label' => t('Webform submission to entities'),
+      'directional' => true,
+      'r_unique' => false,
+      'source_bundles' => array('webform_submission_entity:*'),
+      'target_bundles' => array('crm_case:*', 'crm_core_contact:*'),
+    ),
+  );
+  foreach ($relation_types_info as $relation_type_info) {
+    $relation_type = relation_type_create($relation_type_info);
+    relation_type_save($relation_type);
+  }
+}
 
 /**
  * Implements hook_schema().
