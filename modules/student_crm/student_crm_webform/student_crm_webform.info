@@ -14,6 +14,5 @@ explanation = "Field type(s) in use - see <a href="/crm/admin/reports/fields">Fi
 features[context][] = "case_page_forms"
 features[ctools][] = "context:context:3"
 features[ctools][] = "views:views_default:3.0"
-features[relation_type][] = "webform_submission_to_entities"
 features[views_view][] = "form_submissions"
 required = "1"

@@ -5,6 +5,9 @@
  * Sets up the table to track contacts via webforms.
  */
 function student_crm_webform_install() {
+  if(!module_exists('relation')) {
+    return;
+  }
   $relation_types_info = array(
     array(
       'relation_type' => 'webform_submission_to_entities',

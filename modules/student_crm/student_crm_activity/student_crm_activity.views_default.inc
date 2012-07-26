@@ -47,7 +47,7 @@ function student_crm_activity_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No notes yet! Use the above form to create a new note about this person.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: CRM Activity: Relation: CRM Activity (crm_core_activity <-> crm_core_contact) */
+  /* Relationship: CRM Activity: Relation: CRM Activity (crm_core_activity -&gt; crm_core_contact) */
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_core_contact']['id'] = 'relation_crm_core_activity_crm_core_contact';
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_core_contact']['table'] = 'crm_core_activity';
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_core_contact']['field'] = 'relation_crm_core_activity_crm_core_contact';
@@ -93,7 +93,7 @@ function student_crm_activity_views_default_views() {
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: CRM Activity: Relation: CRM Activity (crm_core_activity <-> crm_case) */
+  /* Relationship: CRM Activity: Relation: CRM Activity (crm_core_activity -&gt; crm_case) */
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_case']['id'] = 'relation_crm_core_activity_crm_case';
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_case']['table'] = 'crm_core_activity';
   $handler->display->display_options['relationships']['relation_crm_core_activity_crm_case']['field'] = 'relation_crm_core_activity_crm_case';

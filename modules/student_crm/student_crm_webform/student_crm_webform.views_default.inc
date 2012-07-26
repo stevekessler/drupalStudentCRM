@@ -43,7 +43,7 @@ function student_crm_webform_views_default_views() {
   $handler->display->display_options['row_options']['separator'] = ' - ';
   $handler->display->display_options['row_options']['hide_empty'] = 0;
   $handler->display->display_options['row_options']['default_field_elements'] = 1;
-  /* Relationship: Webform Submission: Relation: Webform submission to entities (webform_submission_entity <-> crm_case) */
+  /* Relationship: Webform Submission: Relation: Webform submission to entities (webform_submission_entity -&gt; crm_case) */
   $handler->display->display_options['relationships']['relation_webform_submission_to_entities_crm_case']['id'] = 'relation_webform_submission_to_entities_crm_case';
   $handler->display->display_options['relationships']['relation_webform_submission_to_entities_crm_case']['table'] = 'webform_submission_entity';
   $handler->display->display_options['relationships']['relation_webform_submission_to_entities_crm_case']['field'] = 'relation_webform_submission_to_entities_crm_case';
