@@ -89,6 +89,7 @@ dependencies[] = features
 ;relation
 dependencies[] = relation_endpoint
 dependencies[] = relation
+dependencies[] = relation_ui
 
 ;user messaging
 dependencies[] = rules
