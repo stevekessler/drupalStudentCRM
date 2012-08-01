@@ -121,7 +121,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No cases found.';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: Case: Relation: CRM Contact Case (crm_case <-> crm_core_contact) */
+  /* Relationship: Case: Relation: CRM Contact Case (crm_case -&gt; crm_core_contact) */
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['id'] = 'relation_crm_contact_case_crm_core_contact';
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['table'] = 'crm_case';
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['field'] = 'relation_crm_contact_case_crm_core_contact';
@@ -643,7 +643,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No cases found.';
   $handler->display->display_options['empty']['area']['format'] = 'plain_text';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: Case: Relation: CRM Contact Case (crm_case <-> crm_core_contact) */
+  /* Relationship: Case: Relation: CRM Contact Case (crm_case -&gt; crm_core_contact) */
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['id'] = 'relation_crm_contact_case_crm_core_contact';
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['table'] = 'crm_case';
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['field'] = 'relation_crm_contact_case_crm_core_contact';
@@ -1146,7 +1146,7 @@ function crm_case_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'Sorry, we couldn\'t find any cases for you. Sometimes cases are made private so only advisors and other users can view them.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
-  /* Relationship: Case: Relation: CRM Contact Case (crm_case <-> crm_core_contact) */
+  /* Relationship: Case: Relation: CRM Contact Case (crm_case -&gt; crm_core_contact) */
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['id'] = 'relation_crm_contact_case_crm_core_contact';
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['table'] = 'crm_case';
   $handler->display->display_options['relationships']['relation_crm_contact_case_crm_core_contact']['field'] = 'relation_crm_contact_case_crm_core_contact';

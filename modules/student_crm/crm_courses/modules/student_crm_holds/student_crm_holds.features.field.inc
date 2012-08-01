@@ -216,57 +216,6 @@ function student_crm_holds_field_default_fields() {
     ),
   );
 
-  // Exported field: 'relation-hold-endpoints'
-  $fields['relation-hold-endpoints'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'endpoints',
-      'foreign keys' => array(),
-      'indexes' => array(
-        'relation' => array(
-          0 => 'entity_type',
-          1 => 'entity_id',
-          2 => 'r_index',
-        ),
-      ),
-      'module' => 'relation_endpoint',
-      'settings' => array(),
-      'translatable' => '0',
-      'type' => 'relation_endpoint',
-    ),
-    'field_instance' => array(
-      'bundle' => 'hold',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'relation_endpoint',
-          'settings' => array(),
-          'type' => 'relation_endpoint',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'relation',
-      'field_name' => 'endpoints',
-      'label' => 'endpoints',
-      'required' => FALSE,
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'module' => 'relation_endpoint',
-        'settings' => array(),
-        'type' => 'relation_endpoint',
-        'weight' => '0',
-      ),
-    ),
-  );
-
   // Exported field: 'relation-hold-field_hold_date_closed'
   $fields['relation-hold-field_hold_date_closed'] = array(
     'field_config' => array(
@@ -498,7 +447,6 @@ function student_crm_holds_field_default_fields() {
   t('Severity');
   t('Term');
   t('The code used in your student information system.');
-  t('endpoints');
 
   return $fields;
 }

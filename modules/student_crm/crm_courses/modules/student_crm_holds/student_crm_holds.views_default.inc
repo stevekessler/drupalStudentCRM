@@ -104,7 +104,7 @@ function student_crm_holds_views_default_views() {
   $handler->display->display_options['relationships']['relation_base_left_hold']['table'] = 'crm_core_contact';
   $handler->display->display_options['relationships']['relation_base_left_hold']['field'] = 'relation_base_left_hold';
   $handler->display->display_options['relationships']['relation_base_left_hold']['required'] = 1;
-  /* Relationship: Relation: Relation: Hold (relation -> node) */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['relation_base_hold_right_node']['id'] = 'relation_base_hold_right_node';
   $handler->display->display_options['relationships']['relation_base_hold_right_node']['table'] = 'relation';
   $handler->display->display_options['relationships']['relation_base_hold_right_node']['field'] = 'relation_base_hold_right_node';
@@ -282,7 +282,7 @@ function student_crm_holds_views_default_views() {
   $handler->display->display_options['relationships']['relation_base_left_hold']['table'] = 'crm_core_contact';
   $handler->display->display_options['relationships']['relation_base_left_hold']['field'] = 'relation_base_left_hold';
   $handler->display->display_options['relationships']['relation_base_left_hold']['required'] = 1;
-  /* Relationship: Relation: Relation: Hold (relation -> node) */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['relation_base_hold_right_node']['id'] = 'relation_base_hold_right_node';
   $handler->display->display_options['relationships']['relation_base_hold_right_node']['table'] = 'relation';
   $handler->display->display_options['relationships']['relation_base_hold_right_node']['field'] = 'relation_base_hold_right_node';

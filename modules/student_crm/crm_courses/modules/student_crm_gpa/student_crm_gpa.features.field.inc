@@ -10,57 +10,6 @@
 function student_crm_gpa_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'relation-term_gpa-endpoints'
-  $fields['relation-term_gpa-endpoints'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'endpoints',
-      'foreign keys' => array(),
-      'indexes' => array(
-        'relation' => array(
-          0 => 'entity_type',
-          1 => 'entity_id',
-          2 => 'r_index',
-        ),
-      ),
-      'module' => 'relation_endpoint',
-      'settings' => array(),
-      'translatable' => '0',
-      'type' => 'relation_endpoint',
-    ),
-    'field_instance' => array(
-      'bundle' => 'term_gpa',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'relation_endpoint',
-          'settings' => array(),
-          'type' => 'relation_endpoint',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'relation',
-      'field_name' => 'endpoints',
-      'label' => 'endpoints',
-      'required' => FALSE,
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'module' => 'relation_endpoint',
-        'settings' => array(),
-        'type' => 'relation_endpoint',
-        'weight' => '0',
-      ),
-    ),
-  );
-
   // Exported field: 'relation-term_gpa-field_gpa_cumulative'
   $fields['relation-term_gpa-field_gpa_cumulative'] = array(
     'field_config' => array(
@@ -189,7 +138,6 @@ function student_crm_gpa_field_default_fields() {
   t('Term GPA');
   t('The total GPA for just the current term.');
   t('The total computed GPA for the related term.');
-  t('endpoints');
 
   return $fields;
 }

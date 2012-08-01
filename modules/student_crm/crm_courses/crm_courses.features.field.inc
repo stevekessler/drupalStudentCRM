@@ -353,57 +353,6 @@ function crm_courses_field_default_fields() {
     ),
   );
 
-  // Exported field: 'relation-enrollment-endpoints'
-  $fields['relation-enrollment-endpoints'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'endpoints',
-      'foreign keys' => array(),
-      'indexes' => array(
-        'relation' => array(
-          0 => 'entity_type',
-          1 => 'entity_id',
-          2 => 'r_index',
-        ),
-      ),
-      'module' => 'relation_endpoint',
-      'settings' => array(),
-      'translatable' => '0',
-      'type' => 'relation_endpoint',
-    ),
-    'field_instance' => array(
-      'bundle' => 'enrollment',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'relation_endpoint',
-          'settings' => array(),
-          'type' => 'relation_endpoint',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'relation',
-      'field_name' => 'endpoints',
-      'label' => 'endpoints',
-      'required' => FALSE,
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'module' => 'relation_endpoint',
-        'settings' => array(),
-        'type' => 'relation_endpoint',
-        'weight' => '0',
-      ),
-    ),
-  );
-
   // Exported field: 'relation-enrollment-field_enrollment_gpa_compute'
   $fields['relation-enrollment-field_enrollment_gpa_compute'] = array(
     'field_config' => array(
@@ -868,7 +817,6 @@ function crm_courses_field_default_fields() {
   t('Start date');
   t('Term');
   t('Units');
-  t('endpoints');
 
   return $fields;
 }
