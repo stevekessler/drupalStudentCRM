@@ -1,0 +1,19 @@
+<?php
+
+function student_crm_holds_install() {
+  $relation_types_info = array(
+    array(
+      'relation_type' => 'hold',
+      'label' => t('Hold'),
+      'reverse_label' => t('Hold'),
+      'directional' => true,
+      'r_unique' => false,
+      'source_bundles' => array('crm_core_contact:student'),
+      'target_bundles' => array('node:hold_type'),
+    ),
+  );
+  foreach ($relation_types_info as $relation_type_info) {
+    $relation_type = relation_type_create($relation_type_info);
+    relation_type_save($relation_type);
+  }
+}

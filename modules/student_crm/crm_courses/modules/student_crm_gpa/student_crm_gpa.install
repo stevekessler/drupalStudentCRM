@@ -1,0 +1,19 @@
+<?php
+
+function student_crm_gpa_install() {
+  $relation_types_info = array(
+    array(
+      'relation_type' => 'term_gpa',
+      'label' => t('Term GPA'),
+      'reverse_label' => t('Term GPA'),
+      'directional' => true,
+      'r_unique' => false,
+      'source_bundles' => array('crm_core_contact:student'),
+      'target_bundles' => array('taxonomy_term:term'),
+    ),
+  );
+  foreach ($relation_types_info as $relation_type_info) {
+    $relation_type = relation_type_create($relation_type_info);
+    relation_type_save($relation_type);
+  }
+}

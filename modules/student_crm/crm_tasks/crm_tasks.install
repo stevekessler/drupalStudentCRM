@@ -1,0 +1,19 @@
+<?php
+
+function crm_tasks_install() {
+  $relation_types_info = array(
+    array(
+      'relation_type' => 'crm_task',
+      'label' => t('CRM Task'),
+      'reverse_label' => t('CRM Task'),
+      'directional' => true,
+      'r_unique' => false,
+      'source_bundles' => array('user:*'),
+      'target_bundles' => array('crm_case:*', 'crm_core_contact:*'),
+    ),
+  );
+  foreach ($relation_types_info as $relation_type_info) {
+    $relation_type = relation_type_create($relation_type_info);
+    relation_type_save($relation_type);
+  }
+}

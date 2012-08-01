@@ -6,7 +6,23 @@
  * the entity types.
  */
 
-
+function crm_case_install() {
+  $relation_types_info = array(
+    array(
+      'relation_type' => 'crm_contact_case',
+      'label' => t('CRM Contact Case'),
+      'reverse_label' => t('CRM Contact Case'),
+      'directional' => true,
+      'r_unique' => false,
+      'source_bundles' => array('crm_case:*'),
+      'target_bundles' => array('crm_core_contact:*'),
+    ),
+  );
+  foreach ($relation_types_info as $relation_type_info) {
+    $relation_type = relation_type_create($relation_type_info);
+    relation_type_save($relation_type);
+  }
+}
 /**
  * Implements hook_schema().
  */
