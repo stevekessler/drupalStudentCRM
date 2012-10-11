@@ -11,9 +11,6 @@ api = 2
 ;libraries[profiler][download][url] = "http://ftp.drupal.org/files/projects/profiler-7.x-2.x-dev.tar.gz"
 ;libraries[profiler][destination] = "libraries/profiler"
 
-projects[admin_menu][subdir] = "contrib"
-projects[admin_menu][version] = "3.0-rc1"
-
 projects[addressfield][subdir] = "contrib"
 projects[addressfield][version] = "1.0-beta2"
 
@@ -73,9 +70,6 @@ projects[field_group][version] = "1.1"
 
 projects[homebox][subdir] = "contrib"
 projects[homebox][version] = "2.0-beta6"
-
-projects[interface][subdir] = "contrib"
-projects[interface][version] = "1.x-dev"
 
 projects[job_scheduler][subdir] = "contrib"
 projects[job_scheduler][version] = "2.0-alpha2"

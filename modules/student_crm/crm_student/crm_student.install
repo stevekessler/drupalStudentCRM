@@ -64,15 +64,4 @@ function crm_student_install() {
     ),
   );
   variable_set('fancybox_settings', $fancybox_settings);
-  
-  $interface_fields = array(
-    'entity' => 'crm_core_contact', 
-    'bundle' => 'student',
-    'view_mode' => 'full',
-    'plugin' => 'interface_tabs',
-    'interface_data' => '{"tabs":{"interface_tab_0":{"title":"Notes","attributes":{"class":"interface_tab","name":"content_tab_0"}},"interface_tab_1":{"title":"Basic Information","attributes":{"class":"interface_tab","name":"content_tab_1"}},"interface_tab_2":{"title":"","attributes":{"class":"interface_tab","name":"content_tab_2"}}},"regions":[[],["field_contact_email","field_contact_phone","field_contact_address"],[],["contact_name","contact_image","field_student_degrees","field_student_id","field_student_level","field_student_status","field_student_tags"]]}'
-  );
-  db_insert('interface')
-    ->fields($interface_fields)
-    ->execute();
 }

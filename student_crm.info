@@ -38,7 +38,6 @@ dependencies[] = libraries
 
 ;contrib
 dependencies[] = addressfield
-dependencies[] = admin_menu
 dependencies[] = auto_nodetitle
 dependencies[] = better_formats
 dependencies[] = cck_phone
@@ -57,8 +56,6 @@ dependencies[] = feeds_tamper
 dependencies[] = feeds_tamper_ui
 dependencies[] = entity
 dependencies[] = field_group
-dependencies[] = interface
-dependencies[] = interface_tabs
 dependencies[] = job_scheduler
 dependencies[] = link
 dependencies[] = name
