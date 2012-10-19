@@ -1,0 +1,6 @@
+Student CRM is built on [Drupal](http://drupal.org) and is made possible by the Drupal community. Core development resources are made possible by [Cal State Monterey Bay's Web Services team](http://it.csumb.edu/web-services). We would like to thank the following people for contributing to the project:
+
+- Katherine Cante,  Mike Fowler, and Kayla Peterson, our Summer 2012 student assistants
+- Ivan Pagan and the staff of CSUMB's (Center for Student Success)[http://css.csumb.edu]
+- Christina Del Porto, Shawna Gannon, Aaron Roy, and Sophia Vicuna from the CSUMB (Teacher Education program)[http://teach.csumb.edu]
+- Cash Williams of (Acquia)[http://acquia.com]
